@@ -114,8 +114,6 @@
 ### Trae + DeepSeek-Coder V3
 ![trae-deepseek-v3](screenshots/trae-deepseek-v3.png)
 
-![trae-deepseek-v3](screenshots/trae-deepseek-v3.png)
-
 ## 各模型特点对比
 
 
