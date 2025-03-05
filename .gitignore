@@ -2,9 +2,6 @@
 node_modules/
 jspm_packages/
 
-# 生成的截图
-screenshots/
-
 # 日志文件
 logs
 *.log
