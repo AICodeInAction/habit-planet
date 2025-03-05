@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家庭互动 - 习惯星球</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .family-header {
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      padding: 24px 16px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .family-header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2232&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.2;
+    }
+    
+    .family-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    
+    .family-subtitle {
+      font-size: 16px;
+      opacity: 0.8;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    
+    .family-avatar-group {
+      display: flex;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    
+    .family-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 3px solid white;
+      margin-right: -10px;
+      object-fit: cover;
+    }
+    
+    .family-avatar:last-child {
+      margin-right: 0;
+    }
+    
+    .family-add-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-left: 8px;
+      border: 3px solid white;
+    }
+    
+    .tabs {
+      display: flex;
+      background-color: white;
+      border-radius: 12px;
+      padding: 4px;
+      margin: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+    
+    .tab.active {
+      background-color: var(--background-color);
+      color: var(--primary-color);
+    }
+    
+    .section-title {
+      padding: 0 16px;
+      margin-top: 24px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--primary-color);
+    }
+    
+    .streak-card {
+      margin: 0 16px 16px;
+      background-color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .streak-header {
+      padding: 16px;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .streak-title {
+      font-weight: 600;
+    }
+    
+    .streak-days {
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    
+    .streak-content {
+      padding: 16px;
+    }
+    
+    .streak-description {
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .streak-members {
+      display: flex;
+      margin-bottom: 16px;
+    }
+    
+    .streak-member {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 16px;
+    }
+    
+    .streak-member-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-bottom: 8px;
+      object-fit: cover;
+    }
+    
+    .streak-member-name {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .streak-member-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--success-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    
+    .streak-progress {
+      height: 6px;
+      background-color: var(--background-color);
+      border-radius: 3px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    
+    .streak-progress-fill {
+      height: 100%;
+      background-color: var(--success-color);
+      width: 75%;
+    }
+    
+    .streak-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .family-members-list {
+      padding: 0 16px;
+    }
+    
+    .invite-card {
+      background-color: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+    }
+    
+    .invite-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background-color: var(--secondary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-right: 16px;
+    }
+    
+    .invite-info {
+      flex: 1;
+    }
+    
+    .invite-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .invite-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .invite-btn {
+      padding: 8px 16px;
+      background-color: var(--secondary-color);
+      color: white;
+      border-radius: 20px;
+      font-weight: 500;
+      font-size: 14px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="status-bar-time">09:41</div>
+      <div class="status-bar-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    
+    <div class="content" style="padding: 0; height: calc(100% - 44px - 83px);">
+      <div class="family-header">
+        <div class="family-header-bg"></div>
+        <div class="family-title">张家</div>
+        <div class="family-subtitle">一起坚持，共同成长！</div>
+        
+        <div class="family-avatar-group">
+          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="family-avatar">
+          <img src="https://images.unsplash.com/photo-1547212371-eb5e6a4b590c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="family-avatar">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" class="family-avatar">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="family-avatar">
+          <div class="family-add-btn">
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tabs">
+        <div class="tab active">家庭习惯</div>
+        <div class="tab">家庭成员</div>
+      </div>
+      
+      <div id="family-habits-tab">
+        <div class="section-title">
+          <span>家庭共同习惯</span>
+          <span class="section-subtitle">一起养成好习惯</span>
+        </div>
+        
+        <div class="streak-card">
+          <div class="streak-header">
+            <div class="streak-title">每日阅读时间</div>
+            <div class="streak-days">🔥 14天</div>
+          </div>
+          <div class="streak-content">
+            <div class="streak-description">每天全家一起阅读至少30分钟，分享阅读心得</div>
+            <div class="streak-members">
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">爸爸</div>
+                <div class="streak-member-check">
+                  <i class="fas fa-check"></i>
+                </div>
+              </div>
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1547212371-eb5e6a4b590c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">妈妈</div>
+                <div class="streak-member-check">
+                  <i class="fas fa-check"></i>
+                </div>
+              </div>
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">小明</div>
+              </div>
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">小红</div>
+                <div class="streak-member-check">
+                  <i class="fas fa-check"></i>
+                </div>
+              </div>
+            </div>
+            <div class="streak-progress">
+              <div class="streak-progress-fill"></div>
+            </div>
+            <div class="streak-stats">
+              <div>今日完成度: 3/4</div>
+              <div>75%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="streak-card">
+          <div class="streak-header" style="background-color: #10B981;">
+            <div class="streak-title">周末家庭运动</div>
+            <div class="streak-days">🔥 8周</div>
+          </div>
+          <div class="streak-content">
+            <div class="streak-description">每周末一起户外运动至少1小时，增强体魄</div>
+            <div class="streak-members">
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">爸爸</div>
+                <div class="streak-member-check">
+                  <i class="fas fa-check"></i>
+                </div>
+              </div>
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1547212371-eb5e6a4b590c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">妈妈</div>
+                <div class="streak-member-check">
+                  <i class="fas fa-check"></i>
+                </div>
+              </div>
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">小明</div>
+                <div class="streak-member-check">
+                  <i class="fas fa-check"></i>
+                </div>
+              </div>
+              <div class="streak-member" style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="streak-member-avatar">
+                <div class="streak-member-name">小红</div>
+                <div class="streak-member-check">
+                  <i class="fas fa-check"></i>
+                </div>
+              </div>
+            </div>
+            <div class="streak-progress">
+              <div class="streak-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="streak-stats">
+              <div>本周完成度: 4/4</div>
+              <div>100%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-title">
+          <span>推荐习惯</span>
+          <span class="section-subtitle">适合全家人一起养成</span>
+        </div>
+        
+        <div class="card" style="margin: 0 16px 16px;">
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class=""></i>
+            </div>
+            <div class="habit-info">
+              <div class="habit-name">每周一次家庭会议</div>
+              <div class="habit-streak">讨论家庭事务，分享生活点滴</div>
+            </div>
+            <button class="nav-button">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class=""></i>
+            </div>
+            <div class="habit-info">
+              <div class="habit-name">共同做家务</div>
+              <div class="habit-streak">每人负责一项家务，培养责任感</div>
+            </div>
+            <button class="nav-button">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class=""></i>
+            </div>
+            <div class="habit-info">
+              <div class="habit-name">每月一次家庭旅行</div>
+              <div class="habit-streak">一起探索新地方，创造美好回忆</div>
+            </div>
+            <button class="nav-button">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="invite-card">
+          <div class="invite-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="invite-info">
+            <div class="invite-title">邀请更多家庭成员</div>
+            <div class="invite-desc">一起培养好习惯，共同成长！</div>
+          </div>
+          <button class="invite-btn">
+            邀请
+          </button>
+        </div>
+      </div>
+      
+      <div id="family-members-tab" style="display: none;">
+        <div class="family-members-list">
+          <div class="family-member">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="family-avatar">
+            <div class="family-info">
+              <div class="family-name">张爸爸</div>
+              <div class="family-role">家长 · 总习惯数: 8</div>
+            </div>
+            <div class="streak-days" style="background-color: var(--primary-color); color: white;">
+              🔥 31天
+            </div>
+          </div>
+          
+          <div class="family-member">
+            <img src="https://images.unsplash.com/photo-1547212371-eb5e6a4b590c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="family-avatar">
+            <div class="family-info">
+              <div class="family-name">张妈妈</div>
+              <div class="family-role">家长 · 总习惯数: 10</div>
+            </div>
+            <div class="streak-days" style="background-color: var(--primary-color); color: white;">
+              🔥 45天
+            </div>
+          </div>
+          
+          <div class="family-member">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" class="family-avatar">
+            <div class="family-info">
+              <div class="family-name">张小明</div>
+              <div class="family-role">孩子 · 总习惯数: 12</div>
+            </div>
+            <div class="streak-days" style="background-color: var(--primary-color); color: white;">
+              🔥 23天
+            </div>
+          </div>
+          
+          <div class="family-member">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="family-avatar">
+            <div class="family-info">
+              <div class="family-name">张小红</div>
+              <div class="family-role">孩子 · 总习惯数: 9</div>
+            </div>
+            <div class="streak-days" style="background-color: var(--primary-color); color: white;">
+              🔥 18天
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-title">
+          <span>家庭排行榜</span>
+          <span class="section-subtitle">本周习惯完成情况</span>
+        </div>
+        
+        <div class="card" style="margin: 0 16px 16px;">
+          <div style="padding: 16px; text-align: center;">
+            <div style="display: flex; justify-content: space-around; margin-bottom: 24px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="position: relative;">
+                  <img src="https://images.unsplash.com/photo-1547212371-eb5e6a4b590c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #F59E0B; object-fit: cover;">
+                  <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); background-color: #F59E0B; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">1</div>
+                </div>
+                <div style="margin-top: 16px; font-weight: 600;">张妈妈</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">92%</div>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="position: relative;">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #A3A3A3; object-fit: cover;">
+                  <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); background-color: #A3A3A3; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">2</div>
+                </div>
+                <div style="margin-top: 16px; font-weight: 600;">张小明</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">85%</div>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="position: relative;">
+                  <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #B45309; object-fit: cover;">
+                  <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); background-color: #B45309; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">3</div>
+                </div>
+                <div style="margin-top: 16px; font-weight: 600;">张爸爸</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">78%</div>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #D4D4D8; color: white; display: flex; align-items: center; justify-content: center; margin-right: 12px;">4</div>
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 12px; object-fit: cover;">
+              <div style="flex: 1;">张小红</div>
+              <div style="font-weight: 600;">73%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="invite-card">
+          <div class="invite-icon">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <div class="invite-info">
+            <div class="invite-title">邀请家人加入</div>
+            <div class="invite-desc">一起培养好习惯，共同成长！</div>
+          </div>
+          <button class="invite-btn">
+            邀请
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-planet-ringed"></i>
+        <span>星球</span>
+      </a>
+      <a href="habits.html" class="tab-item">
+        <i class="fas fa-list-check"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-medal"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item active">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="profile.html" class="tab-item">
+        <i class="fas fa-user"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.tab');
+      const habitsTab = document.getElementById('family-habits-tab');
+      const membersTab = document.getElementById('family-members-tab');
+      
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', function() {
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (index === 0) {
+            habitsTab.style.display = 'block';
+            membersTab.style.display = 'none';
+          } else {
+            habitsTab.style.display = 'none';
+            membersTab.style.display = 'block';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

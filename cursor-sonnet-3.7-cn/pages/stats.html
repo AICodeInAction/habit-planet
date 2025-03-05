@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 数据统计</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .filter-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .time-filter {
+      display: flex;
+      margin-bottom: 20px;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 5px;
+    }
+    
+    .time-option {
+      flex: 1;
+      padding: 8px;
+      text-align: center;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .time-option.active {
+      background-color: var(--primary-color);
+    }
+    
+    .stats-summary {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .stat-card {
+      flex: 1;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin: 0 5px;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .chart-container {
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .chart-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    .chart-legend {
+      display: flex;
+      align-items: center;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+      font-size: 12px;
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
+    
+    .chart {
+      height: 200px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 20px;
+      position: relative;
+    }
+    
+    .chart::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 20% 25%;
+    }
+    
+    .chart-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 12%;
+    }
+    
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      width: 100%;
+      height: 180px;
+    }
+    
+    .chart-bar {
+      width: 8px;
+      background-color: var(--primary-color);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      z-index: 1;
+      margin: 0 2px;
+    }
+    
+    .chart-bar-secondary {
+      background-color: var(--secondary-color);
+    }
+    
+    .chart-label {
+      font-size: 10px;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .chart-axis {
+      position: absolute;
+      left: -25px;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .chart-axis-label {
+      height: 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .pie-chart {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--primary-color) 0% 40%,
+        var(--accent-color) 40% 65%,
+        var(--success-color) 65% 85%,
+        var(--warning-color) 85% 100%
+      );
+      margin: 0 auto 20px;
+    }
+    
+    .pie-chart::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      background-color: var(--light-bg);
+      border-radius: 50%;
+    }
+    
+    .pie-chart-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 1;
+    }
+    
+    .pie-chart-value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .pie-chart-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .pie-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .pie-legend-item {
+      display: flex;
+      align-items: center;
+      margin: 0 10px 10px;
+      font-size: 12px;
+    }
+    
+    .pie-legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
+    
+    .habit-performance {
+      margin-bottom: 30px;
+    }
+    
+    .performance-item {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .performance-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 20px;
+    }
+    
+    .performance-info {
+      flex: 1;
+    }
+    
+    .performance-name {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    
+    .performance-stats {
+      display: flex;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .performance-stat {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .performance-stat i {
+      margin-right: 5px;
+    }
+    
+    .performance-progress {
+      width: 60px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    .performance-progress.good {
+      color: var(--success-color);
+    }
+    
+    .performance-progress.average {
+      color: var(--warning-color);
+    }
+    
+    .performance-progress.poor {
+      color: var(--danger-color);
+    }
+    
+    .insights-card {
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .insights-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .insights-title i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+    
+    .insight-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .insight-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .insight-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    
+    .insight-content {
+      flex: 1;
+    }
+    
+    .insight-text {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    
+    .insight-action {
+      font-size: 12px;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="signal">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="time">9:49</div>
+      <div class="battery">
+        <span>81%</span>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    
+    <div class="app-content">
+      <div class="stars-bg"></div>
+      
+      <div class="page-header">
+        <div class="page-title">数据统计</div>
+        <div class="filter-button">
+          <i class="fas fa-sliders-h"></i>
+        </div>
+      </div>
+      
+      <div class="time-filter">
+        <div class="time-option">周</div>
+        <div class="time-option active">月</div>
+        <div class="time-option">年</div>
+        <div class="time-option">全部</div>
+      </div>
+      
+      <div class="stats-summary">
+        <div class="stat-card">
+          <div class="stat-value">87%</div>
+          <div class="stat-label">完成率</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-value">42</div>
+          <div class="stat-label">星星获得</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-value">5.2</div>
+          <div class="stat-label">平均连续天数</div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <div class="chart-header">
+          <div class="chart-title">习惯完成趋势</div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--primary-color);"></div>
+              <span>完成</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--secondary-color);"></div>
+              <span>目标</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chart">
+          <div class="chart-axis">
+            <div class="chart-axis-label">10</div>
+            <div class="chart-axis-label">8</div>
+            <div class="chart-axis-label">6</div>
+            <div class="chart-axis-label">4</div>
+            <div class="chart-axis-label">2</div>
+            <div class="chart-axis-label">0</div>
+          </div>
+          
+          <div class="chart-column">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 120px;"></div>
+              <div class="chart-bar chart-bar-secondary" style="height: 150px;"></div>
+            </div>
+            <div class="chart-label">周一</div>
+          </div>
+          
+          <div class="chart-column">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 160px;"></div>
+              <div class="chart-bar chart-bar-secondary" style="height: 150px;"></div>
+            </div>
+            <div class="chart-label">周二</div>
+          </div>
+          
+          <div class="chart-column">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 140px;"></div>
+              <div class="chart-bar chart-bar-secondary" style="height: 150px;"></div>
+            </div>
+            <div class="chart-label">周三</div>
+          </div>
+          
+          <div class="chart-column">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 180px;"></div>
+              <div class="chart-bar chart-bar-secondary" style="height: 150px;"></div>
+            </div>
+            <div class="chart-label">周四</div>
+          </div>
+          
+          <div class="chart-column">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 100px;"></div>
+              <div class="chart-bar chart-bar-secondary" style="height: 150px;"></div>
+            </div>
+            <div class="chart-label">周五</div>
+          </div>
+          
+          <div class="chart-column">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 80px;"></div>
+              <div class="chart-bar chart-bar-secondary" style="height: 150px;"></div>
+            </div>
+            <div class="chart-label">周六</div>
+          </div>
+          
+          <div class="chart-column">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 90px;"></div>
+              <div class="chart-bar chart-bar-secondary" style="height: 150px;"></div>
+            </div>
+            <div class="chart-label">周日</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <div class="chart-header">
+          <div class="chart-title">习惯分类</div>
+        </div>
+        
+        <div class="pie-chart">
+          <div class="pie-chart-center">
+            <div class="pie-chart-value">3</div>
+            <div class="pie-chart-label">习惯</div>
+          </div>
+        </div>
+        
+        <div class="pie-legend">
+          <div class="pie-legend-item">
+            <div class="pie-legend-color" style="background-color: var(--primary-color);"></div>
+            <span>学习 (40%)</span>
+          </div>
+          <div class="pie-legend-item">
+            <div class="pie-legend-color" style="background-color: var(--accent-color);"></div>
+            <span>健康 (25%)</span>
+          </div>
+          <div class="pie-legend-item">
+            <div class="pie-legend-color" style="background-color: var(--success-color);"></div>
+            <span>生活 (20%)</span>
+          </div>
+          <div class="pie-legend-item">
+            <div class="pie-legend-color" style="background-color: var(--warning-color);"></div>
+            <span>其他 (15%)</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="habit-performance">
+        <div class="section-header">
+          <div class="section-title">习惯表现</div>
+        </div>
+        
+        <div class="performance-item">
+          <div class="performance-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="performance-info">
+            <div class="performance-name">阅读20分钟</div>
+            <div class="performance-stats">
+              <div class="performance-stat">
+                <i class="fas fa-calendar-check"></i>
+                <span>5/7天</span>
+              </div>
+              <div class="performance-stat">
+                <i class="fas fa-fire"></i>
+                <span>连续5天</span>
+              </div>
+            </div>
+          </div>
+          <div class="performance-progress good">71%</div>
+        </div>
+        
+        <div class="performance-item">
+          <div class="performance-icon" style="background-color: var(--accent-color);">
+            <i class="fas fa-tooth"></i>
+          </div>
+          <div class="performance-info">
+            <div class="performance-name">刷牙</div>
+            <div class="performance-stats">
+              <div class="performance-stat">
+                <i class="fas fa-calendar-check"></i>
+                <span>12/14天</span>
+              </div>
+              <div class="performance-stat">
+                <i class="fas fa-fire"></i>
+                <span>连续12天</span>
+              </div>
+            </div>
+          </div>
+          <div class="performance-progress good">86%</div>
+        </div>
+        
+        <div class="performance-item">
+          <div class="performance-icon" style="background-color: var(--success-color);">
+            <i class="fas fa-broom"></i>
+          </div>
+          <div class="performance-info">
+            <div class="performance-name">整理房间</div>
+            <div class="performance-stats">
+              <div class="performance-stat">
+                <i class="fas fa-calendar-check"></i>
+                <span>3/7天</span>
+              </div>
+              <div class="performance-stat">
+                <i class="fas fa-fire"></i>
+                <span>连续3天</span>
+              </div>
+            </div>
+          </div>
+          <div class="performance-progress average">43%</div>
+        </div>
+      </div>
+      
+      <div class="insights-card">
+        <div class="insights-title">
+          <i class="fas fa-lightbulb"></i>
+          <span>习惯洞察</span>
+        </div>
+        
+        <div class="insight-item">
+          <div class="insight-icon" style="background-color: var(--success-color);">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="insight-content">
+            <div class="insight-text">
+              你的"刷牙"习惯表现非常好！已经连续12天完成，继续保持！
+            </div>
+            <div class="insight-action">查看详情</div>
+          </div>
+        </div>
+        
+        <div class="insight-item">
+          <div class="insight-icon" style="background-color: var(--warning-color);">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="insight-content">
+            <div class="insight-text">
+              "整理房间"习惯的完成率较低，建议设置提醒或调整时间，使其更容易坚持。
+            </div>
+            <div class="insight-action">调整习惯</div>
+          </div>
+        </div>
+        
+        <div class="insight-item">
+          <div class="insight-icon" style="background-color: var(--primary-color);">
+            <i class="fas fa-magic"></i>
+          </div>
+          <div class="insight-content">
+            <div class="insight-text">
+              你在周四的习惯完成率最高！考虑在这一天添加新习惯，利用良好的势头。
+            </div>
+            <div class="insight-action">添加新习惯</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-globe-asia"></i>
+        <span>星球</span>
+      </a>
+      <a href="habit-tracking.html" class="tab-item">
+        <i class="fas fa-check-circle"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-trophy"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="settings.html" class="tab-item">
+        <i class="fas fa-cog"></i>
+        <span>设置</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html> 

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯打卡 - HabitPlanet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/base.css" rel="stylesheet">
+    <style>
+        .habit-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 12px;
+            position: relative;
+        }
+
+        .calendar-day.completed {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .calendar-day.today {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .streak-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 12px;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="header">
+        <h1 class="text-xl font-bold">今日习惯</h1>
+        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100">
+            <i class="fas fa-plus text-gray-600"></i>
+        </button>
+    </div>
+
+    <div class="page-content">
+        <!-- 运动习惯 -->
+        <div class="habit-card">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                        <i class="fas fa-running text-indigo-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">每日运动</h3>
+                        <p class="text-sm text-gray-500">目标：30分钟</p>
+                    </div>
+                </div>
+                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
+                    打卡
+                </button>
+            </div>
+            
+            <div class="calendar-grid">
+                <div class="calendar-day completed">1</div>
+                <div class="calendar-day completed">2</div>
+                <div class="calendar-day completed">3</div>
+                <div class="calendar-day">4</div>
+                <div class="calendar-day today">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+            </div>
+        </div>
+
+        <!-- 阅读习惯 -->
+        <div class="habit-card">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                        <i class="fas fa-book text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">阅读时光</h3>
+                        <p class="text-sm text-gray-500">目标：20分钟</p>
+                    </div>
+                </div>
+                <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">
+                    已完成
+                </button>
+            </div>
+            
+            <div class="calendar-grid">
+                <div class="calendar-day completed">1</div>
+                <div class="calendar-day completed">2</div>
+                <div class="calendar-day completed">3</div>
+                <div class="calendar-day completed">4</div>
+                <div class="calendar-day completed today">5
+                    <span class="streak-badge">5天</span>
+                </div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+            </div>
+        </div>
+
+        <!-- 学习习惯 -->
+        <div class="habit-card">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                        <i class="fas fa-pencil-alt text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">专注学习</h3>
+                        <p class="text-sm text-gray-500">目标：45分钟</p>
+                    </div>
+                </div>
+                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
+                    打卡
+                </button>
+            </div>
+            
+            <div class="calendar-grid">
+                <div class="calendar-day completed">1</div>
+                <div class="calendar-day">2</div>
+                <div class="calendar-day completed">3</div>
+                <div class="calendar-day completed">4</div>
+                <div class="calendar-day today">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-globe"></i>
+            <span>星球</span>
+        </a>
+        <a href="habits.html" class="nav-item active">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="family.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="rewards.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>奖励</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+</body>
+</html> 

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 个人星球</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .page-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .planet-view {
+      position: relative;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .planet-large {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #6c5ce7, #1e1e2e);
+      box-shadow: 0 0 40px rgba(108, 92, 231, 0.5);
+      position: relative;
+    }
+    
+    .planet-decoration {
+      position: absolute;
+      transition: all 0.3s;
+    }
+    
+    .space-station {
+      top: 30px;
+      right: 20px;
+      width: 40px;
+      height: 20px;
+      background-color: #a29bfe;
+      border-radius: 5px;
+      transform: rotate(30deg);
+    }
+    
+    .space-station::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      width: 10px;
+      height: 10px;
+      background-color: #a29bfe;
+      border-radius: 50%;
+    }
+    
+    .satellite {
+      top: 50px;
+      left: 10px;
+      width: 20px;
+      height: 10px;
+      background-color: #74b9ff;
+      border-radius: 5px;
+      transform: rotate(-30deg);
+    }
+    
+    .satellite::before,
+    .satellite::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 5px;
+      background-color: #74b9ff;
+      border-radius: 5px;
+    }
+    
+    .satellite::before {
+      top: -8px;
+      left: -5px;
+      transform: rotate(30deg);
+    }
+    
+    .satellite::after {
+      bottom: -8px;
+      left: -5px;
+      transform: rotate(-30deg);
+    }
+    
+    .meteor {
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));
+      transform: rotate(45deg);
+      animation: meteor 2s linear infinite;
+    }
+    
+    .meteor:nth-child(1) {
+      top: 50px;
+      left: 100px;
+      animation-delay: 0s;
+    }
+    
+    .meteor:nth-child(2) {
+      top: 80px;
+      left: 200px;
+      animation-delay: 0.5s;
+    }
+    
+    .meteor:nth-child(3) {
+      top: 150px;
+      left: 150px;
+      animation-delay: 1s;
+    }
+    
+    @keyframes meteor {
+      0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100px) translateY(100px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    
+    .planet-orbit {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+    }
+    
+    .planet-moon {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #dfe6e9, #b2bec3);
+      top: 50px;
+      right: 30px;
+      box-shadow: 0 0 10px rgba(223, 230, 233, 0.5);
+      animation: orbit 20s linear infinite;
+    }
+    
+    @keyframes orbit {
+      0% {
+        transform: rotate(0deg) translateX(120px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translateX(120px) rotate(-360deg);
+      }
+    }
+    
+    .planet-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .stat-card {
+      flex: 1;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin: 0 5px;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .decoration-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .decoration-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .decoration-item {
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .decoration-item.locked {
+      opacity: 0.7;
+    }
+    
+    .decoration-item.locked::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: var(--border-radius);
+      z-index: 1;
+    }
+    
+    .decoration-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-size: 24px;
+    }
+    
+    .decoration-lock {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      z-index: 2;
+    }
+    
+    .decoration-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .planet-level {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .level-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 24px;
+    }
+    
+    .level-info {
+      flex: 1;
+    }
+    
+    .level-name {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    
+    .level-progress {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="signal">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="time">9:47</div>
+      <div class="battery">
+        <span>82%</span>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    
+    <div class="app-content">
+      <div class="stars-bg"></div>
+      
+      <div class="page-header">
+        <div class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="page-title">小明星球</div>
+      </div>
+      
+      <div class="planet-view">
+        <div class="planet-orbit"></div>
+        <div class="planet-moon"></div>
+        
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        
+        <div class="planet-large">
+          <div class="planet-decoration space-station"></div>
+          <div class="planet-decoration satellite"></div>
+        </div>
+      </div>
+      
+      <div class="planet-stats">
+        <div class="stat-card">
+          <div class="stat-value">42</div>
+          <div class="stat-label">星星</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">习惯数量</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-value">5</div>
+          <div class="stat-label">装饰物</div>
+        </div>
+      </div>
+      
+      <div class="planet-level">
+        <div class="level-icon">
+          <i class="fas fa-globe-asia"></i>
+        </div>
+        <div class="level-info">
+          <div class="level-name">星球等级: 2级</div>
+          <div class="level-progress">距离下一级: 58/100 星星</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 58%;"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="decoration-title">我的装饰物</div>
+      
+      <div class="decoration-grid">
+        <div class="decoration-item">
+          <div class="decoration-icon" style="background-color: #a29bfe;">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <div class="decoration-name">太空站</div>
+        </div>
+        
+        <div class="decoration-item">
+          <div class="decoration-icon" style="background-color: #74b9ff;">
+            <i class="fas fa-satellite"></i>
+          </div>
+          <div class="decoration-name">卫星</div>
+        </div>
+        
+        <div class="decoration-item">
+          <div class="decoration-icon" style="background-color: #ff7675;">
+            <i class="fas fa-meteor"></i>
+          </div>
+          <div class="decoration-name">流星雨</div>
+        </div>
+        
+        <div class="decoration-item">
+          <div class="decoration-icon" style="background-color: #55efc4;">
+            <i class="fas fa-tree"></i>
+          </div>
+          <div class="decoration-name">植物园</div>
+        </div>
+        
+        <div class="decoration-item">
+          <div class="decoration-icon" style="background-color: #ffeaa7;">
+            <i class="fas fa-flag"></i>
+          </div>
+          <div class="decoration-name">旗帜</div>
+        </div>
+        
+        <div class="decoration-item locked">
+          <div class="decoration-icon" style="background-color: #fd79a8;">
+            <i class="fas fa-robot"></i>
+            <div class="decoration-lock">
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+          <div class="decoration-name">机器人</div>
+        </div>
+        
+        <div class="decoration-item locked">
+          <div class="decoration-icon" style="background-color: #e17055;">
+            <i class="fas fa-mountain"></i>
+            <div class="decoration-lock">
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+          <div class="decoration-name">山脉</div>
+        </div>
+        
+        <div class="decoration-item locked">
+          <div class="decoration-icon" style="background-color: #0984e3;">
+            <i class="fas fa-water"></i>
+            <div class="decoration-lock">
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+          <div class="decoration-name">海洋</div>
+        </div>
+        
+        <div class="decoration-item locked">
+          <div class="decoration-icon" style="background-color: #6c5ce7;">
+            <i class="fas fa-city"></i>
+            <div class="decoration-lock">
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
+          <div class="decoration-name">城市</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-globe-asia"></i>
+        <span>星球</span>
+      </a>
+      <a href="habit-tracking.html" class="tab-item">
+        <i class="fas fa-check-circle"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-trophy"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="settings.html" class="tab-item">
+        <i class="fas fa-cog"></i>
+        <span>设置</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html> 

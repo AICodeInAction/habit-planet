@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .planet-card {
+      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .unlock-progress {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-gray-900">
+  <div class="p-4 space-y-6">
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-white">我的星系</h1>
+      <div class="flex items-center space-x-2 text-yellow-400">
+        <i class="fas fa-star"></i>
+        <span>3580</span>
+      </div>
+    </div>
+
+    <div class="planet-card p-4">
+      <div class="flex items-center space-x-4">
+        <div class="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center">
+          <i class="fas fa-globe-americas text-2xl text-white"></i>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-white font-medium">学习星系</h3>
+          <div class="mt-2">
+            <div class="unlock-progress">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-purple-500 w-3/4"></div>
+            </div>
+            <div class="flex justify-between text-sm text-gray-400 mt-1">
+              <span>Lv.12</span>
+              <span>75% 解锁</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div class="planet-card p-4">
+        <div class="text-center space-y-2">
+          <div class="w-20 h-20 mx-auto bg-green-500 rounded-xl flex items-center justify-center">
+            <i class="fas fa-leaf text-3xl text-white"></i>
+          </div>
+          <h4 class="text-white font-medium">生态星球</h4>
+          <p class="text-sm text-gray-400">每日运动打卡解锁</p>
+          <button class="w-full py-2 bg-green-500 text-white rounded-lg text-sm">
+            <i class="fas fa-lock-open mr-2"></i>立即解锁
+          </button>
+        </div>
+      </div>
+
+      <div class="planet-card p-4 opacity-50">
+        <div class="text-center space-y-2">
+          <div class="w-20 h-20 mx-auto bg-purple-500 rounded-xl flex items-center justify-center">
+            <i class="fas fa-moon text-3xl text-white"></i>
+          </div>
+          <h4 class="text-white font-medium">月光星球</h4>
+          <p class="text-sm text-gray-400">需要等级15解锁</p>
+          <button class="w-full py-2 bg-gray-600 text-gray-400 rounded-lg text-sm cursor-not-allowed">
+            <i class="fas fa-lock mr-2"></i>暂未解锁
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

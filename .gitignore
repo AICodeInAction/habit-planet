@@ -1,0 +1,61 @@
+# 依赖目录
+node_modules/
+jspm_packages/
+
+# 生成的截图
+screenshots/
+
+# 日志文件
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# 诊断报告
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# 运行时数据
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 目录用于缓存工具
+.npm
+.eslintcache
+.node_repl_history
+.yarn-integrity
+
+# 环境变量
+.env
+.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vscode 相关
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# 常见的系统文件
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 包管理器锁文件（可选是否忽略）
+# package-lock.json
+# yarn.lock
+
+# 临时文件
+*.tmp
+*.temp
+*.bak 

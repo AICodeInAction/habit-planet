@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 原型展示</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f5f7;
+      color: #333;
+      line-height: 1.6;
+      padding: 30px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #1e1e2e;
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+    
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    
+    .screen-item {
+      background-color: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+    }
+    
+    .screen-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .screen-header {
+      padding: 15px 20px;
+      background-color: #1e1e2e;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .screen-header i {
+      margin-right: 10px;
+    }
+    
+    .screen-content {
+      position: relative;
+      width: 100%;
+      padding-top: 216.67%; /* 19.5:9 比例 (19.5/9 * 100) */
+      overflow: hidden;
+    }
+    
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1 class="title">习惯星球 App 原型</h1>
+    <p class="subtitle">基于《掌控习惯》原理设计的帮助孩子养成良好习惯的应用，通过游戏化和家庭互动提高习惯养成的趣味性和坚持度。</p>
+  </div>
+  
+  <div class="screens-grid">
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-door-open"></i> 欢迎页面</div>
+        <div>welcome.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/welcome.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-users-cog"></i> 家庭设置</div>
+        <div>family-setup.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/family-setup.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-globe-asia"></i> 主页面</div>
+        <div>home.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/home.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-plus-circle"></i> 习惯创建</div>
+        <div>habit-create.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/habit-create.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-check-circle"></i> 习惯追踪</div>
+        <div>habit-tracking.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/habit-tracking.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-trophy"></i> 奖励和成就</div>
+        <div>rewards.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/rewards.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-planet-moon"></i> 个人星球</div>
+        <div>personal-planet.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/personal-planet.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-users"></i> 家庭互动</div>
+        <div>family.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/family.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-chart-bar"></i> 数据统计</div>
+        <div>stats.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/stats.html"></iframe>
+      </div>
+    </div>
+    
+    <div class="screen-item">
+      <div class="screen-header">
+        <div><i class="fas fa-cog"></i> 设置</div>
+        <div>settings.html</div>
+      </div>
+      <div class="screen-content">
+        <iframe src="pages/settings.html"></iframe>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>© 2023 习惯星球. 保留所有权利。</p>
+  </div>
+</body>
+</html> 

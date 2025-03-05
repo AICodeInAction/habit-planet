@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭互动 - 习惯星球</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f2f2f7;
+            color: #1c1c1e;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .nav-header {
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e5ea;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .nav-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .family-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+        .family-avatar-group {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .family-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 -8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .family-avatar-icon {
+            font-size: 24px;
+            color: #9ca3af;
+        }
+        .family-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .family-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 15px 10px;
+        }
+        .task-card {
+            background-color: white;
+            border-radius: 12px;
+            margin: 10px 15px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .task-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .task-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+        }
+        .task-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .task-participants {
+            display: flex;
+            margin-top: 10px;
+        }
+        .participant {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: -8px;
+            font-size: 12px;
+        }
+        .progress-bar {
+            height: 6px;
+            background-color: #e5e5ea;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .activity-card {
+            background-color: white;
+            border-radius: 12px;
+            margin: 10px 15px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .activity-item {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #f2f2f7;
+        }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        .activity-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        .activity-content {
+            flex: 1;
+        }
+        .activity-name {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .activity-text {
+            font-size: 14px;
+            color: #3c3c43;
+        }
+        .activity-time {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-top: 4px;
+        }
+        .add-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background-color: #007aff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="nav-title">家庭互动</div>
+        <div>
+            <i class="fas fa-bell text-gray-500"></i>
+        </div>
+    </div>
+
+    <div class="family-header">
+        <div class="family-avatar-group">
+            <div class="family-avatar" style="z-index: 5; background-color: #f59e0b;">
+                <span class="text-white font-bold">爸</span>
+            </div>
+            <div class="family-avatar" style="z-index: 4; background-color: #ec4899;">
+                <span class="text-white font-bold">妈</span>
+            </div>
+            <div class="family-avatar" style="z-index: 3; background-color: #3b82f6;">
+                <span class="text-white font-bold">我</span>
+            </div>
+            <div class="family-avatar" style="z-index: 2; background-color: #10b981;">
+                <span class="text-white font-bold">弟</span>
+            </div>
+            <div class="family-avatar" style="z-index: 1; background-color: #8b5cf6;">
+                <i class="fas fa-plus text-white"></i>
+            </div>
+        </div>
+        <div class="family-name">快乐星球家</div>
+        <div class="text-sm opacity-80">一起养成好习惯，共同探索宇宙奥秘</div>
+        
+        <div class="family-stats">
+            <div class="stat-item">
+                <div class="stat-value">4</div>
+                <div class="stat-label">成员</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">共同习惯</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3</div>
+                <div class="stat-label">已解锁星球</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">家庭共同任务</div>
+    
+    <div class="task-card">
+        <div class="task-header">
+            <div class="task-icon" style="background-color: #3b82f6;">
+                <i class="fas fa-book-reader"></i>
+            </div>
+            <div class="task-title">每天阅读30分钟</div>
+        </div>
+        <div class="text-sm text-gray-500 mb-2">今日已有2人完成</div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 50%; background-color: #3b82f6;"></div>
+        </div>
+        <div class="task-participants">
+            <div class="participant" style="background-color: #f59e0b; z-index: 3;">
+                <span class="text-white">爸</span>
+            </div>
+            <div class="participant" style="background-color: #3b82f6; z-index: 2;">
+                <span class="text-white">我</span>
+            </div>
+            <div class="participant" style="background-color: #e5e7eb; z-index: 1; color: #9ca3af;">
+                <i class="fas fa-check"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-card">
+        <div class="task-header">
+            <div class="task-icon" style="background-color: #10b981;">
+                <i class="fas fa-running"></i>
+            </div>
+            <div class="task-title">周末家庭运动</div>
+        </div>
+        <div class="text-sm text-gray-500 mb-2">计划本周六 09:00</div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%; background-color: #10b981;"></div>
+        </div>
+        <div class="task-participants">
+            <div class="participant" style="background-color: #f59e0b; z-index: 4;">
+                <span class="text-white">爸</span>
+            </div>
+            <div class="participant" style="background-color: #ec4899; z-index: 3;">
+                <span class="text-white">妈</span>
+            </div>
+            <div class="participant" style="background-color: #3b82f6; z-index: 2;">
+                <span class="text-white">我</span>
+            </div>
+            <div class="participant" style="background-color: #e5e7eb; z-index: 1; color: #9ca3af;">
+                <i class="fas fa-check"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">家庭动态</div>
+    
+    <div class="activity-card">
+        <div class="activity-item">
+            <div class="activity-avatar" style="background-color: #ec4899;">
+                <span class="text-white font-bold">妈</span>
+            </div>
+            <div class="activity-content">
+                <div class="activity-name">妈妈</div>
+                <div class="activity-text">完成了「每天喝水2000ml」习惯，连续坚持15天！</div>
+                <div class="activity-time">今天 14:30</div>
+            </div>
+        </div>
+        
+        <div class="activity-item">
+            <div class="activity-avatar" style="background-color: #10b981;">
+                <span class="text-white font-bold">弟</span>
+            </div>
+            <div class="activity-content">
+                <div class="activity-name">弟弟</div>
+                <div class="activity-text">解锁了「火星」星球的新装饰「火星车」！</div>
+                <div class="activity-time">今天 10:15</div>
+            </div>
+        </div>
+        
+        <div class="activity-item">
+            <div class="activity-avatar" style="background-color: #f59e0b;">
+                <span class="text-white font-bold">爸</span>
+            </div>
+            <div class="activity-content">
+                <div class="activity-name">爸爸</div>
+                <div class="activity-text">创建了新的家庭共同任务「每周一次家庭会议」</div>
+                <div class="activity-time">昨天 20:45</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-btn">
+        <i class="fas fa-plus"></i>
+    </div>
+</body>
+</html>

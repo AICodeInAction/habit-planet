@@ -1,0 +1,405 @@
+/* 习惯星球App - 主样式表 */
+
+:root {
+  /* 调色板 */
+  --primary-color: #4F46E5;
+  --secondary-color: #7C3AED;
+  --background-color: #F5F7FA;
+  --card-color: #FFFFFF;
+  --success-color: #10B981;
+  --warning-color: #F59E0B;
+  --danger-color: #EF4444;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --text-light: #9CA3AF;
+  --border-color: #E5E7EB;
+  
+  /* 星球主题颜色 */
+  --planet-earth: #4385F4;
+  --planet-mars: #EA4335;
+  --planet-venus: #FBBC05;
+  --planet-jupiter: #F8B195;
+  --planet-saturn: #F67280;
+  --planet-neptune: #C06C84;
+}
+
+/* 基础样式 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* iPhone 15 Pro 尺寸模拟 */
+.iphone-container {
+  width: 390px;
+  height: 844px;
+  background-color: var(--card-color);
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+/* iOS 状态栏 */
+.status-bar {
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.status-bar-time {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-bar-icons {
+  display: flex;
+  gap: 4px;
+}
+
+/* 导航栏 */
+.nav-bar {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  background-color: var(--card-color);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 44px;
+  z-index: 90;
+}
+
+.nav-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 16px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* 底部标签栏 */
+.tab-bar {
+  height: 83px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--card-color);
+  border-top: 1px solid var(--border-color);
+  position: sticky;
+  bottom: 0;
+  padding-bottom: 30px; /* 适应底部安全区域 */
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  color: var(--text-secondary);
+  text-decoration: none;
+  flex: 1;
+}
+
+.tab-item.active {
+  color: var(--primary-color);
+}
+
+.tab-item i {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.tab-item span {
+  font-size: 10px;
+}
+
+/* 内容区域 */
+.content {
+  padding: 16px;
+  height: calc(100% - 44px - 50px - 83px);
+  overflow-y: auto;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: var(--card-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 习惯项目样式 */
+.habit-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.habit-item:last-child {
+  border-bottom: none;
+}
+
+.habit-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.habit-checkbox.checked {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.habit-info {
+  flex: 1;
+}
+
+.habit-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.habit-streak {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: var(--card-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* 行星展示样式 */
+.planet-container {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.planet {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 徽章样式 */
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.badge-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-size: 24px;
+  background-color: var(--background-color);
+  color: var(--text-secondary);
+}
+
+.badge-icon.earned {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.badge-name {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.badge-desc {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+/* 输入框样式 */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  font-size: 16px;
+  background-color: var(--background-color);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* 家庭成员样式 */
+.family-member {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.family-member:last-child {
+  border-bottom: none;
+}
+
+.family-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+}
+
+.family-info {
+  flex: 1;
+}
+
+.family-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.family-role {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 欢迎页面样式 */
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.welcome-logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 24px;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+/* 索引页面样式 */
+.prototype-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.prototype-item {
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  width: 390px;
+  height: 844px;
+}
+
+.prototype-label {
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+iframe {
+  border: none;
+  width: 100%;
+  height: calc(100% - 40px);
+} 

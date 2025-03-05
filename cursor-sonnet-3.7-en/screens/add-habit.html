@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Planet - Add Habit</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100vh;
+            background-color: #f2f2f7;
+            overflow: hidden;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1c1c1e;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #e5e5ea;
+            font-size: 16px;
+            background-color: #ffffff;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #e5e5ea;
+            font-size: 16px;
+            background-color: #ffffff;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238e8e93' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+        
+        .color-option {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-right: 8px;
+            cursor: pointer;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        
+        .color-option.selected {
+            border-color: #007aff;
+        }
+        
+        .color-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .icon-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #f2f2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            cursor: pointer;
+            color: #8e8e93;
+        }
+        
+        .icon-option.selected {
+            background-color: #007aff;
+            color: white;
+        }
+        
+        .day-option {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e5e5ea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #1c1c1e;
+        }
+        
+        .day-option.selected {
+            background-color: #007aff;
+            color: white;
+            border-color: #007aff;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar">
+        <div class="flex items-center">
+            <span>9:41</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <div class="ios-status-bar" style="justify-content: space-between;">
+        <a href="habit-detail.html" class="text-primary">
+            <i class="fas fa-chevron-left mr-1"></i> Cancel
+        </a>
+        <h1 class="text-lg font-semibold">Add New Habit</h1>
+        <a href="habit-detail.html" class="text-primary font-semibold">Save</a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="card">
+            <div class="form-group">
+                <label class="form-label">Habit Name</label>
+                <input type="text" class="form-input" placeholder="e.g., Read a book">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-select">
+                    <option>Morning Routine</option>
+                    <option>Afternoon Activities</option>
+                    <option>Evening Routine</option>
+                    <option>Weekly Habits</option>
+                    <option>+ Create New Category</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Icon</label>
+                <div class="flex flex-wrap">
+                    <div class="icon-option selected">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="icon-option">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="icon-option">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="icon-option">
+                        <i class="fas fa-bicycle"></i>
+                    </div>
+                    <div class="icon-option">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <div class="icon-option">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="icon-option">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="icon-option">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Color</label>
+                <div class="flex">
+                    <div class="color-option selected" style="background-color: #007aff;"></div>
+                    <div class="color-option" style="background-color: #34c759;"></div>
+                    <div class="color-option" style="background-color: #ff9500;"></div>
+                    <div class="color-option" style="background-color: #ff3b30;"></div>
+                    <div class="color-option" style="background-color: #af52de;"></div>
+                    <div class="color-option" style="background-color: #5856d6;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-6">
+            <div class="form-group">
+                <label class="form-label">Frequency</label>
+                <select class="form-select">
+                    <option>Daily</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Custom</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Days of Week</label>
+                <div class="flex">
+                    <div class="day-option selected">M</div>
+                    <div class="day-option selected">T</div>
+                    <div class="day-option selected">W</div>
+                    <div class="day-option selected">T</div>
+                    <div class="day-option selected">F</div>
+                    <div class="day-option">S</div>
+                    <div class="day-option">S</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Reminder Time</label>
+                <select class="form-select">
+                    <option>8:00 AM</option>
+                    <option>9:00 AM</option>
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>12:00 PM</option>
+                    <option>1:00 PM</option>
+                    <option>2:00 PM</option>
+                    <option>3:00 PM</option>
+                    <option>4:00 PM</option>
+                    <option>5:00 PM</option>
+                    <option>6:00 PM</option>
+                    <option>7:00 PM</option>
+                    <option>8:00 PM</option>
+                    <option>9:00 PM</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="card mt-6">
+            <div class="form-group">
+                <label class="form-label">Family Challenge</label>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Make this a family challenge</span>
+                    <label class="ios-switch">
+                        <input type="checkbox">
+                        <span class="ios-switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group mb-0">
+                <label class="form-label">Reward Points</label>
+                <select class="form-select">
+                    <option>10 points (Easy)</option>
+                    <option>20 points (Medium)</option>
+                    <option>30 points (Hard)</option>
+                    <option>Custom</option>
+                </select>
+                <p class="text-xs text-gray-500 mt-2">Points help unlock new planets and decorations</p>
+            </div>
+        </div>
+        
+        <button class="primary-button mt-6">
+            Create Habit
+        </button>
+    </div>
+</body>
+</html> 

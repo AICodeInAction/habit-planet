@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .habit-progress {
+      width: 72px;
+      height: 72px;
+      background: conic-gradient(#4f46e5 75%, #e5e7eb 0);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div class="p-4 space-y-6">
+    <div class="bg-white rounded-2xl p-4 shadow-sm">
+      <h2 class="text-xl font-semibold mb-4">今日任务</h2>
+      <div class="space-y-3">
+        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+          <div class="flex items-center space-x-3">
+            <div class="habit-progress">
+              <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                <span class="font-medium text-blue-600">3/5</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-medium">晨读计划</h3>
+              <p class="text-sm text-gray-500">连续打卡25天</p>
+            </div>
+          </div>
+          <button class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center">
+            <i class="fas fa-check"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-4 shadow-sm">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">星球能量站</h2>
+        <span class="text-blue-500 flex items-center">
+          <i class="fas fa-bolt mr-1"></i> 1200
+        </span>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-purple-50 p-4 rounded-xl flex items-center justify-between">
+          <div>
+            <h3 class="font-medium">学习星球</h3>
+            <p class="text-sm text-gray-600">Lv.12</p>
+          </div>
+          <i class="fas fa-book-open text-3xl text-purple-600"></i>
+        </div>
+        <div class="bg-green-50 p-4 rounded-xl flex items-center justify-between">
+          <div>
+            <h3 class="font-medium">运动星球</h3>
+            <p class="text-sm text-gray-600">Lv.8</p>
+          </div>
+          <i class="fas fa-running text-3xl text-green-600"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

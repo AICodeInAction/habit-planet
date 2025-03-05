@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 家庭互动</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .family-info {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .family-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      margin-right: 15px;
+    }
+    
+    .family-details {
+      flex: 1;
+    }
+    
+    .family-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .family-stats {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .family-action {
+      margin-left: 10px;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      margin-bottom: 20px;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 5px;
+    }
+    
+    .tab-button {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .tab-button.active {
+      background-color: var(--primary-color);
+    }
+    
+    .members-list {
+      margin-bottom: 30px;
+    }
+    
+    .member-card {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .member-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    
+    .member-info {
+      flex: 1;
+    }
+    
+    .member-name {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .member-role {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-left: 10px;
+    }
+    
+    .member-stats {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .member-stat {
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+    }
+    
+    .member-stat i {
+      margin-right: 5px;
+      font-size: 12px;
+    }
+    
+    .member-actions {
+      display: flex;
+    }
+    
+    .member-action-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+      transition: all 0.2s;
+    }
+    
+    .member-action-btn:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .member-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 0 var(--border-radius) 0 var(--border-radius);
+    }
+    
+    .challenge-card {
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .challenge-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .challenge-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 24px;
+    }
+    
+    .challenge-info {
+      flex: 1;
+    }
+    
+    .challenge-name {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    
+    .challenge-period {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .challenge-description {
+      font-size: 14px;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    
+    .challenge-progress {
+      margin-bottom: 15px;
+    }
+    
+    .challenge-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    
+    .challenge-stat {
+      text-align: center;
+    }
+    
+    .challenge-stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .challenge-stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .challenge-members {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    
+    .challenge-member {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: -10px;
+      border: 2px solid var(--background-color);
+    }
+    
+    .challenge-member:last-child {
+      margin-right: 0;
+    }
+    
+    .challenge-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .challenge-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: var(--accent-color);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 0 var(--border-radius) 0 var(--border-radius);
+    }
+    
+    .activity-feed {
+      margin-bottom: 30px;
+    }
+    
+    .activity-item {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .activity-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    
+    .activity-content {
+      flex: 1;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      position: relative;
+    }
+    
+    .activity-content::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: -10px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid var(--light-bg);
+    }
+    
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .activity-user {
+      font-weight: 700;
+    }
+    
+    .activity-time {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .activity-text {
+      font-size: 14px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    
+    .activity-actions {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+    
+    .activity-action {
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .activity-action i {
+      margin-right: 5px;
+    }
+    
+    .create-post {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .create-post-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    
+    .create-post-input {
+      flex: 1;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 10px 15px;
+      border: none;
+      color: var(--text-color);
+    }
+    
+    .create-post-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .create-post-actions {
+      display: flex;
+      margin-left: 10px;
+    }
+    
+    .create-post-action {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="signal">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="time">9:48</div>
+      <div class="battery">
+        <span>82%</span>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    
+    <div class="app-content">
+      <div class="stars-bg"></div>
+      
+      <div class="page-header">
+        <div class="page-title">家庭</div>
+      </div>
+      
+      <div class="family-info">
+        <img src="https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=120&q=80" alt="家庭头像" class="family-avatar">
+        <div class="family-details">
+          <div class="family-name">王家</div>
+          <div class="family-stats">成员: 3 · 共同习惯: 5 · 总星星: 126</div>
+        </div>
+        <div class="family-action">
+          <button class="btn" style="padding: 8px 12px; font-size: 14px;">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="tab-buttons">
+        <div class="tab-button active">成员</div>
+        <div class="tab-button">挑战</div>
+        <div class="tab-button">动态</div>
+      </div>
+      
+      <div class="members-list">
+        <div class="member-card">
+          <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="member-avatar">
+          <div class="member-info">
+            <div class="member-name">
+              王爸爸
+              <span class="member-role">家长</span>
+            </div>
+            <div class="member-stats">
+              <div class="member-stat">
+                <i class="fas fa-star"></i>
+                <span>38</span>
+              </div>
+              <div class="member-stat">
+                <i class="fas fa-check-circle"></i>
+                <span>4个习惯</span>
+              </div>
+            </div>
+          </div>
+          <div class="member-actions">
+            <div class="member-action-btn">
+              <i class="fas fa-comment"></i>
+            </div>
+            <div class="member-action-btn">
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="member-card">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="member-avatar">
+          <div class="member-info">
+            <div class="member-name">
+              王妈妈
+              <span class="member-role">家长</span>
+            </div>
+            <div class="member-stats">
+              <div class="member-stat">
+                <i class="fas fa-star"></i>
+                <span>46</span>
+              </div>
+              <div class="member-stat">
+                <i class="fas fa-check-circle"></i>
+                <span>5个习惯</span>
+              </div>
+            </div>
+          </div>
+          <div class="member-actions">
+            <div class="member-action-btn">
+              <i class="fas fa-comment"></i>
+            </div>
+            <div class="member-action-btn">
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
+          <div class="member-badge">今日之星</div>
+        </div>
+        
+        <div class="member-card">
+          <img src="https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="member-avatar">
+          <div class="member-info">
+            <div class="member-name">
+              小明
+              <span class="member-role">孩子</span>
+            </div>
+            <div class="member-stats">
+              <div class="member-stat">
+                <i class="fas fa-star"></i>
+                <span>42</span>
+              </div>
+              <div class="member-stat">
+                <i class="fas fa-check-circle"></i>
+                <span>3个习惯</span>
+              </div>
+            </div>
+          </div>
+          <div class="member-actions">
+            <div class="member-action-btn">
+              <i class="fas fa-comment"></i>
+            </div>
+            <div class="member-action-btn">
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="challenge-card">
+        <div class="challenge-badge">进行中</div>
+        <div class="challenge-header">
+          <div class="challenge-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="challenge-info">
+            <div class="challenge-name">家庭阅读挑战</div>
+            <div class="challenge-period">6月10日 - 6月24日</div>
+          </div>
+        </div>
+        
+        <div class="challenge-description">
+          全家人一起养成阅读习惯！每天至少阅读20分钟，连续两周，共同解锁家庭星球上的图书馆装饰！
+        </div>
+        
+        <div class="challenge-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 40%;"></div>
+          </div>
+        </div>
+        
+        <div class="challenge-stats">
+          <div class="challenge-stat">
+            <div class="challenge-stat-value">6/14</div>
+            <div class="challenge-stat-label">已完成天数</div>
+          </div>
+          <div class="challenge-stat">
+            <div class="challenge-stat-value">3/3</div>
+            <div class="challenge-stat-label">参与成员</div>
+          </div>
+          <div class="challenge-stat">
+            <div class="challenge-stat-value">18</div>
+            <div class="challenge-stat-label">总星星奖励</div>
+          </div>
+        </div>
+        
+        <div class="challenge-members">
+          <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="challenge-member">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="challenge-member">
+          <img src="https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="challenge-member">
+        </div>
+        
+        <div class="challenge-actions">
+          <button class="btn btn-outline" style="padding: 8px 12px; font-size: 14px;">
+            查看详情
+          </button>
+          <button class="btn" style="padding: 8px 12px; font-size: 14px;">
+            <i class="fas fa-check"></i>
+            今日打卡
+          </button>
+        </div>
+      </div>
+      
+      <div class="create-post">
+        <img src="https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="用户头像" class="create-post-avatar">
+        <input type="text" class="create-post-input" placeholder="分享你的习惯养成心得...">
+        <div class="create-post-actions">
+          <div class="create-post-action">
+            <i class="fas fa-image"></i>
+          </div>
+          <div class="create-post-action">
+            <i class="fas fa-paper-plane"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="activity-feed">
+        <div class="activity-item">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="activity-avatar">
+          <div class="activity-content">
+            <div class="activity-header">
+              <div class="activity-user">王妈妈</div>
+              <div class="activity-time">10分钟前</div>
+            </div>
+            <div class="activity-text">
+              今天完成了"每日锻炼"习惯，感觉精神焕发！小明也开始跟我一起晨练了，真棒！💪
+            </div>
+            <div class="activity-actions">
+              <div class="activity-action">
+                <i class="fas fa-heart"></i>
+                <span>5</span>
+              </div>
+              <div class="activity-action">
+                <i class="fas fa-comment"></i>
+                <span>2</span>
+              </div>
+              <div class="activity-action">
+                <i class="fas fa-share"></i>
+                <span>分享</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="activity-item">
+          <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="activity-avatar">
+          <div class="activity-content">
+            <div class="activity-header">
+              <div class="activity-user">王爸爸</div>
+              <div class="activity-time">1小时前</div>
+            </div>
+            <div class="activity-text">
+              解锁了新的星球装饰物"太空站"！我们的家庭星球越来越漂亮了，大家继续加油！🚀
+            </div>
+            <div class="activity-actions">
+              <div class="activity-action">
+                <i class="fas fa-heart"></i>
+                <span>8</span>
+              </div>
+              <div class="activity-action">
+                <i class="fas fa-comment"></i>
+                <span>3</span>
+              </div>
+              <div class="activity-action">
+                <i class="fas fa-share"></i>
+                <span>分享</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-globe-asia"></i>
+        <span>星球</span>
+      </a>
+      <a href="habit-tracking.html" class="tab-item">
+        <i class="fas fa-check-circle"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-trophy"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item active">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="settings.html" class="tab-item">
+        <i class="fas fa-cog"></i>
+        <span>设置</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html> 

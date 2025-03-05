@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - HabitPlanet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/base.css" rel="stylesheet">
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            padding: 32px 20px;
+            color: white;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            border: 3px solid white;
+            object-fit: cover;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 20px;
+            margin: -30px 20px 20px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            margin-bottom: 1px;
+        }
+
+        .menu-item i {
+            width: 24px;
+            margin-right: 12px;
+            text-align: center;
+        }
+
+        .badge {
+            background: #EEF2FF;
+            color: #4F46E5;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 个人信息头部 -->
+    <div class="profile-header">
+        <div class="flex items-center mb-6">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200" alt="头像" class="profile-avatar">
+            <div class="ml-4">
+                <h2 class="text-xl font-semibold">小明</h2>
+                <p class="text-sm opacity-90">习惯养成达人</p>
+            </div>
+        </div>
+        <div class="flex items-center">
+            <div class="flex items-center mr-6">
+                <i class="fas fa-star text-yellow-300 mr-2"></i>
+                <span>2,580 星星</span>
+            </div>
+            <div class="flex items-center">
+                <i class="fas fa-trophy text-yellow-300 mr-2"></i>
+                <span>12 个成就</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 统计卡片 -->
+    <div class="stats-card">
+        <div class="grid grid-cols-3 gap-4">
+            <div class="text-center">
+                <div class="text-2xl font-bold text-indigo-600">15</div>
+                <div class="text-sm text-gray-500">习惯总数</div>
+            </div>
+            <div class="text-center">
+                <div class="text-2xl font-bold text-indigo-600">89%</div>
+                <div class="text-sm text-gray-500">完成率</div>
+            </div>
+            <div class="text-center">
+                <div class="text-2xl font-bold text-indigo-600">45</div>
+                <div class="text-sm text-gray-500">连续天数</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 菜单列表 -->
+    <div class="space-y-4">
+        <div class="bg-white">
+            <a href="#" class="menu-item">
+                <i class="fas fa-chart-line text-blue-500"></i>
+                <span>数据统计</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-history text-purple-500"></i>
+                <span>历史记录</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-medal text-yellow-500"></i>
+                <span>我的成就</span>
+                <span class="badge ml-2">新</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+        </div>
+
+        <div class="bg-white">
+            <a href="#" class="menu-item">
+                <i class="fas fa-bell text-red-500"></i>
+                <span>提醒设置</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-palette text-green-500"></i>
+                <span>主题设置</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-shield-alt text-indigo-500"></i>
+                <span>隐私设置</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+        </div>
+
+        <div class="bg-white">
+            <a href="#" class="menu-item">
+                <i class="fas fa-question-circle text-gray-500"></i>
+                <span>帮助与反馈</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-info-circle text-gray-500"></i>
+                <span>关于我们</span>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-globe"></i>
+            <span>星球</span>
+        </a>
+        <a href="habits.html" class="nav-item">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="family.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="rewards.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>奖励</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fas fa-user"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+</body>
+</html> 

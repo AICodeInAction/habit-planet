@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Planet - Family</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100vh;
+            background-color: #f2f2f7;
+            overflow: hidden;
+        }
+        
+        .family-header {
+            background-color: #34c759;
+            color: white;
+            padding: 20px 16px;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        .family-member {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .family-member:last-child {
+            border-bottom: none;
+        }
+        
+        .family-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 12px;
+        }
+        
+        .challenge-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .challenge-item:last-child {
+            border-bottom: none;
+        }
+        
+        .challenge-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+        }
+        
+        .tab-button {
+            padding: 8px 16px;
+            font-weight: 600;
+            color: #8e8e93;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: #34c759;
+            border-bottom-color: #34c759;
+        }
+        
+        .progress-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f2f2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #34c759;
+            clip: rect(0px, 40px, 40px, 20px);
+            transform: rotate(0deg);
+        }
+        
+        .progress-circle.half::before {
+            clip: rect(0px, 20px, 40px, 0px);
+        }
+        
+        .progress-circle.full::before {
+            clip: rect(0px, 40px, 40px, 0px);
+        }
+        
+        .progress-circle.full::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #34c759;
+            clip: rect(0px, 20px, 40px, 0px);
+            transform: rotate(180deg);
+        }
+        
+        .family-challenge-card {
+            background: linear-gradient(135deg, #34c759, #5ac8fa);
+            color: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar">
+        <div class="flex items-center">
+            <span>9:41</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Family Header -->
+    <div class="family-header">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl font-bold">Family Space</h1>
+            <a href="#" class="bg-white bg-opacity-20 rounded-full w-8 h-8 flex items-center justify-center">
+                <i class="fas fa-plus"></i>
+            </a>
+        </div>
+        
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="text-sm text-white text-opacity-80">Family Points</p>
+                <h2 class="text-2xl font-bold">3,750</h2>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-lg px-3 py-1">
+                <span class="text-sm font-semibold">Level 8</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content" style="padding-top: 0;">
+        <!-- Tabs -->
+        <div class="flex border-b border-gray-200 mb-4">
+            <button class="tab-button active flex-1">Family</button>
+            <button class="tab-button flex-1">Challenges</button>
+            <button class="tab-button flex-1">Rewards</button>
+        </div>
+        
+        <!-- Family Challenge Card -->
+        <div class="family-challenge-card">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="font-semibold">Weekly Challenge</h3>
+                <div class="bg-white bg-opacity-20 rounded-full px-3 py-1 text-xs">
+                    3 days left
+                </div>
+            </div>
+            
+            <p class="text-sm text-white text-opacity-90 mb-3">Complete 15 family habits together</p>
+            
+            <div class="progress-bar" style="background-color: rgba(255, 255, 255, 0.2);">
+                <div class="progress-fill" style="width: 60%; background-color: white;"></div>
+            </div>
+            
+            <div class="flex justify-between text-sm mt-2">
+                <span>9/15 completed</span>
+                <span>60%</span>
+            </div>
+        </div>
+        
+        <!-- Family Members -->
+        <div class="card mb-6">
+            <h2 class="font-semibold mb-4">Family Members</h2>
+            
+            <div class="family-member">
+                <div class="family-avatar" style="background-image: url('https://images.unsplash.com/photo-1491013516836-7db643ee125a?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80');"></div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Alex (You)</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Level 5</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 12
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-primary font-semibold">1,250</span>
+                    <p class="text-xs text-gray-500">points</p>
+                </div>
+            </div>
+            
+            <div class="family-member">
+                <div class="family-avatar" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80');"></div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Mom</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Level 7</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 18
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-primary font-semibold">1,850</span>
+                    <p class="text-xs text-gray-500">points</p>
+                </div>
+            </div>
+            
+            <div class="family-member">
+                <div class="family-avatar" style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80');"></div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Dad</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Level 6</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 14
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-primary font-semibold">1,450</span>
+                    <p class="text-xs text-gray-500">points</p>
+                </div>
+            </div>
+            
+            <div class="family-member">
+                <div class="family-avatar" style="background-image: url('https://images.unsplash.com/photo-1516239482977-b550ba7253f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80');"></div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Brother</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Level 3</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 5
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-primary font-semibold">750</span>
+                    <p class="text-xs text-gray-500">points</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Family Challenges -->
+        <div class="card">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-semibold">Active Challenges</h2>
+                <a href="#" class="text-primary text-sm">+ New Challenge</a>
+            </div>
+            
+            <div class="challenge-item">
+                <div class="challenge-icon bg-blue-500">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Family Reading Time</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 7:00 PM</span>
+                        <div class="ml-2 px-2 py-0.5 bg-blue-100 rounded-full text-xs text-blue-600">
+                            All Members
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-circle full">
+                    <span class="text-xs font-semibold">4/4</span>
+                </div>
+            </div>
+            
+            <div class="challenge-item">
+                <div class="challenge-icon bg-green-500">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Dinner Together</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 6:30 PM</span>
+                        <div class="ml-2 px-2 py-0.5 bg-blue-100 rounded-full text-xs text-blue-600">
+                            All Members
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-circle half">
+                    <span class="text-xs font-semibold">2/4</span>
+                </div>
+            </div>
+            
+            <div class="challenge-item">
+                <div class="challenge-icon bg-purple-500">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Game Night</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Weekly • Friday</span>
+                        <div class="ml-2 px-2 py-0.5 bg-blue-100 rounded-full text-xs text-blue-600">
+                            All Members
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-circle">
+                    <span class="text-xs font-semibold">0/4</span>
+                </div>
+            </div>
+            
+            <div class="challenge-item">
+                <div class="challenge-icon bg-orange-500">
+                    <i class="fas fa-hiking"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Weekend Hike</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Weekly • Saturday</span>
+                        <div class="ml-2 px-2 py-0.5 bg-blue-100 rounded-full text-xs text-blue-600">
+                            All Members
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-circle">
+                    <span class="text-xs font-semibold">0/4</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Tab Bar -->
+    <div class="ios-tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="habit-detail.html" class="tab-item">
+            <i class="fas fa-list-check tab-icon"></i>
+            <span>Habits</span>
+        </a>
+        <a href="planet-explorer.html" class="tab-item">
+            <i class="fas fa-globe tab-icon"></i>
+            <span>Planets</span>
+        </a>
+        <a href="family.html" class="tab-item active">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Family</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

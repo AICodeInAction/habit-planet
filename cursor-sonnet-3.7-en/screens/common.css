@@ -1,0 +1,337 @@
+/* Common styles for Habit Planet app */
+
+/* iOS Status Bar */
+.ios-status-bar {
+    height: 44px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* iOS Tab Bar */
+.ios-tab-bar {
+    height: 83px; /* Includes safe area */
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #f0f0f0;
+    padding-bottom: 30px; /* For iPhone home indicator */
+    z-index: 50;
+}
+
+.tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #8e8e93;
+    font-size: 10px;
+    padding: 6px 0;
+    width: 20%;
+}
+
+.tab-item.active {
+    color: #007aff;
+}
+
+.tab-icon {
+    font-size: 22px;
+    margin-bottom: 2px;
+}
+
+/* Main Content Area */
+.main-content {
+    padding: 16px;
+    padding-bottom: 100px; /* Space for tab bar */
+    height: calc(100% - 44px); /* Subtract status bar height */
+    overflow-y: auto;
+}
+
+/* Card Styles */
+.card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Button Styles */
+.primary-button {
+    background-color: #007aff;
+    color: white;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+}
+
+.secondary-button {
+    background-color: #f2f2f7;
+    color: #007aff;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+}
+
+/* Badge Styles */
+.badge {
+    background-color: #ff3b30;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+/* Progress Bar */
+.progress-bar {
+    height: 8px;
+    background-color: #f2f2f7;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #34c759;
+    border-radius: 4px;
+}
+
+/* Planet and Space Theme Elements */
+.planet {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-size: cover;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.planet-small {
+    width: 40px;
+    height: 40px;
+}
+
+.planet-large {
+    width: 100px;
+    height: 100px;
+}
+
+.space-bg {
+    background-color: #0a0a23;
+    background-image: radial-gradient(white, rgba(255, 255, 255, 0.2) 2px, transparent 2px);
+    background-size: 100px 100px;
+}
+
+/* Achievement Badge */
+.achievement-badge {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #ffd60a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+}
+
+/* Utility Classes */
+.text-primary { color: #007aff; }
+.text-success { color: #34c759; }
+.text-danger { color: #ff3b30; }
+.text-warning { color: #ff9500; }
+.text-info { color: #5ac8fa; }
+.text-muted { color: #8e8e93; }
+
+.bg-primary { background-color: #007aff; }
+.bg-success { background-color: #34c759; }
+.bg-danger { background-color: #ff3b30; }
+.bg-warning { background-color: #ff9500; }
+.bg-info { background-color: #5ac8fa; }
+.bg-light { background-color: #f2f2f7; }
+
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+
+.text-sm { font-size: 14px; }
+.text-xs { font-size: 12px; }
+.text-lg { font-size: 18px; }
+.text-xl { font-size: 20px; }
+.text-2xl { font-size: 24px; }
+
+.rounded-full { border-radius: 9999px; }
+.rounded-lg { border-radius: 12px; }
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Habit streak indicator */
+.streak-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #ff9500;
+    font-weight: 600;
+}
+
+.streak-flame {
+    color: #ff9500;
+}
+
+/* Family member avatar */
+.family-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Planet decoration item */
+.decoration-item {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Notification dot */
+.notification-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ff3b30;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* iOS style list item */
+.ios-list-item {
+    padding: 16px;
+    border-bottom: 1px solid #f2f2f7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ios-list-item:last-child {
+    border-bottom: none;
+}
+
+/* iOS style input */
+.ios-input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #e5e5ea;
+    font-size: 16px;
+    background-color: #f2f2f7;
+    margin-bottom: 16px;
+}
+
+/* iOS style toggle switch */
+.ios-switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 31px;
+}
+
+.ios-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.ios-switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e5e5ea;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.ios-switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 27px;
+    width: 27px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .ios-switch-slider {
+    background-color: #34c759;
+}
+
+input:checked + .ios-switch-slider:before {
+    transform: translateX(20px);
+} 

@@ -1,0 +1,3253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 儿童习惯养成APP原型</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .prototype-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: 10px solid #1a1a1a;
+        }
+        .status-bar {
+            height: 44px;
+            background-color: #000;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+        .screen {
+            height: calc(100% - 44px - 83px);
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .tab-bar {
+            height: 83px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            font-size: 10px;
+        }
+        .tab-item.active {
+            color: #007aff;
+        }
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .screen-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-blue-600 text-white p-6">
+        <h1 class="text-3xl font-bold">习惯星球 - 儿童习惯养成APP原型</h1>
+        <p class="mt-2">基于《掌控习惯》原理，帮助孩子通过星际旅行游戏养成良好习惯</p>
+    </header>
+
+    <div class="prototype-container">
+        <!-- 主页界面 -->
+        <div>
+            <h2 class="screen-title">主页 - 星球探索</h2>
+            <div class="phone-frame">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>screen">
+                    <iframe src="home.html"></iframe>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-bar">
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item active">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 习惯列表界面 -->
+        <div>
+            <h2 class="screen-title">习惯列表</h2>
+            <div class="phone-frame">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>screen">
+                    <iframe src="habits.html"></iframe>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-bar">
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item active">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加习惯界面 -->
+        <div>
+            <h2 class="screen-title">添加习惯</h2>
+            <div class="phone-frame">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>screen">
+                    <iframe src="add-habit.html"></iframe>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-bar">
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item active">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 习惯详情界面 -->
+        <div>
+            <h2 class="screen-title">习惯详情</h2>
+            <div class="phone-frame">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>screen">
+                    <iframe src="habit-detail.html"></iframe>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-bar">
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item active">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 奖励中心界面 -->
+        <div>
+            <h2 class="screen-title">奖励中心</h2>
+            <div class="phone-frame">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>screen">
+                    <iframe src="rewards.html"></iframe>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-bar">
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item active">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭互动界面 -->
+        <div>
+            <h2 class="screen-title">家庭互动</h2>
+            <div class="phone-frame">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>screen">
+                    <iframe src="family.html"></iframe>
+                </div>
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-bar">
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item active">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-item">
+                        <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个人中心界面 -->
+        <div>
+            <h2 class="screen-title">个人中心</h2>
+            <div class="phone-frame">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div>
+                        <span class="mr-2"><i class="fas fa-signal"></i></span>
+                        <span class="mr-2"><i class="fas fa-wifi"></i></span>
+                        <span><i class="fas fa-battery-full"></i></span>
+                    </div>
+                </div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-planet-ringed"></i></div>
+                        <div>星球</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-list-check"></i></div>
+                        <div>习惯</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                        <div>奖励</div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-icon"><i class="fas fa-users"></i></div>
+                        <div>家庭</div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div>我的</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

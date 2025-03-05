@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 主页</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .home-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      margin-right: 10px;
+    }
+    
+    .user-name {
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    .currency-display {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: 20px;
+      padding: 8px 15px;
+    }
+    
+    .currency-icon {
+      color: #fdcb6e;
+      margin-right: 5px;
+    }
+    
+    .currency-value {
+      font-weight: 600;
+    }
+    
+    .space-map {
+      position: relative;
+      height: 500px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    
+    .map-container {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .planet:hover {
+      transform: scale(1.1);
+    }
+    
+    .planet-name {
+      position: absolute;
+      bottom: -25px;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .planet-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .planet-locked {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+    }
+    
+    .planet-home {
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle at 30% 30%, #6c5ce7, #1e1e2e);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+    
+    .planet-reading {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3);
+      top: 30%;
+      left: 30%;
+    }
+    
+    .planet-exercise {
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle at 30% 30%, #ff7675, #d63031);
+      top: 70%;
+      left: 30%;
+    }
+    
+    .planet-study {
+      width: 55px;
+      height: 55px;
+      background: radial-gradient(circle at 30% 30%, #55efc4, #00b894);
+      top: 40%;
+      left: 70%;
+    }
+    
+    .planet-chores {
+      width: 45px;
+      height: 45px;
+      background: radial-gradient(circle at 30% 30%, #ffeaa7, #fdcb6e);
+      top: 65%;
+      left: 65%;
+    }
+    
+    .planet-locked-1 {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at 30% 30%, #636e72, #2d3436);
+      top: 20%;
+      left: 50%;
+    }
+    
+    .planet-locked-2 {
+      width: 35px;
+      height: 35px;
+      background: radial-gradient(circle at 30% 30%, #636e72, #2d3436);
+      top: 80%;
+      left: 50%;
+    }
+    
+    .orbit {
+      position: absolute;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .orbit-1 {
+      width: 200px;
+      height: 200px;
+    }
+    
+    .orbit-2 {
+      width: 350px;
+      height: 350px;
+    }
+    
+    .orbit-3 {
+      width: 500px;
+      height: 500px;
+    }
+    
+    .spaceship {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: var(--primary-color);
+      border-radius: 50% 50% 0 50%;
+      transform: rotate(45deg);
+      top: 50%;
+      left: 20%;
+      box-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+      animation: fly 20s linear infinite;
+    }
+    
+    @keyframes fly {
+      0% {
+        transform: rotate(45deg) translateX(0) translateY(0);
+      }
+      25% {
+        transform: rotate(135deg) translateX(100px) translateY(-100px);
+      }
+      50% {
+        transform: rotate(225deg) translateX(0) translateY(-200px);
+      }
+      75% {
+        transform: rotate(315deg) translateX(-100px) translateY(-100px);
+      }
+      100% {
+        transform: rotate(405deg) translateX(0) translateY(0);
+      }
+    }
+    
+    .navigation-controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .nav-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .nav-button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .zoom-controls {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .zoom-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .zoom-button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .quick-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .action-button {
+      flex: 1;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin: 0 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .action-button:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .action-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    
+    .action-text {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="signal">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="time">9:43</div>
+      <div class="battery">
+        <span>84%</span>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    
+    <div class="app-content">
+      <div class="stars-bg"></div>
+      
+      <div class="home-header">
+        <div class="user-info">
+          <img src="https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="用户头像" class="user-avatar">
+          <div class="user-name">小明</div>
+        </div>
+        
+        <div class="currency-display">
+          <div class="currency-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="currency-value">42</div>
+        </div>
+      </div>
+      
+      <div class="space-map">
+        <div class="map-container">
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="orbit orbit-3"></div>
+          
+          <div class="spaceship"></div>
+          
+          <a href="planet.html" class="planet planet-home">
+            <div class="planet-name">小明星球</div>
+            <div class="planet-badge">3</div>
+          </a>
+          
+          <a href="habit-tracking.html" class="planet planet-reading">
+            <i class="fas fa-book" style="color: white; font-size: 20px;"></i>
+            <div class="planet-name">阅读星球</div>
+          </a>
+          
+          <a href="habit-tracking.html" class="planet planet-exercise">
+            <i class="fas fa-running" style="color: white; font-size: 16px;"></i>
+            <div class="planet-name">运动星球</div>
+          </a>
+          
+          <a href="habit-tracking.html" class="planet planet-study">
+            <i class="fas fa-pencil-alt" style="color: white; font-size: 18px;"></i>
+            <div class="planet-name">学习星球</div>
+          </a>
+          
+          <a href="habit-tracking.html" class="planet planet-chores">
+            <i class="fas fa-broom" style="color: white; font-size: 16px;"></i>
+            <div class="planet-name">家务星球</div>
+          </a>
+          
+          <div class="planet planet-locked-1">
+            <div class="planet-locked">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="planet-name">未解锁</div>
+          </div>
+          
+          <div class="planet planet-locked-2">
+            <div class="planet-locked">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="planet-name">未解锁</div>
+          </div>
+        </div>
+        
+        <div class="zoom-controls">
+          <div class="zoom-button">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="zoom-button">
+            <i class="fas fa-minus"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="navigation-controls">
+        <div class="nav-button">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="nav-button">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="nav-button">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+      </div>
+      
+      <div class="quick-actions">
+        <a href="habit-create.html" class="action-button">
+          <div class="action-icon">
+            <i class="fas fa-plus-circle"></i>
+          </div>
+          <div class="action-text">新习惯</div>
+        </a>
+        
+        <a href="family.html" class="action-button">
+          <div class="action-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="action-text">家庭</div>
+        </a>
+        
+        <a href="rewards.html" class="action-button">
+          <div class="action-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div class="action-text">奖励</div>
+        </a>
+        
+        <a href="stats.html" class="action-button">
+          <div class="action-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <div class="action-text">统计</div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item active">
+        <i class="fas fa-globe-asia"></i>
+        <span>星球</span>
+      </a>
+      <a href="habit-tracking.html" class="tab-item">
+        <i class="fas fa-check-circle"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-trophy"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="settings.html" class="tab-item">
+        <i class="fas fa-cog"></i>
+        <span>设置</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html> 

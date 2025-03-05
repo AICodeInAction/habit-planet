@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Planet - Rewards</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100vh;
+            background-color: #f2f2f7;
+            overflow: hidden;
+        }
+        
+        .rewards-header {
+            background-color: #5856d6;
+            color: white;
+            padding: 20px 16px;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        .badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+        }
+        
+        .badge.locked {
+            background-color: #c7c7cc;
+            opacity: 0.5;
+        }
+        
+        .badge.locked::before {
+            content: '\f023';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            z-index: 1;
+        }
+        
+        .tab-button {
+            padding: 8px 16px;
+            font-weight: 600;
+            color: #8e8e93;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: #5856d6;
+            border-bottom-color: #5856d6;
+        }
+        
+        .points-card {
+            background: linear-gradient(135deg, #5856d6, #af52de);
+            color: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar">
+        <div class="flex items-center">
+            <span>9:41</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Rewards Header -->
+    <div class="rewards-header">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl font-bold">My Rewards</h1>
+            <a href="profile.html" class="bg-white bg-opacity-20 rounded-full w-8 h-8 flex items-center justify-center">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+        
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="text-sm text-white text-opacity-80">Total Points</p>
+                <h2 class="text-2xl font-bold">1,250</h2>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-lg px-3 py-1">
+                <span class="text-sm font-semibold">Level 5</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content" style="padding-top: 0;">
+        <!-- Tabs -->
+        <div class="flex border-b border-gray-200 mb-4">
+            <button class="tab-button active flex-1">Badges</button>
+            <button class="tab-button flex-1">Planets</button>
+            <button class="tab-button flex-1">Decorations</button>
+        </div>
+        
+        <!-- Points Card -->
+        <div class="points-card">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="font-semibold">Next Reward</h3>
+                    <p class="text-sm text-white text-opacity-80">250 points to unlock Mars</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-full px-3 py-1 text-sm">
+                    750/1000
+                </div>
+            </div>
+            
+            <div class="progress-bar mt-3" style="background-color: rgba(255, 255, 255, 0.2);">
+                <div class="progress-fill" style="width: 75%; background-color: white;"></div>
+            </div>
+        </div>
+        
+        <!-- Badges Section -->
+        <div class="card mb-6">
+            <h2 class="font-semibold mb-4">Achievement Badges</h2>
+            
+            <div class="badge-grid">
+                <div class="badge-item">
+                    <div class="badge" style="background-color: #ff9500;">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">7-Day Streak</h3>
+                    <p class="text-xs text-gray-500">Complete habits 7 days in a row</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge" style="background-color: #34c759;">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Perfect Day</h3>
+                    <p class="text-xs text-gray-500">Complete all habits in a day</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge" style="background-color: #007aff;">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Bookworm</h3>
+                    <p class="text-xs text-gray-500">Read for 20 days</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge" style="background-color: #ff3b30;">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Bright Smile</h3>
+                    <p class="text-xs text-gray-500">Brush teeth for 30 days</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge" style="background-color: #5856d6;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Family Star</h3>
+                    <p class="text-xs text-gray-500">Complete 5 family challenges</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge locked">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Champion</h3>
+                    <p class="text-xs text-gray-500">Complete 50 habits</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge locked">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Active Kid</h3>
+                    <p class="text-xs text-gray-500">Exercise for 14 days</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge locked">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Healthy Eater</h3>
+                    <p class="text-xs text-gray-500">Eat healthy for 20 days</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge locked">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Superstar</h3>
+                    <p class="text-xs text-gray-500">Earn all other badges</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Special Badges -->
+        <div class="card">
+            <h2 class="font-semibold mb-4">Special Badges</h2>
+            
+            <div class="badge-grid">
+                <div class="badge-item">
+                    <div class="badge" style="background: linear-gradient(135deg, #ff9500, #ff3b30);">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Habit Master</h3>
+                    <p class="text-xs text-gray-500">30-day perfect streak</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge locked" style="background: linear-gradient(135deg, #007aff, #5856d6);">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Space Explorer</h3>
+                    <p class="text-xs text-gray-500">Unlock all planets</p>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge locked" style="background: linear-gradient(135deg, #34c759, #5ac8fa);">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="text-sm font-medium">Family Hero</h3>
+                    <p class="text-xs text-gray-500">Complete 20 family challenges</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Tab Bar -->
+    <div class="ios-tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="habit-detail.html" class="tab-item">
+            <i class="fas fa-list-check tab-icon"></i>
+            <span>Habits</span>
+        </a>
+        <a href="planet-explorer.html" class="tab-item">
+            <i class="fas fa-globe tab-icon"></i>
+            <span>Planets</span>
+        </a>
+        <a href="family.html" class="tab-item">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Family</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

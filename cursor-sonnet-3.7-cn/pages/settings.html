@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 设置</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .user-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      margin-right: 20px;
+    }
+    
+    .user-info {
+      flex: 1;
+    }
+    
+    .user-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .user-role {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+    }
+    
+    .user-stats {
+      display: flex;
+    }
+    
+    .user-stat {
+      margin-right: 15px;
+      font-size: 14px;
+    }
+    
+    .user-stat-value {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .user-edit {
+      margin-left: 10px;
+    }
+    
+    .settings-section {
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .settings-item {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .settings-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 20px;
+    }
+    
+    .settings-info {
+      flex: 1;
+    }
+    
+    .settings-name {
+      font-weight: 600;
+      font-size: 16px;
+    }
+    
+    .settings-description {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .settings-action {
+      margin-left: 10px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .toggle-slider {
+      background-color: var(--primary-color);
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(26px);
+    }
+    
+    .app-info {
+      text-align: center;
+      margin-top: 40px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+    }
+    
+    .app-version {
+      margin-bottom: 10px;
+    }
+    
+    .app-links {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    
+    .app-link {
+      margin: 0 10px;
+      color: var(--primary-color);
+    }
+    
+    .logout-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(225, 112, 85, 0.2);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-top: 30px;
+      color: var(--danger-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .logout-button:hover {
+      background-color: rgba(225, 112, 85, 0.3);
+    }
+    
+    .logout-button i {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="signal">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="time">9:50</div>
+      <div class="battery">
+        <span>81%</span>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    
+    <div class="app-content">
+      <div class="stars-bg"></div>
+      
+      <div class="page-header">
+        <div class="page-title">设置</div>
+      </div>
+      
+      <div class="user-profile">
+        <img src="https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="用户头像" class="user-avatar">
+        <div class="user-info">
+          <div class="user-name">小明</div>
+          <div class="user-role">王家 · 孩子</div>
+          <div class="user-stats">
+            <div class="user-stat">
+              习惯: <span class="user-stat-value">3</span>
+            </div>
+            <div class="user-stat">
+              星星: <span class="user-stat-value">42</span>
+            </div>
+          </div>
+        </div>
+        <div class="user-edit">
+          <button class="btn btn-outline" style="padding: 8px 12px; font-size: 14px;">
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <div class="section-title">账户设置</div>
+        
+        <div class="settings-item">
+          <div class="settings-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">个人资料</div>
+            <div class="settings-description">修改你的个人信息和头像</div>
+          </div>
+          <div class="settings-action">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: var(--accent-color);">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">密码与安全</div>
+            <div class="settings-description">更改密码和安全设置</div>
+          </div>
+          <div class="settings-action">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: var(--success-color);">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">家庭管理</div>
+            <div class="settings-description">管理家庭成员和权限</div>
+          </div>
+          <div class="settings-action">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <div class="section-title">应用设置</div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: #74b9ff;">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">通知设置</div>
+            <div class="settings-description">管理应用通知和提醒</div>
+          </div>
+          <div class="settings-action">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: #a29bfe;">
+            <i class="fas fa-palette"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">主题与外观</div>
+            <div class="settings-description">自定义应用的外观和主题</div>
+          </div>
+          <div class="settings-action">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: #ff7675;">
+            <i class="fas fa-language"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">语言</div>
+            <div class="settings-description">更改应用语言</div>
+          </div>
+          <div class="settings-action">
+            <span>简体中文</span>
+            <i class="fas fa-chevron-right" style="margin-left: 10px;"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <div class="section-title">隐私与数据</div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: #636e72;">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">隐私设置</div>
+            <div class="settings-description">管理你的隐私和数据共享</div>
+          </div>
+          <div class="settings-action">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: #0984e3;">
+            <i class="fas fa-cloud-download-alt"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">数据备份</div>
+            <div class="settings-description">备份和恢复你的数据</div>
+          </div>
+          <div class="settings-action">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="settings-icon" style="background-color: #6c5ce7;">
+            <i class="fas fa-moon"></i>
+          </div>
+          <div class="settings-info">
+            <div class="settings-name">深色模式</div>
+            <div class="settings-description">切换深色/浅色主题</div>
+          </div>
+          <div class="settings-action">
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="logout-button">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>退出登录</span>
+      </div>
+      
+      <div class="app-info">
+        <div class="app-version">习惯星球 v1.0.0</div>
+        <div class="app-links">
+          <a href="#" class="app-link">隐私政策</a>
+          <a href="#" class="app-link">使用条款</a>
+          <a href="#" class="app-link">帮助中心</a>
+        </div>
+        <div>© 2023 习惯星球. 保留所有权利。</div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-globe-asia"></i>
+        <span>星球</span>
+      </a>
+      <a href="habit-tracking.html" class="tab-item">
+        <i class="fas fa-check-circle"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-trophy"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="settings.html" class="tab-item active">
+        <i class="fas fa-cog"></i>
+        <span>设置</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html> 

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>奖励中心 - 习惯星球</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .rewards-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      padding: 24px 16px;
+      color: white;
+      border-radius: 0 0 24px 24px;
+    }
+    
+    .rewards-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .rewards-subtitle {
+      font-size: 16px;
+      opacity: 0.8;
+      margin-bottom: 24px;
+    }
+    
+    .rewards-stats {
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    
+    .rewards-stat {
+      text-align: center;
+    }
+    
+    .rewards-stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .rewards-stat-label {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .rewards-tabs {
+      display: flex;
+      margin: 16px;
+      background-color: var(--background-color);
+      border-radius: 12px;
+      padding: 4px;
+    }
+    
+    .rewards-tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+    
+    .rewards-tab.active {
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .badge-categories {
+      display: flex;
+      overflow-x: auto;
+      padding: 8px 16px;
+      scrollbar-width: none;
+    }
+    
+    .badge-categories::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .badge-category {
+      background-color: var(--background-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-right: 8px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    
+    .badge-category.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 16px;
+    }
+    
+    .badge-item {
+      background-color: white;
+      border-radius: 16px;
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    
+    .badge-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--background-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+    
+    .badge-icon.earned {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+    }
+    
+    .badge-name {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .badge-desc {
+      font-size: 10px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    
+    .badge-item.locked {
+      opacity: 0.5;
+    }
+    
+    .badge-lock {
+      position: absolute;
+      font-size: 16px;
+    }
+    
+    .achievement-list {
+      padding: 0 16px;
+    }
+    
+    .achievement-item {
+      background-color: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .achievement-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      margin-right: 16px;
+    }
+    
+    .achievement-info {
+      flex: 1;
+    }
+    
+    .achievement-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .achievement-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    
+    .achievement-date {
+      font-size: 10px;
+      color: var(--text-light);
+    }
+    
+    .achievement-reward {
+      background-color: var(--background-color);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="status-bar-time">09:41</div>
+      <div class="status-bar-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    
+    <div class="content" style="padding: 0; height: calc(100% - 44px - 83px);">
+      <div class="rewards-header">
+        <div class="rewards-title">奖励中心</div>
+        <div class="rewards-subtitle">收集徽章，解锁成就！</div>
+        
+        <div class="rewards-stats">
+          <div class="rewards-stat">
+            <div class="rewards-stat-number">12</div>
+            <div class="rewards-stat-label">已获徽章</div>
+          </div>
+          <div class="rewards-stat">
+            <div class="rewards-stat-number">8</div>
+            <div class="rewards-stat-label">成就解锁</div>
+          </div>
+          <div class="rewards-stat">
+            <div class="rewards-stat-number">3</div>
+            <div class="rewards-stat-label">排行位置</div>
+          </div>
+          <div class="rewards-stat">
+            <div class="rewards-stat-number">31</div>
+            <div class="rewards-stat-label">连续天数</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="rewards-tabs">
+        <div class="rewards-tab active">徽章</div>
+        <div class="rewards-tab">成就</div>
+      </div>
+      
+      <!-- 徽章部分 -->
+      <div id="badges-tab">
+        <div class="badge-categories">
+          <div class="badge-category active">所有</div>
+          <div class="badge-category">健康习惯</div>
+          <div class="badge-category">学习成长</div>
+          <div class="badge-category">生活技能</div>
+          <div class="badge-category">探索冒险</div>
+        </div>
+        
+        <div class="badge-grid">
+          <div class="badge-item">
+            <div class="badge-icon earned">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="badge-name">阅读达人</div>
+            <div class="badge-desc">连续阅读30天</div>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon earned">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="badge-name">运动健将</div>
+            <div class="badge-desc">累计锻炼20小时</div>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon earned">
+              <i class="fas fa-tooth"></i>
+            </div>
+            <div class="badge-name">健康卫士</div>
+            <div class="badge-desc">坚持刷牙60天</div>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon earned">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <div class="badge-name">数学小天才</div>
+            <div class="badge-desc">完成50道数学题</div>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon earned">
+              <i class="fas fa-language"></i>
+            </div>
+            <div class="badge-name">语言大师</div>
+            <div class="badge-desc">学习100个单词</div>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon">
+              <i class="fas fa-bed"></i>
+            </div>
+            <div class="badge-name">早睡早起</div>
+            <div class="badge-desc">连续一周按时睡觉</div>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon">
+              <i class="fas fa-apple-whole"></i>
+            </div>
+            <div class="badge-name">水果爱好者</div>
+            <div class="badge-desc">连续吃水果10天</div>
+          </div>
+          
+          <div class="badge-item">
+            <div class="badge-icon earned">
+              <i class="fas fa-bowl-food"></i>
+            </div>
+            <div class="badge-name">营养专家</div>
+            <div class="badge-desc">连续早餐45天</div>
+          </div>
+          
+          <div class="badge-item locked">
+            <div class="badge-icon">
+              <i class="fas fa-lock badge-lock"></i>
+            </div>
+            <div class="badge-name">未解锁</div>
+            <div class="badge-desc">继续培养好习惯</div>
+          </div>
+          
+          <div class="badge-item locked">
+            <div class="badge-icon">
+              <i class="fas fa-lock badge-lock"></i>
+            </div>
+            <div class="badge-name">未解锁</div>
+            <div class="badge-desc">继续培养好习惯</div>
+          </div>
+          
+          <div class="badge-item locked">
+            <div class="badge-icon">
+              <i class="fas fa-lock badge-lock"></i>
+            </div>
+            <div class="badge-name">未解锁</div>
+            <div class="badge-desc">继续培养好习惯</div>
+          </div>
+          
+          <div class="badge-item locked">
+            <div class="badge-icon">
+              <i class="fas fa-lock badge-lock"></i>
+            </div>
+            <div class="badge-name">未解锁</div>
+            <div class="badge-desc">继续培养好习惯</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 成就部分（默认隐藏） -->
+      <div id="achievements-tab" style="display: none;">
+        <div class="achievement-list">
+          <div class="achievement-item">
+            <div class="achievement-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="achievement-info">
+              <div class="achievement-name">习惯养成入门</div>
+              <div class="achievement-desc">成功完成第一个为期7天的习惯挑战</div>
+              <div class="achievement-date">获得于 2023年5月1日</div>
+            </div>
+            <div class="achievement-reward">
+              火箭装饰
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-icon">
+              <i class="fas fa-fire"></i>
+            </div>
+            <div class="achievement-info">
+              <div class="achievement-name">连续30天</div>
+              <div class="achievement-desc">连续30天保持至少一个习惯</div>
+              <div class="achievement-date">获得于 2023年5月10日</div>
+            </div>
+            <div class="achievement-reward">
+              解锁火星
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <div class="achievement-info">
+              <div class="achievement-name">5个习惯大师</div>
+              <div class="achievement-desc">同时坚持5个不同的习惯</div>
+              <div class="achievement-date">获得于 2023年4月20日</div>
+            </div>
+            <div class="achievement-reward">
+              金色徽章
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="achievement-info">
+              <div class="achievement-name">家庭协作</div>
+              <div class="achievement-desc">与家人一起完成共同习惯任务</div>
+              <div class="achievement-date">获得于 2023年5月5日</div>
+            </div>
+            <div class="achievement-reward">
+              家庭徽章
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-icon">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="achievement-info">
+              <div class="achievement-name">阅读马拉松</div>
+              <div class="achievement-desc">累计阅读时间超过10小时</div>
+              <div class="achievement-date">获得于 2023年4月15日</div>
+            </div>
+            <div class="achievement-reward">
+              书架装饰
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="achievement-info">
+              <div class="achievement-name">健康生活</div>
+              <div class="achievement-desc">坚持3个健康类习惯连续14天</div>
+              <div class="achievement-date">获得于 2023年5月8日</div>
+            </div>
+            <div class="achievement-reward">
+              树木装饰
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-planet-ringed"></i>
+        <span>星球</span>
+      </a>
+      <a href="habits.html" class="tab-item">
+        <i class="fas fa-list-check"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item active">
+        <i class="fas fa-medal"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="profile.html" class="tab-item">
+        <i class="fas fa-user"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.rewards-tab');
+      const badgesTab = document.getElementById('badges-tab');
+      const achievementsTab = document.getElementById('achievements-tab');
+      
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', function() {
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          if (index === 0) {
+            badgesTab.style.display = 'block';
+            achievementsTab.style.display = 'none';
+          } else {
+            badgesTab.style.display = 'none';
+            achievementsTab.style.display = 'block';
+          }
+        });
+      });
+      
+      const categories = document.querySelectorAll('.badge-category');
+      
+      categories.forEach(category => {
+        category.addEventListener('click', function() {
+          categories.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

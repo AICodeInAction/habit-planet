@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .family-card {
+      background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    .joint-progress {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div class="p-4 space-y-6">
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold">家庭星系</h1>
+      <button class="p-2 bg-blue-500 text-white rounded-full">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+
+    <div class="family-card p-4">
+      <div class="flex items-center space-x-4 mb-4">
+        <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+          <i class="fas fa-user-astronaut text-white"></i>
+        </div>
+        <div class="flex-1">
+          <h3 class="font-medium">爸爸的太空站</h3>
+          <p class="text-sm text-gray-500">本周已运动3天</p>
+        </div>
+        <button class="p-2 bg-green-100 text-green-600 rounded-lg">
+          <i class="fas fa-heart mr-2"></i>鼓励
+        </button>
+      </div>
+      <div class="joint-progress">
+        <div class="h-full bg-gradient-to-r from-blue-400 to-purple-500 w-2/3 rounded-full"></div>
+      </div>
+      <div class="flex justify-between text-sm text-gray-500 mt-2">
+        <span>共同目标：每周5次运动</span>
+        <span>66% 完成</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div class="family-card p-4 text-center">
+        <div class="w-16 h-16 mx-auto bg-pink-100 rounded-full flex items-center justify-center">
+          <i class="fas fa-medal text-pink-500 text-2xl"></i>
+        </div>
+        <h3 class="font-medium mt-2">家庭成就</h3>
+        <p class="text-sm text-gray-500">已解锁12个成就</p>
+      </div>
+      
+      <div class="family-card p-4 text-center">
+        <div class="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center">
+          <i class="fas fa-trophy text-blue-500 text-2xl"></i>
+        </div>
+        <h3 class="font-medium mt-2">家庭排名</h3>
+        <p class="text-sm text-gray-500">当前第58名</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

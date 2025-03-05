@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创建习惯 - 习惯星球</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .create-header {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      background-color: white;
+    }
+    
+    .cancel-btn, .save-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      border: none;
+    }
+    
+    .cancel-btn {
+      background-color: var(--background-color);
+      color: var(--text-primary);
+    }
+    
+    .save-btn {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .create-form {
+      padding: 16px;
+      background-color: white;
+    }
+    
+    .icon-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .icon-option {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+    
+    .icon-option.selected {
+      box-shadow: 0 0 0 3px white, 0 0 0 6px var(--primary-color);
+    }
+    
+    .planet-select {
+      margin-bottom: 24px;
+    }
+    
+    .planet-options {
+      display: flex;
+      overflow-x: auto;
+      padding: 8px 0;
+      gap: 16px;
+      scrollbar-width: none;
+    }
+    
+    .planet-options::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .planet-option {
+      min-width: 100px;
+      background-color: var(--background-color);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    
+    .planet-option.selected {
+      border-color: var(--primary-color);
+    }
+    
+    .planet-img {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .planet-img .circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    
+    .planet-name {
+      padding: 8px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .frequency-select {
+      margin-bottom: 24px;
+    }
+    
+    .freq-options {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .freq-option {
+      padding: 8px 16px;
+      background-color: var(--background-color);
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    
+    .freq-option.selected {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .time-select {
+      margin-bottom: 24px;
+    }
+    
+    .time-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .time-option {
+      padding: 8px 16px;
+      background-color: var(--background-color);
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    
+    .time-option.selected {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .family-toggle {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .toggle-switch {
+      width: 50px;
+      height: 28px;
+      border-radius: 14px;
+      background-color: var(--background-color);
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .toggle-switch.active {
+      background-color: var(--primary-color);
+    }
+    
+    .toggle-button {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: white;
+      top: 2px;
+      left: 2px;
+      transition: all 0.3s;
+    }
+    
+    .toggle-switch.active .toggle-button {
+      left: 24px;
+    }
+    
+    .family-members {
+      margin-top: 16px;
+      display: none;
+    }
+    
+    .family-members.show {
+      display: block;
+    }
+    
+    .member-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    
+    .member-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .member-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-bottom: 4px;
+      border: 2px solid transparent;
+      object-fit: cover;
+    }
+    
+    .member-avatar.selected {
+      border-color: var(--primary-color);
+    }
+    
+    .member-name {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .preview-section {
+      margin-top: 24px;
+      padding: 16px;
+      background-color: var(--background-color);
+      border-radius: 12px;
+    }
+    
+    .preview-title {
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .habit-preview {
+      background-color: white;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .preview-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      margin-right: 16px;
+    }
+    
+    .preview-info {
+      flex: 1;
+    }
+    
+    .preview-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .preview-details {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .preview-checkbox {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="status-bar-time">09:41</div>
+      <div class="status-bar-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    
+    <div class="content" style="padding: 0; height: calc(100% - 44px);">
+      <div class="create-header">
+        <button class="cancel-btn">取消</button>
+        <h2 style="font-size: 18px; font-weight: 600;">创建新习惯</h2>
+        <button class="save-btn">保存</button>
+      </div>
+      
+      <div class="create-form">
+        <div class="form-group">
+          <label for="habit-name" class="form-label">习惯名称</label>
+          <input type="text" id="habit-name" class="form-input" placeholder="例如：晨跑、阅读、弹钢琴等">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">选择图标</label>
+          <div class="icon-selector">
+            <div class="icon-option selected" style="background-color: #F59E0B;">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="icon-option" style="background-color: #10B981;">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="icon-option" style="background-color: #3B82F6;">
+              <i class="fas fa-glass-water"></i>
+            </div>
+            <div class="icon-option" style="background-color: #8B5CF6;">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <div class="icon-option" style="background-color: #EC4899;">
+              <i class="fas fa-apple-whole"></i>
+            </div>
+            <div class="icon-option" style="background-color: #EF4444;">
+              <i class="fas fa-tooth"></i>
+            </div>
+            <div class="icon-option" style="background-color: #6366F1;">
+              <i class="fas fa-language"></i>
+            </div>
+            <div class="icon-option" style="background-color: #0EA5E9;">
+              <i class="fas fa-bed"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="planet-select">
+          <label class="form-label">添加到星球</label>
+          <div class="planet-options">
+            <div class="planet-option selected">
+              <div class="planet-img">
+                <div class="circle" style="background: linear-gradient(135deg, #4385F4, #064796);"></div>
+              </div>
+              <div class="planet-name">地球</div>
+            </div>
+            <div class="planet-option">
+              <div class="planet-img">
+                <div class="circle" style="background: linear-gradient(135deg, #EA4335, #A32222);"></div>
+              </div>
+              <div class="planet-name">火星</div>
+            </div>
+            <div class="planet-option">
+              <div class="planet-img">
+                <div class="circle" style="background: linear-gradient(135deg, #FBBC05, #EA8C0A);"></div>
+              </div>
+              <div class="planet-name">金星</div>
+            </div>
+            <div class="planet-option">
+              <div class="planet-img">
+                <div class="circle" style="filter: grayscale(100%); background: linear-gradient(135deg, #F67280, #C06C84);"></div>
+              </div>
+              <div class="planet-name">土星 (未解锁)</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="frequency-select">
+          <label class="form-label">频率</label>
+          <div class="freq-options">
+            <div class="freq-option selected">每天</div>
+            <div class="freq-option">每周</div>
+            <div class="freq-option">工作日</div>
+            <div class="freq-option">周末</div>
+            <div class="freq-option">自定义</div>
+          </div>
+        </div>
+        
+        <div class="time-select">
+          <label class="form-label">提醒时间</label>
+          <div class="time-options">
+            <div class="time-option">早晨</div>
+            <div class="time-option selected">下午</div>
+            <div class="time-option">晚上</div>
+            <div class="time-option">睡前</div>
+            <div class="time-option">无提醒</div>
+          </div>
+        </div>
+        
+        <div class="family-toggle">
+          <div>
+            <div style="font-weight: 500; margin-bottom: 4px;">家庭共同习惯</div>
+            <div style="font-size: 12px; color: var(--text-secondary);">邀请家人一起养成好习惯</div>
+          </div>
+          <div class="toggle-switch">
+            <div class="toggle-button"></div>
+          </div>
+        </div>
+        
+        <div class="family-members">
+          <div style="font-weight: 500; margin-bottom: 8px;">选择家庭成员</div>
+          <div class="member-list">
+            <div class="member-option">
+              <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="member-avatar">
+              <div class="member-name">爸爸</div>
+            </div>
+            <div class="member-option">
+              <img src="https://images.unsplash.com/photo-1547212371-eb5e6a4b590c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="member-avatar">
+              <div class="member-name">妈妈</div>
+            </div>
+            <div class="member-option">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" class="member-avatar selected">
+              <div class="member-name">小明</div>
+            </div>
+            <div class="member-option">
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="member-avatar">
+              <div class="member-name">小红</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="preview-section">
+          <div class="preview-title">习惯预览</div>
+          <div class="habit-preview">
+            <div class="preview-icon" style="background-color: #F59E0B;">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="preview-info">
+              <div class="preview-name">阅读</div>
+              <div class="preview-details">每天 · 下午提醒</div>
+            </div>
+            <div class="preview-checkbox"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 图标选择
+      const iconOptions = document.querySelectorAll('.icon-option');
+      iconOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          iconOptions.forEach(o => o.classList.remove('selected'));
+          this.classList.add('selected');
+          
+          // 更新预览
+          const iconClass = this.querySelector('i').className;
+          const iconColor = this.style.backgroundColor;
+          
+          document.querySelector('.preview-icon').style.backgroundColor = iconColor;
+          document.querySelector('.preview-icon i').className = iconClass;
+        });
+      });
+      
+      // 星球选择
+      const planetOptions = document.querySelectorAll('.planet-option');
+      planetOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // 检查是否已解锁
+          if (this.querySelector('.planet-name').textContent.includes('未解锁')) {
+            return;
+          }
+          
+          planetOptions.forEach(o => o.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+      
+      // 频率选择
+      const freqOptions = document.querySelectorAll('.freq-option');
+      freqOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          freqOptions.forEach(o => o.classList.remove('selected'));
+          this.classList.add('selected');
+          
+          // 更新预览
+          const freq = this.textContent;
+          let previewDetails = document.querySelector('.preview-details').textContent;
+          const parts = previewDetails.split(' · ');
+          
+          document.querySelector('.preview-details').textContent = `${freq} · ${parts[1]}`;
+        });
+      });
+      
+      // 时间选择
+      const timeOptions = document.querySelectorAll('.time-option');
+      timeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          timeOptions.forEach(o => o.classList.remove('selected'));
+          this.classList.add('selected');
+          
+          // 更新预览
+          const time = this.textContent === '无提醒' ? '无提醒' : `${this.textContent}提醒`;
+          let previewDetails = document.querySelector('.preview-details').textContent;
+          const parts = previewDetails.split(' · ');
+          
+          document.querySelector('.preview-details').textContent = `${parts[0]} · ${time}`;
+        });
+      });
+      
+      // 家庭习惯切换
+      const familyToggle = document.querySelector('.toggle-switch');
+      const familyMembers = document.querySelector('.family-members');
+      
+      familyToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        
+        if (this.classList.contains('active')) {
+          familyMembers.classList.add('show');
+        } else {
+          familyMembers.classList.remove('show');
+        }
+      });
+      
+      // 家庭成员选择
+      const memberAvatars = document.querySelectorAll('.member-avatar');
+      memberAvatars.forEach(avatar => {
+        avatar.addEventListener('click', function() {
+          this.classList.toggle('selected');
+        });
+      });
+      
+      // 习惯名称输入
+      const habitNameInput = document.getElementById('habit-name');
+      habitNameInput.addEventListener('input', function() {
+        document.querySelector('.preview-name').textContent = this.value || '阅读';
+      });
+      
+      // 取消按钮
+      document.querySelector('.cancel-btn').addEventListener('click', function() {
+        window.location.href = 'habits.html';
+      });
+      
+      // 保存按钮
+      document.querySelector('.save-btn').addEventListener('click', function() {
+        alert('习惯创建成功！');
+        window.location.href = 'habits.html';
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭 - HabitPlanet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/base.css" rel="stylesheet">
+    <style>
+        .family-member {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .member-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            object-fit: cover;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .mini-achievement {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            font-size: 12px;
+            color: #4B5563;
+        }
+
+        .mini-achievement i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .interaction-button {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .family-stats {
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="header">
+        <h1 class="text-xl font-bold">家庭空间</h1>
+        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100">
+            <i class="fas fa-plus text-gray-600"></i>
+        </button>
+    </div>
+
+    <div class="page-content">
+        <!-- 家庭统计 -->
+        <div class="family-stats">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">小王家</h3>
+                <span class="text-sm opacity-80">家庭等级 Lv.5</span>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                    <div class="text-2xl font-bold">15</div>
+                    <div class="text-sm opacity-80">总习惯数</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold">89%</div>
+                    <div class="text-sm opacity-80">完成率</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold">7</div>
+                    <div class="text-sm opacity-80">连续天数</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭成员列表 -->
+        <div class="space-y-4">
+            <!-- 成员1 -->
+            <div class="family-member">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1491349174775-aaafddd81942?w=100" alt="妈妈" class="member-avatar">
+                        <div class="ml-3">
+                            <h3 class="font-semibold">妈妈</h3>
+                            <p class="text-sm text-gray-500">今日已完成 3/4 个习惯</p>
+                        </div>
+                    </div>
+                    <button class="interaction-button bg-indigo-100 text-indigo-600">
+                        <i class="fas fa-heart"></i>
+                        <span>加油</span>
+                    </button>
+                </div>
+                <div class="achievement-grid">
+                    <div class="mini-achievement">
+                        <i class="fas fa-running text-indigo-600"></i>
+                        <span>运动达人</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-book text-blue-600"></i>
+                        <span>阅读达人</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-medal text-yellow-600"></i>
+                        <span>坚持王</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-plus text-gray-400"></i>
+                        <span>更多</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 成员2 -->
+            <div class="family-member">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100" alt="爸爸" class="member-avatar">
+                        <div class="ml-3">
+                            <h3 class="font-semibold">爸爸</h3>
+                            <p class="text-sm text-gray-500">今日已完成 2/3 个习惯</p>
+                        </div>
+                    </div>
+                    <button class="interaction-button bg-indigo-100 text-indigo-600">
+                        <i class="fas fa-heart"></i>
+                        <span>加油</span>
+                    </button>
+                </div>
+                <div class="achievement-grid">
+                    <div class="mini-achievement">
+                        <i class="fas fa-dumbbell text-red-600"></i>
+                        <span>健身达人</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-brain text-purple-600"></i>
+                        <span>学习达人</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-star text-yellow-600"></i>
+                        <span>全能王</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-plus text-gray-400"></i>
+                        <span>更多</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 成员3 -->
+            <div class="family-member">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100" alt="女儿" class="member-avatar">
+                        <div class="ml-3">
+                            <h3 class="font-semibold">女儿</h3>
+                            <p class="text-sm text-gray-500">今日已完成 4/4 个习惯</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="interaction-button bg-pink-100 text-pink-600">
+                            <i class="fas fa-gift"></i>
+                            <span>奖励</span>
+                        </button>
+                        <button class="interaction-button bg-indigo-100 text-indigo-600">
+                            <i class="fas fa-heart"></i>
+                            <span>加油</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="achievement-grid">
+                    <div class="mini-achievement">
+                        <i class="fas fa-book text-blue-600"></i>
+                        <span>阅读达人</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-music text-green-600"></i>
+                        <span>音乐达人</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-crown text-yellow-600"></i>
+                        <span>习惯之星</span>
+                    </div>
+                    <div class="mini-achievement">
+                        <i class="fas fa-plus text-gray-400"></i>
+                        <span>更多</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-globe"></i>
+            <span>星球</span>
+        </a>
+        <a href="habits.html" class="nav-item">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="family.html" class="nav-item active">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="rewards.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>奖励</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+</body>
+</html> 

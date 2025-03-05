@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奖励中心 - HabitPlanet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/base.css" rel="stylesheet">
+    <style>
+        .reward-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .planet-decoration {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .planet-decoration::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 44px;
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            z-index: -1;
+        }
+
+        .achievement-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .achievement-item {
+            aspect-ratio: 1;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .achievement-item i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-locked {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .reward-progress {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .reward-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4F46E5, #7C3AED);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="header">
+        <h1 class="text-xl font-bold">奖励中心</h1>
+        <div class="flex items-center">
+            <div class="mr-4 flex items-center">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="font-semibold">2,580</span>
+            </div>
+            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100">
+                <i class="fas fa-gift text-gray-600"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- 当前任务 -->
+        <div class="reward-card">
+            <h3 class="font-semibold mb-4">当前任务</h3>
+            <div class="flex items-center justify-between mb-3">
+                <div>
+                    <h4 class="font-medium">解锁运动星球新装饰</h4>
+                    <div class="reward-progress mt-2" style="width: 200px;">
+                        <div class="reward-progress-fill" style="width: 75%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-500">再坚持 5 天</p>
+                </div>
+                <div class="planet-decoration" style="background-image: url('https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=200');">
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就墙 -->
+        <div class="reward-card">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-semibold">成就墙</h3>
+                <button class="text-sm text-indigo-600">查看全部</button>
+            </div>
+            <div class="achievement-list">
+                <div class="achievement-item bg-indigo-50">
+                    <i class="fas fa-running text-indigo-600"></i>
+                    <span class="text-sm font-medium">运动达人</span>
+                    <span class="text-xs text-gray-500 mt-1">连续运动30天</span>
+                </div>
+                <div class="achievement-item bg-blue-50">
+                    <i class="fas fa-book text-blue-600"></i>
+                    <span class="text-sm font-medium">阅读达人</span>
+                    <span class="text-xs text-gray-500 mt-1">累计阅读50小时</span>
+                </div>
+                <div class="achievement-item bg-green-50">
+                    <i class="fas fa-seedling text-green-600"></i>
+                    <span class="text-sm font-medium">习惯养成者</span>
+                    <span class="text-xs text-gray-500 mt-1">完成3个习惯</span>
+                </div>
+                <div class="achievement-item bg-gray-50 achievement-locked">
+                    <i class="fas fa-question text-gray-400"></i>
+                    <span class="text-sm font-medium">神秘成就</span>
+                    <span class="text-xs text-gray-500 mt-1">继续探索解锁</span>
+                </div>
+                <div class="achievement-item bg-gray-50 achievement-locked">
+                    <i class="fas fa-question text-gray-400"></i>
+                    <span class="text-sm font-medium">神秘成就</span>
+                    <span class="text-xs text-gray-500 mt-1">继续探索解锁</span>
+                </div>
+                <div class="achievement-item bg-gray-50 achievement-locked">
+                    <i class="fas fa-question text-gray-400"></i>
+                    <span class="text-sm font-medium">神秘成就</span>
+                    <span class="text-xs text-gray-500 mt-1">继续探索解锁</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可兑换奖励 -->
+        <div class="reward-card">
+            <h3 class="font-semibold mb-4">可兑换奖励</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-gamepad text-yellow-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">30分钟游戏时间</h4>
+                            <p class="text-sm text-gray-500">需要 500 星星</p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
+                        兑换
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-ice-cream text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">一个冰淇淋</h4>
+                            <p class="text-sm text-gray-500">需要 300 星星</p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
+                        兑换
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-paint-brush text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">星球个性装扮</h4>
+                            <p class="text-sm text-gray-500">需要 1000 星星</p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-gray-200 text-gray-400 rounded-lg text-sm" disabled>
+                        星星不足
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-globe"></i>
+            <span>星球</span>
+        </a>
+        <a href="habits.html" class="nav-item">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="family.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="rewards.html" class="nav-item active">
+            <i class="fas fa-trophy"></i>
+            <span>奖励</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+</body>
+</html> 

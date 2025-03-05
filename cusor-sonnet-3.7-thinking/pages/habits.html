@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯清单 - 习惯星球</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .date-header {
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .date-nav {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 16px;
+    }
+    
+    .date-button {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    .date-title {
+      font-weight: 600;
+      font-size: 18px;
+      text-align: center;
+    }
+    
+    .date-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    
+    .progress-summary {
+      background-color: white;
+      padding: 16px;
+      border-radius: 16px;
+      margin: 0 16px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .progress-dots {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--border-color);
+    }
+    
+    .dot.completed {
+      background-color: var(--success-color);
+    }
+    
+    .dot.current {
+      background-color: var(--primary-color);
+      position: relative;
+    }
+    
+    .dot.current::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-color);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .categories {
+      display: flex;
+      overflow-x: auto;
+      padding: 8px 16px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+    
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .category {
+      background-color: var(--background-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-right: 8px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    
+    .category.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .habit-list {
+      padding: 0 16px;
+    }
+    
+    .list-section {
+      margin-bottom: 24px;
+    }
+    
+    .list-section-title {
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .list-section-subtitle {
+      font-size: 12px;
+      color: var(--text-primary);
+      background-color: var(--background-color);
+      padding: 4px 8px;
+      border-radius: 12px;
+    }
+    
+    .add-habit-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 100px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+      border: none;
+      z-index: 10;
+    }
+    
+    .summary-numbers {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 12px;
+    }
+    
+    .summary-item {
+      text-align: center;
+    }
+    
+    .summary-number {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .summary-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .habit-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-size: 16px;
+      color: white;
+    }
+    
+    .habit-icon.reading {
+      background-color: #F59E0B;
+    }
+    
+    .habit-icon.exercise {
+      background-color: #10B981;
+    }
+    
+    .habit-icon.water {
+      background-color: #3B82F6;
+    }
+    
+    .habit-icon.study {
+      background-color: #8B5CF6;
+    }
+    
+    .habit-icon.sleep {
+      background-color: #1E40AF;
+    }
+    
+    .habit-icon.fruits {
+      background-color: #EC4899;
+    }
+    
+    .habit-actions {
+      display: flex;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="status-bar-time">09:41</div>
+      <div class="status-bar-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    
+    <div class="content" style="height: calc(100% - 44px - 83px);">
+      <div class="date-header">
+        <div class="date-nav">
+          <button class="date-button"><i class="fas fa-chevron-left"></i></button>
+          <button class="date-button"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div>
+          <div class="date-title">今天</div>
+          <div class="date-subtitle">2023年5月15日 星期一</div>
+        </div>
+      </div>
+      
+      <div class="progress-summary">
+        <div class="progress-dots">
+          <div class="dot completed"></div>
+          <div class="dot completed"></div>
+          <div class="dot completed"></div>
+          <div class="dot current"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        
+        <div class="summary-numbers">
+          <div class="summary-item">
+            <div class="summary-number">10</div>
+            <div class="summary-label">总习惯</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-number">3</div>
+            <div class="summary-label">已完成</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-number">7</div>
+            <div class="summary-label">待完成</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-number" style="color: var(--primary-color);">30%</div>
+            <div class="summary-label">完成率</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="categories">
+        <div class="category active">全部</div>
+        <div class="category">个人习惯</div>
+        <div class="category">学习</div>
+        <div class="category">健康</div>
+        <div class="category">家庭共同</div>
+      </div>
+      
+      <div class="habit-list">
+        <div class="list-section">
+          <div class="list-section-title">
+            <span>待完成</span>
+            <span class="list-section-subtitle">7个习惯</span>
+          </div>
+          
+          <div class="card">
+            <div class="habit-item">
+              <div class="habit-checkbox">
+                <i class=""></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">阅读20分钟</div>
+                <div class="habit-streak" data-streak="15">已连续完成 15 天</div>
+              </div>
+              <div class="habit-icon reading">
+                <i class="fas fa-book"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox">
+                <i class=""></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">晨间锻炼</div>
+                <div class="habit-streak" data-streak="7">已连续完成 7 天</div>
+              </div>
+              <div class="habit-icon exercise">
+                <i class="fas fa-dumbbell"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox">
+                <i class=""></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">喝水 2000ml</div>
+                <div class="habit-streak" data-streak="3">已连续完成 3 天</div>
+              </div>
+              <div class="habit-icon water">
+                <i class="fas fa-glass-water"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox">
+                <i class=""></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">数学练习</div>
+                <div class="habit-streak" data-streak="12">已连续完成 12 天</div>
+              </div>
+              <div class="habit-icon study">
+                <i class="fas fa-calculator"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox">
+                <i class=""></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">9点前睡觉</div>
+                <div class="habit-streak" data-streak="5">已连续完成 5 天</div>
+              </div>
+              <div class="habit-icon sleep">
+                <i class="fas fa-moon"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox">
+                <i class=""></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">英语单词</div>
+                <div class="habit-streak" data-streak="20">已连续完成 20 天</div>
+              </div>
+              <div class="habit-icon study">
+                <i class="fas fa-language"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox">
+                <i class=""></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">每天吃水果</div>
+                <div class="habit-streak" data-streak="2">已连续完成 2 天</div>
+              </div>
+              <div class="habit-icon fruits">
+                <i class="fas fa-apple-whole"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="list-section">
+          <div class="list-section-title">
+            <span>已完成</span>
+            <span class="list-section-subtitle">3个习惯</span>
+          </div>
+          
+          <div class="card">
+            <div class="habit-item">
+              <div class="habit-checkbox checked">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">整理书包</div>
+                <div class="habit-streak" data-streak="30">已连续完成 30 天</div>
+              </div>
+              <div class="habit-icon reading">
+                <i class="fas fa-bag-shopping"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox checked">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">刷牙</div>
+                <div class="habit-streak" data-streak="60">已连续完成 60 天</div>
+              </div>
+              <div class="habit-icon water">
+                <i class="fas fa-tooth"></i>
+              </div>
+            </div>
+            
+            <div class="habit-item">
+              <div class="habit-checkbox checked">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="habit-info">
+                <div class="habit-name">吃早餐</div>
+                <div class="habit-streak" data-streak="45">已连续完成 45 天</div>
+              </div>
+              <div class="habit-icon fruits">
+                <i class="fas fa-bowl-food"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="add-habit-button">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-planet-ringed"></i>
+        <span>星球</span>
+      </a>
+      <a href="habits.html" class="tab-item active">
+        <i class="fas fa-list-check"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-medal"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="profile.html" class="tab-item">
+        <i class="fas fa-user"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+</body>
+</html> 

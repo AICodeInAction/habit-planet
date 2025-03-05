@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星球导航 - 习惯星球</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .space-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80') no-repeat;
+      background-size: cover;
+      opacity: 0.1;
+      z-index: -1;
+      border-radius: 40px;
+    }
+    
+    .universe-map {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 16px;
+      margin-top: 20px;
+    }
+    
+    .planet-wrapper {
+      width: 45%;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .planet-item {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .planet-earth {
+      background: linear-gradient(135deg, #4385F4, #064796);
+    }
+    
+    .planet-mars {
+      background: linear-gradient(135deg, #EA4335, #A32222);
+    }
+    
+    .planet-venus {
+      background: linear-gradient(135deg, #FBBC05, #EA8C0A);
+    }
+    
+    .planet-jupiter {
+      background: linear-gradient(135deg, #F8B195, #F67280);
+    }
+    
+    .planet-saturn {
+      background: linear-gradient(135deg, #F67280, #C06C84);
+    }
+    
+    .planet-neptune {
+      background: linear-gradient(135deg, #6C5B7B, #355C7D);
+    }
+    
+    .planet-locked {
+      filter: grayscale(100%);
+      opacity: 0.5;
+    }
+    
+    .planet-lock-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: white;
+      z-index: 2;
+    }
+    
+    .planet-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .planet-habit-count {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .planet-rings {
+      position: absolute;
+      width: 150%;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: rotate(-20deg);
+    }
+    
+    .progress-section {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+    
+    .progress-title {
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background-color: var(--background-color);
+      border-radius: 4px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border-radius: 4px;
+      width: 65%;
+    }
+    
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+    }
+    
+    .header-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .header-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--background-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="status-bar-time">09:41</div>
+      <div class="status-bar-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    
+    <div class="space-background"></div>
+    
+    <div class="content" style="padding: 0; height: calc(100% - 44px - 83px);">
+      <div class="header">
+        <div>
+          <div class="header-title">星球探索</div>
+          <div style="color: var(--text-secondary);">解锁更多星球，建立更多习惯</div>
+        </div>
+        <div class="header-actions">
+          <button class="header-btn">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="header-btn">
+            <i class="fas fa-rocket"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="progress-section">
+        <div class="progress-title">
+          <span>总体进度</span>
+          <span style="color: var(--primary-color); font-size: 14px;">探索者 Lv.3</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="progress-stats">
+          <span>3/8 星球已解锁</span>
+          <span>65%</span>
+        </div>
+      </div>
+      
+      <div class="universe-map">
+        <div class="planet-wrapper">
+          <div class="planet-item planet-earth">
+            <div class="planet-decoration" style="position: absolute; background-color: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; left: 20px; top: 30px;"></div>
+            <div class="planet-decoration" style="position: absolute; background-color: rgba(255,255,255,0.3); width: 20px; height: 20px; border-radius: 50%; right: 30px; bottom: 20px;"></div>
+          </div>
+          <div class="planet-name">地球</div>
+          <div class="planet-habit-count">5个习惯 · 进行中</div>
+        </div>
+        
+        <div class="planet-wrapper">
+          <div class="planet-item planet-mars">
+            <div class="planet-decoration" style="position: absolute; background-color: rgba(255,255,255,0.2); width: 40px; height: 15px; border-radius: 50%; left: 20px; top: 50px;"></div>
+            <div class="planet-decoration" style="position: absolute; background-color: rgba(255,255,255,0.15); width: 25px; height: 25px; border-radius: 50%; right: 25px; top: 30px;"></div>
+          </div>
+          <div class="planet-name">火星</div>
+          <div class="planet-habit-count">3个习惯 · 进行中</div>
+        </div>
+        
+        <div class="planet-wrapper">
+          <div class="planet-item planet-venus">
+            <div class="planet-decoration" style="position: absolute; background-color: rgba(255,255,255,0.2); width: 35px; height: 35px; border-radius: 50%; left: 25px; top: 25px;"></div>
+          </div>
+          <div class="planet-name">金星</div>
+          <div class="planet-habit-count">2个习惯 · 进行中</div>
+        </div>
+        
+        <div class="planet-wrapper">
+          <div class="planet-item planet-saturn">
+            <div class="planet-rings"></div>
+          </div>
+          <div class="planet-name">土星</div>
+          <div class="planet-habit-count">需继续坚持解锁</div>
+        </div>
+        
+        <div class="planet-wrapper">
+          <div class="planet-item planet-jupiter planet-locked">
+            <i class="fas fa-lock planet-lock-icon"></i>
+          </div>
+          <div class="planet-name">木星</div>
+          <div class="planet-habit-count">需解锁前置星球</div>
+        </div>
+        
+        <div class="planet-wrapper">
+          <div class="planet-item planet-neptune planet-locked">
+            <i class="fas fa-lock planet-lock-icon"></i>
+          </div>
+          <div class="planet-name">海王星</div>
+          <div class="planet-habit-count">需解锁前置星球</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item active">
+        <i class="fas fa-planet-ringed"></i>
+        <span>星球</span>
+      </a>
+      <a href="habits.html" class="tab-item">
+        <i class="fas fa-list-check"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-medal"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="profile.html" class="tab-item">
+        <i class="fas fa-user"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+</body>
+</html> 

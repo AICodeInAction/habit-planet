@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星球详情 - 习惯星球</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .planet-hero {
+      height: 360px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .planet-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1614732414444-096e5f1122d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80') no-repeat;
+      background-size: cover;
+      filter: brightness(0.7);
+    }
+    
+    .planet-display {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4385F4, #064796);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .planet-decoration {
+      position: absolute;
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 50%;
+    }
+    
+    .planet-name-display {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: white;
+      z-index: 3;
+    }
+    
+    .planet-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .planet-subtitle {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+    
+    .planet-info {
+      padding: 24px 16px;
+      background-color: white;
+      border-radius: 24px 24px 0 0;
+      margin-top: -24px;
+      position: relative;
+      z-index: 4;
+    }
+    
+    .planet-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 24px;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .section-title {
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--primary-color);
+    }
+    
+    .habit-card {
+      background-color: var(--background-color);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .habit-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-right: 12px;
+      font-size: 18px;
+    }
+    
+    .habit-card-info {
+      flex: 1;
+    }
+    
+    .habit-card-streak {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .decoration-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .decoration-item {
+      background-color: var(--background-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px;
+    }
+    
+    .decoration-icon {
+      width: 60px;
+      height: 60px;
+      background-color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      font-size: 24px;
+    }
+    
+    .decoration-name {
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+    }
+    
+    .decoration-item.locked {
+      opacity: 0.5;
+    }
+    
+    .decoration-lock {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--text-secondary);
+      font-size: 20px;
+    }
+    
+    .action-button {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 24px;
+      border: none;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="status-bar-time">09:41</div>
+      <div class="status-bar-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    
+    <div class="content" style="padding: 0; height: calc(100% - 44px - 83px);">
+      <div class="planet-hero">
+        <div class="planet-bg"></div>
+        <div class="planet-display">
+          <div class="planet-decoration" style="width: 50px; height: 50px; left: 40px; top: 50px;"></div>
+          <div class="planet-decoration" style="width: 30px; height: 30px; right: 60px; top: 70px;"></div>
+          <div class="planet-decoration" style="width: 20px; height: 20px; left: 80px; bottom: 50px;"></div>
+        </div>
+        <div class="planet-name-display">
+          <div class="planet-title">地球</div>
+          <div class="planet-subtitle">你的第一颗星球</div>
+        </div>
+      </div>
+      
+      <div class="planet-info">
+        <div class="planet-stats">
+          <div class="stat-item">
+            <div class="stat-number">12</div>
+            <div class="stat-label">累计习惯</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5</div>
+            <div class="stat-label">解锁装饰</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">87%</div>
+            <div class="stat-label">完成率</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">31</div>
+            <div class="stat-label">探索天数</div>
+          </div>
+        </div>
+        
+        <div style="margin-bottom: 24px;">
+          <div class="section-title">
+            <span>星球习惯</span>
+            <span class="section-subtitle">5 个习惯</span>
+          </div>
+          
+          <div class="habit-card">
+            <div class="habit-card-icon" style="background-color: #F59E0B;">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="habit-card-info">
+              <div class="habit-card-name">阅读20分钟</div>
+              <div class="habit-card-streak">已坚持 15 天 · 目标 30 天</div>
+            </div>
+            <div>
+              <div style="width: 36px; height: 6px; background-color: var(--background-color); border-radius: 3px; overflow: hidden;">
+                <div style="width: 50%; height: 100%; background-color: #F59E0B;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="habit-card">
+            <div class="habit-card-icon" style="background-color: #10B981;">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="habit-card-info">
+              <div class="habit-card-name">晨间锻炼</div>
+              <div class="habit-card-streak">已坚持 7 天 · 目标 14 天</div>
+            </div>
+            <div>
+              <div style="width: 36px; height: 6px; background-color: var(--background-color); border-radius: 3px; overflow: hidden;">
+                <div style="width: 50%; height: 100%; background-color: #10B981;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="habit-card">
+            <div class="habit-card-icon" style="background-color: #3B82F6;">
+              <i class="fas fa-glass-water"></i>
+            </div>
+            <div class="habit-card-info">
+              <div class="habit-card-name">喝水 2000ml</div>
+              <div class="habit-card-streak">已坚持 3 天 · 目标 7 天</div>
+            </div>
+            <div>
+              <div style="width: 36px; height: 6px; background-color: var(--background-color); border-radius: 3px; overflow: hidden;">
+                <div style="width: 43%; height: 100%; background-color: #3B82F6;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="habit-card">
+            <div class="habit-card-icon" style="background-color: #8B5CF6;">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <div class="habit-card-info">
+              <div class="habit-card-name">数学练习</div>
+              <div class="habit-card-streak">已坚持 12 天 · 目标 21 天</div>
+            </div>
+            <div>
+              <div style="width: 36px; height: 6px; background-color: var(--background-color); border-radius: 3px; overflow: hidden;">
+                <div style="width: 57%; height: 100%; background-color: #8B5CF6;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="habit-card">
+            <div class="habit-card-icon" style="background-color: #EC4899;">
+              <i class="fas fa-apple-whole"></i>
+            </div>
+            <div class="habit-card-info">
+              <div class="habit-card-name">每天吃水果</div>
+              <div class="habit-card-streak">已坚持 2 天 · 目标 10 天</div>
+            </div>
+            <div>
+              <div style="width: 36px; height: 6px; background-color: var(--background-color); border-radius: 3px; overflow: hidden;">
+                <div style="width: 20%; height: 100%; background-color: #EC4899;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="section-title">
+            <span>星球装饰</span>
+            <span class="section-subtitle">拖拽放置到星球上</span>
+          </div>
+          
+          <div class="decoration-grid">
+            <div class="decoration-item">
+              <div class="decoration-icon" style="color: #3B82F6;">
+                <i class="fas fa-tree"></i>
+              </div>
+              <div class="decoration-name">大树</div>
+            </div>
+            
+            <div class="decoration-item">
+              <div class="decoration-icon" style="color: #EC4899;">
+                <i class="fas fa-house"></i>
+              </div>
+              <div class="decoration-name">小屋</div>
+            </div>
+            
+            <div class="decoration-item">
+              <div class="decoration-icon" style="color: #F59E0B;">
+                <i class="fas fa-mountain-sun"></i>
+              </div>
+              <div class="decoration-name">山脉</div>
+            </div>
+            
+            <div class="decoration-item">
+              <div class="decoration-icon" style="color: #10B981;">
+                <i class="fas fa-cloud"></i>
+              </div>
+              <div class="decoration-name">云朵</div>
+            </div>
+            
+            <div class="decoration-item">
+              <div class="decoration-icon" style="color: #6366F1;">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <div class="decoration-name">火箭</div>
+            </div>
+            
+            <div class="decoration-item locked">
+              <div class="decoration-icon" style="color: #A1A1AA; position: relative;">
+                <i class="fas fa-lock decoration-lock"></i>
+              </div>
+              <div class="decoration-name">未解锁</div>
+            </div>
+            
+            <div class="decoration-item locked">
+              <div class="decoration-icon" style="color: #A1A1AA; position: relative;">
+                <i class="fas fa-lock decoration-lock"></i>
+              </div>
+              <div class="decoration-name">未解锁</div>
+            </div>
+            
+            <div class="decoration-item locked">
+              <div class="decoration-icon" style="color: #A1A1AA; position: relative;">
+                <i class="fas fa-lock decoration-lock"></i>
+              </div>
+              <div class="decoration-name">未解锁</div>
+            </div>
+            
+            <div class="decoration-item locked">
+              <div class="decoration-icon" style="color: #A1A1AA; position: relative;">
+                <i class="fas fa-lock decoration-lock"></i>
+              </div>
+              <div class="decoration-name">未解锁</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="action-button">
+        <i class="fas fa-magic"></i> 自动装饰
+      </button>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item active">
+        <i class="fas fa-planet-ringed"></i>
+        <span>星球</span>
+      </a>
+      <a href="habits.html" class="tab-item">
+        <i class="fas fa-list-check"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-medal"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="profile.html" class="tab-item">
+        <i class="fas fa-user"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+</body>
+</html> 

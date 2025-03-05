@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitPlanet - 星际习惯养成</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .prototype-container {
+            width: 390px; /* iPhone 15 Pro width */
+            height: 844px; /* iPhone 15 Pro height */
+            border-radius: 55px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px;
+            border: 12px solid #1a1a1a;
+            background: #000;
+            display: inline-block;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: #000;
+            position: relative;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .dynamic-island {
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 20px;
+        }
+
+        .prototype-frame {
+            width: 100%;
+            height: calc(100% - 44px);
+            border: none;
+        }
+
+        .prototypes-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .prototype-label {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">HabitPlanet 原型展示</h1>
+        <div class="prototypes-grid">
+            <!-- 登录页面 -->
+            <div class="relative">
+                <div class="prototype-container">
+                    <div class="status-bar">
+                        <div class="time">9:41</div>
+                        <div class="dynamic-island"></div>
+                        <div class="icons">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi ml-2"></i>
+                            <i class="fas fa-battery-full ml-2"></i>
+                        </div>
+                    </div>
+                    <iframe src="pages/login.html" class="prototype-frame"></iframe>
+                </div>
+                <div class="prototype-label">登录界面</div>
+            </div>
+
+            <!-- 主页 -->
+            <div class="relative">
+                <div class="prototype-container">
+                    <div class="status-bar">
+                        <div class="time">9:41</div>
+                        <div class="dynamic-island"></div>
+                        <div class="icons">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi ml-2"></i>
+                            <i class="fas fa-battery-full ml-2"></i>
+                        </div>
+                    </div>
+                    <iframe src="pages/home.html" class="prototype-frame"></iframe>
+                </div>
+                <div class="prototype-label">主页</div>
+            </div>
+
+            <!-- 习惯打卡 -->
+            <div class="relative">
+                <div class="prototype-container">
+                    <div class="status-bar">
+                        <div class="time">9:41</div>
+                        <div class="dynamic-island"></div>
+                        <div class="icons">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi ml-2"></i>
+                            <i class="fas fa-battery-full ml-2"></i>
+                        </div>
+                    </div>
+                    <iframe src="pages/habits.html" class="prototype-frame"></iframe>
+                </div>
+                <div class="prototype-label">习惯打卡</div>
+            </div>
+
+            <!-- 家庭互动 -->
+            <div class="relative">
+                <div class="prototype-container">
+                    <div class="status-bar">
+                        <div class="time">9:41</div>
+                        <div class="dynamic-island"></div>
+                        <div class="icons">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi ml-2"></i>
+                            <i class="fas fa-battery-full ml-2"></i>
+                        </div>
+                    </div>
+                    <iframe src="pages/family.html" class="prototype-frame"></iframe>
+                </div>
+                <div class="prototype-label">家庭互动</div>
+            </div>
+
+            <!-- 个人档案 -->
+            <div class="relative">
+                <div class="prototype-container">
+                    <div class="status-bar">
+                        <div class="time">9:41</div>
+                        <div class="dynamic-island"></div>
+                        <div class="icons">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi ml-2"></i>
+                            <i class="fas fa-battery-full ml-2"></i>
+                        </div>
+                    </div>
+                    <iframe src="pages/profile.html" class="prototype-frame"></iframe>
+                </div>
+                <div class="prototype-label">个人档案</div>
+            </div>
+
+            <!-- 奖励中心 -->
+            <div class="relative">
+                <div class="prototype-container">
+                    <div class="status-bar">
+                        <div class="time">9:41</div>
+                        <div class="dynamic-island"></div>
+                        <div class="icons">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi ml-2"></i>
+                            <i class="fas fa-battery-full ml-2"></i>
+                        </div>
+                    </div>
+                    <iframe src="pages/rewards.html" class="prototype-frame"></iframe>
+                </div>
+                <div class="prototype-label">奖励中心</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

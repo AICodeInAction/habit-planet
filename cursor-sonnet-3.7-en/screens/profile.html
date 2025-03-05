@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Planet - Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100vh;
+            background-color: #f2f2f7;
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
+        }
+        
+        .stats-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 12px;
+        }
+        
+        .stats-divider {
+            width: 1px;
+            height: 40px;
+            background-color: #e5e5ea;
+        }
+        
+        .setting-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+        }
+        
+        .badge-row {
+            display: flex;
+            overflow-x: auto;
+            padding: 8px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .badge-small {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .badge-small::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar">
+        <div class="flex items-center">
+            <span>9:41</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-avatar" style="background-image: url('https://images.unsplash.com/photo-1491013516836-7db643ee125a?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80');"></div>
+        <h1 class="text-xl font-bold mb-1">Alex Johnson</h1>
+        <p class="text-gray-500 mb-4">Level 5 Explorer</p>
+        
+        <div class="flex items-center justify-center mb-4">
+            <div class="stats-item">
+                <span class="text-xl font-semibold text-blue-500">12</span>
+                <span class="text-xs text-gray-500">Day Streak</span>
+            </div>
+            <div class="stats-divider"></div>
+            <div class="stats-item">
+                <span class="text-xl font-semibold text-purple-500">1,250</span>
+                <span class="text-xs text-gray-500">Points</span>
+            </div>
+            <div class="stats-divider"></div>
+            <div class="stats-item">
+                <span class="text-xl font-semibold text-green-500">8</span>
+                <span class="text-xs text-gray-500">Badges</span>
+            </div>
+        </div>
+        
+        <button class="secondary-button w-auto px-6">
+            Edit Profile
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Recent Achievements -->
+        <div class="card mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-semibold">Recent Achievements</h2>
+                <a href="rewards.html" class="text-primary text-sm">View All</a>
+            </div>
+            
+            <div class="badge-row">
+                <div class="badge-small" style="background-color: #ff9500;">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="badge-small" style="background-color: #34c759;">
+                    <i class="fas fa-check-double"></i>
+                </div>
+                <div class="badge-small" style="background-color: #007aff;">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="badge-small" style="background-color: #ff3b30;">
+                    <i class="fas fa-tooth"></i>
+                </div>
+                <div class="badge-small" style="background-color: #5856d6;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="badge-small" style="background: linear-gradient(135deg, #ff9500, #ff3b30);">
+                    <i class="fas fa-crown"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings -->
+        <div class="card mb-6">
+            <h2 class="font-semibold mb-4">Settings</h2>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-blue-500">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Notifications</h3>
+                    <p class="text-xs text-gray-500">Manage your notifications</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-purple-500">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Appearance</h3>
+                    <p class="text-xs text-gray-500">Customize your app theme</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-green-500">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Privacy</h3>
+                    <p class="text-xs text-gray-500">Manage your privacy settings</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- Family Settings -->
+        <div class="card mb-6">
+            <h2 class="font-semibold mb-4">Family Settings</h2>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-orange-500">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Family Members</h3>
+                    <p class="text-xs text-gray-500">Manage your family group</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-red-500">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Sharing</h3>
+                    <p class="text-xs text-gray-500">Control what you share with family</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- Account -->
+        <div class="card">
+            <h2 class="font-semibold mb-4">Account</h2>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-gray-500">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Help & Support</h3>
+                    <p class="text-xs text-gray-500">Get help with the app</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-gray-500">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">About</h3>
+                    <p class="text-xs text-gray-500">App version and information</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-icon bg-gray-500">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium text-red-500">Sign Out</h3>
+                    <p class="text-xs text-gray-500">Log out of your account</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Tab Bar -->
+    <div class="ios-tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="habit-detail.html" class="tab-item">
+            <i class="fas fa-list-check tab-icon"></i>
+            <span>Habits</span>
+        </a>
+        <a href="planet-explorer.html" class="tab-item">
+            <i class="fas fa-globe tab-icon"></i>
+            <span>Planets</span>
+        </a>
+        <a href="family.html" class="tab-item">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Family</span>
+        </a>
+        <a href="profile.html" class="tab-item active">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星球探索 - 习惯星球</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        .space-bg {
+            background: linear-gradient(180deg, #121212 0%, #1e3a8a 100%);
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            width: 2px;
+            height: 2px;
+            opacity: 0.8;
+        }
+        .planet {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 15px auto;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .planet:hover {
+            transform: scale(1.05);
+        }
+        .planet-earth {
+            background: radial-gradient(circle at 30% 30%, #4b9cd3, #1a4e8c);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .planet-mars {
+            background: radial-gradient(circle at 30% 30%, #e27b58, #c23616);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .planet-jupiter {
+            background: radial-gradient(circle at 30% 30%, #e2a658, #cd6133);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .planet-locked {
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+        .planet-name {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 16px;
+        }
+        .planet-status {
+            text-align: center;
+            font-size: 12px;
+            color: #a0aec0;
+            margin-top: 4px;
+        }
+        .planet-progress {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .planet-progress-bar {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .progress-earth {
+            background-color: #4b9cd3;
+            width: 75%;
+        }
+        .progress-mars {
+            background-color: #e27b58;
+            width: 30%;
+        }
+        .progress-jupiter {
+            background-color: #e2a658;
+            width: 0%;
+        }
+        .nav-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .lock-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #f56565;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            border: 2px solid #121212;
+        }
+    </style>
+</head>
+<body>
+    <div class="space-bg" id="space-bg">
+        <div class="nav-title">探索星球</div>
+        
+        <div class="p-4">
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-lg font-bold">当前能量</div>
+                    <div class="text-yellow-400 font-bold">⚡ 250</div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-400">完成习惯获取能量</div>
+                    <div class="text-sm text-blue-400">查看详情 <i class="fas fa-chevron-right text-xs"></i></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 mt-8">
+                <!-- 地球星球 - 已解锁 -->
+                <div class="relative">
+                    <div class="planet planet-earth" onclick="location.href='planet-detail.html?id=earth'">
+                        <div class="badge">1</div>
+                    </div>
+                    <div class="planet-name">地球</div>
+                    <div class="planet-status">探索进度: 75%</div>
+                    <div class="planet-progress">
+                        <div class="planet-progress-bar progress-earth"></div>
+                    </div>
+                </div>
+                
+                <!-- 火星 - 已解锁 -->
+                <div class="relative">
+                    <div class="planet planet-mars" onclick="location.href='planet-detail.html?id=mars'">
+                    </div>
+                    <div class="planet-name">火星</div>
+                    <div class="planet-status">探索进度: 30%</div>
+                    <div class="planet-progress">
+                        <div class="planet-progress-bar progress-mars"></div>
+                    </div>
+                </div>
+                
+                <!-- 木星 - 未解锁 -->
+                <div class="relative">
+                    <div class="planet planet-jupiter planet-locked">
+                        <div class="lock-icon"><i class="fas fa-lock"></i></div>
+                    </div>
+                    <div class="planet-name text-gray-500">木星</div>
+                    <div class="planet-status">需要: 500能量解锁</div>
+                    <div class="planet-progress">
+                        <div class="planet-progress-bar progress-jupiter"></div>
+                    </div>
+                </div>
+                
+                <!-- 更多星球提示 -->
+                <div class="flex items-center justify-center h-full">
+                    <div class="text-center text-gray-400">
+                        <div class="text-4xl mb-2"><i class="fas fa-plus-circle"></i></div>
+                        <div>更多星球即将到来</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-4 bg-blue-900 bg-opacity-30 rounded-xl">
+                <div class="flex items-center">
+                    <div class="text-yellow-300 text-xl mr-2"><i class="fas fa-lightbulb"></i></div>
+                    <div class="text-lg font-bold">小贴士</div>
+                </div>
+                <div class="mt-2 text-sm text-gray-300">
+                    坚持完成习惯任务可以获得能量，用能量解锁新的星球和装饰物！
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 创建星星背景
+        const spaceBg = document.getElementById('space-bg');
+        const starsCount = 100;
+        
+        for (let i = 0; i < starsCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // 随机位置
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            
+            // 随机大小
+            const size = Math.random() * 2;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            // 随机透明度
+            star.style.opacity = Math.random();
+            
+            // 添加到背景
+            spaceBg.appendChild(star);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 原型展示</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f5f5f7;
+      padding: 40px;
+      color: #1d1d1f;
+    }
+    
+    .project-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .project-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .project-subtitle {
+      font-size: 18px;
+      color: #6b7280;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .prototype-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .prototype-item {
+      background-color: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-width: 280px;
+    }
+    
+    .prototype-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .prototype-header {
+      padding: 16px;
+      background-color: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .prototype-label {
+      font-weight: 600;
+      font-size: 16px;
+    }
+    
+    .prototype-tag {
+      background-color: #ebf5ff;
+      color: #3b82f6;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .prototype-frame-container {
+      position: relative;
+      padding-top: 216.5%; /* 9:19.5 比例 */
+      height: 0;
+      overflow: hidden;
+    }
+    
+    .prototype-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .prototype-description {
+      padding: 16px;
+      font-size: 14px;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .page-section {
+      margin-bottom: 60px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #374151;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    /* 入口页面网格 - 固定两列 */
+    .entrance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    /* 主要功能页面网格 - 使用固定列数和固定宽度避免重叠 */
+    .main-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    /* 操作页面网格 */
+    .operation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    @media (max-width: 1200px) {
+      .main-features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .entrance-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      
+      .entrance-grid,
+      .main-features-grid,
+      .operation-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .project-title {
+        font-size: 28px;
+      }
+      
+      .project-subtitle {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="project-header">
+    <h1 class="project-title">习惯星球</h1>
+    <p class="project-subtitle">一款帮助孩子养成良好习惯的太空主题应用，基于"原子习惯"理念，通过游戏化激励和家庭互动提高习惯坚持度。</p>
+  </div>
+  
+  <div class="page-section">
+    <h2 class="section-title">入口页面</h2>
+    <div class="entrance-grid">
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">欢迎页面</div>
+          <div class="prototype-tag">入口</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/welcome.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          应用首次打开的欢迎界面，展示应用主题和品牌标识，引导用户注册或登录。
+        </div>
+      </div>
+      
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">登录页面</div>
+          <div class="prototype-tag">身份验证</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/login.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          用户登录界面，支持账号密码登录和社交媒体快捷登录。
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="page-section">
+    <h2 class="section-title">主要功能页面</h2>
+    <div class="main-features-grid">
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">星球导航</div>
+          <div class="prototype-tag">主页</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/home.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          主页展示用户的星球探索进度和已解锁/未解锁的星球。
+        </div>
+      </div>
+      
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">习惯清单</div>
+          <div class="prototype-tag">核心功能</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/habits.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          展示用户今日需要完成的所有习惯，包括待完成和已完成两个部分。
+        </div>
+      </div>
+      
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">星球详情</div>
+          <div class="prototype-tag">探索</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/planet-detail.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          展示特定星球的详细信息，包括关联习惯和可解锁的装饰。
+        </div>
+      </div>
+      
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">奖励中心</div>
+          <div class="prototype-tag">激励</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/rewards.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          展示用户获得的徽章、成就和排名，提供成就感和社交比较。
+        </div>
+      </div>
+      
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">家庭互动</div>
+          <div class="prototype-tag">社交</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/family.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          展示家庭成员互动功能，包括共同习惯和家庭成员列表。
+        </div>
+      </div>
+      
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">个人资料</div>
+          <div class="prototype-tag">设置</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/profile.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          用户个人资料页面，包含账户信息、统计数据和应用设置。
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="page-section">
+    <h2 class="section-title">操作页面</h2>
+    <div class="operation-grid">
+      <div class="prototype-item">
+        <div class="prototype-header">
+          <div class="prototype-label">创建习惯</div>
+          <div class="prototype-tag">表单</div>
+        </div>
+        <div class="prototype-frame-container">
+          <iframe src="pages/create-habit.html" class="prototype-frame"></iframe>
+        </div>
+        <div class="prototype-description">
+          创建新习惯的表单页面，可以设置习惯名称、图标、所属星球等。
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer style="text-align: center; margin-top: 60px; padding: 20px; color: #6b7280; font-size: 14px;">
+    <p>习惯星球 &copy; 2023 | 原型设计展示</p>
+    <p style="margin-top: 5px;">基于"原子习惯"理念开发的儿童习惯养成应用</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 调整iframe高度以确保正确比例
+      const frames = document.querySelectorAll('.prototype-frame');
+      frames.forEach(frame => {
+        frame.onload = function() {
+          // 确保iframe内容完全加载
+          this.style.opacity = 1;
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

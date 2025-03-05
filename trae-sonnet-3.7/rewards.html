@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奖励中心 - 习惯星球</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f2f2f7;
+            color: #1c1c1e;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .nav-header {
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e5ea;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .nav-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .tab-container {
+            display: flex;
+            background-color: white;
+            padding: 10px 15px 0;
+            border-bottom: 1px solid #e5e5ea;
+        }
+        .tab {
+            padding: 10px 15px;
+            margin-right: 10px;
+            font-weight: 500;
+            color: #8e8e93;
+            border-bottom: 2px solid transparent;
+        }
+        .tab.active {
+            color: #007aff;
+            border-bottom: 2px solid #007aff;
+        }
+        .reward-card {
+            background-color: white;
+            border-radius: 12px;
+            margin: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .reward-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f2f2f7;
+        }
+        .reward-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+            font-size: 24px;
+        }
+        .reward-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .reward-subtitle {
+            font-size: 12px;
+            color: #8e8e93;
+        }
+        .reward-body {
+            padding: 15px;
+        }
+        .energy-badge {
+            background-color: #FFD700;
+            border-radius: 15px;
+            padding: 4px 10px;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            color: #1c1c1e;
+            font-weight: bold;
+        }
+        .energy-icon {
+            margin-right: 4px;
+        }
+        .reward-action-btn {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+        .btn-primary {
+            background-color: #007aff;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #f2f2f7;
+            color: #007aff;
+        }
+        .btn-disabled {
+            background-color: #e5e5ea;
+            color: #8e8e93;
+        }
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 12px;
+        }
+        .achievement-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+        .achievement-locked {
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+        .achievement-name {
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .achievement-desc {
+            font-size: 10px;
+            color: #8e8e93;
+            text-align: center;
+        }
+        .energy-container {
+            background-color: white;
+            border-radius: 12px;
+            margin: 12px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .energy-text {
+            font-weight: bold;
+        }
+        .energy-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FFD700;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="nav-title">奖励中心</div>
+        <div><i class="fas fa-history"></i></div>
+    </div>
+    
+    <div class="energy-container">
+        <div class="energy-text">当前能量</div>
+        <div class="energy-value">
+            <i class="fas fa-bolt mr-1"></i> 250
+        </div>
+    </div>
+    
+    <div class="tab-container">
+        <div class="tab active">可兑换奖励</div>
+        <div class="tab">成就徽章</div>
+    </div>
+    
+    <!-- 可兑换奖励部分 -->
+    <div>
+        <!-- 实物奖励 -->
+        <div class="reward-card">
+            <div class="reward-header">
+                <div class="reward-icon" style="background-color: #5856d6;">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div>
+                    <div class="reward-title">新玩具</div>
+                    <div class="reward-subtitle">完成10次习惯任务可兑换</div>
+                </div>
+            </div>
+            <div class="reward-body">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="energy-badge">
+                        <i class="fas fa-bolt energy-icon"></i> 需要300能量
+                    </div>
+                    <div class="text-xs text-gray-500">爸爸妈妈已批准</div>
+                </div>
+                <div class="reward-action-btn btn-disabled">
+                    能量不足
+                </div>
+            </div>
+        </div>
+        
+        <!-- 特权奖励 -->
+        <div class="reward-card">
+            <div class="reward-header">
+                <div class="reward-icon" style="background-color: #ff9500;">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <div>
+                    <div class="reward-title">额外30分钟屏幕时间</div>
+                    <div class="reward-subtitle">完成5次习惯任务可兑换</div>
+                </div>
+            </div>
+            <div class="reward-body">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="energy-badge">
+                        <i class="fas fa-bolt energy-icon"></i> 需要150能量
+                    </div>
+                    <div class="text-xs text-gray-500">每周限兑换1次</div>
+                </div>
+                <div class="reward-action-btn btn-primary">
+                    立即兑换
+                </div>
+            </div>
+        </div>
+        
+        <!-- 星球装饰物 -->
+        <div class="reward-card">
+            <div class="reward-header">
+                <div class="reward-icon" style="background-color: #4cd964;">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div>
+                    <div class="reward-title">地球星球装饰 - 森林</div>
+                    <div class="reward-subtitle">为你的星球添加美丽的森林</div>
+                </div>
+            </div>
+            <div class="reward-body">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="energy-badge">
+                        <i class="fas fa-bolt energy-icon"></i> 需要200能量
+                    </div>
+                    <div class="text-xs text-gray-500">永久解锁</div>
+                </div>
+                <div class="reward-action-btn btn-primary">
+                    立即兑换
+                </div>
+            </div>
+        </div>
+        
+        <!-- 家庭活动 -->
+        <div class="reward-card">
+            <div class="reward-header">
+                <div class="reward-icon" style="background-color: #ff2d55;">
+                    <i class="fas fa-ice-cream"></i>
+                </div>
+                <div>
+                    <div class="reward-title">家庭出游</div>
+                    <div class="reward-subtitle">全家一起去游乐园玩一天</div>
+                </div>
+            </div>
+            <div class="reward-body">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="energy-badge">
+                        <i class="fas fa-bolt energy-icon"></i> 需要500能量
+                    </div>
+                    <div class="text-xs text-gray-500">需要家长确认</div>
+                </div>
+                <div class="reward-action-btn btn-disabled">
+                    能量不足
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 成就徽章部分 (默认隐藏) -->
+    <div class="hidden">
+        <div class="achievement-grid">
+            <!-- 已解锁成就 -->
+            <div class="achievement-item">
+                <div class="achievement-icon" style="background-color: #5856d6;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="achievement-name">习惯起步者</div>
+                <div class="achievement-desc">完成第一个习惯任务</div>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon" style="background-color: #ff9500;">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="achievement-name">坚持一周</div>
+                <div class="achievement-desc">连续7天完成习惯</div>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon" style="background-color: #4cd964;">
+                    <i class="fas fa-book-reader"></i>
+                </div>
+                <div class="achievement-name">阅读爱好者</div>
+                <div class="achievement-desc">完成10次阅读习惯</div>
+            </div>
+            
+            <!-- 未解锁成就 -->
+            <div class="achievement-item">
+                <div class="achievement-icon achievement-locked" style="background-color: #ff2d55;">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="achievement-name text-gray-500">习惯大师</div>
+                <div class="achievement-desc">完成30天连续打卡</div>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon achievement-locked" style="background-color: #5ac8fa;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="achievement-name text-gray-500">家庭协作</div>
+                <div class="achievement-desc">与家人共同完成习惯</div>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon achievement-locked" style="background-color: #ffcc00;">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="achievement-name text-gray-500">星球探索者</div>
+                <div class="achievement-desc">解锁所有星球</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 切换标签页的功能
+        const tabs = document.querySelectorAll('.tab');
+        const contentDivs = document.querySelectorAll('body > div:nth-child(n+4)');
+        
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                // 移除所有标签的active类
+                tabs.forEach(t => t.classList.remove('active'));
+                // 给当前点击的标签添加active类
+                tab.classList.add('active');
+                
+                // 隐藏所有内容
+                contentDivs.forEach(div => div.classList.add('

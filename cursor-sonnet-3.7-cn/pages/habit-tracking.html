@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 习惯追踪</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .add-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+    }
+    
+    .date-selector {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    
+    .date-selector::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    .date-selector::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+    }
+    
+    .date-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 50px;
+      cursor: pointer;
+    }
+    
+    .date-day {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 5px;
+    }
+    
+    .date-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    
+    .date-item.active .date-number {
+      background-color: var(--primary-color);
+    }
+    
+    .date-item.completed .date-number::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: var(--success-color);
+      border-radius: 50%;
+      bottom: -3px;
+    }
+    
+    .notification {
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 184, 148, 0.2);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--success-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 20px;
+    }
+    
+    .notification-content {
+      flex: 1;
+    }
+    
+    .notification-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    
+    .notification-message {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .habits-container {
+      margin-bottom: 30px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .section-action {
+      font-size: 14px;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .habit-item {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .habit-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 24px;
+    }
+    
+    .habit-info {
+      flex: 1;
+    }
+    
+    .habit-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .habit-streak {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+    }
+    
+    .habit-streak i {
+      color: #fdcb6e;
+      margin-right: 5px;
+    }
+    
+    .habit-action {
+      margin-left: 10px;
+    }
+    
+    .check-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(0, 184, 148, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--success-color);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .check-button:hover {
+      background-color: rgba(0, 184, 148, 0.3);
+    }
+    
+    .check-button.checked {
+      background-color: var(--success-color);
+      color: white;
+    }
+    
+    .habit-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      overflow: hidden;
+    }
+    
+    .habit-progress-fill {
+      height: 100%;
+      background-color: var(--primary-color);
+    }
+    
+    .streak-calendar {
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .calendar-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    .calendar-nav {
+      display: flex;
+      align-items: center;
+    }
+    
+    .calendar-nav-button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .calendar-nav-button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      margin-bottom: 10px;
+    }
+    
+    .weekday {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 5px;
+    }
+    
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .calendar-day:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .calendar-day.other-month {
+      opacity: 0.3;
+    }
+    
+    .calendar-day.today {
+      background-color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .calendar-day.completed {
+      background-color: var(--success-color);
+      color: white;
+    }
+    
+    .calendar-day.partial {
+      background-color: var(--warning-color);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="signal">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="time">9:45</div>
+      <div class="battery">
+        <span>83%</span>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    
+    <div class="app-content">
+      <div class="stars-bg"></div>
+      
+      <div class="page-header">
+        <div class="page-title">习惯追踪</div>
+        <a href="habit-create.html" class="add-button">
+          <i class="fas fa-plus"></i>
+        </a>
+      </div>
+      
+      <div class="date-selector">
+        <div class="date-item completed">
+          <div class="date-day">周一</div>
+          <div class="date-number">12</div>
+        </div>
+        
+        <div class="date-item completed">
+          <div class="date-day">周二</div>
+          <div class="date-number">13</div>
+        </div>
+        
+        <div class="date-item completed">
+          <div class="date-day">周三</div>
+          <div class="date-number">14</div>
+        </div>
+        
+        <div class="date-item completed">
+          <div class="date-day">周四</div>
+          <div class="date-number">15</div>
+        </div>
+        
+        <div class="date-item active">
+          <div class="date-day">周五</div>
+          <div class="date-number">16</div>
+        </div>
+        
+        <div class="date-item">
+          <div class="date-day">周六</div>
+          <div class="date-number">17</div>
+        </div>
+        
+        <div class="date-item">
+          <div class="date-day">周日</div>
+          <div class="date-number">18</div>
+        </div>
+      </div>
+      
+      <div class="notification">
+        <div class="notification-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">今日进度</div>
+          <div class="notification-message">已完成 1/3 个习惯，继续加油！</div>
+        </div>
+      </div>
+      
+      <div class="habits-container">
+        <div class="section-header">
+          <div class="section-title">待完成</div>
+          <div class="section-action">查看全部</div>
+        </div>
+        
+        <div class="habit-item">
+          <div class="habit-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="habit-info">
+            <div class="habit-name">阅读20分钟</div>
+            <div class="habit-streak">
+              <i class="fas fa-fire"></i>
+              <span>连续5天</span>
+            </div>
+          </div>
+          <div class="habit-action">
+            <div class="check-button">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+          <div class="habit-progress">
+            <div class="habit-progress-fill" style="width: 70%;"></div>
+          </div>
+        </div>
+        
+        <div class="habit-item">
+          <div class="habit-icon" style="background-color: #ff7675;">
+            <i class="fas fa-running"></i>
+          </div>
+          <div class="habit-info">
+            <div class="habit-name">运动30分钟</div>
+            <div class="habit-streak">
+              <i class="fas fa-fire"></i>
+              <span>连续3天</span>
+            </div>
+          </div>
+          <div class="habit-action">
+            <div class="check-button">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+          <div class="habit-progress">
+            <div class="habit-progress-fill" style="width: 40%;"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="habits-container">
+        <div class="section-header">
+          <div class="section-title">已完成</div>
+        </div>
+        
+        <div class="habit-item">
+          <div class="habit-icon" style="background-color: #74b9ff;">
+            <i class="fas fa-tooth"></i>
+          </div>
+          <div class="habit-info">
+            <div class="habit-name">刷牙</div>
+            <div class="habit-streak">
+              <i class="fas fa-fire"></i>
+              <span>连续12天</span>
+            </div>
+          </div>
+          <div class="habit-action">
+            <div class="check-button checked">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+          <div class="habit-progress">
+            <div class="habit-progress-fill" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="streak-calendar">
+        <div class="calendar-header">
+          <div class="calendar-title">6月习惯记录</div>
+          <div class="calendar-nav">
+            <div class="calendar-nav-button">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="calendar-nav-button">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="calendar-weekdays">
+          <div class="weekday">一</div>
+          <div class="weekday">二</div>
+          <div class="weekday">三</div>
+          <div class="weekday">四</div>
+          <div class="weekday">五</div>
+          <div class="weekday">六</div>
+          <div class="weekday">日</div>
+        </div>
+        
+        <div class="calendar-days">
+          <div class="calendar-day other-month">29</div>
+          <div class="calendar-day other-month">30</div>
+          <div class="calendar-day other-month">31</div>
+          <div class="calendar-day completed">1</div>
+          <div class="calendar-day completed">2</div>
+          <div class="calendar-day partial">3</div>
+          <div class="calendar-day">4</div>
+          
+          <div class="calendar-day completed">5</div>
+          <div class="calendar-day completed">6</div>
+          <div class="calendar-day completed">7</div>
+          <div class="calendar-day completed">8</div>
+          <div class="calendar-day partial">9</div>
+          <div class="calendar-day completed">10</div>
+          <div class="calendar-day completed">11</div>
+          
+          <div class="calendar-day completed">12</div>
+          <div class="calendar-day completed">13</div>
+          <div class="calendar-day completed">14</div>
+          <div class="calendar-day completed">15</div>
+          <div class="calendar-day today">16</div>
+          <div class="calendar-day">17</div>
+          <div class="calendar-day">18</div>
+          
+          <div class="calendar-day">19</div>
+          <div class="calendar-day">20</div>
+          <div class="calendar-day">21</div>
+          <div class="calendar-day">22</div>
+          <div class="calendar-day">23</div>
+          <div class="calendar-day">24</div>
+          <div class="calendar-day">25</div>
+          
+          <div class="calendar-day">26</div>
+          <div class="calendar-day">27</div>
+          <div class="calendar-day">28</div>
+          <div class="calendar-day">29</div>
+          <div class="calendar-day">30</div>
+          <div class="calendar-day other-month">1</div>
+          <div class="calendar-day other-month">2</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-globe-asia"></i>
+        <span>星球</span>
+      </a>
+      <a href="habit-tracking.html" class="tab-item active">
+        <i class="fas fa-check-circle"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-trophy"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="settings.html" class="tab-item">
+        <i class="fas fa-cog"></i>
+        <span>设置</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html> 

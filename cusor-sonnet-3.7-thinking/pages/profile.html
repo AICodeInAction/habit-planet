@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人资料 - 习惯星球</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .profile-header {
+      padding: 24px 16px;
+      display: flex;
+      align-items: center;
+      background-color: white;
+    }
+    
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 16px;
+      object-fit: cover;
+      border: 3px solid var(--primary-color);
+    }
+    
+    .profile-info {
+      flex: 1;
+    }
+    
+    .profile-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .profile-id {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    
+    .profile-level {
+      display: inline-block;
+      padding: 4px 12px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .profile-edit-btn {
+      background-color: var(--background-color);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+    
+    .stats-row {
+      display: flex;
+      background-color: white;
+      padding: 16px;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid var(--border-color);
+    }
+    
+    .stat-item:last-child {
+      border-right: none;
+    }
+    
+    .stat-number {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .section-title {
+      font-weight: 600;
+      padding: 16px;
+      background-color: white;
+      margin-top: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .menu-item {
+      padding: 16px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: var(--background-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: var(--primary-color);
+    }
+    
+    .menu-label {
+      flex: 1;
+      font-weight: 500;
+    }
+    
+    .menu-value {
+      color: var(--text-secondary);
+      margin-right: 8px;
+      font-size: 14px;
+    }
+    
+    .menu-arrow {
+      color: var(--text-light);
+    }
+    
+    .signup-promo {
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      border-radius: 12px;
+      margin: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+    
+    .promo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-right: 16px;
+    }
+    
+    .promo-info {
+      flex: 1;
+    }
+    
+    .promo-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .promo-desc {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .promo-btn {
+      padding: 8px 16px;
+      background-color: white;
+      color: var(--primary-color);
+      border-radius: 20px;
+      font-weight: 500;
+      font-size: 14px;
+      border: none;
+    }
+    
+    .settings-group {
+      margin-bottom: 12px;
+    }
+    
+    .dark-mode-toggle {
+      width: 50px;
+      height: 28px;
+      border-radius: 14px;
+      background-color: var(--success-color);
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .toggle-button {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: white;
+      top: 2px;
+      right: 2px;
+      transition: all 0.3s;
+    }
+    
+    .logout-btn {
+      margin: 24px 16px;
+      padding: 12px;
+      background-color: white;
+      color: var(--danger-color);
+      border: 1px solid var(--danger-color);
+      border-radius: 12px;
+      font-weight: 600;
+      text-align: center;
+      width: calc(100% - 32px);
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="status-bar-time">09:41</div>
+      <div class="status-bar-icons">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    
+    <div class="content" style="padding: 0; height: calc(100% - 44px - 83px); background-color: var(--background-color);">
+      <div class="profile-header">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" class="profile-avatar">
+        <div class="profile-info">
+          <div class="profile-name">张小明</div>
+          <div class="profile-id">ID: xiaoming2023</div>
+          <div class="profile-level">探索者 Lv.3</div>
+        </div>
+        <button class="profile-edit-btn">
+          <i class="fas fa-pen"></i>
+        </button>
+      </div>
+      
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-number">12</div>
+          <div class="stat-label">习惯数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">31</div>
+          <div class="stat-label">连续天数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">78%</div>
+          <div class="stat-label">完成率</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">解锁星球</div>
+        </div>
+      </div>
+      
+      <div class="section-title">账户</div>
+      <div class="settings-group">
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="menu-label">个人资料</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="menu-label">通知设置</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="menu-label">家庭管理</div>
+          <div class="menu-value">张家</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="signup-promo">
+        <div class="promo-icon">
+          <i class="fas fa-crown"></i>
+        </div>
+        <div class="promo-info">
+          <div class="promo-title">升级到高级会员</div>
+          <div class="promo-desc">解锁所有星球和更多独家装饰</div>
+        </div>
+        <button class="promo-btn">升级</button>
+      </div>
+      
+      <div class="section-title">设置</div>
+      <div class="settings-group">
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <div class="menu-label">主题设置</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-moon"></i>
+          </div>
+          <div class="menu-label">深色模式</div>
+          <div class="dark-mode-toggle">
+            <div class="toggle-button"></div>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-language"></i>
+          </div>
+          <div class="menu-label">语言</div>
+          <div class="menu-value">简体中文</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section-title">关于</div>
+      <div class="settings-group">
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-circle-info"></i>
+          </div>
+          <div class="menu-label">关于习惯星球</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-shield"></i>
+          </div>
+          <div class="menu-label">隐私政策</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-icon">
+            <i class="fas fa-circle-question"></i>
+          </div>
+          <div class="menu-label">帮助中心</div>
+          <div class="menu-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      
+      <button class="logout-btn">退出登录</button>
+    </div>
+    
+    <div class="tab-bar">
+      <a href="home.html" class="tab-item">
+        <i class="fas fa-planet-ringed"></i>
+        <span>星球</span>
+      </a>
+      <a href="habits.html" class="tab-item">
+        <i class="fas fa-list-check"></i>
+        <span>习惯</span>
+      </a>
+      <a href="rewards.html" class="tab-item">
+        <i class="fas fa-medal"></i>
+        <span>奖励</span>
+      </a>
+      <a href="family.html" class="tab-item">
+        <i class="fas fa-users"></i>
+        <span>家庭</span>
+      </a>
+      <a href="profile.html" class="tab-item active">
+        <i class="fas fa-user"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const darkModeToggle = document.querySelector('.dark-mode-toggle');
+      const toggleButton = document.querySelector('.toggle-button');
+      
+      darkModeToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        
+        if (this.classList.contains('active')) {
+          toggleButton.style.right = '24px';
+          this.style.backgroundColor = '#D4D4D8';
+        } else {
+          toggleButton.style.right = '2px';
+          this.style.backgroundColor = '#10B981';
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>习惯星球 - 家庭设置</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .setup-container {
+      height: 100%;
+      padding: 20px;
+      position: relative;
+    }
+    
+    .setup-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    }
+    
+    .setup-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .setup-progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    
+    .progress-step {
+      flex: 1;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 0 3px;
+      border-radius: 2px;
+    }
+    
+    .progress-step.active {
+      background-color: var(--primary-color);
+    }
+    
+    .setup-content {
+      margin-bottom: 30px;
+    }
+    
+    .setup-subtitle {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .setup-description {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .form-input {
+      width: 100%;
+      background-color: var(--light-bg);
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 15px;
+      color: var(--text-color);
+      font-size: 16px;
+    }
+    
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .avatar-selection {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .avatar-option {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .avatar-option.selected::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(108, 92, 231, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: '\f00c';
+      color: white;
+      font-size: 24px;
+    }
+    
+    .avatar-option img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .member-list {
+      margin-bottom: 30px;
+    }
+    
+    .member-item {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-bg);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .member-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      margin-right: 15px;
+    }
+    
+    .member-info {
+      flex: 1;
+    }
+    
+    .member-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    
+    .member-role {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .member-action {
+      color: var(--danger-color);
+    }
+    
+    .add-member {
+      display: flex;
+      align-items: center;
+      background-color: rgba(108, 92, 231, 0.1);
+      border: 1px dashed var(--primary-color);
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .add-member:hover {
+      background-color: rgba(108, 92, 231, 0.2);
+    }
+    
+    .add-member-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background-color: rgba(108, 92, 231, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 24px;
+      color: var(--primary-color);
+    }
+    
+    .add-member-text {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .setup-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+    
+    .skip-button {
+      color: rgba(255, 255, 255, 0.6);
+      background-color: transparent;
+      border: none;
+      padding: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .next-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 15px 30px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    
+    .next-button i {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="iphone-container">
+    <div class="status-bar">
+      <div class="signal">
+        <i class="fas fa-signal"></i>
+      </div>
+      <div class="time">9:42</div>
+      <div class="battery">
+        <span>84%</span>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    
+    <div class="app-content">
+      <div class="stars-bg"></div>
+      
+      <div class="setup-container">
+        <div class="setup-header">
+          <a href="welcome.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+          </a>
+          <div class="setup-title">创建你的家庭</div>
+        </div>
+        
+        <div class="setup-progress">
+          <div class="progress-step active"></div>
+          <div class="progress-step active"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
+        
+        <div class="setup-content">
+          <div class="setup-subtitle">家庭信息</div>
+          <div class="setup-description">
+            创建一个家庭，邀请家人一起养成好习惯！
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">家庭名称</label>
+            <input type="text" class="form-input" placeholder="例如：王家" value="王家">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">选择家庭头像</label>
+            <div class="avatar-selection">
+              <div class="avatar-option">
+                <img src="https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=120&q=80" alt="家庭头像">
+              </div>
+              <div class="avatar-option selected">
+                <img src="https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=120&q=80" alt="家庭头像">
+              </div>
+              <div class="avatar-option">
+                <img src="https://images.unsplash.com/photo-1484712401471-05c7215830eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=120&q=80" alt="家庭头像">
+              </div>
+              <div class="avatar-option">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=120&q=80" alt="家庭头像">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">家庭成员</label>
+            <div class="member-list">
+              <div class="member-item">
+                <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="member-avatar">
+                <div class="member-info">
+                  <div class="member-name">王爸爸</div>
+                  <div class="member-role">家长</div>
+                </div>
+                <div class="member-action">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+              
+              <div class="member-item">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="member-avatar">
+                <div class="member-info">
+                  <div class="member-name">王妈妈</div>
+                  <div class="member-role">家长</div>
+                </div>
+                <div class="member-action">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+              
+              <div class="member-item">
+                <img src="https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?ixlib=rb-1.2.1&auto=format&fit=crop&w=80&q=80" alt="成员头像" class="member-avatar">
+                <div class="member-info">
+                  <div class="member-name">小明</div>
+                  <div class="member-role">孩子</div>
+                </div>
+                <div class="member-action">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+              
+              <div class="add-member">
+                <div class="add-member-icon">
+                  <i class="fas fa-plus"></i>
+                </div>
+                <div class="add-member-text">添加家庭成员</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="setup-actions">
+          <button class="skip-button">跳过</button>
+          <a href="home.html" class="next-button">
+            下一步
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

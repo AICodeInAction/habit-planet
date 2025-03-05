@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Planet Prototype</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .phone-frame {
+      width: 393px;
+      height: 852px;
+      border-radius: 40px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+      background: #f2f2f7;
+      position: relative;
+    }
+    .status-bar {
+      height: 44px;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(20px);
+    }
+    .scroller-container {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .scroller-container::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="phone-frame mx-auto">
+    <div class="status-bar flex items-center px-4 justify-between text-sm">
+      <span>9:41</span>
+      <div class="flex space-x-2">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-three-quarters"></i>
+      </div>
+    </div>
+    <div class="scroller-container w-[400%] h-[calc(100%-88px)] flex overflow-x-auto snap-mandatory snap-x scroll-smooth">
+  <iframe src="home.html" class="w-full h-full snap-start flex-shrink-0 pointer-events-none"></iframe>
+  <iframe src="galaxy.html" class="w-full h-full snap-start flex-shrink-0 pointer-events-none"></iframe>
+  <iframe src="family.html" class="w-full h-full snap-start flex-shrink-0 pointer-events-none"></iframe>
+  <iframe src="profile.html" class="w-full h-full snap-start flex-shrink-0 pointer-events-none"></iframe>
+</div>
+    <nav class="absolute bottom-0 w-full h-[88px] bg-white flex justify-around items-center border-t">
+      <a href="#" class="text-blue-500 p-3 rounded-full" onclick="scrollToPage(0)">
+        <i class="fas fa-home text-xl"></i>
+      </a>
+      <a href="#" class="p-3 rounded-full" onclick="scrollToPage(1)">
+        <i class="fas fa-rocket text-xl"></i>
+      </a>
+      <a href="#" class="p-3 rounded-full" onclick="scrollToPage(2)">
+        <i class="fas fa-users text-xl"></i>
+      </a>
+      <a href="#" class="p-3 rounded-full" onclick="scrollToPage(3)">
+        <i class="fas fa-user-astronaut text-xl"></i>
+      </a>
+    </nav>
+    <script>
+      const scroller = document.querySelector('.scroller-container');
+      function scrollToPage(index) {
+        const scrollWidth = scroller.offsetWidth;
+        scroller.scrollTo({
+          left: scrollWidth * index,
+          behavior: 'smooth'
+        });
+      }
+    </script>
+  </div>
+</body>
+</html>

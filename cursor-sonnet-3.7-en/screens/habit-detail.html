@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Planet - Habit Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100vh;
+            background-color: #f2f2f7;
+            overflow: hidden;
+        }
+        
+        .habit-header {
+            background-color: #007aff;
+            color: white;
+            padding: 20px 16px;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        .habit-category {
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e5ea;
+        }
+        
+        .habit-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .habit-item:last-child {
+            border-bottom: none;
+        }
+        
+        .habit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+        }
+        
+        .habit-check {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid #e5e5ea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+        
+        .habit-check.completed {
+            background-color: #34c759;
+            border-color: #34c759;
+            color: white;
+        }
+        
+        .streak-badge {
+            background-color: #ff9500;
+            color: white;
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .calendar-day {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 14px;
+            margin: 0 2px;
+        }
+        
+        .calendar-day.completed {
+            background-color: #34c759;
+            color: white;
+        }
+        
+        .calendar-day.today {
+            border: 2px solid #007aff;
+            font-weight: 600;
+        }
+        
+        .calendar-day.future {
+            color: #c7c7cc;
+        }
+        
+        .tab-button {
+            padding: 8px 16px;
+            font-weight: 600;
+            color: #8e8e93;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: #007aff;
+            border-bottom-color: #007aff;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar">
+        <div class="flex items-center">
+            <span>9:41</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- Habit Header -->
+    <div class="habit-header">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl font-bold">My Habits</h1>
+            <a href="add-habit.html" class="bg-white bg-opacity-20 rounded-full w-8 h-8 flex items-center justify-center">
+                <i class="fas fa-plus"></i>
+            </a>
+        </div>
+        
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="text-sm text-white text-opacity-80">This Week</p>
+                <h2 class="text-2xl font-bold">15 of 35 completed</h2>
+            </div>
+            <div class="bg-white bg-opacity-20 rounded-lg px-3 py-1">
+                <span class="text-sm font-semibold">43%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content" style="padding-top: 0;">
+        <!-- Tabs -->
+        <div class="flex border-b border-gray-200 mb-4">
+            <button class="tab-button active flex-1">All Habits</button>
+            <button class="tab-button flex-1">Daily</button>
+            <button class="tab-button flex-1">Weekly</button>
+        </div>
+        
+        <!-- Habit List -->
+        <div class="card mb-6">
+            <div class="habit-category">Morning Routine</div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-blue-500">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Read for 20 minutes</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 8:00 AM</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 5
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check completed">
+                    <i class="fas fa-check text-xs"></i>
+                </div>
+            </div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-green-500">
+                    <i class="fas fa-apple-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Eat a healthy breakfast</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 7:30 AM</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 12
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check completed">
+                    <i class="fas fa-check text-xs"></i>
+                </div>
+            </div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-yellow-500">
+                    <i class="fas fa-bed"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Make bed</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 7:00 AM</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 8
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check completed">
+                    <i class="fas fa-check text-xs"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-6">
+            <div class="habit-category">Afternoon Activities</div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-purple-500">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Draw or color</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 2:00 PM</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 7
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check">
+                </div>
+            </div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-orange-500">
+                    <i class="fas fa-bicycle"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Outdoor play</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 4:30 PM</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 9
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-6">
+            <div class="habit-category">Evening Routine</div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-red-500">
+                    <i class="fas fa-tooth"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Brush teeth</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 8:00 PM</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 15
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check">
+                </div>
+            </div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-indigo-500">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Bedtime story</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Daily • 8:30 PM</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 10
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="habit-category">Weekly Habits</div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-teal-500">
+                    <i class="fas fa-broom"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Clean room</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Weekly • Saturday</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 4
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check completed">
+                    <i class="fas fa-check text-xs"></i>
+                </div>
+            </div>
+            
+            <div class="habit-item">
+                <div class="habit-icon bg-pink-500">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Help with chores</h3>
+                    <div class="flex items-center">
+                        <span class="text-xs text-gray-500">Weekly • Sunday</span>
+                        <div class="streak-badge ml-2">
+                            <i class="fas fa-fire mr-1"></i> 3
+                        </div>
+                    </div>
+                </div>
+                <div class="habit-check">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Tab Bar -->
+    <div class="ios-tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="habit-detail.html" class="tab-item active">
+            <i class="fas fa-list-check tab-icon"></i>
+            <span>Habits</span>
+        </a>
+        <a href="planet-explorer.html" class="tab-item">
+            <i class="fas fa-globe tab-icon"></i>
+            <span>Planets</span>
+        </a>
+        <a href="family.html" class="tab-item">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Family</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 

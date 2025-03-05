@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页 - HabitPlanet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/base.css" rel="stylesheet">
+    <style>
+        .space-map {
+            position: relative;
+            min-height: calc(100vh - 83px);
+            background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 1s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .planet {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .planet:hover {
+            transform: scale(1.1);
+        }
+
+        .planet-name {
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .planet-progress {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .planet-progress-fill {
+            height: 100%;
+            background: #10B981;
+            border-radius: 3px;
+        }
+
+        .planet-locked {
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+
+        .planet-connection {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            height: 2px;
+            transform-origin: left center;
+        }
+    </style>
+</head>
+<body>
+    <div class="space-map">
+        <!-- 生成随机星星 -->
+        <script>
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                document.querySelector('.space-map').appendChild(star);
+            }
+        </script>
+
+        <!-- 习惯星球 -->
+        <div class="relative w-full h-full p-8">
+            <!-- 第一行星球 -->
+            <div class="planet absolute" style="left: 50%; top: 10%;">
+                <div class="planet-progress">
+                    <div class="planet-progress-fill" style="width: 75%;"></div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=200" alt="运动星球" class="w-24 h-24 rounded-full">
+                <span class="planet-name">运动星球</span>
+            </div>
+
+            <!-- 第二行星球 -->
+            <div class="planet absolute" style="left: 20%; top: 30%;">
+                <div class="planet-progress">
+                    <div class="planet-progress-fill" style="width: 45%;"></div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1614724723656-457e78e0b50b?w=200" alt="阅读星球" class="w-24 h-24 rounded-full">
+                <span class="planet-name">阅读星球</span>
+            </div>
+
+            <div class="planet absolute" style="left: 80%; top: 30%;">
+                <div class="planet-progress">
+                    <div class="planet-progress-fill" style="width: 60%;"></div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1614726365952-510103b1bbb4?w=200" alt="学习星球" class="w-24 h-24 rounded-full">
+                <span class="planet-name">学习星球</span>
+            </div>
+
+            <!-- 第三行星球 -->
+            <div class="planet absolute planet-locked" style="left: 35%; top: 50%;">
+                <img src="https://images.unsplash.com/photo-1614314107768-6018061b5b72?w=200" alt="未解锁星球" class="w-24 h-24 rounded-full">
+                <span class="planet-name">未解锁</span>
+            </div>
+
+            <div class="planet absolute planet-locked" style="left: 65%; top: 50%;">
+                <img src="https://images.unsplash.com/photo-1614729373912-77475fb0fb40?w=200" alt="未解锁星球" class="w-24 h-24 rounded-full">
+                <span class="planet-name">未解锁</span>
+            </div>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item active">
+                <i class="fas fa-globe"></i>
+                <span>星球</span>
+            </a>
+            <a href="habits.html" class="nav-item">
+                <i class="fas fa-check-circle"></i>
+                <span>打卡</span>
+            </a>
+            <a href="family.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>家庭</span>
+            </a>
+            <a href="rewards.html" class="nav-item">
+                <i class="fas fa-trophy"></i>
+                <span>奖励</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- 星球详情弹窗 -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 hidden" id="planetModal">
+        <div class="bg-white rounded-t-3xl p-6 absolute bottom-0 left-0 right-0">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">运动星球</h3>
+                <button class="text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
+                        <i class="fas fa-running text-indigo-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">每日运动30分钟</h4>
+                        <p class="text-sm text-gray-500">已坚持 15 天</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4">
+                    <h5 class="font-medium mb-2">今日任务</h5>
+                    <div class="flex items-center justify-between">
+                        <span>跑步 5 公里</span>
+                        <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
+                            去打卡
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="font-medium mb-2">解锁进度</h5>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 75%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">再坚持 5 天解锁新装饰</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

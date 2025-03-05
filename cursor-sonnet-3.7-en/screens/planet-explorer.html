@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Planet - Planet Explorer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100vh;
+            background-color: #0a0a23;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .space-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #0a0a23;
+            background-image: radial-gradient(white, rgba(255, 255, 255, 0.2) 2px, transparent 2px);
+            background-size: 100px 100px;
+            z-index: -1;
+        }
+        
+        .planet-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .planet.active {
+            border: 2px solid white;
+            animation: pulse 2s infinite;
+        }
+        
+        .planet.locked {
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+        
+        .planet.locked::before {
+            content: '\f023';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            z-index: 1;
+        }
+        
+        .planet-info-card {
+            position: absolute;
+            bottom: 100px;
+            left: 16px;
+            right: 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 16px;
+            color: white;
+        }
+        
+        .decoration-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .decoration-item {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .decoration-item.locked {
+            opacity: 0.5;
+        }
+        
+        .decoration-item.locked::before {
+            content: '\f023';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            font-size: 16px;
+        }
+        
+        .planet-nav {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .planet-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 255, 255, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar" style="background-color: transparent; border: none;">
+        <div class="flex items-center">
+            <span>9:41</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <div class="space-bg"></div>
+
+    <!-- Planet Explorer -->
+    <div class="planet-container">
+        <!-- Orbits -->
+        <div class="orbit" style="width: 200px; height: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="orbit" style="width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="orbit" style="width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="orbit" style="width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        
+        <!-- Sun (Center) -->
+        <div class="planet active" style="width: 80px; height: 80px; top: 50%; left: 50%; transform: translate(-50%, -50%); background-image: url('https://images.unsplash.com/photo-1575881875475-31023242e3f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80'); z-index: 10;"></div>
+        
+        <!-- Planets -->
+        <div class="planet" style="width: 60px; height: 60px; top: 40%; left: 30%; background-image: url('https://images.unsplash.com/photo-1614732414444-096e5f1122d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80');">
+            <span class="absolute -bottom-6 text-xs">Earth</span>
+        </div>
+        
+        <div class="planet" style="width: 50px; height: 50px; top: 30%; left: 60%; background-image: url('https://images.unsplash.com/photo-1630839437035-dac17da580d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80');">
+            <span class="absolute -bottom-6 text-xs">Mars</span>
+        </div>
+        
+        <div class="planet" style="width: 70px; height: 70px; top: 60%; left: 65%; background-image: url('https://images.unsplash.com/photo-1639921884918-8d28ab2e39a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80');">
+            <span class="absolute -bottom-6 text-xs">Jupiter</span>
+        </div>
+        
+        <div class="planet locked" style="width: 55px; height: 55px; top: 70%; left: 30%; background-image: url('https://images.unsplash.com/photo-1614314169000-4cf6be9f4a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80');">
+            <span class="absolute -bottom-6 text-xs">Saturn</span>
+        </div>
+        
+        <div class="planet locked" style="width: 45px; height: 45px; top: 20%; left: 75%; background-image: url('https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80');">
+            <span class="absolute -bottom-6 text-xs">Neptune</span>
+        </div>
+        
+        <!-- Planet Navigation -->
+        <div class="planet-nav">
+            <button class="planet-nav-btn">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button class="planet-nav-btn">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button class="planet-nav-btn">
+                <i class="fas fa-arrows-alt"></i>
+            </button>
+        </div>
+        
+        <!-- Planet Info Card -->
+        <div class="planet-info-card">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Earth</h2>
+                <div class="bg-white bg-opacity-20 rounded-full px-3 py-1 text-xs">
+                    Level 3
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-300 mb-4">Your home planet. Complete more habits to unlock decorations and new planets!</p>
+            
+            <h3 class="text-sm font-semibold mb-2">Available Decorations</h3>
+            <div class="decoration-grid mb-4">
+                <div class="decoration-item">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div class="decoration-item">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="decoration-item">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="decoration-item locked">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <div class="decoration-item locked">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="decoration-item locked">
+                    <i class="fas fa-city"></i>
+                </div>
+                <div class="decoration-item locked">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="decoration-item locked">
+                    <i class="fas fa-satellite"></i>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-sm font-semibold">Next Decoration</h3>
+                    <p class="text-xs text-gray-300">150 more points needed</p>
+                </div>
+                <button class="bg-white bg-opacity-20 rounded-full px-4 py-2 text-sm">
+                    Customize
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Tab Bar -->
+    <div class="ios-tab-bar">
+        <a href="home.html" class="tab-item">
+            <i class="fas fa-home tab-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="habit-detail.html" class="tab-item">
+            <i class="fas fa-list-check tab-icon"></i>
+            <span>Habits</span>
+        </a>
+        <a href="planet-explorer.html" class="tab-item active">
+            <i class="fas fa-globe tab-icon"></i>
+            <span>Planets</span>
+        </a>
+        <a href="family.html" class="tab-item">
+            <i class="fas fa-users tab-icon"></i>
+            <span>Family</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html> 
