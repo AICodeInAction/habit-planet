@@ -10,7 +10,8 @@ function updateReadme() {
     'cusor-sonnet-3.7-thinking',
     'cusor-openai-o4',
     'trae-sonnet-3.7',
-    'trae-deepseek-r1'
+    'trae-deepseek-r1',
+    'trae-deepseek-v3'
   ];
 
   // 读取当前的README内容
@@ -44,7 +45,8 @@ function updateReadme() {
       'cusor-sonnet-3.7-thinking': 'Cursor + Claude 3.7 Sonnet (思考过程)',
       'cusor-openai-o4': 'Cursor + OpenAI GPT-4o',
       'trae-sonnet-3.7': 'Trae + Claude 3.7 Sonnet',
-      'trae-deepseek-r1': 'Trae + DeepSeek-Coder'
+      'trae-deepseek-r1': 'Trae + DeepSeek R1',
+      'trae-deepseek-v3': 'Trae + DeepSeek V3'
     }[folder];
 
     screenshotsSection += `### ${modelName}\n\n`;

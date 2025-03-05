@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .phone-frame {
+            width: 375px;
+            height: 667px;
+            border: 12px solid #333;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            margin: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="grid-container">
+        <div class="phone-frame">
+            <iframe src="home.html"></iframe>
+        </div>
+        <div class="phone-frame">
+            <iframe src="habit-map.html"></iframe>
+        </div>
+        <div class="phone-frame">
+            <iframe src="family.html"></iframe>
+        </div>
+        <div class="phone-frame">
+            <iframe src="achievement.html"></iframe>
+        </div>
+    </div>
+</body>
+</html>

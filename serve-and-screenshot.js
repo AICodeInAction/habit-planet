@@ -17,7 +17,8 @@ async function takeScreenshots() {
     'cusor-sonnet-3.7-thinking',
     'cusor-openai-o4',
     'trae-sonnet-3.7',
-    'trae-deepseek-r1'
+    'trae-deepseek-r1',
+    'trae-deepseek-v3'  // 添加新目录
   ];
 
   // 创建截图文件夹（如果不存在）

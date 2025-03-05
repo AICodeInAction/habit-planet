@@ -12,17 +12,18 @@
 
 | 文件夹 | AI IDE | 语言模型 | 说明 |
 |--------|--------|---------|------|
-| cursor-sonnet-3.5 | Cursor | Claude 3.5 Sonnet | 英文提示生成的原型 |
-| cursor-sonnet-3.7-cn | Cursor | Claude 3.7 Sonnet | 中文提示生成的原型 |
-| cursor-sonnet-3.7-en | Cursor | Claude 3.7 Sonnet | 英文提示生成的原型 |
+| cursor-sonnet-3.5 | Cursor | Claude 3.5 Sonnet |  |
+| cursor-sonnet-3.7-cn | Cursor | Claude 3.7 Sonnet | 中文界面 |
+| cursor-sonnet-3.7-en | Cursor | Claude 3.7 Sonnet | 英文界面 |
 | cusor-sonnet-3.7-thinking | Cursor | Claude 3.7 Sonnet | 带思考过程的生成 |
 | cusor-openai-o4 | Cursor | OpenAI GPT-4o | GPT-4o 生成的原型 |
 | trae-sonnet-3.7 | Trae | Claude 3.7 Sonnet | Trae IDE 下生成的原型 |
-| trae-deepseek-r1 | Trae | DeepSeek-Coder | DeepSeek 模型生成的原型 |
+| trae-deepseek-r1 | Trae | DeepSeek-Coder | DeepSeek R1模型生成的原型 |
+| trae-deepseek-v3 | Trae | DeepSeek-Coder V3 | DeepSeek V3模型生成的原型 |
 
 ## 如何浏览原型
 
-每个文件夹下都有一个 `index.html` 文件，可以直接在浏览器中打开查看。每个原型展示了习惯星球应用的不同页面和功能，包括：
+每个文件夹下都有一个 `index.html` 文件，可以直接在浏览器中打开查看。每个原型展示了习惯星球应用的不同页面和功能（不同模型对应的功能页面不同），包括：
 
 - 欢迎和引导页面
 - 家庭设置
@@ -61,7 +62,7 @@
 
 2. 生成截图：
    ```bash
-   npm run screenshot
+   npm run serve-screenshot
    ```
 
 3. 更新README添加截图：
@@ -82,7 +83,7 @@
 
 以下是各个AI模型生成的界面截图比较：
 
-### Cursor + Claude 3.5 Sonnet (英文)
+### Cursor + Claude 3.5 Sonnet
 
 ![cursor-sonnet-3.5](screenshots/cursor-sonnet-3.5.png)
 
@@ -94,7 +95,7 @@
 
 ![cursor-sonnet-3.7-en](screenshots/cursor-sonnet-3.7-en.png)
 
-### Cursor + Claude 3.7 Sonnet (思考过程)
+### Cursor + Claude 3.7 Sonnet Thinking
 
 ![cusor-sonnet-3.7-thinking](screenshots/cusor-sonnet-3.7-thinking.png)
 
@@ -104,11 +105,19 @@
 
 ### Trae + Claude 3.7 Sonnet
 
-![trae-sonnet-3.7]
+![trae-sonnet-3.7](screenshots/trae-sonnet-3.7.png)
 
-### Trae + DeepSeek-Coder
+### Trae + DeepSeek- R1
 
 ![trae-deepseek-r1](screenshots/trae-deepseek-r1.png)
+
+### Trae + DeepSeek-Coder V3
+![trae-deepseek-v3](screenshots/trae-deepseek-v3.png)
+
+![trae-deepseek-v3](screenshots/trae-deepseek-v3.png)
+
+## 各模型特点对比
+
 
 ---
 
