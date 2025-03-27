@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Planet - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <div class="device-frame">
+    <!-- Include Status Bar -->
+    <div id="status-bar-container"></div>
+    
+    <div class="app-body">
+      <div class="header">
+        <h1 class="page-title">Dashboard</h1>
+        <div class="avatar">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=60" alt="Child Avatar" class="avatar">
+        </div>
+      </div>
+      
+      <div class="notification">
+        <div class="flex justify-between items-center">
+          <div>
+            <strong>Great progress!</strong>
+            <p class="mb-0">You're on a 5-day streak!</p>
+          </div>
+          <i class="fas fa-star text-warning" style="font-size: 24px;"></i>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="flex justify-between">
+          <h2>Today's Mission</h2>
+          <span class="badge">3/5 Tasks</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width: 60%;"></div>
+        </div>
+        
+        <div class="habit-list mt-3">
+          <div class="habit-item">
+            <div class="habit-checkbox checked">
+              <i class="fas fa-check"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">Read for 15 minutes</h3>
+              <small class="text-success">Completed at 4:30 PM</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox checked">
+              <i class="fas fa-check"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">Brush teeth morning</h3>
+              <small class="text-success">Completed at 7:15 AM</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox checked">
+              <i class="fas fa-check"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">Tidy up toys</h3>
+              <small class="text-success">Completed at 6:00 PM</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class="fas fa-check" style="display: none;"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">Homework time</h3>
+              <small>Scheduled for today</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class="fas fa-check" style="display: none;"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">Brush teeth night</h3>
+              <small>Scheduled for 8:00 PM</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Weekly Progress</h2>
+        <div class="streak-indicator">
+          <div class="streak-day completed">M</div>
+          <div class="streak-day completed">T</div>
+          <div class="streak-day completed">W</div>
+          <div class="streak-day completed">T</div>
+          <div class="streak-day completed">F</div>
+          <div class="streak-day">S</div>
+          <div class="streak-day">S</div>
+        </div>
+        <p class="text-center"><strong>5-day streak!</strong> Keep it up!</p>
+      </div>
+      
+      <div class="card">
+        <div class="flex justify-between">
+          <h2>Space Journey</h2>
+          <a href="space.html" class="text-primary">View All</a>
+        </div>
+        <div class="text-center mt-3">
+          <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&auto=format&fit=crop&q=60" alt="Planet" class="planet">
+          <h3 class="mt-2">Mars Exploration</h3>
+          <p>12 stars collected</p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 40%;"></div>
+          </div>
+          <p>12/30 stars to unlock next planet</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="flex justify-between">
+          <h2>Family Activity</h2>
+          <a href="family.html" class="text-primary">View All</a>
+        </div>
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1581582730057-32d6335a4c5c?w=400&auto=format&fit=crop&q=60" alt="Mom" class="avatar mr-3" style="margin-right: 10px;">
+            <div>
+              <h3 class="mb-0">Mom</h3>
+              <p class="mb-0">Approved your reading completion</p>
+            </div>
+          </div>
+          <small>2h ago</small>
+        </div>
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=400&auto=format&fit=crop&q=60" alt="Dad" class="avatar mr-3" style="margin-right: 10px;">
+            <div>
+              <h3 class="mb-0">Dad</h3>
+              <p class="mb-0">Added a new habit: Swimming lessons</p>
+            </div>
+          </div>
+          <small>Yesterday</small>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Include Tab Bar -->
+    <div id="tab-bar-container"></div>
+  </div>
+
+  <script>
+    // Load status bar and tab bar components
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('../components/StatusBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('status-bar-container').innerHTML = data;
+        });
+      
+      fetch('../components/TabBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('tab-bar-container').innerHTML = data;
+        });
+    });
+  </script>
+</body>
+</html> 

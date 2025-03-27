@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Screen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+        body { display: flex; flex-direction: column; background-color: #F3F4F6; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding-bottom: 80px; }
+        .tab-bar { border-top: 1px solid #E5E7EB; }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+    <!-- Header (No title, profile info acts as header) -->
+    <header class="bg-gradient-to-b from-purple-500 to-indigo-600 p-6 text-white text-center relative shadow-lg">
+         <button class="absolute top-4 right-4 text-white text-xl opacity-80 hover:opacity-100">
+            <i class="fas fa-cog"></i> <!-- Settings Icon -->
+        </button>
+        <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="小宇" class="w-24 h-24 rounded-full mb-3 mx-auto border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold">小宇</h1>
+        <p class="text-sm opacity-90">小小宇航员</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content p-4 space-y-5 -mt-8 z-10 relative"> <!-- Negative margin to overlap header slightly -->
+
+        <!-- Stats Overview -->
+        <div class="bg-white rounded-xl shadow-md p-4 grid grid-cols-3 divide-x text-center">
+            <div>
+                <p class="text-2xl font-bold text-purple-600">35</p>
+                <p class="text-xs text-gray-500">总坚持天数</p>
+            </div>
+             <div>
+                <p class="text-2xl font-bold text-yellow-500">3</p>
+                <p class="text-xs text-gray-500">获得奖牌</p>
+            </div>
+             <div>
+                <p class="text-2xl font-bold text-blue-500">2</p>
+                <p class="text-xs text-gray-500">解锁星球</p>
+            </div>
+        </div>
+
+        <!-- Quick Links/Settings -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <a href="#" class="flex items-center justify-between p-4 border-b hover:bg-gray-50 transition">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-user-edit text-lg text-gray-500 w-6 text-center"></i>
+                    <span class="text-gray-700">编辑个人资料</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </a>
+             <a href="#" class="flex items-center justify-between p-4 border-b hover:bg-gray-50 transition">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-bell text-lg text-gray-500 w-6 text-center"></i>
+                    <span class="text-gray-700">通知设置</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </a>
+             <a href="#" class="flex items-center justify-between p-4 border-b hover:bg-gray-50 transition">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-shield-alt text-lg text-gray-500 w-6 text-center"></i>
+                    <span class="text-gray-700">账号与安全</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </a>
+             <a href="#" class="flex items-center justify-between p-4 hover:bg-gray-50 transition">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-info-circle text-lg text-gray-500 w-6 text-center"></i>
+                    <span class="text-gray-700">关于应用</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </a>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="pt-4">
+             <button class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg shadow transition">
+                退出登录
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Tab Bar (No active state needed here as it's not part of the main flow typically) -->
+    <nav class="tab-bar bg-white p-3 flex justify-around items-center fixed bottom-0 left-0 right-0 w-full z-10">
+        <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-home text-xl"></i>
+            <span class="block text-xs">主页</span>
+        </a>
+        <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-list-check text-xl"></i>
+            <span class="block text-xs">习惯</span>
+        </a>
+        <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-rocket text-xl"></i>
+            <span class="block text-xs">旅程</span>
+        </a>
+        <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-medal text-xl"></i>
+            <span class="block text-xs">成就</span>
+        </a>
+         <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-users text-xl"></i>
+            <span class="block text-xs">家庭</span>
+        </a>
+        <!-- Profile might be accessed differently, e.g., from a top-right icon on Home -->
+    </nav>
+
+</body>
+</html> 

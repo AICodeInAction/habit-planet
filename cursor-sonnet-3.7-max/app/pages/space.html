@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Planet - Space</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    .planet-map {
+      position: relative;
+      height: 400px;
+      background-color: #1a1a2e;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      padding: 15px;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background-color: white;
+      border-radius: 50%;
+    }
+    
+    .star.medium {
+      width: 3px;
+      height: 3px;
+    }
+    
+    .star.large {
+      width: 4px;
+      height: 4px;
+    }
+    
+    .planet-item {
+      position: absolute;
+      text-align: center;
+    }
+    
+    .planet-item.unlocked .planet-icon {
+      filter: grayscale(0);
+    }
+    
+    .planet-item.locked .planet-icon {
+      filter: grayscale(1);
+    }
+    
+    .planet-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 5px;
+    }
+    
+    .planet-icon.current {
+      animation: pulse 2s infinite;
+    }
+    
+    .path {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.2);
+      height: 2px;
+    }
+    
+    .path.completed {
+      background-color: #28a745;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="device-frame">
+    <!-- Include Status Bar -->
+    <div id="status-bar-container"></div>
+    
+    <div class="app-body">
+      <div class="header">
+        <h1 class="page-title">Space Journey</h1>
+        <div class="flex items-center">
+          <span class="badge" style="margin-right: 10px;"><i class="fas fa-star"></i> 42</span>
+          <span class="badge"><i class="fas fa-medal"></i> 5</span>
+        </div>
+      </div>
+      
+      <div class="planet-map">
+        <!-- Stars in the background -->
+        <div class="star small" style="top: 10%; left: 20%;"></div>
+        <div class="star small" style="top: 15%; left: 80%;"></div>
+        <div class="star medium" style="top: 30%; left: 40%;"></div>
+        <div class="star large" style="top: 70%; left: 90%;"></div>
+        <div class="star small" style="top: 85%; left: 30%;"></div>
+        <div class="star medium" style="top: 50%; left: 70%;"></div>
+        <div class="star large" style="top: 25%; left: 15%;"></div>
+        <div class="star small" style="top: 60%; left: 55%;"></div>
+        <div class="star medium" style="top: 80%; left: 10%;"></div>
+        <div class="star large" style="top: 5%; left: 60%;"></div>
+        
+        <!-- Path between planets -->
+        <div class="path completed" style="top: 200px; left: 40px; width: 100px; transform: rotate(30deg);"></div>
+        <div class="path completed" style="top: 150px; left: 120px; width: 120px; transform: rotate(15deg);"></div>
+        <div class="path" style="top: 130px; left: 230px; width: 100px; transform: rotate(-15deg);"></div>
+        
+        <!-- Planets -->
+        <div class="planet-item unlocked" style="top: 180px; left: 10px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/3049/3049498.png" alt="Earth" class="planet-icon">
+          <p style="color: white; font-size: 12px;">Earth</p>
+          <span class="badge" style="background-color: #28a745;">Complete</span>
+        </div>
+        
+        <div class="planet-item unlocked" style="top: 120px; left: 100px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/3336/3336008.png" alt="Moon" class="planet-icon">
+          <p style="color: white; font-size: 12px;">Moon</p>
+          <span class="badge" style="background-color: #28a745;">Complete</span>
+        </div>
+        
+        <div class="planet-item unlocked" style="top: 100px; left: 220px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/2949/2949014.png" alt="Mars" class="planet-icon current">
+          <p style="color: white; font-size: 12px;">Mars</p>
+          <span class="badge">40% Complete</span>
+        </div>
+        
+        <div class="planet-item locked" style="top: 130px; left: 340px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124567.png" alt="Jupiter" class="planet-icon">
+          <p style="color: white; font-size: 12px;">Jupiter</p>
+          <span class="badge" style="background-color: #6c757d;">Locked</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="flex justify-between items-center">
+          <h2>Current Planet: Mars</h2>
+          <span class="badge">12/30 Stars</span>
+        </div>
+        <div class="progress-bar mt-2">
+          <div class="progress-bar-fill" style="width: 40%;"></div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/2949/2949014.png" alt="Mars" class="planet-lg">
+          <h3 class="mt-2">Mars Exploration</h3>
+          <p>Collect 30 stars to unlock Jupiter!</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Planet Decorations</h2>
+        <p>Use your stars to decorate Mars:</p>
+        
+        <div class="grid-3">
+          <div class="text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/3100/3100499.png" alt="Flag" style="width: 50px; height: 50px;">
+            <p style="font-size: 12px;">Flag</p>
+            <button class="btn-primary" style="font-size: 10px; padding: 5px 10px;">10 <i class="fas fa-star"></i></button>
+          </div>
+          
+          <div class="text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/6599/6599090.png" alt="Rover" style="width: 50px; height: 50px;">
+            <p style="font-size: 12px;">Rover</p>
+            <button class="btn-primary" style="font-size: 10px; padding: 5px 10px;">15 <i class="fas fa-star"></i></button>
+          </div>
+          
+          <div class="text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/6106/6106688.png" alt="Base" style="width: 50px; height: 50px;">
+            <p style="font-size: 12px;">Base</p>
+            <button class="btn-primary" style="font-size: 10px; padding: 5px 10px;">20 <i class="fas fa-star"></i></button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Recent Achievements</h2>
+        <div class="flex items-center">
+          <div style="position: relative; margin-right: 15px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2173/2173906.png" alt="Moon Badge" class="badge-icon">
+            <div style="position: absolute; bottom: 0; right: 0; background-color: var(--success-color); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; justify-content: center; align-items: center; font-size: 10px;">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="mb-0">Moon Explorer</h3>
+            <p class="mb-0">Completed all moon habits for 7 consecutive days</p>
+            <small class="text-success">Completed 3 days ago</small>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Next Milestone</h2>
+        <div class="flex items-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124567.png" alt="Jupiter" class="planet-sm" style="margin-right: 15px;">
+          <div>
+            <h3 class="mb-0">Jupiter Unlocking</h3>
+            <p class="mb-0">Need 18 more stars to unlock this planet</p>
+            <div class="progress-bar" style="height: 5px;">
+              <div class="progress-bar-fill" style="width: 40%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Include Tab Bar -->
+    <div id="tab-bar-container"></div>
+  </div>
+
+  <script>
+    // Load status bar and tab bar components
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('../components/StatusBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('status-bar-container').innerHTML = data;
+        });
+      
+      fetch('../components/TabBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('tab-bar-container').innerHTML = data;
+        });
+      
+      // Add extra stars randomly in the background
+      const planetMap = document.querySelector('.planet-map');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star ' + (Math.random() > 0.7 ? 'medium' : 'small');
+        star.style.top = Math.random() * 100 + '%';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        planetMap.appendChild(star);
+      }
+    });
+  </script>
+</body>
+</html> 

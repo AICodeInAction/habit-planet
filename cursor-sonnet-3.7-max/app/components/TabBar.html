@@ -1,0 +1,39 @@
+<!-- Tab Bar Component -->
+<div class="tab-bar">
+  <a href="home.html" class="tab-item" id="tab-home">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a href="habits.html" class="tab-item" id="tab-habits">
+    <i class="fas fa-check-circle"></i>
+    <span>Habits</span>
+  </a>
+  <a href="space.html" class="tab-item" id="tab-space">
+    <i class="fas fa-planet-ringed"></i>
+    <span>Space</span>
+  </a>
+  <a href="family.html" class="tab-item" id="tab-family">
+    <i class="fas fa-users"></i>
+    <span>Family</span>
+  </a>
+  <a href="profile.html" class="tab-item" id="tab-profile">
+    <i class="fas fa-user-astronaut"></i>
+    <span>Profile</span>
+  </a>
+</div>
+
+<script>
+  // Set active tab based on current page
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const tabId = 'tab-' + currentPage.replace('.html', '');
+    const activeTab = document.getElementById(tabId);
+    
+    if (activeTab) {
+      activeTab.classList.add('active');
+    } else {
+      // Default to home tab if page not found
+      document.getElementById('tab-home').classList.add('active');
+    }
+  });
+</script> 

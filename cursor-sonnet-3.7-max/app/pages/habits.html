@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Planet - Habits</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <div class="device-frame">
+    <!-- Include Status Bar -->
+    <div id="status-bar-container"></div>
+    
+    <div class="app-body">
+      <div class="header">
+        <h1 class="page-title">My Habits</h1>
+        <button class="btn-primary" style="border-radius: 50%; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      
+      <div class="card">
+        <div class="flex justify-between items-center mb-3">
+          <h2 class="mb-0">Daily Habits</h2>
+          <span class="badge">3/5 Today</span>
+        </div>
+        
+        <div class="habit-list">
+          <div class="habit-item">
+            <div class="habit-checkbox checked">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h3 class="mb-0">Read for 15 minutes</h3>
+                <span class="text-success">
+                  <i class="fas fa-fire"></i> 7
+                </span>
+              </div>
+              <div class="progress-bar" style="height: 5px;">
+                <div class="progress-bar-fill" style="width: 100%;"></div>
+              </div>
+              <small class="text-success">Completed today</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox checked">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h3 class="mb-0">Brush teeth morning</h3>
+                <span class="text-success">
+                  <i class="fas fa-fire"></i> 12
+                </span>
+              </div>
+              <div class="progress-bar" style="height: 5px;">
+                <div class="progress-bar-fill" style="width: 100%;"></div>
+              </div>
+              <small class="text-success">Completed today</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox checked">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h3 class="mb-0">Tidy up toys</h3>
+                <span class="text-success">
+                  <i class="fas fa-fire"></i> 5
+                </span>
+              </div>
+              <div class="progress-bar" style="height: 5px;">
+                <div class="progress-bar-fill" style="width: 100%;"></div>
+              </div>
+              <small class="text-success">Completed today</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class="fas fa-check" style="display: none;"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h3 class="mb-0">Homework time</h3>
+                <span class="text-success">
+                  <i class="fas fa-fire"></i> 3
+                </span>
+              </div>
+              <div class="progress-bar" style="height: 5px;">
+                <div class="progress-bar-fill" style="width: 60%;"></div>
+              </div>
+              <small>Scheduled for today</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class="fas fa-check" style="display: none;"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h3 class="mb-0">Brush teeth night</h3>
+                <span class="text-success">
+                  <i class="fas fa-fire"></i> 8
+                </span>
+              </div>
+              <div class="progress-bar" style="height: 5px;">
+                <div class="progress-bar-fill" style="width: 85%;"></div>
+              </div>
+              <small>Scheduled for 8:00 PM</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="flex justify-between items-center mb-3">
+          <h2 class="mb-0">Weekly Habits</h2>
+          <span class="badge">1/2 This week</span>
+        </div>
+        
+        <div class="habit-list">
+          <div class="habit-item">
+            <div class="habit-checkbox checked">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h3 class="mb-0">Swimming lessons</h3>
+                <span class="text-success">
+                  <i class="fas fa-trophy"></i> 2
+                </span>
+              </div>
+              <div class="progress-bar" style="height: 5px;">
+                <div class="progress-bar-fill" style="width: 100%;"></div>
+              </div>
+              <small class="text-success">Completed on Wednesday</small>
+            </div>
+          </div>
+          
+          <div class="habit-item">
+            <div class="habit-checkbox">
+              <i class="fas fa-check" style="display: none;"></i>
+            </div>
+            <div class="w-full">
+              <div class="flex justify-between">
+                <h3 class="mb-0">Clean room thoroughly</h3>
+                <span class="text-success">
+                  <i class="fas fa-trophy"></i> 3
+                </span>
+              </div>
+              <div class="progress-bar" style="height: 5px;">
+                <div class="progress-bar-fill" style="width: 30%;"></div>
+              </div>
+              <small>Scheduled for Saturday</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Achievements</h2>
+        <p>Completed streaks unlock special rewards!</p>
+        <div class="flex justify-between">
+          <div class="badge-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/6941/6941697.png" alt="Reading Badge" class="badge-icon">
+            <p class="badge-title">Bookworm</p>
+          </div>
+          <div class="badge-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3588/3588614.png" alt="Cleaning Badge" class="badge-icon">
+            <p class="badge-title">Neat Freak</p>
+          </div>
+          <div class="badge-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/4319/4319474.png" alt="Swimming Badge" class="badge-icon">
+            <p class="badge-title">Swimmer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Recommended Habits</h2>
+        <p>Based on your interests and age:</p>
+        
+        <div class="habit-item">
+          <div class="habit-checkbox" style="background-color: var(--light-gray); border: none;">
+            <i class="fas fa-plus" style="color: var(--dark-gray);"></i>
+          </div>
+          <div>
+            <h3 class="mb-0">Practice piano for 15 minutes</h3>
+            <small>Great for developing discipline</small>
+          </div>
+        </div>
+        
+        <div class="habit-item">
+          <div class="habit-checkbox" style="background-color: var(--light-gray); border: none;">
+            <i class="fas fa-plus" style="color: var(--dark-gray);"></i>
+          </div>
+          <div>
+            <h3 class="mb-0">Drink water regularly</h3>
+            <small>Staying hydrated is important</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Include Tab Bar -->
+    <div id="tab-bar-container"></div>
+  </div>
+
+  <script>
+    // Load status bar and tab bar components
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('../components/StatusBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('status-bar-container').innerHTML = data;
+        });
+      
+      fetch('../components/TabBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('tab-bar-container').innerHTML = data;
+        });
+    });
+  </script>
+</body>
+</html> 

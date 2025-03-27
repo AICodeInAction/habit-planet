@@ -15,7 +15,9 @@
 | cursor-sonnet-3.5 | Cursor | Claude 3.5 Sonnet |  |
 | cursor-sonnet-3.7-cn | Cursor | Claude 3.7 Sonnet | 中文界面 |
 | cursor-sonnet-3.7-en | Cursor | Claude 3.7 Sonnet | 英文界面 |
-| cusor-sonnet-3.7-thinking | Cursor | Claude 3.7 Sonnet | 带思考过程的生成 |
+| cusor-sonnet-3.7-thinking | Cursor | Claude 3.7 Sonnet thinking| 带思考过程的生成 |
+| cusor-gemini2.5 | Cursor | Google Gemini | gemini 2.5 |
+| cusor-sonnet-3.7-max | Cursor | sonnet 3.7 max | sonnet 3.7 max |
 | cusor-openai-o4 | Cursor | OpenAI GPT-4o | GPT-4o 生成的原型 |
 | trae-sonnet-3.7 | Trae | Claude 3.7 Sonnet | Trae IDE 下生成的原型 |
 | trae-deepseek-r1 | Trae | DeepSeek-Coder | DeepSeek R1模型生成的原型 |
@@ -99,9 +101,17 @@
 
 ![cusor-sonnet-3.7-thinking](screenshots/cusor-sonnet-3.7-thinking.png)
 
+### Cursor + Claude 3.7 Sonnet Max
+
+![cusor-sonnet-3.7-max](screenshots/cusor-sonnet-3.7-max.png)
+
 ### Cursor + OpenAI GPT-4o
 
 ![cusor-openai-o4](screenshots/cusor-openai-o4.png)
+
+### Cursor + Google Gemini 2.5
+
+![cusor-gemini2.5](screenshots/cursor-gemini2.5.png)
 
 ### Trae + Claude 3.7 Sonnet
 

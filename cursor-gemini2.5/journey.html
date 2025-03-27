@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Screen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+        body { display: flex; flex-direction: column; background-color: #1a202c; /* Dark space background */ color: white; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding-bottom: 80px; position: relative; /* For positioning elements */ }
+        .tab-bar { border-top: 1px solid #4A5568; background-color: #2D3748; /* Darker tab bar */ }
+        .tab-bar a { color: #A0AEC0; /* Lighter gray text */}
+        .tab-bar a.active { color: #9F7AEA; /* Purple active */}
+        /* Simple dashed line for path */
+        .path-line {
+            position: absolute;
+            border-top: 3px dashed rgba(255, 255, 255, 0.4);
+            z-index: 0;
+        }
+        .planet { z-index: 1; position: relative; } /* Ensure planets are above lines */
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-gray-800 p-4 shadow-md sticky top-0 z-20">
+        <h1 class="text-xl font-bold text-center text-white">我的星际旅程</h1>
+    </header>
+
+    <!-- Main Content - Use relative positioning and absolute for planets/paths -->
+    <main class="main-content p-6 space-y-8">
+
+        <!-- Background Stars (Optional Enhancement) -->
+        <!-- Could add absolutely positioned small white dots -->
+
+        <!-- Planet Path Visualization -->
+        <div class="relative h-[600px]"> <!-- Container for the path -->
+
+            <!-- Path Lines (Example) -->
+            <div class="path-line" style="width: 100px; top: 100px; left: 80px; transform: rotate(20deg);"></div>
+            <div class="path-line" style="width: 120px; top: 250px; left: 130px; transform: rotate(-15deg);"></div>
+            <div class="path-line" style="width: 90px; top: 400px; left: 80px; transform: rotate(30deg);"></div>
+
+            <!-- Planet 1: Earth (Start) -->
+            <div class="planet absolute top-6 left-6 text-center">
+                <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWFydGglMjBmcm9tJTIwc3BhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Earth" class="w-16 h-16 rounded-full mb-1 border-2 border-blue-300 shadow-lg">
+                <span class="text-xs font-semibold">地球 (起点)</span>
+                <i class="fas fa-flag-checkered text-green-400 ml-1"></i>
+            </div>
+
+            <!-- Rocket Position -->
+             <div class="absolute top-[180px] left-[100px] text-yellow-400 text-3xl transform -translate-x-1/2 -translate-y-1/2 rotate-[20deg] z-10">
+                <i class="fas fa-rocket"></i>
+            </div>
+
+            <!-- Planet 2: Moon (Unlocked) -->
+            <div class="planet absolute top-[180px] left-[180px] text-center">
+                 <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1vb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Moon" class="w-14 h-14 rounded-full mb-1 border-2 border-gray-400 shadow-lg">
+                <span class="text-xs font-semibold">月球</span>
+                <i class="fas fa-check-circle text-green-400 ml-1"></i>
+            </div>
+
+            <!-- Planet 3: Mars (Current Target) -->
+            <div class="planet absolute top-[350px] left-[50px] text-center">
+                 <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFyc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Mars" class="w-20 h-20 rounded-full mb-1 border-4 border-yellow-400 shadow-xl animate-pulse">
+                <span class="text-sm font-bold text-yellow-300">火星 (目标!)</span>
+                <p class="text-xs text-gray-300">还需 550 星尘</p>
+            </div>
+
+             <!-- Planet 4: Jupiter (Locked) -->
+            <div class="planet absolute top-[480px] left-[220px] text-center opacity-50">
+                 <img src="https://images.unsplash.com/photo-1614729939124-037598373c43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8anVwaXRlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Jupiter" class="w-24 h-24 rounded-full mb-1 border-2 border-gray-600">
+                <span class="text-xs font-semibold text-gray-400">木星</span>
+                <i class="fas fa-lock text-gray-500 ml-1"></i>
+            </div>
+
+        </div>
+
+        <!-- Current Status Footer -->
+        <div class="bg-gray-700 rounded-lg p-3 text-center mt-auto sticky bottom-4 left-4 right-4 z-10 mx-4">
+             <p class="text-sm">当前拥有 <span class="font-bold text-yellow-400">450</span> 星尘 <i class="fas fa-star text-yellow-400"></i></p>
+             <p class="text-xs text-gray-300">继续完成习惯，为飞船充能！</p>
+        </div>
+
+
+    </main>
+
+    <!-- Tab Bar -->
+    <nav class="tab-bar bg-gray-800 p-3 flex justify-around items-center fixed bottom-0 left-0 right-0 w-full z-20">
+        <a href="#" class="text-center">
+            <i class="fas fa-home text-xl"></i>
+            <span class="block text-xs">主页</span>
+        </a>
+        <a href="#" class="text-center">
+            <i class="fas fa-list-check text-xl"></i>
+            <span class="block text-xs">习惯</span>
+        </a>
+        <a href="#" class="text-center active">
+            <i class="fas fa-rocket text-xl"></i>
+            <span class="block text-xs font-medium">旅程</span>
+        </a>
+        <a href="#" class="text-center">
+            <i class="fas fa-medal text-xl"></i>
+            <span class="block text-xs">成就</span>
+        </a>
+         <a href="#" class="text-center">
+            <i class="fas fa-users text-xl"></i>
+            <span class="block text-xs">家庭</span>
+        </a>
+    </nav>
+
+</body>
+</html> 

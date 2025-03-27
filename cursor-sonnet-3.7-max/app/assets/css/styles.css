@@ -1,0 +1,371 @@
+/* Base styles for Habit Planet App */
+:root {
+  --primary-color: #6a5acd;
+  --secondary-color: #9370db;
+  --accent-color: #ff6b6b;
+  --background-color: #f8f9fa;
+  --text-color: #343a40;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --light-gray: #e9ecef;
+  --dark-gray: #495057;
+  --white: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+.device-frame {
+  width: 390px;
+  height: 844px;
+  background-color: var(--white);
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow);
+  margin: 20px;
+  border: 12px solid #121212;
+}
+
+.ios-status-bar {
+  height: 44px;
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.app-body {
+  height: calc(100% - 44px - 70px);
+  margin-top: 44px;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.tab-bar {
+  height: 70px;
+  background-color: var(--white);
+  border-top: 1px solid var(--light-gray);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-gray);
+  text-decoration: none;
+  font-size: 10px;
+  width: 20%;
+  height: 100%;
+}
+
+.tab-item.active {
+  color: var(--primary-color);
+}
+
+.tab-item i {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 600;
+}
+
+.card {
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.badge {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.habit-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.habit-checkbox.checked {
+  background-color: var(--primary-color);
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow);
+}
+
+.avatar-lg {
+  width: 80px;
+  height: 80px;
+}
+
+.planet {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.planet-lg {
+  width: 150px;
+  height: 150px;
+}
+
+.planet-sm {
+  width: 60px;
+  height: 60px;
+}
+
+/* Animation for stars */
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.star {
+  position: absolute;
+  opacity: 0.5;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+.badge-card {
+  text-align: center;
+  margin: 10px;
+  width: 100px;
+}
+
+.badge-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  display: block;
+}
+
+.badge-title {
+  font-size: 12px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.parent-child-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.notification {
+  background-color: var(--accent-color);
+  color: var(--white);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.streak-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.streak-day {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--light-gray);
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.streak-day.completed {
+  background-color: var(--success-color);
+  color: var(--white);
+}
+
+.planet-map {
+  position: relative;
+  height: 400px;
+  background-color: #1a1a2e;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Scroll animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Grid layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--light-gray);
+  border-radius: 12px;
+  font-family: var(--font-family);
+}
+
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--light-gray);
+  border-radius: 12px;
+  font-family: var(--font-family);
+  background-color: var(--white);
+}
+
+/* Custom section classes */
+.rewards-section {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.family-section {
+  padding: 20px 0;
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-primary { color: var(--primary-color); }
+.text-success { color: var(--success-color); }
+.text-accent { color: var(--accent-color); }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 16px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.justify-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.w-full { width: 100%; }
+.font-bold { font-weight: 700; }
+.rounded-full { border-radius: 9999px; } 

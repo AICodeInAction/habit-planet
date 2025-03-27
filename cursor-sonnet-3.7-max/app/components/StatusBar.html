@@ -1,0 +1,28 @@
+<!-- iOS Status Bar Component -->
+<div class="ios-status-bar">
+  <div class="status-left">
+    <span id="current-time">9:41</span>
+  </div>
+  <div class="status-center">
+    <div class="notch" style="width: 160px; height: 30px;"></div>
+  </div>
+  <div class="status-right">
+    <i class="fas fa-signal"></i>
+    <i class="fas fa-wifi"></i>
+    <i class="fas fa-battery-full"></i>
+  </div>
+</div>
+
+<script>
+  // Update time in status bar
+  function updateTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+  }
+  
+  // Update time every minute
+  updateTime();
+  setInterval(updateTime, 60000);
+</script> 

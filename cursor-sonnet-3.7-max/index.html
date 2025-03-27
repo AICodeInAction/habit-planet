@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Planet - High Fidelity Prototype</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #6a5acd;
+      --secondary-color: #9370db;
+      --background-color: #f8f9fa;
+      --text-color: #343a40;
+      --light-gray: #e9ecef;
+      --white: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+    
+    .header h1 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    
+    .header p {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .screens-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .screen-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .screen-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    
+    iframe {
+      border: none;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      width: 414px;
+      height: 896px;
+      overflow: hidden;
+      background-color: var(--white);
+    }
+    
+    .product-analysis {
+      margin-top: 60px;
+      background-color: var(--white);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+    
+    .product-analysis h2 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .analysis-section {
+      margin-bottom: 30px;
+    }
+    
+    .analysis-section h3 {
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+    
+    .analysis-section p, .analysis-section ul {
+      line-height: 1.6;
+    }
+    
+    .analysis-section ul {
+      padding-left: 20px;
+    }
+    
+    .analysis-section li {
+      margin-bottom: 10px;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      background-color: var(--light-gray);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Habit Planet - 儿童习惯养成应用</h1>
+      <p>一款专为儿童设计的习惯养成应用，融合了《掌控习惯》的核心理念，通过星际旅行游戏化设计，让孩子在有趣的探索中养成良好习惯。下面展示了该应用的高保真原型界面。</p>
+    </div>
+    
+    <div class="screens-container">
+      <div class="screen-wrapper">
+        <div class="screen-title">首页 Dashboard</div>
+        <iframe src="app/pages/home.html" title="Home Screen"></iframe>
+      </div>
+      
+      <div class="screen-wrapper">
+        <div class="screen-title">习惯管理</div>
+        <iframe src="app/pages/habits.html" title="Habits Screen"></iframe>
+      </div>
+      
+      <div class="screen-wrapper">
+        <div class="screen-title">星际探索</div>
+        <iframe src="app/pages/space.html" title="Space Screen"></iframe>
+      </div>
+      
+      <div class="screen-wrapper">
+        <div class="screen-title">家庭互动</div>
+        <iframe src="app/pages/family.html" title="Family Screen"></iframe>
+      </div>
+      
+      <div class="screen-wrapper">
+        <div class="screen-title">个人资料</div>
+        <iframe src="app/pages/profile.html" title="Profile Screen"></iframe>
+      </div>
+    </div>
+    
+    <div class="product-analysis">
+      <h2>产品分析与功能设计</h2>
+      
+      <div class="analysis-section">
+        <h3>1. 用户体验分析</h3>
+        <p>Habit Planet 应用针对儿童习惯养成的核心需求，结合《掌控习惯》的原理进行设计：</p>
+        <ul>
+          <li><strong>目标用户：</strong>5-12岁儿童及其家长，特别是需要培养良好习惯的家庭。</li>
+          <li><strong>核心问题：</strong>传统习惯养成方法对儿童缺乏吸引力，难以持续，亲子互动不足。</li>
+          <li><strong>解决方案：</strong>通过游戏化设计、星际旅行主题和家庭互动功能，让习惯养成变得有趣且有持续性。</li>
+          <li><strong>关键心理原理：</strong>利用《掌控习惯》中提到的"提示-渴望-反应-奖励"习惯循环，设计提醒系统、视觉吸引、简易完成和即时奖励机制。</li>
+        </ul>
+      </div>
+      
+      <div class="analysis-section">
+        <h3>2. 产品功能亮点</h3>
+        <ul>
+          <li><strong>习惯养成体系：</strong>基于科学的习惯形成理论，设计易于执行的微习惯和渐进式习惯培养路径。</li>
+          <li><strong>星际探索游戏化：</strong>将习惯养成与星际探索融合，每完成习惯获得星星，解锁新的星球和装饰品。</li>
+          <li><strong>成就与奖章系统：</strong>通过视觉化的奖章和收藏品，激发儿童的成就感和收集欲望。</li>
+          <li><strong>家庭互动模块：</strong>允许父母监督、鼓励和参与孩子的习惯养成，增强亲子关系。</li>
+          <li><strong>个性化推荐：</strong>根据儿童年龄和兴趣，推荐适合的习惯，确保习惯养成的适宜性。</li>
+        </ul>
+      </div>
+      
+      <div class="analysis-section">
+        <h3>3. 界面设计原则</h3>
+        <ul>
+          <li><strong>儿童友好设计：</strong>使用明亮色彩、简单清晰的图标和大字体，确保儿童容易理解和操作。</li>
+          <li><strong>视觉反馈丰富：</strong>完成习惯时提供丰富的动画和声音反馈，强化正向激励。</li>
+          <li><strong>成长可视化：</strong>通过图表和进度条直观展示习惯养成进度，让孩子能看到自己的进步。</li>
+          <li><strong>游戏化元素：</strong>通过星球探索、收集奖章等游戏化设计，增加应用的趣味性和粘性。</li>
+          <li><strong>亲子互动界面：</strong>设计简洁的家庭互动功能，便于父母参与和监督。</li>
+        </ul>
+      </div>
+      
+      <div class="analysis-section">
+        <h3>4. 实施建议</h3>
+        <ul>
+          <li><strong>阶段性发布：</strong>先推出核心习惯养成和星际探索功能，后续迭代家庭互动和社交功能。</li>
+          <li><strong>用户反馈机制：</strong>内置简单的反馈工具，收集儿童和家长的使用体验。</li>
+          <li><strong>内容扩展策略：</strong>定期更新新的习惯类型、星球和装饰物，保持应用新鲜感。</li>
+          <li><strong>数据安全与隐私：</strong>严格保护儿童数据，符合儿童应用相关法律法规。</li>
+          <li><strong>跨平台支持：</strong>支持 iOS 和 Android 平台，并考虑开发家长端 Web 界面。</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>Habit Planet - 让习惯养成充满乐趣</p>
+    </div>
+  </div>
+</body>
+</html> 

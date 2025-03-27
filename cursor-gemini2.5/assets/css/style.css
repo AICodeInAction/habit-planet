@@ -1,0 +1,90 @@
+/* Basic reset and body style */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f0f2f5;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Space between phone mockups */
+    justify-content: center;
+}
+
+.phone-container {
+    width: 393px; /* iPhone 15 Pro width */
+    height: 852px; /* iPhone 15 Pro height */
+    border-radius: 50px; /* Rounded corners */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative; /* Needed for absolute positioning of status bar */
+    background-color: #fff; /* Default background for iframe area */
+    display: flex; /* Use flexbox to manage iframe */
+    flex-direction: column; /* Stack status bar and iframe */
+}
+
+.phone-container iframe {
+    border: none;
+    width: 100%;
+    height: 100%; /* Take remaining height */
+    flex-grow: 1; /* Allow iframe to grow */
+}
+
+/* Simulate iOS Status Bar */
+.status-bar {
+    height: 44px; /* Approximate height */
+    background-color: #ffffff; /* Or match the app's header */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1c1c1e; /* iOS dark text color */
+    position: absolute; /* Position over the iframe content */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Ensure it's above iframe content */
+    border-top-left-radius: 50px; /* Match container rounding */
+    border-top-right-radius: 50px;
+    box-sizing: border-box;
+    padding-top: 10px; /* Adjust vertical alignment */
+}
+
+.status-bar .time {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.status-bar .right-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Adjust iframe container to account for status bar */
+.phone-container .iframe-wrapper {
+    padding-top: 44px; /* Space for the absolute status bar */
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative; /* Ensure iframe respects padding */
+    overflow: hidden; /* Hide potential overflow */
+    border-radius: 50px; /* Match container rounding */
+}
+
+/* Style for the title above each phone */
+.screen-title {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    width: 393px; /* Match phone width */
+}
+
+.phone-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

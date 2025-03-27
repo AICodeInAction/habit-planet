@@ -11,14 +11,16 @@ const PORT = 3000;
 async function takeScreenshots() {
   // 列出所有需要截图的文件夹
   const folders = [
-    'cursor-sonnet-3.5',
-    'cursor-sonnet-3.7-cn',
-    'cursor-sonnet-3.7-en',
-    'cusor-sonnet-3.7-thinking',
-    'cusor-openai-o4',
-    'trae-sonnet-3.7',
-    'trae-deepseek-r1',
-    'trae-deepseek-v3'  // 添加新目录
+    // 'cursor-sonnet-3.5',
+    // 'cursor-sonnet-3.7-cn',
+    // 'cursor-sonnet-3.7-en',
+    // 'cusor-sonnet-3.7-thinking',
+    // 'cusor-openai-o4',
+    // 'trae-sonnet-3.7',
+    // 'trae-deepseek-r1',
+    // 'trae-deepseek-v3', 
+    //'cursor-sonnet-3.7-max',
+    'cursor-gemini2.5'
   ];
 
   // 创建截图文件夹（如果不存在）

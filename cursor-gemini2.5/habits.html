@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habits Screen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+        body { display: flex; flex-direction: column; background-color: #F3F4F6; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding-bottom: 80px; }
+        .tab-bar { border-top: 1px solid #E5E7EB; }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white p-4 shadow-sm sticky top-0 z-10 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-gray-800">我的习惯列表</h1>
+        <button class="text-purple-600 hover:text-purple-800">
+            <i class="fas fa-plus-circle text-2xl"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content p-4 space-y-4">
+
+        <!-- Habit Item 1 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-book-open text-xl text-blue-500 w-6 text-center"></i>
+                    <p class="font-medium text-gray-800">阅读 20 分钟</p>
+                </div>
+                <span class="text-sm font-semibold text-green-600">进行中</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-3">目标：增长知识。每天坚持，成为小小读书家！</p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>已坚持 <span class="font-bold text-gray-700">15</span> 天</span>
+                <div class="w-1/2 bg-gray-200 rounded-full h-1.5">
+                    <div class="bg-blue-500 h-1.5 rounded-full" style="width: 75%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Habit Item 2 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-apple-alt text-xl text-green-600 w-6 text-center"></i>
+                    <p class="font-medium text-gray-800">吃一个水果</p>
+                </div>
+                <span class="text-sm font-semibold text-green-600">进行中</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-3">目标：健康饮食。每天补充维生素！</p>
+             <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>已坚持 <span class="font-bold text-gray-700">32</span> 天</span>
+                <div class="w-1/2 bg-gray-200 rounded-full h-1.5">
+                    <div class="bg-green-600 h-1.5 rounded-full" style="width: 90%"></div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Habit Item 3 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-running text-xl text-orange-500 w-6 text-center"></i>
+                    <p class="font-medium text-gray-800">户外运动 30 分钟</p>
+                </div>
+                 <span class="text-sm font-semibold text-green-600">进行中</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-3">目标：强健体魄。跑跑跳跳更健康！</p>
+             <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>已坚持 <span class="font-bold text-gray-700">8</span> 天</span>
+                <div class="w-1/2 bg-gray-200 rounded-full h-1.5">
+                    <div class="bg-orange-500 h-1.5 rounded-full" style="width: 40%"></div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Habit Item 4 (Paused/Inactive Example) -->
+        <div class="bg-gray-100 rounded-lg shadow-inner p-4 opacity-60">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-pencil-alt text-xl text-gray-400 w-6 text-center"></i>
+                    <p class="font-medium text-gray-500">练习写字 15 分钟</p>
+                </div>
+                <span class="text-sm font-semibold text-gray-500">已暂停</span>
+            </div>
+            <p class="text-sm text-gray-400 mb-3">目标：写一手好字。</p>
+             <div class="flex items-center justify-between text-xs text-gray-400">
+                <span>曾坚持 <span class="font-bold">20</span> 天</span>
+                <div class="w-1/2 bg-gray-300 rounded-full h-1.5">
+                    <div class="bg-gray-400 h-1.5 rounded-full" style="width: 60%"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Tab Bar -->
+    <nav class="tab-bar bg-white p-3 flex justify-around items-center fixed bottom-0 left-0 right-0 w-full z-10">
+        <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-home text-xl"></i>
+            <span class="block text-xs">主页</span>
+        </a>
+        <a href="#" class="text-center text-purple-600">
+            <i class="fas fa-list-check text-xl"></i>
+            <span class="block text-xs font-medium">习惯</span>
+        </a>
+        <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-rocket text-xl"></i>
+            <span class="block text-xs">旅程</span>
+        </a>
+        <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-medal text-xl"></i>
+            <span class="block text-xs">成就</span>
+        </a>
+         <a href="#" class="text-center text-gray-500 hover:text-purple-600">
+            <i class="fas fa-users text-xl"></i>
+            <span class="block text-xs">家庭</span>
+        </a>
+    </nav>
+
+</body>
+</html> 

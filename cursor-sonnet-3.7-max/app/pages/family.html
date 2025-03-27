@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Planet - Family</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <div class="device-frame">
+    <!-- Include Status Bar -->
+    <div id="status-bar-container"></div>
+    
+    <div class="app-body">
+      <div class="header">
+        <h1 class="page-title">Family</h1>
+        <button class="btn-primary" style="border-radius: 50%; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-user-plus"></i>
+        </button>
+      </div>
+      
+      <div class="card">
+        <h2>Family Progress</h2>
+        <div class="flex items-center mb-3">
+          <div class="flex-col items-center" style="text-align: center; margin-right: 15px;">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=60" alt="Child Avatar" class="avatar-lg">
+            <h3 class="mb-0 mt-2">Alex</h3>
+            <span class="badge mt-1">5-day streak</span>
+          </div>
+          <div class="w-full">
+            <div class="flex justify-between mb-1">
+              <span>Today's progress:</span>
+              <span>3/5</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill" style="width: 60%;"></div>
+            </div>
+            <div class="flex justify-between mb-1 mt-2">
+              <span>Weekly progress:</span>
+              <span>12/15</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill" style="width: 80%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Family Members</h2>
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1581582730057-32d6335a4c5c?w=400&auto=format&fit=crop&q=60" alt="Mom" class="avatar" style="margin-right: 15px;">
+            <div>
+              <h3 class="mb-0">Mom</h3>
+              <p class="mb-0 text-success">Online now</p>
+            </div>
+          </div>
+          <button class="btn-primary" style="padding: 8px 12px; font-size: 12px;">
+            <i class="fas fa-comment"></i> Chat
+          </button>
+        </div>
+        
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=400&auto=format&fit=crop&q=60" alt="Dad" class="avatar" style="margin-right: 15px;">
+            <div>
+              <h3 class="mb-0">Dad</h3>
+              <p class="mb-0">Last seen 2h ago</p>
+            </div>
+          </div>
+          <button class="btn-primary" style="padding: 8px 12px; font-size: 12px;">
+            <i class="fas fa-comment"></i> Chat
+          </button>
+        </div>
+        
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1595586916212-68c3f5b892df?w=400&auto=format&fit=crop&q=60" alt="Sister" class="avatar" style="margin-right: 15px;">
+            <div>
+              <h3 class="mb-0">Sister</h3>
+              <p class="mb-0">Last seen yesterday</p>
+            </div>
+          </div>
+          <button class="btn-primary" style="padding: 8px 12px; font-size: 12px;">
+            <i class="fas fa-comment"></i> Chat
+          </button>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Family Challenges</h2>
+        <p>Compete and grow habits together!</p>
+        
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <div style="width: 50px; height: 50px; background-color: var(--primary-color); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+              <i class="fas fa-book" style="color: white; font-size: 24px;"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">Reading Challenge</h3>
+              <p class="mb-0">Who can read the most pages this week?</p>
+              <div class="progress-bar" style="height: 5px; margin-top: 5px;">
+                <div class="progress-bar-fill" style="width: 60%;"></div>
+              </div>
+            </div>
+          </div>
+          <span class="badge">3 days left</span>
+        </div>
+        
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <div style="width: 50px; height: 50px; background-color: var(--secondary-color); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+              <i class="fas fa-bed" style="color: white; font-size: 24px;"></i>
+            </div>
+            <div>
+              <h3 class="mb-0">Early to Bed</h3>
+              <p class="mb-0">Go to bed before 9 PM all week</p>
+              <div class="progress-bar" style="height: 5px; margin-top: 5px;">
+                <div class="progress-bar-fill" style="width: 80%;"></div>
+              </div>
+            </div>
+          </div>
+          <span class="badge">4/5 days</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Family Activity</h2>
+        
+        <div class="notification">
+          <div class="flex justify-between items-center">
+            <div>
+              <strong>Mom approved your task</strong>
+              <p class="mb-0">Reading for 15 minutes is complete!</p>
+            </div>
+            <span>2h ago</span>
+          </div>
+        </div>
+        
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=400&auto=format&fit=crop&q=60" alt="Dad" class="avatar" style="margin-right: 15px;">
+            <div>
+              <h3 class="mb-0">Dad added a new habit</h3>
+              <p class="mb-0">Swimming lessons - Weekly</p>
+            </div>
+          </div>
+          <span>Yesterday</span>
+        </div>
+        
+        <div class="parent-child-card">
+          <div class="flex items-center">
+            <img src="https://images.unsplash.com/photo-1595586916212-68c3f5b892df?w=400&auto=format&fit=crop&q=60" alt="Sister" class="avatar" style="margin-right: 15px;">
+            <div>
+              <h3 class="mb-0">Sister completed a challenge</h3>
+              <p class="mb-0">Homework Challenge - 7 day streak!</p>
+            </div>
+          </div>
+          <span>3 days ago</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Suggest Family Activities</h2>
+        <p>Fun ways to build habits together:</p>
+        
+        <div class="grid-2">
+          <div class="card" style="margin-bottom: 0; background-color: var(--light-gray);">
+            <div style="text-align: center;">
+              <i class="fas fa-hiking" style="font-size: 30px; color: var(--primary-color);"></i>
+              <h3 class="mt-2">Weekend Hike</h3>
+              <p>Explore nature together</p>
+              <button class="btn-primary" style="width: 100%;">Suggest</button>
+            </div>
+          </div>
+          
+          <div class="card" style="margin-bottom: 0; background-color: var(--light-gray);">
+            <div style="text-align: center;">
+              <i class="fas fa-utensils" style="font-size: 30px; color: var(--primary-color);"></i>
+              <h3 class="mt-2">Cook Together</h3>
+              <p>Learn healthy recipes</p>
+              <button class="btn-primary" style="width: 100%;">Suggest</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Include Tab Bar -->
+    <div id="tab-bar-container"></div>
+  </div>
+
+  <script>
+    // Load status bar and tab bar components
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('../components/StatusBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('status-bar-container').innerHTML = data;
+        });
+      
+      fetch('../components/TabBar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('tab-bar-container').innerHTML = data;
+        });
+    });
+  </script>
+</body>
+</html> 
