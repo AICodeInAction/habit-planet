@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 今日习惯</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .habit-card {
+            transition: all 0.3s ease;
+        }
+        
+        .habit-card:active {
+            transform: scale(0.98);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            stroke-linecap: round;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="fixed top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-gray-800 text-sm bg-white z-20">
+        <span>9:41</span>
+        <div class="flex gap-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- 导航栏 -->
+    <div class="fixed top-12 left-0 right-0 bg-white border-b border-gray-100 z-10">
+        <div class="flex items-center justify-between px-4 py-3">
+            <h1 class="text-xl font-bold text-gray-800">今日习惯</h1>
+            <button class="text-purple-600">
+                <i class="fas fa-calendar-alt text-xl"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div class="pt-24 pb-20 px-4">
+        <!-- 今日进度 -->
+        <div class="bg-gradient-to-r from-purple-500 to-blue-600 rounded-2xl p-6 mb-6 text-white">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <p class="text-white/80 text-sm">2024年1月15日 星期一</p>
+                    <h2 class="text-2xl font-bold mt-1">今日进度</h2>
+                </div>
+                <div class="relative">
+                    <svg width="80" height="80">
+                        <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.3)" stroke-width="6" fill="none"/>
+                        <circle class="progress-ring-circle" cx="40" cy="40" r="35" stroke="white" stroke-width="6" fill="none"
+                                stroke-dasharray="220" stroke-dashoffset="55"/>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-2xl font-bold">75%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span>已完成 6/8 个习惯</span>
+                <span>获得 60 颗星星</span>
+            </div>
+        </div>
+        
+        <!-- 习惯分类标签 -->
+        <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+            <button class="px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-medium whitespace-nowrap">
+                全部
+            </button>
+            <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm whitespace-nowrap">
+                作息
+            </button>
+            <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm whitespace-nowrap">
+                运动
+            </button>
+            <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm whitespace-nowrap">
+                学习
+            </button>
+            <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm whitespace-nowrap">
+                饮食
+            </button>
+        </div>
+        
+        <!-- 习惯列表 -->
+        <div class="space-y-3">
+            <!-- 习惯卡片1 - 已完成 -->
+            <div class="habit-card bg-white rounded-2xl p-4 shadow-sm slide-in">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-bed text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">早睡早起</h3>
+                            <p class="text-sm text-gray-500">晚上10点前睡觉</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-yellow-500 font-bold">+10⭐</span>
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片2 - 待完成 -->
+            <div class="habit-card bg-white rounded-2xl p-4 shadow-sm slide-in" style="animation-delay: 0.1s">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-running text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">晨跑30分钟</h3>
+                            <p class="text-sm text-gray-500">早上7点开始</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-400 font-bold">+15⭐</span>
+                        <button class="w-8 h-8 border-2 border-gray-300 rounded-full"></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片3 - 已完成 -->
+            <div class="habit-card bg-white rounded-2xl p-4 shadow-sm slide-in" style="animation-delay: 0.2s">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-apple-alt text-orange-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">吃早餐</h3>
+                            <p class="text-sm text-gray-500">营养均衡的早餐</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-yellow-500 font-bold">+10⭐</span>
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片4 - 待完成 -->
+            <div class="habit-card bg-white rounded-2xl p-4 shadow-sm slide-in" style="animation-delay: 0.3s">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-book text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">阅读30分钟</h3>
+                            <p class="text-sm text-gray-500">睡前阅读时光</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-400 font-bold">+20⭐</span>
+                        <button class="w-8 h-8 border-2 border-gray-300 rounded-full"></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片5 - 已完成 -->
+            <div class="habit-card bg-white rounded-2xl p-4 shadow-sm slide-in" style="animation-delay: 0.4s">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-tint text-cyan-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">喝8杯水</h3>
+                            <p class="text-sm text-gray-500">保持水分充足</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-yellow-500 font-bold">+10⭐</span>
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 添加新习惯提示 -->
+        <div class="mt-6 bg-purple-50 rounded-2xl p-4 border border-purple-200">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-lightbulb text-purple-600 text-xl"></i>
+                <div class="flex-1">
+                    <p class="text-sm text-purple-800">想要养成新习惯？</p>
+                    <p class="text-xs text-purple-600 mt-1">点击右下角的 + 按钮添加</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100">
+        <div class="flex justify-around items-center py-2">
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-globe-americas text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">星系</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-tasks text-purple-500 text-xl mb-1"></i>
+                <span class="text-purple-500 text-xs">习惯</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">家庭</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">成就</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-user text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">我的</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 添加习惯按钮 -->
+    <button class="fixed bottom-20 right-4 w-14 h-14 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full shadow-lg flex items-center justify-center">
+        <i class="fas fa-plus text-white text-xl"></i>
+    </button>
+</body>
+</html> 

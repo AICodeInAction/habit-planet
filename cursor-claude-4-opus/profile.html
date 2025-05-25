@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 个人中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .level-progress {
+            transition: width 0.5s ease-out;
+        }
+        
+        .medal {
+            transition: transform 0.3s ease;
+        }
+        
+        .medal:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="fixed top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-gray-800 text-sm bg-white z-20">
+        <span>9:41</span>
+        <div class="flex gap-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- 个人信息头部 -->
+    <div class="bg-gradient-to-br from-purple-500 to-blue-600 pt-12 pb-8 px-6">
+        <div class="flex justify-between items-start mb-6">
+            <h1 class="text-2xl font-bold text-white">个人中心</h1>
+            <button class="text-white">
+                <i class="fas fa-cog text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 用户信息 -->
+        <div class="flex items-center gap-4 mb-6">
+            <div class="relative">
+                <img src="https://i.pravatar.cc/80?img=3" class="w-20 h-20 rounded-full border-4 border-white shadow-lg">
+                <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-white">
+                    <span class="text-xs font-bold">15</span>
+                </div>
+            </div>
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold text-white mb-1">小明</h2>
+                <p class="text-white/90 text-sm mb-2">ID: 2024001</p>
+                <div class="flex items-center gap-2">
+                    <span class="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-semibold">
+                        银河探索者
+                    </span>
+                    <span class="bg-white/20 text-white px-3 py-1 rounded-full text-xs">
+                        加入 30 天
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 等级进度 -->
+        <div class="bg-white/10 rounded-xl p-4 backdrop-blur">
+            <div class="flex justify-between text-white text-sm mb-2">
+                <span>Lv.15 银河探索者</span>
+                <span>Lv.16 星系守护者</span>
+            </div>
+            <div class="w-full bg-white/20 rounded-full h-3 overflow-hidden">
+                <div class="level-progress bg-gradient-to-r from-yellow-400 to-orange-500 h-full rounded-full" style="width: 65%"></div>
+            </div>
+            <p class="text-white/80 text-xs mt-2">还需 350 经验升级</p>
+        </div>
+    </div>
+    
+    <!-- 统计数据 -->
+    <div class="px-4 -mt-4">
+        <div class="grid grid-cols-3 gap-3">
+            <div class="stat-card bg-white rounded-xl p-4 text-center shadow-sm">
+                <i class="fas fa-star text-yellow-500 text-2xl mb-2"></i>
+                <p class="text-2xl font-bold text-gray-800">1,250</p>
+                <p class="text-xs text-gray-600">总星星</p>
+            </div>
+            <div class="stat-card bg-white rounded-xl p-4 text-center shadow-sm">
+                <i class="fas fa-fire text-orange-500 text-2xl mb-2"></i>
+                <p class="text-2xl font-bold text-gray-800">15</p>
+                <p class="text-xs text-gray-600">连续天数</p>
+            </div>
+            <div class="stat-card bg-white rounded-xl p-4 text-center shadow-sm">
+                <i class="fas fa-check-circle text-green-500 text-2xl mb-2"></i>
+                <p class="text-2xl font-bold text-gray-800">92%</p>
+                <p class="text-xs text-gray-600">完成率</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 成就奖章 -->
+    <div class="px-4 mt-6 mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-gray-800">我的奖章</h3>
+            <a href="#" class="text-purple-600 text-sm">查看全部</a>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-3">
+            <!-- 奖章1 -->
+            <div class="medal text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg float-animation">
+                    <i class="fas fa-trophy text-white text-xl"></i>
+                </div>
+                <p class="text-xs text-gray-600 mt-2">初露锋芒</p>
+            </div>
+            
+            <!-- 奖章2 -->
+            <div class="medal text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg float-animation" style="animation-delay: 0.5s">
+                    <i class="fas fa-rocket text-white text-xl"></i>
+                </div>
+                <p class="text-xs text-gray-600 mt-2">星际旅行</p>
+            </div>
+            
+            <!-- 奖章3 -->
+            <div class="medal text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center shadow-lg float-animation" style="animation-delay: 1s">
+                    <i class="fas fa-seedling text-white text-xl"></i>
+                </div>
+                <p class="text-xs text-gray-600 mt-2">习惯新芽</p>
+            </div>
+            
+            <!-- 奖章4 - 未解锁 -->
+            <div class="medal text-center opacity-50">
+                <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-question text-gray-500 text-xl"></i>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">未解锁</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 习惯统计 -->
+    <div class="px-4 mb-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">习惯统计</h3>
+        
+        <div class="bg-white rounded-2xl shadow-sm p-4">
+            <!-- 本周打卡 -->
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm text-gray-600">本周打卡</span>
+                    <span class="text-sm font-semibold text-gray-800">42/48</span>
+                </div>
+                <div class="grid grid-cols-7 gap-1">
+                    <div class="aspect-square bg-green-500 rounded"></div>
+                    <div class="aspect-square bg-green-500 rounded"></div>
+                    <div class="aspect-square bg-green-300 rounded"></div>
+                    <div class="aspect-square bg-green-500 rounded"></div>
+                    <div class="aspect-square bg-green-500 rounded"></div>
+                    <div class="aspect-square bg-green-300 rounded"></div>
+                    <div class="aspect-square bg-gray-200 rounded"></div>
+                </div>
+            </div>
+            
+            <!-- 习惯分布 -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-blue-50 rounded-xl p-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <i class="fas fa-bed text-blue-600"></i>
+                        <span class="text-sm font-semibold text-gray-800">作息习惯</span>
+                    </div>
+                    <p class="text-xs text-gray-600">完成率 95%</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <i class="fas fa-running text-green-600"></i>
+                        <span class="text-sm font-semibold text-gray-800">运动习惯</span>
+                    </div>
+                    <p class="text-xs text-gray-600">完成率 88%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 功能列表 -->
+    <div class="px-4 pb-24">
+        <div class="bg-white rounded-2xl shadow-sm">
+            <a href="#" class="flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chart-line text-purple-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">数据报告</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </a>
+            
+            <a href="#" class="flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-history text-orange-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">历史记录</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </a>
+            
+            <a href="#" class="flex items-center justify-between p-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-share-alt text-blue-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">分享成就</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 底部导航 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100">
+        <div class="flex justify-around items-center py-2">
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-globe-americas text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">星系</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-tasks text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">习惯</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">家庭</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">成就</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-user text-purple-500 text-xl mb-1"></i>
+                <span class="text-purple-500 text-xs">我的</span>
+            </button>
+        </div>
+    </div>
+</body>
+</html> 

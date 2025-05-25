@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+        .family-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .member-avatar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .challenge-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        .floating-hearts {
+            position: absolute;
+            animation: float-up 3s infinite;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-30px) rotate(10deg); opacity: 0; }
+        }
+        .crown {
+            color: #FFD700;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 状态栏 -->
+    <div class="flex justify-between items-center px-6 pt-12 pb-2 text-sm">
+        <div class="flex items-center space-x-1">
+            <div class="flex space-x-1">
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full opacity-50"></div>
+            </div>
+            <span class="ml-2 text-xs">中国移动</span>
+        </div>
+        <div class="text-center">
+            <div class="text-xs opacity-80">今天</div>
+            <div class="text-lg font-bold">09:41</div>
+        </div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-wifi text-xs"></i>
+            <div class="flex space-x-0.5">
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+            </div>
+            <span class="text-xs">100%</span>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="flex items-center justify-between px-6 py-4">
+        <h1 class="text-2xl font-bold">👨‍👩‍👧‍👦 家庭中心</h1>
+        <button class="family-card w-10 h-10 rounded-full flex items-center justify-center">
+            <i class="fas fa-plus text-lg"></i>
+        </button>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="px-6 pb-24">
+        <!-- 家庭成员 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🏠 我的家庭</h2>
+            <div class="space-y-3">
+                <!-- 爸爸 -->
+                <div class="family-card rounded-xl p-4 flex items-center relative">
+                    <div class="member-avatar w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-user text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center">
+                            <h3 class="font-medium text-lg">爸爸</h3>
+                            <i class="fas fa-crown crown text-lg ml-2"></i>
+                        </div>
+                        <p class="text-sm text-gray-200">家庭队长 · 连续 15 天</p>
+                        <div class="flex items-center mt-2">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            </div>
+                            <span class="text-sm text-gray-200 ml-2">今日完成 5/5</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-yellow-400 text-xl">⚡</div>
+                        <div class="text-sm">1,850</div>
+                    </div>
+                    <div class="floating-hearts absolute top-2 right-2">
+                        <i class="fas fa-heart text-pink-400 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- 妈妈 -->
+                <div class="family-card rounded-xl p-4 flex items-center">
+                    <div class="member-avatar w-12 h-12 rounded-full flex items-center justify-center mr-4 bg-gradient-to-br from-pink-400 to-purple-500">
+                        <i class="fas fa-user text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium text-lg">妈妈</h3>
+                        <p class="text-sm text-gray-200">习惯达人 · 连续 12 天</p>
+                        <div class="flex items-center mt-2">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                            </div>
+                            <span class="text-sm text-gray-200 ml-2">今日完成 4/5</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-yellow-400 text-xl">⚡</div>
+                        <div class="text-sm">1,420</div>
+                    </div>
+                </div>
+
+                <!-- 小明 (自己) -->
+                <div class="family-card rounded-xl p-4 flex items-center border-2 border-blue-400">
+                    <div class="member-avatar w-12 h-12 rounded-full flex items-center justify-center mr-4 bg-gradient-to-br from-blue-400 to-cyan-500">
+                        <i class="fas fa-user text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium text-lg">小明 (我)</h3>
+                        <p class="text-sm text-gray-200">小小探险家 · 连续 7 天</p>
+                        <div class="flex items-center mt-2">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                            </div>
+                            <span class="text-sm text-gray-200 ml-2">今日完成 2/5</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-yellow-400 text-xl">⚡</div>
+                        <div class="text-sm">1,280</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭挑战 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🎯 家庭挑战</h2>
+            <div class="space-y-4">
+                <!-- 当前挑战 -->
+                <div class="challenge-card rounded-xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-lg">🌟 本周阅读挑战</h3>
+                        <span class="text-sm bg-green-500 px-2 py-1 rounded-full">进行中</span>
+                    </div>
+                    <p class="text-sm text-gray-200 mb-4">全家一起阅读，目标每人每天阅读30分钟</p>
+                    
+                    <!-- 进度 -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm">挑战进度</span>
+                            <span class="text-sm">85/100 ⭐</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">还需15⭐即可获得家庭奖励！</p>
+                    </div>
+
+                    <!-- 参与成员 -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white flex items-center justify-center">
+                                <i class="fas fa-user text-white text-xs"></i>
+                            </div>
+                            <div class="w-8 h-8 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full border-2 border-white flex items-center justify-center">
+                                <i class="fas fa-user text-white text-xs"></i>
+                            </div>
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full border-2 border-white flex items-center justify-center">
+                                <i class="fas fa-user text-white text-xs"></i>
+                            </div>
+                        </div>
+                        <div class="text-yellow-400">
+                            <i class="fas fa-gift"></i>
+                            <span class="text-sm ml-1">家庭电影夜</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 即将开始的挑战 -->
+                <div class="challenge-card rounded-xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-lg">🏃‍♂️ 运动周挑战</h3>
+                        <span class="text-sm bg-blue-500 px-2 py-1 rounded-full">即将开始</span>
+                    </div>
+                    <p class="text-sm text-gray-200 mb-4">下周一开始，全家一起运动，目标每人每天30分钟</p>
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs text-gray-400">3天后开始</p>
+                        <div class="text-yellow-400">
+                            <i class="fas fa-trophy"></i>
+                            <span class="text-sm ml-1">运动装备</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭排行榜 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🏆 本周排行榜</h2>
+            <div class="space-y-3">
+                <!-- 第一名 -->
+                <div class="family-card rounded-xl p-4 flex items-center bg-gradient-to-r from-yellow-500 to-yellow-600">
+                    <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-yellow-900 font-bold">1</span>
+                    </div>
+                    <div class="member-avatar w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-user text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">爸爸</h3>
+                        <p class="text-xs text-yellow-100">完成率 100%</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-crown crown text-xl"></i>
+                        <p class="text-xs">1,850⚡</p>
+                    </div>
+                </div>
+
+                <!-- 第二名 -->
+                <div class="family-card rounded-xl p-4 flex items-center">
+                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-gray-700 font-bold">2</span>
+                    </div>
+                    <div class="member-avatar w-10 h-10 rounded-full flex items-center justify-center mr-3 bg-gradient-to-br from-pink-400 to-purple-500">
+                        <i class="fas fa-user text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">妈妈</h3>
+                        <p class="text-xs text-gray-200">完成率 96%</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-medal text-gray-300 text-xl"></i>
+                        <p class="text-xs">1,420⚡</p>
+                    </div>
+                </div>
+
+                <!-- 第三名 -->
+                <div class="family-card rounded-xl p-4 flex items-center">
+                    <div class="w-8 h-8 bg-orange-400 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-orange-900 font-bold">3</span>
+                    </div>
+                    <div class="member-avatar w-10 h-10 rounded-full flex items-center justify-center mr-3 bg-gradient-to-br from-blue-400 to-cyan-500">
+                        <i class="fas fa-user text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">小明</h3>
+                        <p class="text-xs text-gray-200">完成率 85%</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-medal text-orange-400 text-xl"></i>
+                        <p class="text-xs">1,280⚡</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭动态 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-bold mb-4">📰 家庭动态</h2>
+            <div class="space-y-3">
+                <div class="family-card rounded-xl p-3 flex items-center">
+                    <i class="fas fa-trophy text-yellow-400 text-lg mr-3"></i>
+                    <div class="flex-1">
+                        <p class="text-sm">爸爸获得了"早起达人"徽章！</p>
+                        <p class="text-xs text-gray-400">2小时前</p>
+                    </div>
+                </div>
+                <div class="family-card rounded-xl p-3 flex items-center">
+                    <i class="fas fa-heart text-pink-400 text-lg mr-3"></i>
+                    <div class="flex-1">
+                        <p class="text-sm">小明完成了钢琴练习，妈妈点赞了</p>
+                        <p class="text-xs text-gray-400">4小时前</p>
+                    </div>
+                </div>
+                <div class="family-card rounded-xl p-3 flex items-center">
+                    <i class="fas fa-star text-yellow-400 text-lg mr-3"></i>
+                    <div class="flex-1">
+                        <p class="text-sm">全家完成了昨日挑战，获得20能量奖励</p>
+                        <p class="text-xs text-gray-400">昨天</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 backdrop-filter backdrop-blur-lg">
+        <div class="flex justify-around items-center py-3 px-6">
+            <div class="text-center">
+                <i class="fas fa-home text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">太空舱</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-list-check text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">习惯</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-planet-moon text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">星球</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-users text-blue-400 text-xl mb-1"></i>
+                <p class="text-xs text-blue-400">家庭</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">成就</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

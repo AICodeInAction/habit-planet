@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 设置</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: #e5e7eb;
+            border-radius: 12px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .toggle-switch.active {
+            background: #8b5cf6;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(24px);
+        }
+        
+        .setting-item {
+            transition: background 0.3s;
+        }
+        
+        .setting-item:hover {
+            background: #f3f4f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="fixed top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-gray-800 text-sm bg-white z-20">
+        <span>9:41</span>
+        <div class="flex gap-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- 导航栏 -->
+    <div class="fixed top-12 left-0 right-0 bg-white border-b border-gray-100 z-10">
+        <div class="flex items-center justify-between px-4 py-3">
+            <button class="text-gray-600">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-xl font-bold text-gray-800">设置</h1>
+            <div class="w-6"></div>
+        </div>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div class="pt-24 pb-20 px-4">
+        <!-- 账号信息 -->
+        <div class="bg-white rounded-2xl shadow-sm mb-6">
+            <div class="p-4 border-b border-gray-100">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/60?img=3" class="w-14 h-14 rounded-full">
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-800">小明</h3>
+                        <p class="text-sm text-gray-500">家庭成员 · 儿童账号</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-user-edit text-purple-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">编辑资料</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- 通知设置 -->
+        <div class="bg-white rounded-2xl shadow-sm mb-6">
+            <div class="p-4 border-b border-gray-100">
+                <h3 class="font-semibold text-gray-800">通知提醒</h3>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">习惯提醒</p>
+                    <p class="text-xs text-gray-500 mt-1">在习惯时间前15分钟提醒</p>
+                </div>
+                <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">成就通知</p>
+                    <p class="text-xs text-gray-500 mt-1">获得新成就时通知</p>
+                </div>
+                <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4">
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">家庭动态</p>
+                    <p class="text-xs text-gray-500 mt-1">家人完成习惯时通知</p>
+                </div>
+                <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+            </div>
+        </div>
+        
+        <!-- 家长控制 -->
+        <div class="bg-white rounded-2xl shadow-sm mb-6">
+            <div class="p-4 border-b border-gray-100">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800">家长控制</h3>
+                    <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">需要密码</span>
+                </div>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-clock text-orange-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-800">使用时间限制</p>
+                        <p class="text-xs text-gray-500 mt-1">每天最多使用2小时</p>
+                    </div>
+                </div>
+                <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-green-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-800">内容过滤</p>
+                        <p class="text-xs text-gray-500 mt-1">适合儿童的内容</p>
+                    </div>
+                </div>
+                <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chart-bar text-blue-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">查看孩子报告</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- 应用设置 -->
+        <div class="bg-white rounded-2xl shadow-sm mb-6">
+            <div class="p-4 border-b border-gray-100">
+                <h3 class="font-semibold text-gray-800">应用设置</h3>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-volume-up text-purple-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">音效</span>
+                </div>
+                <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-language text-yellow-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">语言</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-500">简体中文</span>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-moon text-indigo-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">深色模式</span>
+                </div>
+                <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+            </div>
+        </div>
+        
+        <!-- 其他 -->
+        <div class="bg-white rounded-2xl shadow-sm">
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-question-circle text-gray-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">帮助与反馈</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-file-alt text-gray-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">隐私政策</span>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item flex items-center justify-between p-4 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-info-circle text-gray-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-800">关于我们</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-500">v1.0.0</span>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            </div>
+            
+            <div class="p-4">
+                <button class="w-full py-3 text-red-600 font-medium">
+                    退出登录
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

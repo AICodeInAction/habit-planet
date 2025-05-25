@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太空舱首页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #0F0C29 0%, #24243e 50%, #2E3E50 100%);
+        }
+        .planet {
+            background: radial-gradient(circle at 30% 30%, #FF6B6B, #4ECDC4);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        .energy-bar {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .task-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .completed {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 状态栏 -->
+    <div class="flex justify-between items-center px-6 pt-12 pb-2 text-sm">
+        <div class="flex items-center space-x-1">
+            <div class="flex space-x-1">
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full opacity-50"></div>
+            </div>
+            <span class="ml-2 text-xs">中国移动</span>
+        </div>
+        <div class="text-center">
+            <div class="text-xs opacity-80">今天</div>
+            <div class="text-lg font-bold">09:41</div>
+        </div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-wifi text-xs"></i>
+            <div class="flex space-x-0.5">
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+            </div>
+            <span class="text-xs">100%</span>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="px-6 pb-24">
+        <!-- 欢迎信息 -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold mb-2">🚀 欢迎回到太空舱，小明</h1>
+            <p class="text-gray-300 text-sm">今天是探索宇宙的第12天</p>
+        </div>
+
+        <!-- 当前星球 -->
+        <div class="mb-8">
+            <div class="text-center">
+                <div class="planet w-32 h-32 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <i class="fas fa-globe text-4xl text-white"></i>
+                </div>
+                <h2 class="text-xl font-bold mb-2">地球基地</h2>
+                <p class="text-gray-300 text-sm">已收集 3/5 个装饰物</p>
+            </div>
+        </div>
+
+        <!-- 能量条 -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium">今日能量值</span>
+                <span class="text-sm">180/200 ⚡</span>
+            </div>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+                <div class="energy-bar h-3 rounded-full" style="width: 90%"></div>
+            </div>
+            <p class="text-xs text-gray-400 mt-1">还需20能量即可解锁火星！</p>
+        </div>
+
+        <!-- 今日任务 -->
+        <div class="mb-6">
+            <h3 class="text-lg font-bold mb-4">🎯 今日任务</h3>
+            <div class="space-y-3">
+                <div class="task-card completed rounded-xl p-4 flex items-center">
+                    <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-medium">早起喝水</h4>
+                        <p class="text-xs text-gray-400">08:00 完成</p>
+                    </div>
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <span class="text-sm ml-1">+20</span>
+                    </div>
+                </div>
+
+                <div class="task-card completed rounded-xl p-4 flex items-center">
+                    <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-medium">阅读20分钟</h4>
+                        <p class="text-xs text-gray-400">19:30 完成</p>
+                    </div>
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <span class="text-sm ml-1">+30</span>
+                    </div>
+                </div>
+
+                <div class="task-card rounded-xl p-4 flex items-center">
+                    <div class="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-plus text-white text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-medium">练习钢琴</h4>
+                        <p class="text-xs text-gray-400">21:00 前完成</p>
+                    </div>
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <span class="text-sm ml-1">+25</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 快速操作 -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <button class="task-card rounded-xl p-4 text-center">
+                <i class="fas fa-plus-circle text-2xl text-blue-400 mb-2"></i>
+                <p class="text-sm font-medium">添加习惯</p>
+            </button>
+            <button class="task-card rounded-xl p-4 text-center">
+                <i class="fas fa-rocket text-2xl text-purple-400 mb-2"></i>
+                <p class="text-sm font-medium">探索星球</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 backdrop-filter backdrop-blur-lg">
+        <div class="flex justify-around items-center py-3 px-6">
+            <div class="text-center">
+                <i class="fas fa-home text-blue-400 text-xl mb-1"></i>
+                <p class="text-xs text-blue-400">太空舱</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-list-check text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">习惯</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-planet-moon text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">星球</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">家庭</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">成就</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

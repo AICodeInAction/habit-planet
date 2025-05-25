@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 习惯管理</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background: transparent;">
+    <div class="iphone-container">
+        <div class="iphone-screen">
+            <!-- iOS 状态栏 -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span>9:41</span>
+                </div>
+                <div class="status-right">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- 导航栏 -->
+            <div class="nav-header">
+                <div class="nav-title">我的习惯</div>
+                <div>
+                    <i class="fas fa-calendar-alt" style="font-size: 20px; color: #666;"></i>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 习惯统计 -->
+                <div class="card animate-in" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold;">12</div>
+                            <div style="font-size: 12px; opacity: 0.9;">总习惯数</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold;">8</div>
+                            <div style="font-size: 12px; opacity: 0.9;">活跃习惯</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold;">85%</div>
+                            <div style="font-size: 12px; opacity: 0.9;">完成率</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 习惯分类标签 -->
+                <div style="padding: 16px; display: flex; gap: 12px; overflow-x: auto;">
+                    <div style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        全部
+                    </div>
+                    <div style="background: #f0f0f0; color: #666; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        健康 <span style="background: white; color: #666; padding: 2px 6px; border-radius: 10px; margin-left: 4px;">5</span>
+                    </div>
+                    <div style="background: #f0f0f0; color: #666; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        学习 <span style="background: white; color: #666; padding: 2px 6px; border-radius: 10px; margin-left: 4px;">3</span>
+                    </div>
+                    <div style="background: #f0f0f0; color: #666; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        生活 <span style="background: white; color: #666; padding: 2px 6px; border-radius: 10px; margin-left: 4px;">4</span>
+                    </div>
+                </div>
+
+                <!-- 习惯列表 -->
+                <div style="padding: 0 16px 20px;">
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">今日习惯</h3>
+                    
+                    <!-- 习惯卡片 -->
+                    <div class="habit-card">
+                        <div class="habit-icon" style="background: #e3f2fd;">
+                            <i class="fas fa-tooth" style="color: #2196f3;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">早晚刷牙</h4>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="background: #e3f2fd; color: #2196f3; padding: 2px 8px; 
+                                           border-radius: 12px; font-size: 12px;">健康</span>
+                                <span style="font-size: 12px; color: #666;">每天2次</span>
+                            </div>
+                            <div style="display: flex; gap: 4px;">
+                                <div style="width: 24px; height: 24px; border-radius: 50%; background: #4caf50; 
+                                          display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">
+                                    ✓
+                                </div>
+                                <div style="width: 24px; height: 24px; border-radius: 50%; background: #e0e0e0;"></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 20px; font-weight: bold; color: #ff9800;">🔥 7</div>
+                            <div style="font-size: 12px; color: #999;">连续天数</div>
+                        </div>
+                    </div>
+
+                    <div class="habit-card">
+                        <div class="habit-icon" style="background: #fff3e0;">
+                            <i class="fas fa-book-open" style="color: #ff9800;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">阅读30分钟</h4>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="background: #fff3e0; color: #ff9800; padding: 2px 8px; 
+                                           border-radius: 12px; font-size: 12px;">学习</span>
+                                <span style="font-size: 12px; color: #666;">每天1次</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            <p style="font-size: 12px; color: #666; margin-top: 4px;">已读18分钟</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 20px; font-weight: bold; color: #ff9800;">🔥 15</div>
+                            <div style="font-size: 12px; color: #999;">连续天数</div>
+                        </div>
+                    </div>
+
+                    <div class="habit-card">
+                        <div class="habit-icon" style="background: #f3e5f5;">
+                            <i class="fas fa-running" style="color: #9c27b0;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">运动1小时</h4>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="background: #f3e5f5; color: #9c27b0; padding: 2px 8px; 
+                                           border-radius: 12px; font-size: 12px;">健康</span>
+                                <span style="font-size: 12px; color: #666;">每周3次</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-check-circle" style="color: #4caf50;"></i>
+                                <span style="font-size: 14px; color: #4caf50;">今日已完成</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 20px; font-weight: bold; color: #ff9800;">🔥 30</div>
+                            <div style="font-size: 12px; color: #999;">连续天数</div>
+                        </div>
+                    </div>
+
+                    <div class="habit-card">
+                        <div class="habit-icon" style="background: #e8f5e9;">
+                            <i class="fas fa-seedling" style="color: #4caf50;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">浇花</h4>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <span style="background: #e8f5e9; color: #4caf50; padding: 2px 8px; 
+                                           border-radius: 12px; font-size: 12px;">生活</span>
+                                <span style="font-size: 12px; color: #666;">每天1次</span>
+                            </div>
+                            <div style="display: flex; gap: 4px;">
+                                <div style="width: 24px; height: 24px; border-radius: 50%; background: #e0e0e0;"></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 20px; font-weight: bold; color: #ff9800;">🔥 3</div>
+                            <div style="font-size: 12px; color: #999;">连续天数</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 已完成习惯 -->
+                <div style="padding: 0 16px 20px;">
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #666;">
+                        已归档 <span style="font-size: 14px; font-weight: normal;">(4个习惯)</span>
+                    </h3>
+                    
+                    <div class="habit-card" style="opacity: 0.6;">
+                        <div class="habit-icon" style="background: #fce4ec;">
+                            <i class="fas fa-palette" style="color: #e91e63;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">画画30分钟</h4>
+                            <p style="font-size: 12px; color: #999;">已完成目标，共坚持60天</p>
+                        </div>
+                        <i class="fas fa-trophy" style="color: #ffc107; font-size: 24px;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>首页</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-tasks tab-icon"></i>
+                    <span>习惯</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-globe tab-icon"></i>
+                    <span>星球</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-users tab-icon"></i>
+                    <span>家庭</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>我的</span>
+                </a>
+            </div>
+
+            <!-- 浮动按钮 -->
+            <div class="fab">
+                <i class="fas fa-plus"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 成就系统</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .medal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 16px;
+        }
+        
+        .medal-card {
+            text-align: center;
+            padding: 16px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .medal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .medal-locked {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+        
+        .milestone-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .milestone-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-right: 16px;
+        }
+    </style>
+</head>
+<body style="background: transparent;">
+    <div class="iphone-container">
+        <div class="iphone-screen">
+            <!-- iOS 状态栏 -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span>9:41</span>
+                </div>
+                <div class="status-right">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- 导航栏 -->
+            <div class="nav-header">
+                <div class="nav-title">成就中心</div>
+                <div>
+                    <i class="fas fa-chart-line" style="font-size: 20px; color: #666;"></i>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 成就统计 -->
+                <div class="card animate-in" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h2 style="font-size: 24px; margin-bottom: 8px;">成就大师</h2>
+                        <p style="opacity: 0.9;">已获得 18 / 50 枚奖牌</p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold;">🥇 5</div>
+                            <div style="font-size: 12px; opacity: 0.9;">金牌</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold;">🥈 8</div>
+                            <div style="font-size: 12px; opacity: 0.9;">银牌</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 28px; font-weight: bold;">🥉 5</div>
+                            <div style="font-size: 12px; opacity: 0.9;">铜牌</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 奖牌类别选择 -->
+                <div style="padding: 16px; display: flex; gap: 12px; overflow-x: auto;">
+                    <div style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        全部
+                    </div>
+                    <div style="background: #f0f0f0; color: #666; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        习惯养成
+                    </div>
+                    <div style="background: #f0f0f0; color: #666; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        运动健康
+                    </div>
+                    <div style="background: #f0f0f0; color: #666; padding: 8px 16px; border-radius: 20px; 
+                                font-size: 14px; white-space: nowrap; cursor: pointer;">
+                        学习成长
+                    </div>
+                </div>
+
+                <!-- 奖牌墙 -->
+                <div style="padding: 0 16px;">
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">奖牌展示</h3>
+                </div>
+                
+                <div class="medal-grid">
+                    <!-- 已获得的奖牌 -->
+                    <div class="medal-card">
+                        <div class="medal">
+                            <div class="medal-inner" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">
+                                🔥
+                            </div>
+                            <div class="medal-ribbon"></div>
+                        </div>
+                        <h4 style="font-size: 14px; margin-top: 8px;">习惯新手</h4>
+                        <p style="font-size: 10px; color: #999;">连续7天完成</p>
+                    </div>
+
+                    <div class="medal-card">
+                        <div class="medal">
+                            <div class="medal-inner" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">
+                                ⭐
+                            </div>
+                            <div class="medal-ribbon"></div>
+                        </div>
+                        <h4 style="font-size: 14px; margin-top: 8px;">坚持达人</h4>
+                        <p style="font-size: 10px; color: #999;">连续30天</p>
+                    </div>
+
+                    <div class="medal-card">
+                        <div class="medal">
+                            <div class="medal-inner" style="background: linear-gradient(135deg, #c0c0c0, #e0e0e0);">
+                                📚
+                            </div>
+                            <div class="medal-ribbon" style="background: #757575;"></div>
+                        </div>
+                        <h4 style="font-size: 14px; margin-top: 8px;">书虫</h4>
+                        <p style="font-size: 10px; color: #999;">阅读100小时</p>
+                    </div>
+
+                    <div class="medal-card">
+                        <div class="medal">
+                            <div class="medal-inner" style="background: linear-gradient(135deg, #cd7f32, #d4a574);">
+                                🏃
+                            </div>
+                            <div class="medal-ribbon" style="background: #8d5524;"></div>
+                        </div>
+                        <h4 style="font-size: 14px; margin-top: 8px;">运动健将</h4>
+                        <p style="font-size: 10px; color: #999;">运动50小时</p>
+                    </div>
+
+                    <div class="medal-card">
+                        <div class="medal">
+                            <div class="medal-inner" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">
+                                👨‍👩‍👧‍👦
+                            </div>
+                            <div class="medal-ribbon"></div>
+                        </div>
+                        <h4 style="font-size: 14px; margin-top: 8px;">家庭榜样</h4>
+                        <p style="font-size: 10px; color: #999;">家庭任务30个</p>
+                    </div>
+
+                    <!-- 未解锁的奖牌 -->
+                    <div class="medal-card medal-locked">
+                        <div class="medal">
+                            <div class="medal-inner" style="background: #e0e0e0;">
+                                <i class="fas fa-lock" style="font-size: 24px; color: #999;"></i>
+                            </div>
+                        </div>
+                        <h4 style="font-size: 14px; margin-top: 8px;">???</h4>
+                        <p style="font-size: 10px; color: #999;">未解锁</p>
+                    </div>
+                </div>
+
+                <!-- 里程碑 -->
+                <div style="padding: 20px 16px;">
+                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">
+                        近期里程碑 <i class="fas fa-flag-checkered" style="color: #ff6b6b; margin-left: 8px;"></i>
+                    </h3>
+                    
+                    <div class="milestone-item">
+                        <div class="milestone-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            💯
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">百日挑战</h4>
+                            <p style="font-size: 12px; color: #666;">连续打卡100天</p>
+                            <div class="progress-bar" style="margin-top: 8px;">
+                                <div class="progress-fill" style="width: 28%;"></div>
+                            </div>
+                            <p style="font-size: 10px; color: #999; margin-top: 4px;">28/100 天</p>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-icon" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                            🌟
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">星星收集者</h4>
+                            <p style="font-size: 12px; color: #666;">累计获得1000颗星星</p>
+                            <div class="progress-bar" style="margin-top: 8px;">
+                                <div class="progress-fill" style="width: 52%;"></div>
+                            </div>
+                            <p style="font-size: 10px; color: #999; margin-top: 4px;">520/1000 ⭐</p>
+                        </div>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                            🚀
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">星际探索者</h4>
+                            <p style="font-size: 12px; color: #666;">解锁所有星球</p>
+                            <div class="progress-bar" style="margin-top: 8px;">
+                                <div class="progress-fill" style="width: 30%;"></div>
+                            </div>
+                            <p style="font-size: 10px; color: #999; margin-top: 4px;">3/10 个星球</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>首页</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-tasks tab-icon"></i>
+                    <span>习惯</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-globe tab-icon"></i>
+                    <span>星球</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-users tab-icon"></i>
+                    <span>家庭</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>我的</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

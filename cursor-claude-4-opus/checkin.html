@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 打卡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #f0f4ff, #e6efff);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        @keyframes starFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-200px) rotate(360deg); opacity: 0; }
+        }
+        
+        .bounce {
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .rotate {
+            animation: rotate 20s linear infinite;
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .star-particle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 20px;
+            animation: starFloat 3s ease-out forwards;
+        }
+        
+        .checkin-button {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .checkin-button:active {
+            transform: scale(0.95);
+        }
+        
+        .checkin-button.checked {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="absolute top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-gray-800 text-sm z-20">
+        <span>9:41</span>
+        <div class="flex gap-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- 导航栏 -->
+    <div class="absolute top-12 left-0 right-0 px-4 py-3 z-10">
+        <div class="flex items-center justify-between">
+            <button class="text-gray-600">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-xl font-bold text-gray-800">习惯打卡</h1>
+            <div class="w-6"></div>
+        </div>
+    </div>
+    
+    <!-- 主内容 -->
+    <div class="h-full flex flex-col items-center justify-center px-8 pt-24">
+        <!-- 星球动画 -->
+        <div class="relative mb-8">
+            <div class="w-48 h-48 relative">
+                <!-- 星球主体 -->
+                <div class="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-2xl bounce"></div>
+                
+                <!-- 星球装饰环 -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-56 h-56 border-4 border-green-300/30 rounded-full rotate"></div>
+                </div>
+                
+                <!-- 习惯图标 -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-24 h-24 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-running text-green-600 text-4xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 习惯信息 -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">晨跑30分钟</h2>
+            <p class="text-gray-600">早上7点开始，让身体充满活力！</p>
+            
+            <!-- 连续打卡天数 -->
+            <div class="mt-4 inline-flex items-center gap-2 bg-orange-100 px-4 py-2 rounded-full">
+                <i class="fas fa-fire text-orange-500"></i>
+                <span class="text-orange-700 font-semibold">连续打卡 7 天</span>
+            </div>
+        </div>
+        
+        <!-- 打卡按钮 -->
+        <button id="checkinBtn" class="checkin-button w-64 py-6 rounded-2xl text-white font-bold text-xl shadow-xl flex items-center justify-center gap-3">
+            <i class="fas fa-check-circle text-2xl"></i>
+            <span>完成打卡</span>
+        </button>
+        
+        <!-- 奖励预览 -->
+        <div class="mt-6 bg-white/80 backdrop-blur rounded-2xl p-4 w-full max-w-sm">
+            <p class="text-center text-gray-600 text-sm mb-3">完成打卡将获得</p>
+            <div class="flex justify-center items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-star text-yellow-500 text-xl pulse"></i>
+                    <span class="font-bold text-lg">+15 星星</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-gem text-purple-500 text-xl pulse"></i>
+                    <span class="font-bold text-lg">+5 宝石</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 今日提示 -->
+        <div class="mt-6 px-4 py-3 bg-blue-50 rounded-xl max-w-sm">
+            <div class="flex items-start gap-3">
+                <i class="fas fa-info-circle text-blue-500 mt-1"></i>
+                <p class="text-sm text-blue-700">
+                    坚持晨跑可以提高新陈代谢，让一整天都充满活力哦！
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 粒子效果容器 -->
+    <div id="particles"></div>
+    
+    <script>
+        const checkinBtn = document.getElementById('checkinBtn');
+        const particlesContainer = document.getElementById('particles');
+        
+        checkinBtn.addEventListener('click', function() {
+            if (this.classList.contains('checked')) return;
+            
+            // 更改按钮状态
+            this.classList.add('checked');
+            this.innerHTML = `
+                <i class="fas fa-check text-2xl"></i>
+                <span>已完成</span>
+            `;
+            
+            // 创建星星粒子效果
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const star = document.createElement('div');
+                    star.className = 'star-particle';
+                    star.innerHTML = '⭐';
+                    star.style.left = Math.random() * window.innerWidth + 'px';
+                    star.style.bottom = '40%';
+                    particlesContainer.appendChild(star);
+                    
+                    setTimeout(() => star.remove(), 3000);
+                }, i * 100);
+            }
+            
+            // 创建彩纸效果
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b', '#6ab04c'][Math.floor(Math.random() * 7)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+            
+            // 震动反馈（如果支持）
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+        });
+    </script>
+</body>
+</html> 

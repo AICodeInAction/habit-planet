@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星球探索</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #0c0c1e 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative;
+        }
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        .planet-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .planet-earth {
+            background: radial-gradient(circle at 30% 30%, #4CAF50, #2196F3);
+            animation: rotate 20s linear infinite;
+        }
+        .planet-mars {
+            background: radial-gradient(circle at 30% 30%, #FF5722, #795548);
+            animation: rotate 25s linear infinite;
+        }
+        .planet-jupiter {
+            background: radial-gradient(circle at 30% 30%, #FF9800, #FFC107);
+            animation: rotate 30s linear infinite;
+        }
+        .planet-locked {
+            background: radial-gradient(circle at 30% 30%, #616161, #424242);
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .decoration-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 星空背景 -->
+    <div class="stars">
+        <div class="star" style="top: 10%; left: 20%; width: 2px; height: 2px; animation-delay: 0s;"></div>
+        <div class="star" style="top: 20%; left: 80%; width: 1px; height: 1px; animation-delay: 1s;"></div>
+        <div class="star" style="top: 30%; left: 10%; width: 2px; height: 2px; animation-delay: 2s;"></div>
+        <div class="star" style="top: 40%; left: 90%; width: 1px; height: 1px; animation-delay: 0.5s;"></div>
+        <div class="star" style="top: 60%; left: 30%; width: 2px; height: 2px; animation-delay: 1.5s;"></div>
+        <div class="star" style="top: 70%; left: 70%; width: 1px; height: 1px; animation-delay: 2.5s;"></div>
+        <div class="star" style="top: 80%; left: 50%; width: 2px; height: 2px; animation-delay: 0.8s;"></div>
+    </div>
+
+    <!-- 状态栏 -->
+    <div class="flex justify-between items-center px-6 pt-12 pb-2 text-sm relative z-10">
+        <div class="flex items-center space-x-1">
+            <div class="flex space-x-1">
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full opacity-50"></div>
+            </div>
+            <span class="ml-2 text-xs">中国移动</span>
+        </div>
+        <div class="text-center">
+            <div class="text-xs opacity-80">今天</div>
+            <div class="text-lg font-bold">09:41</div>
+        </div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-wifi text-xs"></i>
+            <div class="flex space-x-0.5">
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+            </div>
+            <span class="text-xs">100%</span>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="flex items-center justify-between px-6 py-4 relative z-10">
+        <h1 class="text-2xl font-bold">🌌 星球探索</h1>
+        <div class="flex items-center space-x-2">
+            <div class="text-yellow-400">
+                <i class="fas fa-star"></i>
+                <span class="text-sm ml-1">1,280</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="px-6 pb-24 relative z-10">
+        <!-- 当前星球 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🚀 当前探索</h2>
+            <div class="planet-card rounded-2xl p-6 text-center">
+                <div class="planet-earth w-24 h-24 rounded-full mx-auto mb-4 relative">
+                    <div class="absolute inset-2 rounded-full bg-gradient-to-br from-green-400 to-blue-500 opacity-30"></div>
+                </div>
+                <h3 class="text-xl font-bold mb-2">地球基地</h3>
+                <p class="text-gray-300 text-sm mb-4">人类的起源地，充满生命力的蓝色星球</p>
+                
+                <!-- 进度条 -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm">探索进度</span>
+                        <span class="text-sm">3/5</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-green-500 h-2 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+
+                <!-- 装饰物收集 -->
+                <div class="grid grid-cols-5 gap-2">
+                    <div class="decoration-item rounded-lg p-2 text-center">
+                        <i class="fas fa-tree text-green-400 text-lg"></i>
+                        <p class="text-xs mt-1">森林</p>
+                    </div>
+                    <div class="decoration-item rounded-lg p-2 text-center">
+                        <i class="fas fa-mountain text-brown-400 text-lg"></i>
+                        <p class="text-xs mt-1">高山</p>
+                    </div>
+                    <div class="decoration-item rounded-lg p-2 text-center">
+                        <i class="fas fa-water text-blue-400 text-lg"></i>
+                        <p class="text-xs mt-1">海洋</p>
+                    </div>
+                    <div class="decoration-item locked rounded-lg p-2 text-center">
+                        <i class="fas fa-cloud text-gray-400 text-lg"></i>
+                        <p class="text-xs mt-1">云朵</p>
+                    </div>
+                    <div class="decoration-item locked rounded-lg p-2 text-center">
+                        <i class="fas fa-globe text-gray-400 text-lg"></i>
+                        <p class="text-xs mt-1">卫星</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可解锁星球 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🪐 待解锁星球</h2>
+            <div class="space-y-4">
+                <!-- 火星 -->
+                <div class="planet-card rounded-xl p-4 flex items-center">
+                    <div class="planet-mars w-16 h-16 rounded-full mr-4 relative">
+                        <div class="absolute inset-2 rounded-full bg-gradient-to-br from-red-400 to-orange-500 opacity-30"></div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg">火星</h3>
+                        <p class="text-gray-300 text-sm">红色星球，未来人类的第二家园</p>
+                        <div class="flex items-center mt-2">
+                            <div class="text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1">需要 200 能量</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-orange-400">
+                        <i class="fas fa-lock text-2xl"></i>
+                    </div>
+                </div>
+
+                <!-- 木星 -->
+                <div class="planet-card rounded-xl p-4 flex items-center">
+                    <div class="planet-jupiter w-16 h-16 rounded-full mr-4 relative">
+                        <div class="absolute inset-2 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 opacity-30"></div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg">木星</h3>
+                        <p class="text-gray-300 text-sm">太阳系最大的气态巨行星</p>
+                        <div class="flex items-center mt-2">
+                            <div class="text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1">需要 500 能量</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-orange-400">
+                        <i class="fas fa-lock text-2xl"></i>
+                    </div>
+                </div>
+
+                <!-- 神秘星球 -->
+                <div class="planet-card rounded-xl p-4 flex items-center">
+                    <div class="planet-locked w-16 h-16 rounded-full mr-4 relative">
+                        <div class="absolute inset-2 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 opacity-30"></div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg">??? 神秘星球</h3>
+                        <p class="text-gray-300 text-sm">传说中的梦幻星球</p>
+                        <div class="flex items-center mt-2">
+                            <div class="text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <span class="text-sm ml-1">需要 1000 能量</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-purple-400">
+                        <i class="fas fa-question text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 收集成就 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-bold mb-4">🏆 收集成就</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="planet-card rounded-xl p-4 text-center">
+                    <i class="fas fa-seedling text-green-400 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">生态学家</p>
+                    <p class="text-xs text-gray-400">收集所有植物</p>
+                </div>
+                <div class="planet-card rounded-xl p-4 text-center">
+                    <i class="fas fa-rocket text-blue-400 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">探险家</p>
+                    <p class="text-xs text-gray-400">解锁3个星球</p>
+                </div>
+                <div class="planet-card locked rounded-xl p-4 text-center">
+                    <i class="fas fa-crown text-gray-400 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">宇宙之王</p>
+                    <p class="text-xs text-gray-400">收集所有装饰</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 backdrop-filter backdrop-blur-lg z-10">
+        <div class="flex justify-around items-center py-3 px-6">
+            <div class="text-center">
+                <i class="fas fa-home text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">太空舱</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-list-check text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">习惯</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-planet-moon text-blue-400 text-xl mb-1"></i>
+                <p class="text-xs text-blue-400">星球</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">家庭</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">成就</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

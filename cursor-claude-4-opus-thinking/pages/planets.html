@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 星球系统</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .galaxy-container {
+            background: linear-gradient(180deg, #0d1b2a 0%, #1e3a5f 50%, #2d5a8e 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .planet-item {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .planet-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .planet-locked {
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+        
+        .planet-info {
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body style="background: transparent;">
+    <div class="iphone-container">
+        <div class="iphone-screen">
+            <!-- iOS 状态栏 -->
+            <div class="status-bar" style="background: transparent; border: none;">
+                <div class="status-left" style="color: white;">
+                    <span>9:41</span>
+                </div>
+                <div class="status-right" style="color: white;">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- 导航栏 -->
+            <div class="nav-header" style="background: transparent; border: none;">
+                <div class="nav-title" style="color: white;">星际探索</div>
+                <div style="display: flex; gap: 16px;">
+                    <i class="fas fa-rocket" style="font-size: 20px; color: white;"></i>
+                    <i class="fas fa-store" style="font-size: 20px; color: white;"></i>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area galaxy-container">
+                <!-- 星星背景 -->
+                <div class="stars">
+                    <div class="star" style="width: 2px; height: 2px; top: 10%; left: 20%; animation-delay: 0s;"></div>
+                    <div class="star" style="width: 3px; height: 3px; top: 20%; left: 80%; animation-delay: 0.5s;"></div>
+                    <div class="star" style="width: 2px; height: 2px; top: 30%; left: 50%; animation-delay: 1s;"></div>
+                    <div class="star" style="width: 1px; height: 1px; top: 40%; left: 10%; animation-delay: 1.5s;"></div>
+                    <div class="star" style="width: 2px; height: 2px; top: 50%; left: 70%; animation-delay: 2s;"></div>
+                    <div class="star" style="width: 3px; height: 3px; top: 60%; left: 30%; animation-delay: 2.5s;"></div>
+                    <div class="star" style="width: 1px; height: 1px; top: 70%; left: 90%; animation-delay: 0.3s;"></div>
+                    <div class="star" style="width: 2px; height: 2px; top: 80%; left: 40%; animation-delay: 1.3s;"></div>
+                </div>
+
+                <!-- 星球展示 -->
+                <div style="position: relative; height: 100%; padding-top: 60px;">
+                    <!-- 初始星球 -->
+                    <div class="planet-item" style="top: 50px; left: 50%; transform: translateX(-50%);">
+                        <div class="planet" style="width: 80px; height: 80px;
+                                    background: radial-gradient(circle at 30% 30%, #4fc3f7, #0277bd);
+                                    box-shadow: 0 0 30px rgba(79, 195, 247, 0.8);">
+                            <div class="planet-glow"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 8px;">
+                            <p style="color: white; font-size: 12px; font-weight: 600;">初始星球</p>
+                            <p style="color: rgba(255,255,255,0.7); font-size: 10px;">已完成</p>
+                        </div>
+                    </div>
+
+                    <!-- 习惯星球 -->
+                    <div class="planet-item" style="top: 180px; left: 30%;">
+                        <div class="planet" style="width: 100px; height: 100px;
+                                    background: radial-gradient(circle at 30% 30%, #81c784, #388e3c);
+                                    box-shadow: 0 0 40px rgba(129, 199, 132, 0.8);">
+                            <div class="planet-glow"></div>
+                            <!-- 装饰物 - 小树 -->
+                            <div style="position: absolute; bottom: 20px; left: 20px; font-size: 20px;">🌳</div>
+                            <div style="position: absolute; top: 20px; right: 25px; font-size: 16px;">🌲</div>
+                        </div>
+                        <div style="text-align: center; margin-top: 8px;">
+                            <p style="color: white; font-size: 12px; font-weight: 600;">习惯星球</p>
+                            <p style="color: rgba(255,255,255,0.7); font-size: 10px;">进行中</p>
+                        </div>
+                    </div>
+
+                    <!-- 运动星球 -->
+                    <div class="planet-item" style="top: 320px; right: 20%;">
+                        <div class="planet" style="width: 90px; height: 90px;
+                                    background: radial-gradient(circle at 30% 30%, #ff7043, #d84315);
+                                    box-shadow: 0 0 35px rgba(255, 112, 67, 0.8);">
+                            <div class="planet-glow"></div>
+                            <!-- 装饰物 - 火山 -->
+                            <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 24px;">🌋</div>
+                        </div>
+                        <div style="text-align: center; margin-top: 8px;">
+                            <p style="color: white; font-size: 12px; font-weight: 600;">运动星球</p>
+                            <p style="color: rgba(255,255,255,0.7); font-size: 10px;">已解锁</p>
+                        </div>
+                    </div>
+
+                    <!-- 知识星球（未解锁） -->
+                    <div class="planet-item planet-locked" style="top: 450px; left: 50%; transform: translateX(-50%);">
+                        <div class="planet" style="width: 85px; height: 85px;
+                                    background: radial-gradient(circle at 30% 30%, #9575cd, #5e35b1);
+                                    box-shadow: 0 0 30px rgba(149, 117, 205, 0.4);">
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                                      font-size: 36px; color: rgba(255,255,255,0.5);">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 8px;">
+                            <p style="color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600;">知识星球</p>
+                            <p style="color: rgba(255,255,255,0.3); font-size: 10px;">需要30天解锁</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 星球信息面板 -->
+                <div class="planet-info">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <div>
+                            <h3 style="font-size: 18px; margin-bottom: 4px;">当前星球：习惯星球</h3>
+                            <p style="font-size: 12px; opacity: 0.8;">已收集 3/5 装饰物</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold;">⭐ 156</div>
+                            <div style="font-size: 10px; opacity: 0.8;">可用星星</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn-primary" style="flex: 1; padding: 12px; font-size: 14px;">
+                            <i class="fas fa-info-circle"></i> 星球详情
+                        </button>
+                        <button style="flex: 1; background: rgba(255,255,255,0.2); color: white; 
+                                     border: 1px solid rgba(255,255,255,0.3); border-radius: 12px; 
+                                     padding: 12px; font-size: 14px;">
+                            <i class="fas fa-store"></i> 装饰商店
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>首页</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-tasks tab-icon"></i>
+                    <span>习惯</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-globe tab-icon"></i>
+                    <span>星球</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-users tab-icon"></i>
+                    <span>家庭</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>我的</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

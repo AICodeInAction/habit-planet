@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - Habit Planet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 47px;
+            padding: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 39px;
+            overflow: hidden;
+            position: relative;
+        }
+        .status-bar {
+            height: 47px;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .content-area {
+            height: calc(100% - 47px - 83px);
+            overflow-y: auto;
+        }
+        .bottom-nav {
+            height: 83px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8E8E93;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-item.active {
+            color: #007AFF;
+        }
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            padding: 40px;
+            background: #f5f5f7;
+            min-height: 100vh;
+        }
+        .prototype-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .prototype-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        iframe {
+            border: none;
+            border-radius: 39px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="prototype-grid">
+        <!-- 首页 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">首页 - 星际地图</h2>
+            <div class="phone-frame">
+                <iframe src="home.html" width="377" height="836"></iframe>
+            </div>
+        </div>
+
+        <!-- 习惯列表 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">习惯打卡</h2>
+            <div class="phone-frame">
+                <iframe src="habits.html" width="377" height="836"></iframe>
+            </div>
+        </div>
+
+        <!-- 探索页面 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">星球探索</h2>
+            <div class="phone-frame">
+                <iframe src="explore.html" width="377" height="836"></iframe>
+            </div>
+        </div>
+
+        <!-- 家庭页面 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">家庭互动</h2>
+            <div class="phone-frame">
+                <iframe src="family.html" width="377" height="836"></iframe>
+            </div>
+        </div>
+
+        <!-- 成就页面 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">成就奖牌</h2>
+            <div class="phone-frame">
+                <iframe src="achievements.html" width="377" height="836"></iframe>
+            </div>
+        </div>
+
+        <!-- 个人资料 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">个人资料</h2>
+            <div class="phone-frame">
+                <iframe src="profile.html" width="377" height="836"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

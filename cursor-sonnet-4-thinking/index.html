@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星际习惯 - 原型设计展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            background: #000;
+            border-radius: 47px;
+            padding: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 39px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .notch {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .prototype-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .prototype-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="prototype-grid">
+        <!-- 太空舱首页 -->
+        <div class="prototype-card">
+            <h3 class="prototype-title">太空舱首页</h3>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="screen">
+                    <iframe src="home.html"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 习惯管理 -->
+        <div class="prototype-card">
+            <h3 class="prototype-title">习惯管理</h3>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="screen">
+                    <iframe src="habits.html"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 星球探索 -->
+        <div class="prototype-card">
+            <h3 class="prototype-title">星球探索</h3>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="screen">
+                    <iframe src="planets.html"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭中心 -->
+        <div class="prototype-card">
+            <h3 class="prototype-title">家庭中心</h3>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="screen">
+                    <iframe src="family.html"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就中心 -->
+        <div class="prototype-card">
+            <h3 class="prototype-title">成就中心</h3>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="screen">
+                    <iframe src="achievements.html"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个人档案 -->
+        <div class="prototype-card">
+            <h3 class="prototype-title">个人档案</h3>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="screen">
+                    <iframe src="profile.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭互动</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .status-bar {
+            height: 47px;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .content-area {
+            height: calc(100vh - 47px - 83px);
+            overflow-y: auto;
+            position: relative;
+        }
+        .bottom-nav {
+            height: 83px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8E8E93;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-item.active {
+            color: #007AFF;
+        }
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .family-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 12px 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .family-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+        .member-avatar.dad {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        .member-avatar.mom {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        .member-avatar.child {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+        .status-badge {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        .status-badge.online {
+            background: #4CAF50;
+        }
+        .status-badge.offline {
+            background: #9E9E9E;
+        }
+        .progress-bar {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        .challenge-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-radius: 20px;
+            margin: 12px 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+        .rank-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        .rank-1 {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+        }
+        .rank-2 {
+            background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+            color: white;
+        }
+        .rank-3 {
+            background: linear-gradient(135deg, #CD7F32, #B8860B);
+            color: white;
+        }
+        .rank-other {
+            background: #f0f0f0;
+            color: #666;
+        }
+        .interaction-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .interaction-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .like-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+        }
+        .cheer-btn {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: white;
+        }
+        .message-btn {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: white;
+        }
+        .floating-heart {
+            position: absolute;
+            pointer-events: none;
+            animation: floatHeart 2s ease-out forwards;
+            font-size: 20px;
+            color: #ff6b6b;
+        }
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(0); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-three-quarters text-xs"></i>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="content-area">
+        <!-- 顶部标题 -->
+        <div class="text-center py-6 text-white">
+            <h1 class="text-2xl font-bold mb-2">我的家庭</h1>
+            <p class="text-lg opacity-90">一起养成好习惯</p>
+        </div>
+
+        <!-- 家庭挑战卡片 -->
+        <div class="challenge-card">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-xl font-bold">本周家庭挑战</h2>
+                    <p class="text-sm opacity-90">早睡早起健康生活</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-bold">🏆</div>
+                    <div class="text-xs opacity-80">奖励: 100⭐</div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <div class="flex justify-between text-sm mb-1">
+                    <span>挑战进度</span>
+                    <span>12/21 天</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill bg-white" style="width: 57%"></div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-sm opacity-90">还有 2 天结束，加油！</p>
+            </div>
+        </div>
+
+        <!-- 家庭成员列表 -->
+        <div class="mx-5 mb-4">
+            <h3 class="text-white text-lg font-bold mb-3">家庭成员</h3>
+            
+            <!-- 爸爸 -->
+            <div class="family-card">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="member-avatar dad">
+                            👨
+                            <div class="status-badge online"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">爸爸</h3>
+                            <p class="text-sm text-gray-600">今日完成 4/5 个习惯</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-gradient-to-r from-blue-400 to-blue-600" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-gray-800">⭐ 89</div>
+                        <div class="text-xs text-gray-500">本周获得</div>
+                    </div>
+                </div>
+                <div class="interaction-buttons">
+                    <div class="interaction-btn like-btn" onclick="sendInteraction(this, '❤️')">点赞</div>
+                    <div class="interaction-btn cheer-btn" onclick="sendInteraction(this, '🎉')">加油</div>
+                    <div class="interaction-btn message-btn" onclick="sendMessage('爸爸')">留言</div>
+                </div>
+            </div>
+
+            <!-- 妈妈 -->
+            <div class="family-card">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="member-avatar mom">
+                            👩
+                            <div class="status-badge online"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">妈妈</h3>
+                            <p class="text-sm text-gray-600">今日完成 5/5 个习惯</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-gradient-to-r from-green-400 to-green-600" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-gray-800">⭐ 125</div>
+                        <div class="text-xs text-gray-500">本周获得</div>
+                    </div>
+                </div>
+                <div class="interaction-buttons">
+                    <div class="interaction-btn like-btn" onclick="sendInteraction(this, '❤️')">点赞</div>
+                    <div class="interaction-btn cheer-btn" onclick="sendInteraction(this, '🎉')">加油</div>
+                    <div class="interaction-btn message-btn" onclick="sendMessage('妈妈')">留言</div>
+                </div>
+            </div>
+
+            <!-- 小明 (自己) -->
+            <div class="family-card" style="border: 2px solid #4facfe;">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="member-avatar child">
+                            👦
+                            <div class="status-badge online"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">小明 (我)</h3>
+                            <p class="text-sm text-gray-600">今日完成 3/5 个习惯</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-gradient-to-r from-orange-400 to-orange-600" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-gray-800">⭐ 127</div>
+                        <div class="text-xs text-gray-500">本周获得</div>
+                    </div>
+                </div>
+                <div class="mt-3 p-2 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-blue-800 text-center">
+                        <i class="fas fa-crown mr-1"></i>
+                        本周家庭之星！继续保持！
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 本周排行榜 -->
+        <div class="family-card">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">本周排行榜</h3>
+            
+            <div class="ranking-item">
+                <div class="rank-number rank-1">1</div>
+                <div class="member-avatar child" style="width: 40px; height: 40px; font-size: 16px;">👦</div>
+                <div class="flex-1 ml-3">
+                    <h4 class="font-semibold">小明</h4>
+                    <p class="text-sm text-gray-600">127 ⭐</p>
+                </div>
+                <div class="text-yellow-500">
+                    <i class="fas fa-crown text-xl"></i>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number rank-2">2</div>
+                <div class="member-avatar mom" style="width: 40px; height: 40px; font-size: 16px;">👩</div>
+                <div class="flex-1 ml-3">
+                    <h4 class="font-semibold">妈妈</h4>
+                    <p class="text-sm text-gray-600">125 ⭐</p>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-medal text-xl"></i>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number rank-3">3</div>
+                <div class="member-avatar dad" style="width: 40px; height: 40px; font-size: 16px;">👨</div>
+                <div class="flex-1 ml-3">
+                    <h4 class="font-semibold">爸爸</h4>
+                    <p class="text-sm text-gray-600">89 ⭐</p>
+                </div>
+                <div class="text-orange-400">
+                    <i class="fas fa-medal text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最近互动 -->
+        <div class="family-card">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">最近互动</h3>
+            
+            <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                    <div class="member-avatar mom" style="width: 32px; height: 32px; font-size: 12px;">👩</div>
+                    <div class="flex-1">
+                        <p class="text-sm"><span class="font-semibold">妈妈</span> 给你点了赞 ❤️</p>
+                        <p class="text-xs text-gray-500">2分钟前</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="member-avatar dad" style="width: 32px; height: 32px; font-size: 12px;">👨</div>
+                    <div class="flex-1">
+                        <p class="text-sm"><span class="font-semibold">爸爸</span> 说："小明真棒！"</p>
+                        <p class="text-xs text-gray-500">10分钟前</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="member-avatar child" style="width: 32px; height: 32px; font-size: 12px;">👦</div>
+                    <div class="flex-1">
+                        <p class="text-sm"><span class="font-semibold">你</span> 完成了阅读习惯</p>
+                        <p class="text-xs text-gray-500">30分钟前</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <div class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-list-check"></i>
+            <span>习惯</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </div>
+    </div>
+
+    <script>
+        function sendInteraction(button, emoji) {
+            // 创建飘浮动画
+            const rect = button.getBoundingClientRect();
+            const floatingEmoji = document.createElement('div');
+            floatingEmoji.textContent = emoji;
+            floatingEmoji.className = 'floating-heart';
+            floatingEmoji.style.position = 'fixed';
+            floatingEmoji.style.left = (rect.left + rect.width / 2) + 'px';
+            floatingEmoji.style.top = rect.top + 'px';
+            floatingEmoji.style.zIndex = '1000';
+            
+            document.body.appendChild(floatingEmoji);
+            
+            setTimeout(() => {
+                floatingEmoji.remove();
+            }, 2000);
+            
+            // 显示成功消息
+            showMessage('互动发送成功！');
+        }
+        
+        function sendMessage(memberName) {
+            // 模拟发送消息
+            const messages = [
+                '加油！你是最棒的！',
+                '继续保持，我们一起努力！',
+                '今天的表现很棒！',
+                '我们是最好的家庭团队！'
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            showMessage(`已向${memberName}发送消息："${randomMessage}"`);
+        }
+        
+        function showMessage(text) {
+            const message = document.createElement('div');
+            message.textContent = text;
+            message.className = 'fixed top-20 left-4 right-4 bg-black bg-opacity-80 text-white p-4 rounded-lg text-center z-50';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

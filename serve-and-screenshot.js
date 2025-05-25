@@ -20,10 +20,14 @@ async function takeScreenshots() {
     // 'trae-deepseek-r1',
     // 'trae-deepseek-v3', 
     //'cursor-sonnet-3.7-max',
-    'cursor-gemini2.5'
+    //'cursor-gemini2.5',
+    'cursor-sonnet-4',
+    'cursor-sonnet-4-thinking',
+    'cursor-claude-4-opus-thinking',
+    'cursor-claude-4-opus',
   ];
 
-  // 创建截图文件夹（如果不存在）
+  
   const screenshotsDir = path.join(__dirname, 'screenshots');
   if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir);
@@ -62,7 +66,8 @@ async function takeScreenshots() {
         
         // 检查文件是否存在
         if (!fs.existsSync(htmlFilePath)) {
-          console.error(`❌ ${folder}/index.html 文件不存在，跳过此文件夹`);
+          console.error(htmlFilePath);
+          console.error(`${folder}/index.html 文件不存在，跳过此文件夹`);
           continue;
         }
         

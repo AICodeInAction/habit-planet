@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 家庭空间</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .member-card {
+            transition: all 0.3s ease;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1s ease-in-out;
+        }
+        
+        .challenge-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .challenge-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="fixed top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-gray-800 text-sm bg-white z-20">
+        <span>9:41</span>
+        <div class="flex gap-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- 导航栏 -->
+    <div class="fixed top-12 left-0 right-0 bg-white border-b border-gray-100 z-10">
+        <div class="flex items-center justify-between px-4 py-3">
+            <h1 class="text-xl font-bold text-gray-800">家庭空间</h1>
+            <button class="text-purple-600">
+                <i class="fas fa-user-plus text-xl"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div class="pt-24 pb-20 px-4">
+        <!-- 家庭信息卡片 -->
+        <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 mb-6 text-white">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h2 class="text-2xl font-bold mb-1">温馨之家</h2>
+                    <p class="text-white/80 text-sm">家庭ID: FAM2024001</p>
+                </div>
+                <div class="bg-white/20 backdrop-blur px-3 py-1 rounded-full">
+                    <span class="text-sm font-semibold">4 成员</span>
+                </div>
+            </div>
+            
+            <!-- 家庭统计 -->
+            <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                    <p class="text-3xl font-bold">156</p>
+                    <p class="text-xs text-white/80">今日总星星</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-3xl font-bold">89%</p>
+                    <p class="text-xs text-white/80">家庭完成率</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-3xl font-bold">12</p>
+                    <p class="text-xs text-white/80">共同习惯</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 家庭成员 -->
+        <div class="mb-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">家庭成员</h3>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <!-- 成员1 - 爸爸 -->
+                <div class="member-card bg-white rounded-2xl p-4 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/50?img=8" class="w-12 h-12 rounded-full">
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-800">爸爸</p>
+                            <p class="text-xs text-gray-500">今日完成 5/6</p>
+                        </div>
+                        <span class="text-green-500">
+                            <i class="fas fa-circle text-xs"></i>
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-500 text-sm"></i>
+                            <span class="text-sm font-semibold">45</span>
+                        </div>
+                        <button class="text-purple-600 text-sm">
+                            <i class="fas fa-thumbs-up"></i> 鼓励
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 成员2 - 妈妈 -->
+                <div class="member-card bg-white rounded-2xl p-4 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/50?img=5" class="w-12 h-12 rounded-full">
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-800">妈妈</p>
+                            <p class="text-xs text-gray-500">今日完成 6/6</p>
+                        </div>
+                        <span class="text-green-500">
+                            <i class="fas fa-circle text-xs"></i>
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-500 text-sm"></i>
+                            <span class="text-sm font-semibold">60</span>
+                        </div>
+                        <button class="text-purple-600 text-sm">
+                            <i class="fas fa-thumbs-up"></i> 鼓励
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 成员3 - 小明 -->
+                <div class="member-card bg-white rounded-2xl p-4 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/50?img=3" class="w-12 h-12 rounded-full">
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-800">小明</p>
+                            <p class="text-xs text-gray-500">今日完成 4/5</p>
+                        </div>
+                        <span class="text-yellow-500">
+                            <i class="fas fa-circle text-xs"></i>
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-500 text-sm"></i>
+                            <span class="text-sm font-semibold">35</span>
+                        </div>
+                        <button class="text-purple-600 text-sm">
+                            <i class="fas fa-thumbs-up"></i> 鼓励
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 成员4 - 小红 -->
+                <div class="member-card bg-white rounded-2xl p-4 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://i.pravatar.cc/50?img=9" class="w-12 h-12 rounded-full">
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-800">小红</p>
+                            <p class="text-xs text-gray-500">今日完成 3/4</p>
+                        </div>
+                        <span class="text-gray-400">
+                            <i class="fas fa-circle text-xs"></i>
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-500 text-sm"></i>
+                            <span class="text-sm font-semibold">16</span>
+                        </div>
+                        <button class="text-purple-600 text-sm">
+                            <i class="fas fa-thumbs-up"></i> 鼓励
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 家庭挑战 -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-800">家庭挑战</h3>
+                <a href="#" class="text-purple-600 text-sm">查看全部</a>
+            </div>
+            
+            <div class="challenge-card rounded-2xl p-6 text-white mb-4">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="text-xl font-bold mb-1">健康生活周</h4>
+                        <p class="text-white/80 text-sm">全家一起养成健康习惯</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-bold">3/7</p>
+                        <p class="text-xs text-white/80">天</p>
+                    </div>
+                </div>
+                
+                <!-- 进度条 -->
+                <div class="w-full bg-white/20 rounded-full h-3 overflow-hidden mb-4">
+                    <div class="bg-white h-full rounded-full" style="width: 43%"></div>
+                </div>
+                
+                <!-- 奖励 -->
+                <div class="flex items-center justify-between">
+                    <p class="text-sm text-white/90">完成奖励：全家获得专属勋章</p>
+                    <div class="flex -space-x-2">
+                        <img src="https://i.pravatar.cc/30?img=8" class="w-8 h-8 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/30?img=5" class="w-8 h-8 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/30?img=3" class="w-8 h-8 rounded-full border-2 border-white">
+                        <img src="https://i.pravatar.cc/30?img=9" class="w-8 h-8 rounded-full border-2 border-white">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 家庭动态 -->
+        <div>
+            <h3 class="text-lg font-bold text-gray-800 mb-4">家庭动态</h3>
+            
+            <div class="space-y-3">
+                <!-- 动态1 -->
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <div class="flex items-start gap-3">
+                        <img src="https://i.pravatar.cc/40?img=5" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-600 mb-1">
+                                <span class="font-semibold text-gray-800">妈妈</span>
+                                完成了今天所有习惯！
+                            </p>
+                            <p class="text-xs text-gray-500">5分钟前</p>
+                        </div>
+                        <button class="text-red-500" onclick="this.classList.toggle('heartbeat')">
+                            <i class="fas fa-heart text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 动态2 -->
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <div class="flex items-start gap-3">
+                        <img src="https://i.pravatar.cc/40?img=3" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-600 mb-2">
+                                <span class="font-semibold text-gray-800">小明</span>
+                                解锁了新成就"运动达人"！
+                            </p>
+                            <div class="inline-flex items-center gap-2 bg-yellow-100 px-3 py-1 rounded-full">
+                                <i class="fas fa-medal text-yellow-600"></i>
+                                <span class="text-xs font-semibold text-yellow-800">运动达人</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">1小时前</p>
+                        </div>
+                        <button class="text-red-500">
+                            <i class="far fa-heart text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 动态3 -->
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <div class="flex items-start gap-3">
+                        <img src="https://i.pravatar.cc/40?img=8" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-600 mb-1">
+                                <span class="font-semibold text-gray-800">爸爸</span>
+                                给<span class="font-semibold text-gray-800">小红</span>发送了鼓励
+                            </p>
+                            <div class="bg-purple-50 rounded-lg p-3 mt-2">
+                                <p class="text-sm text-purple-800">加油小红！你是最棒的！💪</p>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">2小时前</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100">
+        <div class="flex justify-around items-center py-2">
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-globe-americas text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">星系</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-tasks text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">习惯</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-users text-purple-500 text-xl mb-1"></i>
+                <span class="text-purple-500 text-xs">家庭</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">成就</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-user text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">我的</span>
+            </button>
+        </div>
+    </div>
+</body>
+</html> 

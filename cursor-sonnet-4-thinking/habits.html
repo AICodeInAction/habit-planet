@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        .habit-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .streak-circle {
+            background: conic-gradient(#4CAF50 0deg 288deg, rgba(255,255,255,0.2) 288deg 360deg);
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        .add-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 状态栏 -->
+    <div class="flex justify-between items-center px-6 pt-12 pb-2 text-sm">
+        <div class="flex items-center space-x-1">
+            <div class="flex space-x-1">
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full opacity-50"></div>
+            </div>
+            <span class="ml-2 text-xs">中国移动</span>
+        </div>
+        <div class="text-center">
+            <div class="text-xs opacity-80">今天</div>
+            <div class="text-lg font-bold">09:41</div>
+        </div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-wifi text-xs"></i>
+            <div class="flex space-x-0.5">
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+            </div>
+            <span class="text-xs">100%</span>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="flex items-center justify-between px-6 py-4">
+        <h1 class="text-2xl font-bold">习惯管理</h1>
+        <button class="add-btn w-10 h-10 rounded-full flex items-center justify-center">
+            <i class="fas fa-plus text-lg"></i>
+        </button>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="px-6 pb-24">
+        <!-- 统计卡片 -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="habit-card rounded-xl p-4 text-center">
+                <div class="text-2xl font-bold text-green-400">7</div>
+                <div class="text-xs text-gray-400">活跃习惯</div>
+            </div>
+            <div class="habit-card rounded-xl p-4 text-center">
+                <div class="text-2xl font-bold text-yellow-400">12</div>
+                <div class="text-xs text-gray-400">连续天数</div>
+            </div>
+            <div class="habit-card rounded-xl p-4 text-center">
+                <div class="text-2xl font-bold text-blue-400">85%</div>
+                <div class="text-xs text-gray-400">完成率</div>
+            </div>
+        </div>
+
+        <!-- 今日习惯 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-bold mb-4">🌟 今日习惯</h2>
+            <div class="space-y-3">
+                <div class="habit-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-glass-water text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">早起喝水</h3>
+                                <p class="text-xs text-gray-400">每天早上8点</p>
+                                <div class="flex items-center mt-1">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-400 ml-2">连续5天</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mb-1">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div class="text-xs text-green-400">已完成</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-book text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">阅读20分钟</h3>
+                                <p class="text-xs text-gray-400">每天晚上7点</p>
+                                <div class="flex items-center mt-1">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-400 ml-2">连续7天</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mb-1">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div class="text-xs text-green-400">已完成</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-music text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">练习钢琴</h3>
+                                <p class="text-xs text-gray-400">每天晚上9点</p>
+                                <div class="flex items-center mt-1">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                        <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-400 ml-2">连续3天</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center mb-1">
+                                <i class="fas fa-plus text-white text-sm"></i>
+                            </button>
+                            <div class="text-xs text-gray-400">待完成</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 其他习惯 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-bold mb-4">📚 其他习惯</h2>
+            <div class="space-y-3">
+                <div class="habit-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-running text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">晨跑</h3>
+                                <p class="text-xs text-gray-400">周一、三、五</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400">
+                            本周 2/3
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-utensils text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">健康饮食</h3>
+                                <p class="text-xs text-gray-400">每天三餐</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400">
+                            今日 2/3
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-bed text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">早睡早起</h3>
+                                <p class="text-xs text-gray-400">晚上10点前睡觉</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400">
+                            连续12天
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 backdrop-filter backdrop-blur-lg">
+        <div class="flex justify-around items-center py-3 px-6">
+            <div class="text-center">
+                <i class="fas fa-home text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">太空舱</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-list-check text-blue-400 text-xl mb-1"></i>
+                <p class="text-xs text-blue-400">习惯</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-planet-moon text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">星球</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">家庭</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">成就</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

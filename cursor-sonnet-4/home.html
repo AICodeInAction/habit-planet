@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星际地图</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .status-bar {
+            height: 47px;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .content-area {
+            height: calc(100vh - 47px - 83px);
+            overflow-y: auto;
+            position: relative;
+        }
+        .bottom-nav {
+            height: 83px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8E8E93;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-item.active {
+            color: #007AFF;
+        }
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .planet:hover {
+            transform: scale(1.1);
+        }
+        .planet.unlocked {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        .planet.locked {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+        @keyframes glow {
+            from { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+            to { box-shadow: 0 4px 30px rgba(255,255,255,0.5); }
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s linear infinite;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        .progress-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            margin: 20px;
+            padding: 20px;
+            color: white;
+        }
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-three-quarters text-xs"></i>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="content-area">
+        <!-- 星空背景 -->
+        <div class="stars"></div>
+        
+        <!-- 顶部进度卡片 -->
+        <div class="progress-card">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-rocket text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg">小明的星际之旅</h3>
+                        <p class="text-sm opacity-80">等级 5 宇航员</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-bold">⭐ 127</div>
+                    <div class="text-xs opacity-80">星星币</div>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="flex justify-between text-sm mb-1">
+                    <span>今日进度</span>
+                    <span>3/5 完成</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 星球地图 -->
+        <div class="relative h-96 mx-4">
+            <!-- 地球 (已解锁) -->
+            <div class="planet unlocked" style="top: 60%; left: 20%; width: 60px; height: 60px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <i class="fas fa-globe text-white text-xl"></i>
+            </div>
+            
+            <!-- 月球 (已解锁) -->
+            <div class="planet unlocked" style="top: 40%; left: 45%; width: 45px; height: 45px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <i class="fas fa-moon text-white"></i>
+            </div>
+            
+            <!-- 火星 (当前目标) -->
+            <div class="planet unlocked" style="top: 25%; left: 70%; width: 55px; height: 55px; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); border: 3px solid #fff;">
+                <i class="fas fa-globe-americas text-white text-lg"></i>
+            </div>
+            
+            <!-- 木星 (锁定) -->
+            <div class="planet locked" style="top: 15%; left: 25%; width: 70px; height: 70px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                <i class="fas fa-lock text-white text-xl"></i>
+            </div>
+            
+            <!-- 土星 (锁定) -->
+            <div class="planet locked" style="top: 70%; left: 65%; width: 65px; height: 65px; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                <i class="fas fa-lock text-white text-xl"></i>
+            </div>
+
+            <!-- 连接线 -->
+            <svg class="absolute inset-0 w-full h-full" style="z-index: -1;">
+                <defs>
+                    <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4facfe;stop-opacity:0.6" />
+                        <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:0.6" />
+                    </linearGradient>
+                </defs>
+                <path d="M 50 240 Q 120 180 170 160 Q 220 140 270 100" stroke="url(#pathGradient)" stroke-width="3" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite"/>
+                </path>
+            </svg>
+        </div>
+
+        <!-- 快速操作 -->
+        <div class="mx-4 mb-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-4 text-center text-white">
+                    <i class="fas fa-check-circle text-3xl mb-2 text-green-400"></i>
+                    <div class="font-semibold">今日打卡</div>
+                    <div class="text-sm opacity-80">3/5 完成</div>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-2xl p-4 text-center text-white">
+                    <i class="fas fa-users text-3xl mb-2 text-blue-400"></i>
+                    <div class="font-semibold">家庭挑战</div>
+                    <div class="text-sm opacity-80">2人参与</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-list-check"></i>
+            <span>习惯</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </div>
+    </div>
+</body>
+</html> 

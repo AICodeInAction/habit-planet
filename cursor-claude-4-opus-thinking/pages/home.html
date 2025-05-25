@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 首页</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background: transparent;">
+    <div class="iphone-container">
+        <div class="iphone-screen">
+            <!-- iOS 状态栏 -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span>9:41</span>
+                </div>
+                <div class="status-right">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- 导航栏 -->
+            <div class="nav-header">
+                <div class="nav-title">习惯星球</div>
+                <div style="display: flex; gap: 16px;">
+                    <i class="fas fa-bell" style="font-size: 20px; color: #666;"></i>
+                    <i class="fas fa-gift" style="font-size: 20px; color: #666;"></i>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 用户信息卡片 -->
+                <div class="card animate-in" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center;">
+                            <img src="https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=100&h=100&fit=crop" 
+                                 alt="用户头像" class="avatar" style="margin-right: 16px;">
+                            <div>
+                                <h3 style="font-size: 18px; margin-bottom: 4px;">小明的星际之旅</h3>
+                                <p style="opacity: 0.9; font-size: 14px;">已坚持 <strong>28</strong> 天</p>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 28px; font-weight: bold;">⭐ 156</div>
+                            <div style="font-size: 12px; opacity: 0.9;">星星能量</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 今日任务 -->
+                <div style="padding: 20px 16px 0;">
+                    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">
+                        今日任务 <span style="font-size: 14px; color: #666; font-weight: normal;">(3/5 完成)</span>
+                    </h2>
+                    
+                    <!-- 任务列表 -->
+                    <div class="habit-card">
+                        <div class="habit-icon" style="background: #e3f2fd;">
+                            <i class="fas fa-tooth" style="color: #2196f3;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">早晚刷牙</h4>
+                            <p style="font-size: 12px; color: #666;">已完成早上，晚上待完成</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                        <button style="background: #4caf50; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 14px;">
+                            打卡
+                        </button>
+                    </div>
+
+                    <div class="habit-card">
+                        <div class="habit-icon" style="background: #fff3e0;">
+                            <i class="fas fa-book-open" style="color: #ff9800;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">阅读30分钟</h4>
+                            <p style="font-size: 12px; color: #666;">今日未开始</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <button style="background: #ff9800; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 14px;">
+                            开始
+                        </button>
+                    </div>
+
+                    <div class="habit-card" style="opacity: 0.6;">
+                        <div class="habit-icon" style="background: #f3e5f5;">
+                            <i class="fas fa-running" style="color: #9c27b0;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">运动1小时</h4>
+                            <p style="font-size: 12px; color: #666;">已完成 ✓</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <i class="fas fa-check-circle" style="color: #4caf50; font-size: 24px;"></i>
+                    </div>
+                </div>
+
+                <!-- 星球地图预览 -->
+                <div style="padding: 20px 16px;">
+                    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">
+                        我的星球 <i class="fas fa-chevron-right" style="font-size: 14px; color: #999;"></i>
+                    </h2>
+                    
+                    <div style="background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%); 
+                                border-radius: 16px; padding: 20px; position: relative; height: 200px; overflow: hidden;">
+                        <!-- 星星背景 -->
+                        <div style="position: absolute; top: 20px; left: 30px; color: white; opacity: 0.3;">✦</div>
+                        <div style="position: absolute; top: 50px; right: 40px; color: white; opacity: 0.5;">✧</div>
+                        <div style="position: absolute; bottom: 30px; left: 60px; color: white; opacity: 0.4;">✦</div>
+                        
+                        <!-- 星球 -->
+                        <div class="planet" style="position: absolute; bottom: 20px; right: 20px; width: 100px; height: 100px;
+                                    background: radial-gradient(circle at 30% 30%, #81c784, #388e3c); 
+                                    box-shadow: 0 0 40px rgba(129, 199, 132, 0.6);">
+                            <div class="planet-glow"></div>
+                        </div>
+                        
+                        <div style="color: white;">
+                            <h3 style="font-size: 18px; margin-bottom: 8px;">习惯星球 - Lv.3</h3>
+                            <p style="font-size: 14px; opacity: 0.9;">已解锁 3 个星球</p>
+                            <p style="font-size: 12px; opacity: 0.7; margin-top: 8px;">
+                                <i class="fas fa-rocket"></i> 继续努力，解锁更多星球！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 家庭动态 -->
+                <div style="padding: 0 16px 20px;">
+                    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">
+                        家庭动态 <span style="font-size: 14px; color: #666; font-weight: normal;">刚刚更新</span>
+                    </h2>
+                    
+                    <div class="card" style="margin: 0;">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" 
+                                 alt="妈妈" class="avatar-small" style="margin-right: 12px;">
+                            <div>
+                                <p style="font-size: 14px;"><strong>妈妈</strong> 完成了 <strong>瑜伽30分钟</strong></p>
+                                <p style="font-size: 12px; color: #999;">5分钟前</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" 
+                                 alt="爸爸" class="avatar-small" style="margin-right: 12px;">
+                            <div>
+                                <p style="font-size: 14px;"><strong>爸爸</strong> 获得了 <strong>连续7天早起</strong> 成就</p>
+                                <p style="font-size: 12px; color: #999;">1小时前</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>首页</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-tasks tab-icon"></i>
+                    <span>习惯</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-globe tab-icon"></i>
+                    <span>星球</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-users tab-icon"></i>
+                    <span>家庭</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>我的</span>
+                </a>
+            </div>
+
+            <!-- 浮动按钮 -->
+            <div class="fab">
+                <i class="fas fa-plus"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

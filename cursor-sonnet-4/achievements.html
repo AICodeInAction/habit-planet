@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成就奖牌</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .status-bar {
+            height: 47px;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .content-area {
+            height: calc(100vh - 47px - 83px);
+            overflow-y: auto;
+            position: relative;
+        }
+        .bottom-nav {
+            height: 83px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8E8E93;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-item.active {
+            color: #007AFF;
+        }
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .achievement-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 12px 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .achievement-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        .achievement-card.locked {
+            opacity: 0.6;
+        }
+        .medal {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 16px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .medal.gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            animation: goldGlow 2s ease-in-out infinite alternate;
+        }
+        .medal.silver {
+            background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+        }
+        .medal.bronze {
+            background: linear-gradient(135deg, #CD7F32, #B8860B);
+        }
+        .medal.locked {
+            background: #e0e0e0;
+            color: #999;
+        }
+        @keyframes goldGlow {
+            from { box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3); }
+            to { box-shadow: 0 4px 30px rgba(255, 215, 0, 0.6); }
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+            margin: 0 auto;
+        }
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform-origin: 50% 50%;
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border-radius: 20px;
+            margin: 12px 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .category-tab {
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+        .category-tab.active {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+        }
+        .category-tab:not(.active) {
+            background: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+        }
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 0 20px;
+        }
+        .achievement-item {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .achievement-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        .achievement-item.locked {
+            opacity: 0.6;
+        }
+        .mini-medal {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .progress-bar {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            height: 6px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        .floating-medal {
+            position: fixed;
+            pointer-events: none;
+            animation: floatMedal 3s ease-out forwards;
+            font-size: 60px;
+            z-index: 1000;
+        }
+        @keyframes floatMedal {
+            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-50px) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translateY(-150px) scale(1) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-three-quarters text-xs"></i>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="content-area">
+        <!-- 顶部标题 -->
+        <div class="text-center py-6 text-white">
+            <h1 class="text-2xl font-bold mb-2">成就殿堂</h1>
+            <p class="text-lg opacity-90">记录每一个进步时刻</p>
+        </div>
+
+        <!-- 统计卡片 -->
+        <div class="stats-card">
+            <div class="flex items-center justify-between mb-4">
+                <div class="text-center">
+                    <div class="text-3xl font-bold">12</div>
+                    <div class="text-sm opacity-90">已获得</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold">8</div>
+                    <div class="text-sm opacity-90">进行中</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold">25</div>
+                    <div class="text-sm opacity-90">总成就</div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-lg font-bold mb-2">成就等级：⭐ 宇航学员</div>
+                <div class="progress-bar">
+                    <div class="progress-fill bg-white" style="width: 48%"></div>
+                </div>
+                <div class="text-sm opacity-90 mt-1">距离下一等级还需 52 ⭐</div>
+            </div>
+        </div>
+
+        <!-- 分类标签 -->
+        <div class="mx-5 mb-4 overflow-x-auto">
+            <div class="flex whitespace-nowrap">
+                <div class="category-tab active" onclick="switchCategory('all')">全部</div>
+                <div class="category-tab" onclick="switchCategory('habits')">习惯</div>
+                <div class="category-tab" onclick="switchCategory('exploration')">探索</div>
+                <div class="category-tab" onclick="switchCategory('family')">家庭</div>
+            </div>
+        </div>
+
+        <!-- 最新获得的成就 -->
+        <div class="mx-5 mb-4">
+            <h3 class="text-white text-lg font-bold mb-3">🎉 最新获得</h3>
+            
+            <div class="achievement-card" onclick="showAchievementDetail('早起之星')">
+                <div class="flex items-center space-x-4">
+                    <div class="medal gold">
+                        🌅
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg text-gray-800">早起之星</h3>
+                        <p class="text-sm text-gray-600">连续早起7天</p>
+                        <div class="flex items-center space-x-2 mt-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">金牌</span>
+                            <span class="text-sm text-gray-500">2小时前获得</span>
+                        </div>
+                    </div>
+                    <div class="text-yellow-500">
+                        <i class="fas fa-star text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就网格 -->
+        <div id="all-achievements" class="mb-6">
+            <div class="mx-5 mb-3">
+                <h3 class="text-white text-lg font-bold">所有成就</h3>
+            </div>
+            
+            <div class="achievement-grid">
+                <!-- 已获得的成就 -->
+                <div class="achievement-item" onclick="showAchievementDetail('阅读达人')">
+                    <div class="mini-medal gold">📚</div>
+                    <h4 class="font-bold text-sm">阅读达人</h4>
+                    <p class="text-xs text-gray-600 mt-1">累计阅读30小时</p>
+                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold mt-2 inline-block">金牌</span>
+                </div>
+                
+                <div class="achievement-item" onclick="showAchievementDetail('运动健将')">
+                    <div class="mini-medal silver">🏃</div>
+                    <h4 class="font-bold text-sm">运动健将</h4>
+                    <p class="text-xs text-gray-600 mt-1">连续运动14天</p>
+                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs font-semibold mt-2 inline-block">银牌</span>
+                </div>
+                
+                <div class="achievement-item" onclick="showAchievementDetail('整理小能手')">
+                    <div class="mini-medal bronze">🏠</div>
+                    <h4 class="font-bold text-sm">整理小能手</h4>
+                    <p class="text-xs text-gray-600 mt-1">房间整理7天</p>
+                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-semibold mt-2 inline-block">铜牌</span>
+                </div>
+                
+                <div class="achievement-item" onclick="showAchievementDetail('星际探索者')">
+                    <div class="mini-medal gold">🚀</div>
+                    <h4 class="font-bold text-sm">星际探索者</h4>
+                    <p class="text-xs text-gray-600 mt-1">解锁3个星球</p>
+                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold mt-2 inline-block">金牌</span>
+                </div>
+                
+                <!-- 进行中的成就 -->
+                <div class="achievement-item locked" onclick="showAchievementDetail('习惯大师')">
+                    <div class="mini-medal locked">🎯</div>
+                    <h4 class="font-bold text-sm text-gray-500">习惯大师</h4>
+                    <p class="text-xs text-gray-400 mt-1">完成100个习惯</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-gradient-to-r from-blue-400 to-blue-600" style="width: 67%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">67/100</p>
+                </div>
+                
+                <div class="achievement-item locked" onclick="showAchievementDetail('家庭之星')">
+                    <div class="mini-medal locked">👨‍👩‍👦</div>
+                    <h4 class="font-bold text-sm text-gray-500">家庭之星</h4>
+                    <p class="text-xs text-gray-400 mt-1">家庭排名第一30天</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-gradient-to-r from-green-400 to-green-600" style="width: 23%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">7/30</p>
+                </div>
+                
+                <div class="achievement-item locked" onclick="showAchievementDetail('火星居民')">
+                    <div class="mini-medal locked">🔴</div>
+                    <h4 class="font-bold text-sm text-gray-500">火星居民</h4>
+                    <p class="text-xs text-gray-400 mt-1">在火星生活30天</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-gradient-to-r from-red-400 to-red-600" style="width: 40%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">12/30</p>
+                </div>
+                
+                <div class="achievement-item locked" onclick="showAchievementDetail('完美一周')">
+                    <div class="mini-medal locked">⭐</div>
+                    <h4 class="font-bold text-sm text-gray-500">完美一周</h4>
+                    <p class="text-xs text-gray-400 mt-1">一周内完成所有习惯</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-gradient-to-r from-purple-400 to-purple-600" style="width: 85%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">6/7</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 激励消息 -->
+        <div class="mx-5 mb-6">
+            <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-4 text-white text-center">
+                <i class="fas fa-trophy text-3xl mb-2"></i>
+                <h3 class="font-bold text-lg">继续努力！</h3>
+                <p class="text-sm opacity-90">你已经超越了80%的用户，再接再厉！</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <div class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-list-check"></i>
+            <span>习惯</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </div>
+    </div>
+
+    <!-- 成就详情模态框 -->
+    <div id="achievement-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full">
+            <div class="text-center">
+                <div id="modal-medal" class="medal gold mx-auto mb-4">🌅</div>
+                <h3 id="modal-title" class="text-xl font-bold mb-2">早起之星</h3>
+                <p id="modal-description" class="text-gray-600 mb-4">连续早起7天，养成健康的作息习惯</p>
+                <div id="modal-reward" class="bg-yellow-50 p-3 rounded-lg mb-4">
+                    <p class="text-yellow-800 font-semibold">奖励：+50 ⭐ 星星币</p>
+                </div>
+                <button onclick="closeModal()" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold">
+                    太棒了！
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchCategory(category) {
+            // 切换标签状态
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 这里可以添加筛选逻辑
+            console.log('切换到分类:', category);
+        }
+        
+        function showAchievementDetail(achievementName) {
+            const modal = document.getElementById('achievement-modal');
+            const title = document.getElementById('modal-title');
+            const description = document.getElementById('modal-description');
+            const medal = document.getElementById('modal-medal');
+            const reward = document.getElementById('modal-reward');
+            
+            // 根据成就名称设置详情
+            const achievements = {
+                '早起之星': {
+                    emoji: '🌅',
+                    description: '连续早起7天，养成健康的作息习惯。早起的鸟儿有虫吃！',
+                    reward: '+50 ⭐ 星星币',
+                    type: 'gold'
+                },
+                '阅读达人': {
+                    emoji: '📚',
+                    description: '累计阅读30小时，知识就是力量！',
+                    reward: '+100 ⭐ 星星币',
+                    type: 'gold'
+                },
+                '运动健将': {
+                    emoji: '🏃',
+                    description: '连续运动14天，身体是革命的本钱！',
+                    reward: '+75 ⭐ 星星币',
+                    type: 'silver'
+                },
+                '习惯大师': {
+                    emoji: '🎯',
+                    description: '完成100个习惯打卡，你已经是习惯养成专家了！',
+                    reward: '+200 ⭐ 星星币',
+                    type: 'locked'
+                }
+            };
+            
+            const achievement = achievements[achievementName] || achievements['早起之星'];
+            
+            title.textContent = achievementName;
+            description.textContent = achievement.description;
+            medal.textContent = achievement.emoji;
+            medal.className = `medal ${achievement.type} mx-auto mb-4`;
+            reward.innerHTML = `<p class="text-yellow-800 font-semibold">奖励：${achievement.reward}</p>`;
+            
+            modal.classList.remove('hidden');
+            
+            // 添加获得成就的动画效果
+            if (achievement.type !== 'locked') {
+                createFloatingMedal(achievement.emoji);
+            }
+        }
+        
+        function closeModal() {
+            document.getElementById('achievement-modal').classList.add('hidden');
+        }
+        
+        function createFloatingMedal(emoji) {
+            const medal = document.createElement('div');
+            medal.textContent = emoji;
+            medal.className = 'floating-medal';
+            medal.style.left = '50%';
+            medal.style.top = '50%';
+            medal.style.transform = 'translateX(-50%)';
+            
+            document.body.appendChild(medal);
+            
+            setTimeout(() => {
+                medal.remove();
+            }, 3000);
+        }
+        
+        // 点击模态框外部关闭
+        document.getElementById('achievement-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html> 

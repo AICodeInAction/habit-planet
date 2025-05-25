@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            background: #0a0a0a;
+        }
+        
+        .galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 100%);
+        }
+        
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .planet {
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .planet:hover {
+            transform: scale(1.1);
+        }
+        
+        .planet-locked {
+            filter: grayscale(80%);
+            opacity: 0.5;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        .current-planet::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 星系背景 -->
+    <div class="galaxy-bg"></div>
+    
+    <!-- 星星 -->
+    <div id="stars"></div>
+    
+    <!-- 状态栏 -->
+    <div class="absolute top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-white text-sm z-20">
+        <span>9:41</span>
+        <div class="flex gap-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- 顶部信息 -->
+    <div class="absolute top-12 left-0 right-0 p-4 z-20">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://i.pravatar.cc/40?img=3" class="w-10 h-10 rounded-full border-2 border-white">
+                <div>
+                    <p class="text-white font-semibold">小明</p>
+                    <p class="text-yellow-400 text-xs">银河探索者</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <span class="text-white font-bold">1,250</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <i class="fas fa-gem text-purple-400"></i>
+                    <span class="text-white font-bold">85</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 星系地图 -->
+    <div class="relative w-full h-full flex items-center justify-center">
+        <!-- 轨道 -->
+        <div class="orbit" style="width: 150px; height: 150px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="orbit" style="width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="orbit" style="width: 450px; height: 450px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="orbit" style="width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        
+        <!-- 太阳（中心） -->
+        <div class="absolute" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full shadow-2xl flex items-center justify-center">
+                <i class="fas fa-sun text-white text-2xl"></i>
+            </div>
+        </div>
+        
+        <!-- 星球1 - 作息星球（已解锁） -->
+        <div class="planet current-planet" style="top: 35%; left: 50%; transform: translateX(-50%);">
+            <div class="relative">
+                <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full shadow-lg flex items-center justify-center">
+                    <i class="fas fa-bed text-white text-xl"></i>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                    <p class="text-white text-xs">作息星球</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 星球2 - 运动星球（已解锁） -->
+        <div class="planet" style="top: 50%; right: 25%;">
+            <div class="relative">
+                <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg flex items-center justify-center">
+                    <i class="fas fa-running text-white text-xl"></i>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                    <p class="text-white text-xs">运动星球</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 星球3 - 学习星球（未解锁） -->
+        <div class="planet planet-locked" style="bottom: 35%; left: 50%; transform: translateX(-50%);">
+            <div class="relative">
+                <div class="w-14 h-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full shadow-lg flex items-center justify-center">
+                    <i class="fas fa-book text-white text-xl"></i>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                    <p class="text-gray-400 text-xs">学习星球</p>
+                    <p class="text-gray-500 text-xs">需要1500⭐</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 星球4 - 饮食星球（未解锁） -->
+        <div class="planet planet-locked" style="top: 50%; left: 20%;">
+            <div class="relative">
+                <div class="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full shadow-lg flex items-center justify-center">
+                    <i class="fas fa-apple-alt text-white text-xl"></i>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                    <p class="text-gray-400 text-xs">饮食星球</p>
+                    <p class="text-gray-500 text-xs">需要2000⭐</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 更多星球（外圈） -->
+        <div class="planet planet-locked" style="top: 20%; right: 15%;">
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full shadow-lg flex items-center justify-center">
+                <i class="fas fa-palette text-white"></i>
+            </div>
+        </div>
+        
+        <div class="planet planet-locked" style="bottom: 20%; left: 15%;">
+            <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-full shadow-lg flex items-center justify-center">
+                <i class="fas fa-music text-white"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航 -->
+    <div class="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-lg">
+        <div class="flex justify-around items-center py-2">
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-globe-americas text-purple-500 text-xl mb-1"></i>
+                <span class="text-purple-500 text-xs">星系</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-tasks text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">习惯</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">家庭</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">成就</span>
+            </button>
+            <button class="flex flex-col items-center p-2">
+                <i class="fas fa-user text-gray-400 text-xl mb-1"></i>
+                <span class="text-gray-400 text-xs">我的</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 快速操作按钮 -->
+    <button class="absolute bottom-20 right-4 w-14 h-14 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full shadow-lg flex items-center justify-center z-20">
+        <i class="fas fa-plus text-white text-xl"></i>
+    </button>
+    
+    <script>
+        // 生成星星
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 个人中心</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: #fff;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .menu-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .menu-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 16px;
+        }
+        
+        .menu-section {
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body style="background: transparent;">
+    <div class="iphone-container">
+        <div class="iphone-screen">
+            <!-- iOS 状态栏 -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span>9:41</span>
+                </div>
+                <div class="status-right">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+            </div>
+
+            <!-- 导航栏 -->
+            <div class="nav-header">
+                <div class="nav-title">个人中心</div>
+                <div>
+                    <i class="fas fa-cog" style="font-size: 20px; color: #666;"></i>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="content-area" style="background: #f8f9fa;">
+                <!-- 个人信息头部 -->
+                <div class="profile-header">
+                    <img src="https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=100&h=100&fit=crop" 
+                         alt="用户头像" class="avatar-large" style="margin-bottom: 16px;">
+                    <h2 style="font-size: 24px; margin-bottom: 8px;">小明</h2>
+                    <p style="opacity: 0.9; margin-bottom: 20px;">ID: HP2024001</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 300px; margin: 0 auto;">
+                        <div>
+                            <div style="font-size: 24px; font-weight: bold;">28</div>
+                            <div style="font-size: 12px; opacity: 0.9;">连续天数</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 24px; font-weight: bold;">156</div>
+                            <div style="font-size: 12px; opacity: 0.9;">总星星</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 24px; font-weight: bold;">18</div>
+                            <div style="font-size: 12px; opacity: 0.9;">获得奖牌</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 个人信息菜单 -->
+                <div class="menu-section">
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #e3f2fd;">
+                            <i class="fas fa-user-edit" style="color: #2196f3;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">编辑资料</h4>
+                            <p style="font-size: 12px; color: #999;">修改头像、昵称等信息</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #f3e5f5;">
+                            <i class="fas fa-medal" style="color: #9c27b0;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">我的成就</h4>
+                            <p style="font-size: 12px; color: #999;">查看所有奖牌和成就</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #fff3e0;">
+                            <i class="fas fa-chart-line" style="color: #ff9800;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">数据统计</h4>
+                            <p style="font-size: 12px; color: #999;">查看习惯完成情况分析</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+                </div>
+
+                <!-- 设置菜单 -->
+                <div class="menu-section">
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #e8f5e9;">
+                            <i class="fas fa-bell" style="color: #4caf50;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">提醒设置</h4>
+                            <p style="font-size: 12px; color: #999;">管理习惯提醒时间</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #fce4ec;">
+                            <i class="fas fa-shield-alt" style="color: #e91e63;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">隐私设置</h4>
+                            <p style="font-size: 12px; color: #999;">管理个人信息安全</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #e0f2f1;">
+                            <i class="fas fa-language" style="color: #009688;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">语言设置</h4>
+                            <p style="font-size: 12px; color: #999;">简体中文</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+                </div>
+
+                <!-- 其他选项 -->
+                <div class="menu-section">
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #e1f5fe;">
+                            <i class="fas fa-question-circle" style="color: #03a9f4;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">帮助中心</h4>
+                            <p style="font-size: 12px; color: #999;">常见问题与使用指南</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #f3e5f5;">
+                            <i class="fas fa-star" style="color: #9c27b0;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">给我们评分</h4>
+                            <p style="font-size: 12px; color: #999;">在应用商店评价我们</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-icon" style="background: #fff3e0;">
+                            <i class="fas fa-info-circle" style="color: #ff9800;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">关于我们</h4>
+                            <p style="font-size: 12px; color: #999;">版本 1.0.0</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </div>
+                </div>
+
+                <!-- 退出登录 -->
+                <div style="padding: 20px; margin-bottom: 20px;">
+                    <button style="width: 100%; background: #f44336; color: white; border: none; 
+                                 padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600;">
+                        退出登录
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <a href="#" class="tab-item">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>首页</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-tasks tab-icon"></i>
+                    <span>习惯</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-globe tab-icon"></i>
+                    <span>星球</span>
+                </a>
+                <a href="#" class="tab-item">
+                    <i class="fas fa-users tab-icon"></i>
+                    <span>家庭</span>
+                </a>
+                <a href="#" class="tab-item active">
+                    <i class="fas fa-user tab-icon"></i>
+                    <span>我的</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

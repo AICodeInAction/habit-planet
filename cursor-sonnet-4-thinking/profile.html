@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人档案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+        .profile-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .avatar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .setting-item {
+            transition: all 0.2s ease;
+        }
+        .setting-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 状态栏 -->
+    <div class="flex justify-between items-center px-6 pt-12 pb-2 text-sm">
+        <div class="flex items-center space-x-1">
+            <div class="flex space-x-1">
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full opacity-50"></div>
+            </div>
+            <span class="ml-2 text-xs">中国移动</span>
+        </div>
+        <div class="text-center">
+            <div class="text-xs opacity-80">今天</div>
+            <div class="text-lg font-bold">09:41</div>
+        </div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-wifi text-xs"></i>
+            <div class="flex space-x-0.5">
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+            </div>
+            <span class="text-xs">100%</span>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="flex items-center justify-between px-6 py-4">
+        <h1 class="text-2xl font-bold">👤 个人档案</h1>
+        <button class="profile-card w-10 h-10 rounded-full flex items-center justify-center">
+            <i class="fas fa-cog text-lg"></i>
+        </button>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="px-6 pb-24">
+        <!-- 个人信息 -->
+        <div class="mb-8">
+            <div class="profile-card rounded-2xl p-6 text-center">
+                <div class="avatar w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <i class="fas fa-user text-white text-3xl"></i>
+                </div>
+                <h2 class="text-xl font-bold mb-2">小明</h2>
+                <p class="text-gray-200 text-sm mb-4">小小探险家 · 等级 5</p>
+                
+                <!-- 个人数据 -->
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-yellow-400">12</div>
+                        <div class="text-xs text-gray-300">使用天数</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-400">85%</div>
+                        <div class="text-xs text-gray-300">完成率</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-400">15</div>
+                        <div class="text-xs text-gray-300">获得徽章</div>
+                    </div>
+                </div>
+
+                <button class="w-full bg-blue-500 hover:bg-blue-600 rounded-xl py-3 font-medium transition-colors">
+                    编辑个人资料
+                </button>
+            </div>
+        </div>
+
+        <!-- 应用设置 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">⚙️ 应用设置</h2>
+            <div class="profile-card rounded-xl overflow-hidden">
+                <div class="setting-item p-4 flex items-center justify-between border-b border-white border-opacity-10">
+                    <div class="flex items-center">
+                        <i class="fas fa-bell text-blue-400 text-lg mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">推送通知</h3>
+                            <p class="text-xs text-gray-300">习惯提醒和成就通知</p>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item p-4 flex items-center justify-between border-b border-white border-opacity-10">
+                    <div class="flex items-center">
+                        <i class="fas fa-volume-up text-green-400 text-lg mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">声音效果</h3>
+                            <p class="text-xs text-gray-300">完成习惯时播放音效</p>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item p-4 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i class="fas fa-moon text-yellow-400 text-lg mr-3"></i>
+                        <div>
+                            <h3 class="font-medium">夜间模式</h3>
+                            <p class="text-xs text-gray-300">深色主题保护眼睛</p>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 账户管理 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">👤 账户管理</h2>
+            <div class="space-y-3">
+                <button class="profile-card rounded-xl p-4 w-full flex items-center justify-between setting-item">
+                    <div class="flex items-center">
+                        <i class="fas fa-key text-blue-400 text-lg mr-3"></i>
+                        <span class="font-medium">修改密码</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+
+                <button class="profile-card rounded-xl p-4 w-full flex items-center justify-between setting-item">
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope text-green-400 text-lg mr-3"></i>
+                        <span class="font-medium">绑定邮箱</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 帮助与支持 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">❓ 帮助与支持</h2>
+            <div class="space-y-3">
+                <button class="profile-card rounded-xl p-4 w-full flex items-center justify-between setting-item">
+                    <div class="flex items-center">
+                        <i class="fas fa-question-circle text-blue-400 text-lg mr-3"></i>
+                        <span class="font-medium">使用帮助</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+
+                <button class="profile-card rounded-xl p-4 w-full flex items-center justify-between setting-item">
+                    <div class="flex items-center">
+                        <i class="fas fa-bug text-orange-400 text-lg mr-3"></i>
+                        <span class="font-medium">反馈问题</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 退出登录 -->
+        <div class="mb-6">
+            <button class="w-full bg-red-500 hover:bg-red-600 rounded-xl py-4 font-medium transition-colors">
+                退出登录
+            </button>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 backdrop-filter backdrop-blur-lg">
+        <div class="flex justify-around items-center py-3 px-6">
+            <div class="text-center">
+                <i class="fas fa-home text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">太空舱</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-list-check text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">习惯</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-planet-moon text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">星球</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">家庭</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-trophy text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">成就</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

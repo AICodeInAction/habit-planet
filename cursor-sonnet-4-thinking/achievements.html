@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成就中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #ffd89b 0%, #19547b 100%);
+        }
+        .achievement-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .badge-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            to { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+        .medal-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .medal-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+        .locked-badge {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+        .progress-circle {
+            stroke-dasharray: 251.2;
+            stroke-dashoffset: 125.6;
+            animation: progress 2s ease-out;
+        }
+        @keyframes progress {
+            from { stroke-dashoffset: 251.2; }
+            to { stroke-dashoffset: 125.6; }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 状态栏 -->
+    <div class="flex justify-between items-center px-6 pt-12 pb-2 text-sm">
+        <div class="flex items-center space-x-1">
+            <div class="flex space-x-1">
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full"></div>
+                <div class="w-1 h-1 bg-white rounded-full opacity-50"></div>
+            </div>
+            <span class="ml-2 text-xs">中国移动</span>
+        </div>
+        <div class="text-center">
+            <div class="text-xs opacity-80">今天</div>
+            <div class="text-lg font-bold">09:41</div>
+        </div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-wifi text-xs"></i>
+            <div class="flex space-x-0.5">
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+                <div class="w-1 h-3 bg-white rounded-sm"></div>
+            </div>
+            <span class="text-xs">100%</span>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="flex items-center justify-between px-6 py-4">
+        <h1 class="text-2xl font-bold">🏆 成就中心</h1>
+        <div class="flex items-center space-x-2">
+            <div class="text-yellow-400">
+                <i class="fas fa-trophy"></i>
+                <span class="text-sm ml-1">15</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="px-6 pb-24">
+        <!-- 用户等级 -->
+        <div class="mb-8">
+            <div class="achievement-card rounded-2xl p-6 text-center">
+                <div class="relative mb-4">
+                    <svg class="w-32 h-32 mx-auto" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.2)" stroke-width="8" fill="none"/>
+                        <circle cx="50" cy="50" r="40" stroke="#FFD700" stroke-width="8" fill="none" 
+                                class="progress-circle" stroke-linecap="round"/>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">5</div>
+                            <div class="text-sm text-gray-200">等级</div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-xl font-bold mb-2">⭐ 小小探险家</h2>
+                <p class="text-gray-200 text-sm mb-4">距离下一级还需 320 经验值</p>
+                <div class="w-full bg-gray-700 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 h-3 rounded-full" style="width: 65%"></div>
+                </div>
+                <p class="text-xs text-gray-300 mt-2">1,280 / 1,600 XP</p>
+            </div>
+        </div>
+
+        <!-- 最新成就 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🎉 最新成就</h2>
+            <div class="achievement-card rounded-xl p-4 flex items-center border-2 border-yellow-400 badge-glow">
+                <div class="medal-shine w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mr-4">
+                    <i class="fas fa-star text-yellow-900 text-2xl"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold text-lg">习惯新手</h3>
+                    <p class="text-gray-200 text-sm">连续完成7天习惯</p>
+                    <p class="text-xs text-yellow-400 mt-1">2小时前获得</p>
+                </div>
+                <div class="text-yellow-400">
+                    <i class="fas fa-trophy text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 徽章收集 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🏅 徽章收集</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <!-- 已获得徽章 -->
+                <div class="achievement-card rounded-xl p-4 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 medal-shine">
+                        <i class="fas fa-glass-water text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-sm">水分达人</h3>
+                    <p class="text-xs text-gray-300">每天8杯水</p>
+                    <p class="text-xs text-green-400 mt-1">已获得</p>
+                </div>
+
+                <div class="achievement-card rounded-xl p-4 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3 medal-shine">
+                        <i class="fas fa-book text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-sm">阅读家</h3>
+                    <p class="text-xs text-gray-300">读书30天</p>
+                    <p class="text-xs text-green-400 mt-1">已获得</p>
+                </div>
+
+                <div class="achievement-card rounded-xl p-4 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 medal-shine">
+                        <i class="fas fa-music text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-sm">音乐家</h3>
+                    <p class="text-xs text-gray-300">练琴100小时</p>
+                    <p class="text-xs text-yellow-400 mt-1">进行中</p>
+                </div>
+
+                <!-- 未解锁徽章 -->
+                <div class="achievement-card locked-badge rounded-xl p-4 text-center">
+                    <div class="w-16 h-16 bg-gray-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-running text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-sm">运动健将</h3>
+                    <p class="text-xs text-gray-400">运动365天</p>
+                    <p class="text-xs text-gray-500 mt-1">未解锁</p>
+                </div>
+
+                <div class="achievement-card locked-badge rounded-xl p-4 text-center">
+                    <div class="w-16 h-16 bg-gray-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-bed text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-sm">睡眠大师</h3>
+                    <p class="text-xs text-gray-400">早睡100天</p>
+                    <p class="text-xs text-gray-500 mt-1">未解锁</p>
+                </div>
+
+                <div class="achievement-card locked-badge rounded-xl p-4 text-center">
+                    <div class="w-16 h-16 bg-gray-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-crown text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-medium text-sm">习惯之王</h3>
+                    <p class="text-xs text-gray-400">完美一年</p>
+                    <p class="text-xs text-gray-500 mt-1">未解锁</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 连击记录 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">🔥 连击记录</h2>
+            <div class="space-y-3">
+                <div class="achievement-card rounded-xl p-4 flex items-center">
+                    <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-fire text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">当前连击</h3>
+                        <p class="text-gray-200 text-sm">连续7天完成所有习惯</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-orange-400">7</div>
+                        <div class="text-xs text-gray-300">天</div>
+                    </div>
+                </div>
+
+                <div class="achievement-card rounded-xl p-4 flex items-center">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-trophy text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">最佳记录</h3>
+                        <p class="text-gray-200 text-sm">最长连击记录</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-yellow-400">15</div>
+                        <div class="text-xs text-gray-300">天</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 统计数据 -->
+        <div class="mb-8">
+            <h2 class="text-lg font-bold mb-4">📊 数据统计</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="achievement-card rounded-xl p-4 text-center">
+                    <i class="fas fa-calendar text-blue-400 text-2xl mb-2"></i>
+                    <div class="text-2xl font-bold">12</div>
+                    <div class="text-sm text-gray-300">使用天数</div>
+                </div>
+                <div class="achievement-card rounded-xl p-4 text-center">
+                    <i class="fas fa-check-circle text-green-400 text-2xl mb-2"></i>
+                    <div class="text-2xl font-bold">85%</div>
+                    <div class="text-sm text-gray-300">完成率</div>
+                </div>
+                <div class="achievement-card rounded-xl p-4 text-center">
+                    <i class="fas fa-star text-yellow-400 text-2xl mb-2"></i>
+                    <div class="text-2xl font-bold">1,280</div>
+                    <div class="text-sm text-gray-300">总能量</div>
+                </div>
+                <div class="achievement-card rounded-xl p-4 text-center">
+                    <i class="fas fa-rocket text-purple-400 text-2xl mb-2"></i>
+                    <div class="text-2xl font-bold">3</div>
+                    <div class="text-sm text-gray-300">解锁星球</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 近期活动 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-bold mb-4">📅 近期活动</h2>
+            <div class="space-y-3">
+                <div class="achievement-card rounded-xl p-3 flex items-center">
+                    <i class="fas fa-star text-yellow-400 text-lg mr-3"></i>
+                    <div class="flex-1">
+                        <p class="text-sm">获得"水分达人"徽章</p>
+                        <p class="text-xs text-gray-400">今天 14:30</p>
+                    </div>
+                </div>
+                <div class="achievement-card rounded-xl p-3 flex items-center">
+                    <i class="fas fa-fire text-orange-400 text-lg mr-3"></i>
+                    <div class="flex-1">
+                        <p class="text-sm">连击达到7天新记录</p>
+                        <p class="text-xs text-gray-400">今天 08:00</p>
+                    </div>
+                </div>
+                <div class="achievement-card rounded-xl p-3 flex items-center">
+                    <i class="fas fa-gift text-pink-400 text-lg mr-3"></i>
+                    <div class="flex-1">
+                        <p class="text-sm">完成家庭挑战，获得奖励</p>
+                        <p class="text-xs text-gray-400">昨天 20:15</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 backdrop-filter backdrop-blur-lg">
+        <div class="flex justify-around items-center py-3 px-6">
+            <div class="text-center">
+                <i class="fas fa-home text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">太空舱</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-list-check text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">习惯</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-planet-moon text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">星球</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-users text-gray-400 text-xl mb-1"></i>
+                <p class="text-xs text-gray-400">家庭</p>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-trophy text-blue-400 text-xl mb-1"></i>
+                <p class="text-xs text-blue-400">成就</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

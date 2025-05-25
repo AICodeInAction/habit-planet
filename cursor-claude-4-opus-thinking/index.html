@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 高保真原型展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f7;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            font-size: 20px;
+            color: #6e6e73;
+            line-height: 1.6;
+        }
+        
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .prototype-item {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .prototype-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .prototype-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .prototype-description {
+            font-size: 16px;
+            color: #6e6e73;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        .prototype-frame {
+            width: 100%;
+            height: 900px;
+            border: none;
+            border-radius: 12px;
+            background: #f0f0f5;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .feature-list {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature-list h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+        
+        .feature-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #6e6e73;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-list li:before {
+            content: "✅";
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            color: #6e6e73;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>习惯星球 🌟</h1>
+        <p>帮助孩子养成良好习惯的游戏化 APP<br>基于《掌控习惯》原理设计，让全家人一起成长</p>
+    </div>
+
+    <div class="feature-list" style="max-width: 1400px; margin: 0 auto 40px;">
+        <h3>🚀 核心功能特色</h3>
+        <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+            <li>游戏化星际探索主题，解锁新星球</li>
+            <li>基于《掌控习惯》四大原则设计</li>
+            <li>丰富的奖牌成就系统</li>
+            <li>亲子互动任务，双倍星星奖励</li>
+            <li>家庭排行榜，良性竞争</li>
+            <li>精美的视觉设计，贴近真实 APP</li>
+            <li>习惯分类管理，科学养成</li>
+            <li>数据统计分析，掌握成长轨迹</li>
+            <li>星球装饰系统，持续激励</li>
+        </ul>
+    </div>
+
+    <div class="prototype-grid">
+        <!-- 首页 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">
+                <span class="tag">核心</span>
+                首页 - 今日概览
+            </h2>
+            <p class="prototype-description">
+                展示用户的习惯完成情况、今日任务、星球预览和家庭动态。快速了解当前进度，一键打卡完成习惯。
+            </p>
+            <iframe src="pages/home.html" class="prototype-frame"></iframe>
+        </div>
+
+        <!-- 习惯管理 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">
+                <span class="tag">核心</span>
+                习惯管理
+            </h2>
+            <p class="prototype-description">
+                管理所有习惯，查看完成进度、连续天数。支持习惯分类（健康、学习、生活），归档已完成习惯。
+            </p>
+            <iframe src="pages/habits.html" class="prototype-frame"></iframe>
+        </div>
+
+        <!-- 星球系统 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">
+                <span class="tag">游戏化</span>
+                星球探索
+            </h2>
+            <p class="prototype-description">
+                沉浸式的星际探索体验，通过完成习惯解锁新星球，收集装饰物美化星球，激发孩子持续动力。
+            </p>
+            <iframe src="pages/planets.html" class="prototype-frame"></iframe>
+        </div>
+
+        <!-- 家庭中心 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">
+                <span class="tag">亲子</span>
+                家庭中心
+            </h2>
+            <p class="prototype-description">
+                查看家庭成员状态，参与亲子任务获得双倍奖励，家庭排行榜激发良性竞争，全家共同成长。
+            </p>
+            <iframe src="pages/family.html" class="prototype-frame"></iframe>
+        </div>
+
+        <!-- 成就系统 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">
+                <span class="tag">激励</span>
+                成就中心
+            </h2>
+            <p class="prototype-description">
+                丰富的奖牌墙展示，追踪里程碑进度，金银铜牌分级激励，让每一次坚持都有回报。
+            </p>
+            <iframe src="pages/achievements.html" class="prototype-frame"></iframe>
+        </div>
+
+        <!-- 个人中心 -->
+        <div class="prototype-item">
+            <h2 class="prototype-title">
+                个人中心
+            </h2>
+            <p class="prototype-description">
+                管理个人资料、查看数据统计、设置提醒时间、隐私安全设置等，打造个性化使用体验。
+            </p>
+            <iframe src="pages/profile.html" class="prototype-frame"></iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>习惯星球 - 让好习惯成为一场有趣的星际冒险 ✨</p>
+        <p style="margin-top: 8px; font-size: 14px;">高保真原型设计 | 2024</p>
+    </div>
+</body>
+</html> 

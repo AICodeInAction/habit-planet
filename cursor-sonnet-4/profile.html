@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人资料</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .status-bar {
+            height: 47px;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .content-area {
+            height: calc(100vh - 47px - 83px);
+            overflow-y: auto;
+            position: relative;
+        }
+        .bottom-nav {
+            height: 83px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8E8E93;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-item.active {
+            color: #007AFF;
+        }
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .profile-header {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 0 0 30px 30px;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto 16px;
+            border: 4px solid rgba(255,255,255,0.3);
+            position: relative;
+        }
+        .level-badge {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+        .info-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 12px 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 0 20px 20px;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        .setting-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: #ddd;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .toggle-switch.active {
+            background: #4CAF50;
+        }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .toggle-switch.active::after {
+            transform: translateX(22px);
+        }
+        .progress-circle {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+        .progress-circle svg {
+            transform: rotate(-90deg);
+        }
+        .progress-circle-bg {
+            fill: none;
+            stroke: rgba(0,0,0,0.1);
+            stroke-width: 8;
+        }
+        .progress-circle-fill {
+            fill: none;
+            stroke: url(#progressGradient);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        .badge-collection {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            justify-content: center;
+        }
+        .mini-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .gold-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+        .silver-badge {
+            background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+        }
+        .bronze-badge {
+            background: linear-gradient(135deg, #CD7F32, #B8860B);
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-three-quarters text-xs"></i>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="content-area">
+        <!-- 个人资料头部 -->
+        <div class="profile-header">
+            <div class="avatar">
+                👦
+                <div class="level-badge">Lv.5</div>
+            </div>
+            <h1 class="text-2xl font-bold mb-2">小明</h1>
+            <p class="text-lg opacity-90">宇航学员</p>
+            <div class="flex items-center justify-center space-x-4 mt-4">
+                <div class="text-center">
+                    <div class="text-xl font-bold">⭐ 127</div>
+                    <div class="text-sm opacity-80">星星币</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xl font-bold">🏆 12</div>
+                    <div class="text-sm opacity-80">成就</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xl font-bold">🔥 7</div>
+                    <div class="text-sm opacity-80">连续天数</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 统计数据 -->
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">67</div>
+                <div class="stat-label">完成习惯</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15</div>
+                <div class="stat-label">使用天数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">解锁星球</div>
+            </div>
+        </div>
+
+        <!-- 本周进度 -->
+        <div class="info-card">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">本周进度</h3>
+            <div class="flex items-center justify-between">
+                <div class="progress-circle">
+                    <svg width="80" height="80" viewBox="0 0 80 80">
+                        <defs>
+                            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4facfe"/>
+                                <stop offset="100%" style="stop-color:#00f2fe"/>
+                            </linearGradient>
+                        </defs>
+                        <circle class="progress-circle-bg" cx="40" cy="40" r="32"/>
+                        <circle class="progress-circle-fill" cx="40" cy="40" r="32" 
+                                stroke-dasharray="201" stroke-dashoffset="60"/>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-lg font-bold">70%</div>
+                            <div class="text-xs text-gray-600">完成率</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 ml-6">
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span>早起</span>
+                            <span class="text-green-600">7/7</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>阅读</span>
+                            <span class="text-green-600">6/7</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>运动</span>
+                            <span class="text-orange-600">4/7</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>整理</span>
+                            <span class="text-orange-600">3/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最近获得的徽章 -->
+        <div class="info-card">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">最近获得的徽章</h3>
+            <div class="badge-collection">
+                <div class="mini-badge gold-badge">🌅</div>
+                <div class="mini-badge silver-badge">🏃</div>
+                <div class="mini-badge bronze-badge">🏠</div>
+                <div class="mini-badge gold-badge">📚</div>
+                <div class="mini-badge gold-badge">🚀</div>
+            </div>
+            <p class="text-center text-sm text-gray-600 mt-3">共获得 12 个徽章</p>
+        </div>
+
+        <!-- 设置选项 -->
+        <div class="info-card">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">设置</h3>
+            
+            <div class="setting-item">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-blue-500 to-blue-600">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">推送通知</h4>
+                        <p class="text-sm text-gray-600">接收习惯提醒和成就通知</p>
+                    </div>
+                </div>
+                <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+            
+            <div class="setting-item">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-green-500 to-green-600">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">家庭分享</h4>
+                        <p class="text-sm text-gray-600">与家人分享进度和成就</p>
+                    </div>
+                </div>
+                <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+            
+            <div class="setting-item">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-purple-500 to-purple-600">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">深色模式</h4>
+                        <p class="text-sm text-gray-600">护眼模式，适合夜间使用</p>
+                    </div>
+                </div>
+                <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+            </div>
+            
+            <div class="setting-item">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-orange-500 to-orange-600">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">音效</h4>
+                        <p class="text-sm text-gray-600">打卡和成就音效提示</p>
+                    </div>
+                </div>
+                <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+        </div>
+
+        <!-- 其他选项 -->
+        <div class="info-card">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">其他</h3>
+            
+            <div class="setting-item" onclick="showOption('编辑资料')">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-pink-500 to-pink-600">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">编辑资料</h4>
+                        <p class="text-sm text-gray-600">修改头像、昵称等信息</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item" onclick="showOption('习惯管理')">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-teal-500 to-teal-600">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">习惯管理</h4>
+                        <p class="text-sm text-gray-600">添加、编辑或删除习惯</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item" onclick="showOption('数据导出')">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-indigo-500 to-indigo-600">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">数据导出</h4>
+                        <p class="text-sm text-gray-600">导出习惯数据和统计报告</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="setting-item" onclick="showOption('帮助与反馈')">
+                <div class="flex items-center">
+                    <div class="setting-icon bg-gradient-to-r from-yellow-500 to-yellow-600">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">帮助与反馈</h4>
+                        <p class="text-sm text-gray-600">使用帮助和意见反馈</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- 版本信息 -->
+        <div class="text-center py-6 text-white opacity-70">
+            <p class="text-sm">习惯星球 v1.0.0</p>
+            <p class="text-xs mt-1">让好习惯成为生活的一部分</p>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <div class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-list-check"></i>
+            <span>习惯</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-user"></i>
+            <span>我的</span>
+        </div>
+    </div>
+
+    <script>
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+            
+            // 模拟设置保存
+            const isActive = element.classList.contains('active');
+            const settingName = element.previousElementSibling.querySelector('h4').textContent;
+            
+            showMessage(`${settingName} 已${isActive ? '开启' : '关闭'}`);
+        }
+        
+        function showOption(optionName) {
+            showMessage(`正在打开 ${optionName}...`);
+        }
+        
+        function showMessage(text) {
+            const message = document.createElement('div');
+            message.textContent = text;
+            message.className = 'fixed top-20 left-4 right-4 bg-black bg-opacity-80 text-white p-4 rounded-lg text-center z-50';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html> 

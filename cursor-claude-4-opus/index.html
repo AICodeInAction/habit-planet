@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 高保真原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .iphone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            background: #000;
+            padding: 10px;
+        }
+        
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 40px;
+            overflow: hidden;
+            background: #fff;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 10;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .prototype-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .page-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center mb-10">
+        <h1 class="text-4xl font-bold text-white mb-4">习惯星球 - 高保真原型</h1>
+        <p class="text-white/80 text-lg">帮助孩子养成良好习惯的趣味APP</p>
+    </div>
+    
+    <div class="prototype-grid">
+        <!-- 启动页 -->
+        <div class="prototype-item">
+            <h2 class="page-title">启动页</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="splash.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 登录页 -->
+        <div class="prototype-item">
+            <h2 class="page-title">登录/注册</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="login.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 主页 -->
+        <div class="prototype-item">
+            <h2 class="page-title">主页 - 星球地图</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="home.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 习惯列表 -->
+        <div class="prototype-item">
+            <h2 class="page-title">今日习惯</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="habits.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 习惯打卡 -->
+        <div class="prototype-item">
+            <h2 class="page-title">习惯打卡</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="checkin.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 个人中心 -->
+        <div class="prototype-item">
+            <h2 class="page-title">个人中心</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="profile.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 家庭空间 -->
+        <div class="prototype-item">
+            <h2 class="page-title">家庭空间</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="family.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 奖励商城 -->
+        <div class="prototype-item">
+            <h2 class="page-title">奖励商城</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="rewards.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 习惯详情 -->
+        <div class="prototype-item">
+            <h2 class="page-title">习惯详情</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="habit-detail.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 设置页 -->
+        <div class="prototype-item">
+            <h2 class="page-title">设置</h2>
+            <div class="iphone-frame">
+                <div class="dynamic-island"></div>
+                <div class="iphone-screen">
+                    <iframe src="settings.html" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

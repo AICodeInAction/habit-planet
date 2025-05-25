@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星球探索</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .status-bar {
+            height: 47px;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .content-area {
+            height: calc(100vh - 47px - 83px);
+            overflow-y: auto;
+            position: relative;
+        }
+        .bottom-nav {
+            height: 83px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8E8E93;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-item.active {
+            color: #007AFF;
+        }
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .planet-hero {
+            height: 300px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #ee5a24, #d63031);
+            border-radius: 0 0 30px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .planet-sphere {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #ff9ff3, #f368e0, #e056fd);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 50px rgba(240, 104, 224, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-20px); }
+        }
+        .stars-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s linear infinite;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .info-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .decoration-item {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .decoration-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        .decoration-item.owned {
+            border-color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        .decoration-item.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .price-tag {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .unlock-progress {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .unlock-fill {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        .tab-button {
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .tab-button.active {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        .tab-button:not(.active) {
+            background: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS状态栏 -->
+    <div class="status-bar">
+        <div>9:41</div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-three-quarters text-xs"></i>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="content-area">
+        <!-- 星球展示区域 -->
+        <div class="planet-hero">
+            <div class="stars-bg"></div>
+            <div class="planet-sphere"></div>
+            
+            <!-- 星球信息覆盖层 -->
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold">火星</h1>
+                        <p class="text-sm opacity-90">红色星球</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xl font-bold">⭐ 127</div>
+                        <div class="text-xs opacity-80">可用星星币</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 星球信息卡片 -->
+        <div class="info-card">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-800">解锁进度</h2>
+                <span class="text-sm text-gray-600">75% 完成</span>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">连续打卡</span>
+                    <span class="text-sm font-semibold">7/10 天</span>
+                </div>
+                <div class="unlock-progress">
+                    <div class="unlock-fill" style="width: 70%"></div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">完成习惯</span>
+                    <span class="text-sm font-semibold">15/20 次</span>
+                </div>
+                <div class="unlock-progress">
+                    <div class="unlock-fill" style="width: 75%"></div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">获得星星币</span>
+                    <span class="text-sm font-semibold">127/150 ⭐</span>
+                </div>
+                <div class="unlock-progress">
+                    <div class="unlock-fill" style="width: 85%"></div>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                <p class="text-sm text-blue-800">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    再坚持 3 天就能完全解锁火星，获得专属装饰物！
+                </p>
+            </div>
+        </div>
+
+        <!-- 标签切换 -->
+        <div class="mx-5 mb-4">
+            <div class="flex space-x-2">
+                <div class="tab-button active" onclick="switchTab('decorations')">装饰物</div>
+                <div class="tab-button" onclick="switchTab('achievements')">成就</div>
+            </div>
+        </div>
+
+        <!-- 装饰物商店 -->
+        <div id="decorations-tab" class="mx-5 mb-6">
+            <div class="grid grid-cols-2 gap-4">
+                <!-- 已拥有的装饰物 -->
+                <div class="decoration-item owned">
+                    <div class="text-4xl mb-2">🏠</div>
+                    <h3 class="font-bold text-sm">火星基地</h3>
+                    <p class="text-xs opacity-90 mt-1">已拥有</p>
+                </div>
+                
+                <div class="decoration-item owned">
+                    <div class="text-4xl mb-2">🌱</div>
+                    <h3 class="font-bold text-sm">氧气花园</h3>
+                    <p class="text-xs opacity-90 mt-1">已拥有</p>
+                </div>
+                
+                <!-- 可购买的装饰物 -->
+                <div class="decoration-item" onclick="buyDecoration(this, 50)">
+                    <div class="text-4xl mb-2">🚀</div>
+                    <h3 class="font-bold text-sm text-gray-800">火箭发射台</h3>
+                    <div class="price-tag mt-2">50 ⭐</div>
+                </div>
+                
+                <div class="decoration-item" onclick="buyDecoration(this, 75)">
+                    <div class="text-4xl mb-2">🛰️</div>
+                    <h3 class="font-bold text-sm text-gray-800">通讯卫星</h3>
+                    <div class="price-tag mt-2">75 ⭐</div>
+                </div>
+                
+                <div class="decoration-item" onclick="buyDecoration(this, 100)">
+                    <div class="text-4xl mb-2">⚡</div>
+                    <h3 class="font-bold text-sm text-gray-800">能量核心</h3>
+                    <div class="price-tag mt-2">100 ⭐</div>
+                </div>
+                
+                <!-- 锁定的装饰物 -->
+                <div class="decoration-item locked">
+                    <div class="text-4xl mb-2 filter grayscale">🏭</div>
+                    <h3 class="font-bold text-sm text-gray-500">工业区</h3>
+                    <p class="text-xs text-gray-500 mt-1">需要完全解锁火星</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就标签页 (隐藏) -->
+        <div id="achievements-tab" class="mx-5 mb-6 hidden">
+            <div class="space-y-4">
+                <div class="info-card">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-trophy text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold">火星探索者</h3>
+                            <p class="text-sm text-gray-600">首次登陆火星</p>
+                        </div>
+                        <div class="text-green-500">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card opacity-60">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i class="fas fa-lock text-gray-500"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-gray-500">火星居民</h3>
+                            <p class="text-sm text-gray-400">在火星连续生活30天</p>
+                            <div class="unlock-progress mt-2">
+                                <div class="unlock-fill" style="width: 23%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <div class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-list-check"></i>
+            <span>习惯</span>
+        </div>
+        <div class="nav-item active">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </div>
+    </div>
+
+    <script>
+        let starCoins = 127;
+        
+        function switchTab(tabName) {
+            // 切换标签按钮状态
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 切换内容显示
+            document.getElementById('decorations-tab').classList.add('hidden');
+            document.getElementById('achievements-tab').classList.add('hidden');
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+        }
+        
+        function buyDecoration(element, price) {
+            if (starCoins >= price) {
+                starCoins -= price;
+                
+                // 更新星星币显示
+                document.querySelector('.planet-hero .text-xl').textContent = `⭐ ${starCoins}`;
+                
+                // 标记为已拥有
+                element.classList.add('owned');
+                element.onclick = null;
+                element.querySelector('.price-tag').textContent = '已拥有';
+                
+                // 购买成功动画
+                element.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    element.style.transform = '';
+                }, 300);
+                
+                // 显示购买成功消息
+                showMessage('购买成功！装饰物已添加到你的火星基地');
+            } else {
+                showMessage('星星币不足，继续完成习惯来获得更多星星币！');
+            }
+        }
+        
+        function showMessage(text) {
+            const message = document.createElement('div');
+            message.textContent = text;
+            message.className = 'fixed top-20 left-4 right-4 bg-black bg-opacity-80 text-white p-4 rounded-lg text-center z-50';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

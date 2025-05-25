@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 奖励商城</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .reward-card {
+            transition: all 0.3s ease;
+        }
+        
+        .reward-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        .category-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div class="fixed top-0 left-0 right-0 h-12 flex items-center justify-between px-6 text-gray-800 text-sm bg-white z-20">
+        <span>9:41</span>
+        <div class="flex gap-1">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- 导航栏 -->
+    <div class="fixed top-12 left-0 right-0 bg-white border-b border-gray-100 z-10">
+        <div class="flex items-center justify-between px-4 py-3">
+            <button class="text-gray-600">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </button>
+            <h1 class="text-xl font-bold text-gray-800">奖励商城</h1>
+            <button class="text-purple-600">
+                <i class="fas fa-shopping-cart text-xl"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 我的积分 -->
+    <div class="fixed top-24 left-0 right-0 bg-gradient-to-r from-purple-500 to-blue-600 px-6 py-4 z-10">
+        <div class="flex justify-between items-center text-white">
+            <div>
+                <p class="text-sm text-white/80">我的积分</p>
+                <div class="flex items-center gap-4 mt-1">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <span class="text-2xl font-bold">1,250</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-gem text-purple-300 text-xl"></i>
+                        <span class="text-2xl font-bold">85</span>
+                    </div>
+                </div>
+            </div>
+            <button class="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-medium">
+                兑换记录
+            </button>
+        </div>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div class="pt-44 pb-20 px-4">
+        <!-- 分类标签 -->
+        <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+            <button class="category-tab active px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap">
+                全部
+            </button>
+            <button class="category-tab px-4 py-2 bg-white rounded-full text-sm text-gray-600 whitespace-nowrap">
+                星球装饰
+            </button>
+            <button class="category-tab px-4 py-2 bg-white rounded-full text-sm text-gray-600 whitespace-nowrap">
+                飞船外观
+            </button>
+            <button class="category-tab px-4 py-2 bg-white rounded-full text-sm text-gray-600 whitespace-nowrap">
+                特殊效果
+            </button>
+            <button class="category-tab px-4 py-2 bg-white rounded-full text-sm text-gray-600 whitespace-nowrap">
+                限时优惠
+            </button>
+        </div>
+        
+        <!-- 商品列表 -->
+        <div class="grid grid-cols-2 gap-4">
+            <!-- 商品1 - 彩虹光环 -->
+            <div class="reward-card bg-white rounded-2xl overflow-hidden shadow-sm">
+                <div class="relative h-32 bg-gradient-to-br from-pink-400 to-purple-400 p-4 flex items-center justify-center">
+                    <div class="relative">
+                        <div class="w-20 h-20 border-4 border-white rounded-full float-animation"></div>
+                        <div class="absolute inset-0 w-20 h-20 border-4 border-yellow-300 rounded-full" style="animation-delay: 0.5s"></div>
+                        <div class="absolute inset-0 w-20 h-20 border-4 border-pink-300 rounded-full" style="animation-delay: 1s"></div>
+                    </div>
+                    <!-- 闪光效果 -->
+                    <div class="sparkle" style="top: 20%; left: 20%; animation-delay: 0s"></div>
+                    <div class="sparkle" style="top: 80%; right: 20%; animation-delay: 0.5s"></div>
+                    <div class="sparkle" style="bottom: 30%; left: 10%; animation-delay: 1s"></div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1">彩虹光环</h3>
+                    <p class="text-xs text-gray-500 mb-2">让你的星球闪闪发光</p>
+                    <div class="flex items-center gap-2">
+                        <span class="flex items-center gap-1 text-yellow-600 font-bold">
+                            <i class="fas fa-star text-sm"></i>
+                            500
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商品2 - 流星雨 -->
+            <div class="reward-card bg-white rounded-2xl overflow-hidden shadow-sm">
+                <div class="relative h-32 bg-gradient-to-br from-blue-900 to-purple-900 p-4 flex items-center justify-center overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-full">
+                        <div class="absolute w-1 h-8 bg-gradient-to-b from-white to-transparent transform rotate-45" 
+                             style="top: 10%; left: 20%; animation: shooting-star 3s linear infinite"></div>
+                        <div class="absolute w-1 h-8 bg-gradient-to-b from-white to-transparent transform rotate-45" 
+                             style="top: 30%; left: 60%; animation: shooting-star 3s linear infinite; animation-delay: 1s"></div>
+                        <div class="absolute w-1 h-8 bg-gradient-to-b from-white to-transparent transform rotate-45" 
+                             style="top: 50%; left: 40%; animation: shooting-star 3s linear infinite; animation-delay: 2s"></div>
+                    </div>
+                    <i class="fas fa-meteor text-white text-4xl relative z-10"></i>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1">流星雨效果</h3>
+                    <p class="text-xs text-gray-500 mb-2">浪漫的流星划过</p>
+                    <div class="flex items-center gap-2">
+                        <span class="flex items-center gap-1 text-purple-600 font-bold">
+                            <i class="fas fa-gem text-sm"></i>
+                            30
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商品3 - 宇航员 -->
+            <div class="reward-card bg-white rounded-2xl overflow-hidden shadow-sm">
+                <div class="relative h-32 bg-gradient-to-br from-gray-800 to-gray-900 p-4 flex items-center justify-center">
+                    <div class="text-white text-5xl float-animation">👨‍🚀</div>
+                    <div class="absolute bottom-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                        HOT
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1">迷你宇航员</h3>
+                    <p class="text-xs text-gray-500 mb-2">星球上的小伙伴</p>
+                    <div class="flex items-center gap-2">
+                        <span class="flex items-center gap-1 text-yellow-600 font-bold">
+                            <i class="fas fa-star text-sm"></i>
+                            800
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商品4 - 极光 -->
+            <div class="reward-card bg-white rounded-2xl overflow-hidden shadow-sm">
+                <div class="relative h-32 bg-gradient-to-br from-teal-500 to-green-600 p-4 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-transparent via-green-300/30 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-transparent via-blue-300/30 to-transparent transform skew-x-12"></div>
+                    <i class="fas fa-mountain text-white/80 text-4xl relative z-10"></i>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1">极光背景</h3>
+                    <p class="text-xs text-gray-500 mb-2">绚丽的极光效果</p>
+                    <div class="flex items-center gap-2">
+                        <span class="flex items-center gap-1 text-purple-600 font-bold">
+                            <i class="fas fa-gem text-sm"></i>
+                            50
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商品5 - 星际飞船 -->
+            <div class="reward-card bg-white rounded-2xl overflow-hidden shadow-sm">
+                <div class="relative h-32 bg-gradient-to-br from-orange-500 to-red-600 p-4 flex items-center justify-center">
+                    <div class="text-6xl">🚀</div>
+                    <div class="absolute top-2 left-2 bg-yellow-400 text-gray-800 text-xs px-2 py-1 rounded-full font-bold">
+                        NEW
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1">超级飞船</h3>
+                    <p class="text-xs text-gray-500 mb-2">探索宇宙的座驾</p>
+                    <div class="flex items-center gap-2">
+                        <span class="flex items-center gap-1 text-yellow-600 font-bold">
+                            <i class="fas fa-star text-sm"></i>
+                            1200
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商品6 - 星座连线 -->
+            <div class="reward-card bg-white rounded-2xl overflow-hidden shadow-sm">
+                <div class="relative h-32 bg-gradient-to-br from-indigo-900 to-purple-900 p-4 flex items-center justify-center">
+                    <div class="relative w-24 h-24">
+                        <!-- 星座点 -->
+                        <div class="absolute w-2 h-2 bg-white rounded-full" style="top: 10%; left: 20%"></div>
+                        <div class="absolute w-2 h-2 bg-white rounded-full" style="top: 30%; left: 60%"></div>
+                        <div class="absolute w-2 h-2 bg-white rounded-full" style="top: 60%; left: 30%"></div>
+                        <div class="absolute w-2 h-2 bg-white rounded-full" style="top: 80%; left: 70%"></div>
+                        <!-- 连线 -->
+                        <svg class="absolute inset-0 w-full h-full">
+                            <line x1="20%" y1="10%" x2="60%" y2="30%" stroke="white" stroke-width="1" opacity="0.5"/>
+                            <line x1="60%" y1="30%" x2="30%" y2="60%" stroke="white" stroke-width="1" opacity="0.5"/>
+                            <line x1="30%" y1="60%" x2="70%" y2="80%" stroke="white" stroke-width="1" opacity="0.5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1">星座守护</h3>
+                    <p class="text-xs text-gray-500 mb-2">独特的星座图案</p>
+                    <div class="flex items-center gap-2">
+                        <span class="flex items-center gap-1 text-yellow-600 font-bold line-through text-gray-400 text-xs">
+                            <i class="fas fa-star text-xs"></i>
+                            1000
+                        </span>
+                        <span class="flex items-center gap-1 text-red-600 font-bold">
+                            <i class="fas fa-star text-sm"></i>
+                            600
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 限时优惠提示 -->
+        <div class="mt-6 bg-gradient-to-r from-orange-500 to-pink-500 rounded-2xl p-4 text-white">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-clock text-2xl"></i>
+                <div class="flex-1">
+                    <p class="font-bold">限时优惠活动</p>
+                    <p class="text-sm text-white/90">所有星座系列装饰 6 折优惠，仅剩 2 天！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        @keyframes shooting-star {
+            from {
+                transform: translateX(0) translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100px) translateY(100px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html> 
