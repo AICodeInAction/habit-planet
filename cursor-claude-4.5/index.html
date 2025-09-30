@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 原型展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .prototype-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .screen-frame {
+            width: 390px;
+            height: 844px;
+            background: #000;
+            border-radius: 55px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            display: inline-block;
+            margin: 20px;
+            position: relative;
+            vertical-align: top;
+        }
+        
+        .screen-frame::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 45px;
+            overflow: hidden;
+            background: #fff;
+        }
+        
+        .screen-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .screen-label {
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="prototype-container">
+        <div class="header">
+            <h1>🌟 习惯星球 - Habit Planet</h1>
+            <p>高保真原型设计展示 | 基于《掌控习惯》原理的亲子习惯养成应用</p>
+        </div>
+        
+        <div style="text-align: center;">
+            <div class="screen-frame">
+                <div class="screen-content">
+                    <iframe src="home.html"></iframe>
+                </div>
+                <div class="screen-label">星际地图 - 主页</div>
+            </div>
+            
+            <div class="screen-frame">
+                <div class="screen-content">
+                    <iframe src="habits.html"></iframe>
+                </div>
+                <div class="screen-label">习惯打卡</div>
+            </div>
+            
+            <div class="screen-frame">
+                <div class="screen-content">
+                    <iframe src="achievements.html"></iframe>
+                </div>
+                <div class="screen-label">成就中心</div>
+            </div>
+            
+            <div class="screen-frame">
+                <div class="screen-content">
+                    <iframe src="family.html"></iframe>
+                </div>
+                <div class="screen-label">家庭互动</div>
+            </div>
+            
+            <div class="screen-frame">
+                <div class="screen-content">
+                    <iframe src="profile.html"></iframe>
+                </div>
+                <div class="screen-label">个人中心</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

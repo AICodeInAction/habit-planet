@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭互动</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #1d1d1f;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 85px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            font-size: 10px;
+            text-decoration: none;
+        }
+        
+        .nav-item.active {
+            color: #5b67f8;
+        }
+        
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .member-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #5b67f8;
+        }
+        
+        .like-button {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .like-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <div style="display: flex; gap: 5px; align-items: center;">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <div style="background: white; padding: 20px 20px 25px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h1 style="font-size: 32px; font-weight: bold; color: #1d1d1f; margin: 0;">👨‍👩‍👧‍👦 我的家庭</h1>
+            <button style="background: linear-gradient(135deg, #5b67f8, #7b61ff); color: white; border: none; border-radius: 20px; padding: 8px 16px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <i class="fas fa-user-plus"></i>
+                邀请
+            </button>
+        </div>
+        
+        <!-- Family Stats -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 20px; color: white;">
+            <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">家庭总成就</div>
+            <div style="font-size: 32px; font-weight: bold; margin-bottom: 15px;">⭐ 456 星星</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; font-size: 12px;">
+                <div>
+                    <div style="opacity: 0.9; margin-bottom: 4px;">总打卡</div>
+                    <div style="font-size: 20px; font-weight: bold;">342</div>
+                </div>
+                <div>
+                    <div style="opacity: 0.9; margin-bottom: 4px;">家庭成员</div>
+                    <div style="font-size: 20px; font-weight: bold;">4人</div>
+                </div>
+                <div>
+                    <div style="opacity: 0.9; margin-bottom: 4px;">互动次数</div>
+                    <div style="font-size: 20px; font-weight: bold;">89</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div style="padding: 20px; padding-bottom: 100px;">
+        <!-- Family Members -->
+        <h2 style="font-size: 20px; font-weight: 600; color: #1d1d1f; margin-bottom: 15px;">家庭成员</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px;">
+            <!-- Member 1 - Child -->
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=120&h=120&fit=crop" class="avatar" />
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">小明</div>
+                        <span style="background: linear-gradient(135deg, #ffd89b, #19547b); color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;">我</span>
+                    </div>
+                    <div style="font-size: 13px; color: #8e8e93; margin-bottom: 6px;">今日完成 7/10 个习惯</div>
+                    <div style="display: flex; gap: 12px; font-size: 12px;">
+                        <span style="display: flex; align-items: center; gap: 4px; color: #5b67f8;">
+                            <i class="fas fa-fire"></i>
+                            <span>12天连击</span>
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 4px; color: #feca57;">
+                            <i class="fas fa-star"></i>
+                            <span>156星星</span>
+                        </span>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 28px; margin-bottom: 4px;">🏆</div>
+                    <div style="font-size: 11px; color: #8e8e93;">Lv.5</div>
+                </div>
+            </div>
+            
+            <!-- Member 2 - Dad -->
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop" class="avatar" style="border-color: #4ecdc4;" />
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">爸爸</div>
+                        <span style="background: #4ecdc4; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;">👨 父亲</span>
+                    </div>
+                    <div style="font-size: 13px; color: #8e8e93; margin-bottom: 6px;">今日完成 8/10 个习惯</div>
+                    <div style="display: flex; gap: 12px; font-size: 12px;">
+                        <span style="display: flex; align-items: center; gap: 4px; color: #5b67f8;">
+                            <i class="fas fa-fire"></i>
+                            <span>25天连击</span>
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 4px; color: #feca57;">
+                            <i class="fas fa-star"></i>
+                            <span>189星星</span>
+                        </span>
+                    </div>
+                </div>
+                <button class="like-button">
+                    <i class="fas fa-thumbs-up"></i>
+                    点赞
+                </button>
+            </div>
+            
+            <!-- Member 3 - Mom -->
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop" class="avatar" style="border-color: #ff6b9d;" />
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">妈妈</div>
+                        <span style="background: #ff6b9d; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;">👩 母亲</span>
+                    </div>
+                    <div style="font-size: 13px; color: #8e8e93; margin-bottom: 6px;">今日完成 6/8 个习惯</div>
+                    <div style="display: flex; gap: 12px; font-size: 12px;">
+                        <span style="display: flex; align-items: center; gap: 4px; color: #5b67f8;">
+                            <i class="fas fa-fire"></i>
+                            <span>18天连击</span>
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 4px; color: #feca57;">
+                            <i class="fas fa-star"></i>
+                            <span>98星星</span>
+                        </span>
+                    </div>
+                </div>
+                <button class="like-button">
+                    <i class="fas fa-thumbs-up"></i>
+                    点赞
+                </button>
+            </div>
+            
+            <!-- Member 4 - Sister -->
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop" class="avatar" style="border-color: #a29bfe;" />
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">妹妹</div>
+                        <span style="background: #a29bfe; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;">👧 孩子</span>
+                    </div>
+                    <div style="font-size: 13px; color: #8e8e93; margin-bottom: 6px;">今日完成 5/7 个习惯</div>
+                    <div style="display: flex; gap: 12px; font-size: 12px;">
+                        <span style="display: flex; align-items: center; gap: 4px; color: #5b67f8;">
+                            <i class="fas fa-fire"></i>
+                            <span>5天连击</span>
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 4px; color: #feca57;">
+                            <i class="fas fa-star"></i>
+                            <span>45星星</span>
+                        </span>
+                    </div>
+                </div>
+                <button class="like-button">
+                    <i class="fas fa-thumbs-up"></i>
+                    点赞
+                </button>
+            </div>
+        </div>
+        
+        <!-- Family Activities -->
+        <h2 style="font-size: 20px; font-weight: 600; color: #1d1d1f; margin-bottom: 15px;">家庭动态</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px;">
+            <!-- Activity 1 -->
+            <div style="background: white; border-radius: 16px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #1d1d1f;">爸爸</div>
+                        <div style="font-size: 12px; color: #8e8e93;">10分钟前</div>
+                    </div>
+                </div>
+                <div style="font-size: 15px; color: #1d1d1f; margin-bottom: 12px;">
+                    完成了"晨跑30分钟"🏃 连续25天打卡！
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <span style="background: #f5f5f7; padding: 6px 12px; border-radius: 12px; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+                        <span>12</span>
+                    </span>
+                    <span style="background: #f5f5f7; padding: 6px 12px; border-radius: 12px; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-comment" style="color: #5b67f8;"></i>
+                        <span>3</span>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Activity 2 -->
+            <div style="background: white; border-radius: 16px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #1d1d1f;">妈妈</div>
+                        <div style="font-size: 12px; color: #8e8e93;">25分钟前</div>
+                    </div>
+                </div>
+                <div style="font-size: 15px; color: #1d1d1f; margin-bottom: 12px;">
+                    为小明点赞👍 阅读习惯坚持得真棒！
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <span style="background: #f5f5f7; padding: 6px 12px; border-radius: 12px; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+                        <span>8</span>
+                    </span>
+                    <span style="background: #f5f5f7; padding: 6px 12px; border-radius: 12px; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-comment" style="color: #5b67f8;"></i>
+                        <span>2</span>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Activity 3 -->
+            <div style="background: white; border-radius: 16px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #1d1d1f;">妹妹</div>
+                        <div style="font-size: 12px; color: #8e8e93;">1小时前</div>
+                    </div>
+                </div>
+                <div style="font-size: 15px; color: #1d1d1f; margin-bottom: 12px;">
+                    解锁新成就"习惯新星"⭐ 连续5天打卡啦！
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <span style="background: #f5f5f7; padding: 6px 12px; border-radius: 12px; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+                        <span>15</span>
+                    </span>
+                    <span style="background: #f5f5f7; padding: 6px 12px; border-radius: 12px; font-size: 13px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-comment" style="color: #5b67f8;"></i>
+                        <span>5</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Family Challenge -->
+        <div style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); border-radius: 20px; padding: 20px; margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div>
+                    <h3 style="font-size: 18px; font-weight: bold; color: white; margin-bottom: 6px;">🎯 家庭挑战</h3>
+                    <div style="font-size: 14px; color: white; opacity: 0.9;">全家一起养成好习惯</div>
+                </div>
+                <div style="font-size: 32px;">🏆</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.3); border-radius: 12px; padding: 15px;">
+                <div style="font-size: 13px; color: white; margin-bottom: 8px;">本周挑战：全家总打卡 50 次</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: white; font-size: 14px;">
+                    <span>进度</span>
+                    <span style="font-weight: bold;">42/50</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.3); border-radius: 10px; height: 8px; overflow: hidden;">
+                    <div style="background: white; height: 100%; width: 84%; border-radius: 10px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="nav-bar">
+        <a href="#" class="nav-item">
+            <i class="fas fa-planet-ringed"></i>
+            <span>星际</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </div>
+</body>
+</html>

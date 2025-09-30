@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 85px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            font-size: 10px;
+            text-decoration: none;
+        }
+        
+        .nav-item.active {
+            color: #5b67f8;
+        }
+        
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .menu-item {
+            background: white;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .menu-item:active {
+            background: #f5f5f7;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <div style="display: flex; gap: 5px; align-items: center;">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- Profile Header -->
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px 20px 40px 20px; color: white;">
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 25px;">
+            <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=200&h=200&fit=crop" 
+                     style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid white; object-fit: cover;" />
+                <div style="position: absolute; bottom: 0; right: 0; background: #5b67f8; width: 28px; height: 28px; border-radius: 50%; border: 3px solid white; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-edit" style="font-size: 12px;"></i>
+                </div>
+            </div>
+            <div style="flex: 1;">
+                <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 6px;">小明</h2>
+                <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">习惯探险家 • Level 5</div>
+                <div style="background: rgba(255,255,255,0.3); border-radius: 10px; height: 6px; overflow: hidden;">
+                    <div style="background: white; height: 100%; width: 65%; border-radius: 10px;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Grid -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+            <div style="text-align: center;">
+                <div style="font-size: 24px; font-weight: bold; margin-bottom: 4px;">156</div>
+                <div style="font-size: 12px; opacity: 0.9;">总星星</div>
+            </div>
+            <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); border-right: 1px solid rgba(255,255,255,0.3);">
+                <div style="font-size: 24px; font-weight: bold; margin-bottom: 4px;">12</div>
+                <div style="font-size: 12px; opacity: 0.9;">连续天数</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 24px; font-weight: bold; margin-bottom: 4px;">12</div>
+                <div style="font-size: 12px; opacity: 0.9;">总奖牌</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div style="padding-bottom: 100px;">
+        <!-- Weekly Report -->
+        <div style="padding: 20px;">
+            <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                <h3 style="font-size: 18px; font-weight: 600; color: #1d1d1f; margin-bottom: 15px;">📊 本周数据</h3>
+                <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 15px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 11px; color: #8e8e93; margin-bottom: 6px;">一</div>
+                        <div style="background: #5b67f8; height: 40px; border-radius: 8px;"></div>
+                        <div style="font-size: 10px; color: #1d1d1f; margin-top: 4px;">10</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 11px; color: #8e8e93; margin-bottom: 6px;">二</div>
+                        <div style="background: #5b67f8; height: 50px; border-radius: 8px;"></div>
+                        <div style="font-size: 10px; color: #1d1d1f; margin-top: 4px;">10</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 11px; color: #8e8e93; margin-bottom: 6px;">三</div>
+                        <div style="background: #5b67f8; height: 45px; border-radius: 8px;"></div>
+                        <div style="font-size: 10px; color: #1d1d1f; margin-top: 4px;">9</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 11px; color: #8e8e93; margin-bottom: 6px;">四</div>
+                        <div style="background: #5b67f8; height: 55px; border-radius: 8px;"></div>
+                        <div style="font-size: 10px; color: #1d1d1f; margin-top: 4px;">10</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 11px; color: #8e8e93; margin-bottom: 6px;">五</div>
+                        <div style="background: #5b67f8; height: 35px; border-radius: 8px;"></div>
+                        <div style="font-size: 10px; color: #1d1d1f; margin-top: 4px;">8</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 11px; color: #8e8e93; margin-bottom: 6px;">六</div>
+                        <div style="background: #5b67f8; height: 50px; border-radius: 8px;"></div>
+                        <div style="font-size: 10px; color: #1d1d1f; margin-top: 4px;">10</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 11px; color: #5b67f8; margin-bottom: 6px; font-weight: 600;">日</div>
+                        <div style="background: linear-gradient(135deg, #5b67f8, #7b61ff); height: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(91, 103, 248, 0.3);"></div>
+                        <div style="font-size: 10px; color: #1d1d1f; margin-top: 4px; font-weight: 600;">7</div>
+                    </div>
+                </div>
+                <div style="text-align: center; color: #8e8e93; font-size: 13px;">
+                    本周平均完成率 <span style="color: #5b67f8; font-weight: bold;">93%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Menu Sections -->
+        <div style="background: white; margin-bottom: 15px;">
+            <div class="menu-item" style="border-bottom: 1px solid #f5f5f7;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #a8edea, #fed6e3); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        🎯
+                    </div>
+                    <div>
+                        <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">我的目标</div>
+                        <div style="font-size: 13px; color: #8e8e93;">设置和管理习惯目标</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+            
+            <div class="menu-item" style="border-bottom: 1px solid #f5f5f7;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ffd89b, #19547b); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        📈
+                    </div>
+                    <div>
+                        <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">数据统计</div>
+                        <div style="font-size: 13px; color: #8e8e93;">查看详细的习惯数据</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #84fab0, #8fd3f4); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        🌟
+                    </div>
+                    <div>
+                        <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">我的装饰</div>
+                        <div style="font-size: 13px; color: #8e8e93;">管理星球装饰物</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+        </div>
+        
+        <div style="background: white; margin-bottom: 15px;">
+            <div class="menu-item" style="border-bottom: 1px solid #f5f5f7;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ffeaa7, #fdcb6e); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        🔔
+                    </div>
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">提醒设置</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+            
+            <div class="menu-item" style="border-bottom: 1px solid #f5f5f7;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #a8c0ff, #3f2b96); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        🎨
+                    </div>
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">主题设置</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff9a9e, #fad0c4); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        ⚙️
+                    </div>
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">通用设置</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+        </div>
+        
+        <div style="background: white; margin-bottom: 15px;">
+            <div class="menu-item" style="border-bottom: 1px solid #f5f5f7;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #d4a5a5, #ff9a9e); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        💡
+                    </div>
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">帮助中心</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        ℹ️
+                    </div>
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f;">关于我们</div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: #d1d1d6;"></i>
+            </div>
+        </div>
+        
+        <!-- Version -->
+        <div style="text-align: center; padding: 20px; color: #8e8e93; font-size: 13px;">
+            习惯星球 v1.0.0
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="nav-bar">
+        <a href="#" class="nav-item">
+            <i class="fas fa-planet-ringed"></i>
+            <span>星际</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </div>
+</body>
+</html>

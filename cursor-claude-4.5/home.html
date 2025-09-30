@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星际地图</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .planet {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .planet-locked {
+            opacity: 0.4;
+            filter: grayscale(100%);
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 85px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            font-size: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #5b67f8;
+        }
+        
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .progress-ring {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(#5b67f8 0deg 252deg, rgba(255,255,255,0.2) 252deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(91, 103, 248, 0.4);
+        }
+        
+        .progress-inner {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #5b67f8;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <div style="display: flex; gap: 5px; align-items: center;">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- Stars Background -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;">
+        <div class="star" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
+        <div class="star" style="top: 20%; left: 80%; animation-delay: 0.5s;"></div>
+        <div class="star" style="top: 35%; left: 25%; animation-delay: 1s;"></div>
+        <div class="star" style="top: 50%; left: 70%; animation-delay: 1.5s;"></div>
+        <div class="star" style="top: 65%; left: 40%; animation-delay: 0.7s;"></div>
+        <div class="star" style="top: 80%; left: 85%; animation-delay: 1.2s;"></div>
+    </div>
+    
+    <!-- Main Content -->
+    <div style="position: relative; z-index: 1; padding: 20px; padding-bottom: 100px;">
+        <!-- Header -->
+        <div style="text-align: center; color: white; margin-bottom: 30px;">
+            <h1 style="font-size: 28px; font-weight: bold; margin-bottom: 8px;">🌌 我的星际之旅</h1>
+            <p style="color: rgba(255,255,255,0.7); font-size: 14px;">探索宇宙，养成好习惯</p>
+        </div>
+        
+        <!-- Daily Progress Card -->
+        <div style="background: linear-gradient(135deg, rgba(91, 103, 248, 0.9), rgba(123, 97, 255, 0.9)); border-radius: 20px; padding: 20px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div style="color: white;">
+                    <div style="font-size: 14px; opacity: 0.9; margin-bottom: 5px;">今日进度</div>
+                    <div style="font-size: 24px; font-weight: bold;">7/10 个习惯</div>
+                </div>
+                <div class="progress-ring">
+                    <div class="progress-inner">70%</div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px; color: white; font-size: 13px;">
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fas fa-fire"></i>
+                    <span>连续 12 天</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fas fa-star"></i>
+                    <span>获得 156 星星</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Planet Journey -->
+        <div style="position: relative;">
+            <!-- Planet 1 - Unlocked -->
+            <div class="planet" style="text-align: center; margin-bottom: 40px;">
+                <div style="position: relative; display: inline-block;">
+                    <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=200&h=200&fit=crop" 
+                         style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #4ecdc4; box-shadow: 0 0 30px rgba(78, 205, 196, 0.5);" />
+                    <div style="position: absolute; top: -5px; right: -5px; background: #4ecdc4; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-check" style="color: white; font-size: 14px;"></i>
+                    </div>
+                </div>
+                <div style="color: white; margin-top: 10px;">
+                    <div style="font-weight: bold; font-size: 16px;">水之星球</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Level 5 - 已解锁</div>
+                </div>
+            </div>
+            
+            <!-- Connection Line -->
+            <div style="width: 2px; height: 40px; background: linear-gradient(180deg, #4ecdc4, #5b67f8); margin: 0 auto; margin-bottom: 20px;"></div>
+            
+            <!-- Planet 2 - Current -->
+            <div class="planet" style="text-align: center; margin-bottom: 40px;">
+                <div style="position: relative; display: inline-block;">
+                    <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=200&h=200&fit=crop" 
+                         style="width: 140px; height: 140px; border-radius: 50%; border: 5px solid #5b67f8; box-shadow: 0 0 40px rgba(91, 103, 248, 0.7);" />
+                    <div style="position: absolute; top: -10px; right: -10px; background: linear-gradient(135deg, #ff6b6b, #feca57); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: pulse 2s infinite;">
+                        <i class="fas fa-rocket" style="color: white; font-size: 18px;"></i>
+                    </div>
+                </div>
+                <div style="color: white; margin-top: 10px;">
+                    <div style="font-weight: bold; font-size: 18px;">🔥 火焰星球</div>
+                    <div style="font-size: 13px; opacity: 0.9;">Level 3 - 探索中</div>
+                    <div style="background: rgba(255,255,255,0.2); border-radius: 10px; height: 6px; margin-top: 8px; overflow: hidden; width: 120px; margin-left: auto; margin-right: auto;">
+                        <div style="background: #5b67f8; height: 100%; width: 60%; border-radius: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Connection Line -->
+            <div style="width: 2px; height: 40px; background: linear-gradient(180deg, #5b67f8, rgba(255,255,255,0.3)); margin: 0 auto; margin-bottom: 20px;"></div>
+            
+            <!-- Planet 3 - Locked -->
+            <div class="planet planet-locked" style="text-align: center; margin-bottom: 40px;">
+                <div style="position: relative; display: inline-block;">
+                    <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=200&h=200&fit=crop" 
+                         style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3);" />
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.6); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-lock" style="color: white; font-size: 20px;"></i>
+                    </div>
+                </div>
+                <div style="color: rgba(255,255,255,0.6); margin-top: 10px;">
+                    <div style="font-weight: bold; font-size: 16px;">森林星球</div>
+                    <div style="font-size: 12px;">需要 200 星星解锁</div>
+                </div>
+            </div>
+            
+            <!-- Connection Line -->
+            <div style="width: 2px; height: 40px; background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1)); margin: 0 auto; margin-bottom: 20px;"></div>
+            
+            <!-- Planet 4 - Locked -->
+            <div class="planet planet-locked" style="text-align: center;">
+                <div style="position: relative; display: inline-block;">
+                    <img src="https://images.unsplash.com/photo-1603575448878-868a20723f5d?w=200&h=200&fit=crop" 
+                         style="width: 110px; height: 110px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3);" />
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.6); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-lock" style="color: white; font-size: 18px;"></i>
+                    </div>
+                </div>
+                <div style="color: rgba(255,255,255,0.6); margin-top: 10px;">
+                    <div style="font-weight: bold; font-size: 16px;">冰雪星球</div>
+                    <div style="font-size: 12px;">需要 500 星星解锁</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="nav-bar">
+        <a href="#" class="nav-item active">
+            <i class="fas fa-planet-ringed"></i>
+            <span>星际</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </div>
+    
+    <style>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</body>
+</html>

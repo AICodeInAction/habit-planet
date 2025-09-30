@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯打卡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #1d1d1f;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 85px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            font-size: 10px;
+            text-decoration: none;
+        }
+        
+        .nav-item.active {
+            color: #5b67f8;
+        }
+        
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .habit-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+        
+        .habit-card:active {
+            transform: scale(0.98);
+        }
+        
+        .habit-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .check-button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #d1d1d6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .check-button.checked {
+            background: #5b67f8;
+            border-color: #5b67f8;
+        }
+        
+        .check-button.checked i {
+            color: white;
+        }
+        
+        .streak-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- iOS Status Bar -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <div style="display: flex; gap: 5px; align-items: center;">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <div style="background: white; padding: 20px 20px 25px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h1 style="font-size: 32px; font-weight: bold; color: #1d1d1f; margin: 0;">今日习惯</h1>
+            <button style="background: linear-gradient(135deg, #5b67f8, #7b61ff); color: white; border: none; border-radius: 20px; padding: 8px 16px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <i class="fas fa-plus"></i>
+                添加
+            </button>
+        </div>
+        
+        <!-- Date Selector -->
+        <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 5px;">
+            <div style="text-align: center; min-width: 60px; padding: 10px; border-radius: 12px; background: #f5f5f7;">
+                <div style="font-size: 12px; color: #8e8e93; margin-bottom: 4px;">周一</div>
+                <div style="font-size: 18px; font-weight: 600; color: #1d1d1f;">28</div>
+            </div>
+            <div style="text-align: center; min-width: 60px; padding: 10px; border-radius: 12px; background: #f5f5f7;">
+                <div style="font-size: 12px; color: #8e8e93; margin-bottom: 4px;">周二</div>
+                <div style="font-size: 18px; font-weight: 600; color: #1d1d1f;">29</div>
+            </div>
+            <div style="text-align: center; min-width: 60px; padding: 10px; border-radius: 12px; background: linear-gradient(135deg, #5b67f8, #7b61ff); box-shadow: 0 4px 15px rgba(91, 103, 248, 0.3);">
+                <div style="font-size: 12px; color: rgba(255,255,255,0.9); margin-bottom: 4px;">今天</div>
+                <div style="font-size: 18px; font-weight: 600; color: white;">30</div>
+            </div>
+            <div style="text-align: center; min-width: 60px; padding: 10px; border-radius: 12px; background: #f5f5f7;">
+                <div style="font-size: 12px; color: #8e8e93; margin-bottom: 4px;">周四</div>
+                <div style="font-size: 18px; font-weight: 600; color: #1d1d1f;">01</div>
+            </div>
+            <div style="text-align: center; min-width: 60px; padding: 10px; border-radius: 12px; background: #f5f5f7;">
+                <div style="font-size: 12px; color: #8e8e93; margin-bottom: 4px;">周五</div>
+                <div style="font-size: 18px; font-weight: 600; color: #1d1d1f;">02</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div style="padding: 20px; padding-bottom: 100px;">
+        <!-- Morning Section -->
+        <div style="margin-bottom: 25px;">
+            <h3 style="font-size: 18px; font-weight: 600; color: #1d1d1f; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-sun" style="color: #feca57;"></i>
+                早晨习惯
+            </h3>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #a8e6cf, #56ab91);">
+                    🪥
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">刷牙洗脸</div>
+                    <div style="font-size: 13px; color: #8e8e93; margin-bottom: 6px;">保持清洁，元气满满</div>
+                    <div class="streak-badge">
+                        <i class="fas fa-fire"></i>
+                        <span>连续 12 天</span>
+                    </div>
+                </div>
+                <div class="check-button checked">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #ffd3a5, #fd6585);">
+                    📚
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">阅读 15 分钟</div>
+                    <div style="font-size: 13px; color: #8e8e93; margin-bottom: 6px;">今天读《小王子》</div>
+                    <div class="streak-badge">
+                        <i class="fas fa-fire"></i>
+                        <span>连续 8 天</span>
+                    </div>
+                </div>
+                <div class="check-button checked">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
+                    🥛
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">喝一杯牛奶</div>
+                    <div style="font-size: 13px; color: #8e8e93;">补充营养，健康成长</div>
+                </div>
+                <div class="check-button">
+                    <i class="far fa-circle" style="color: #d1d1d6;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Afternoon Section -->
+        <div style="margin-bottom: 25px;">
+            <h3 style="font-size: 18px; font-weight: 600; color: #1d1d1f; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-cloud-sun" style="color: #ff6b6b;"></i>
+                下午习惯
+            </h3>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #84fab0, #8fd3f4);">
+                    🏃
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">运动 30 分钟</div>
+                    <div style="font-size: 13px; color: #8e8e93; margin-bottom: 6px;">强身健体，活力十足</div>
+                    <div class="streak-badge">
+                        <i class="fas fa-fire"></i>
+                        <span>连续 15 天</span>
+                    </div>
+                </div>
+                <div class="check-button checked">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
+                    ✏️
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">完成作业</div>
+                    <div style="font-size: 13px; color: #8e8e93;">认真学习，天天向上</div>
+                </div>
+                <div class="check-button checked">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Evening Section -->
+        <div>
+            <h3 style="font-size: 18px; font-weight: 600; color: #1d1d1f; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-moon" style="color: #a29bfe;"></i>
+                晚上习惯
+            </h3>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #d4a5a5, #ff9a9e);">
+                    🎨
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">创意时间</div>
+                    <div style="font-size: 13px; color: #8e8e93;">画画、手工或音乐</div>
+                </div>
+                <div class="check-button checked">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #c7a6ff, #8b5cf6);">
+                    🛁
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">洗澡刷牙</div>
+                    <div style="font-size: 13px; color: #8e8e93;">睡前清洁，舒服入睡</div>
+                </div>
+                <div class="check-button checked">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #a8c0ff, #3f2b96);">
+                    😴
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">9点前睡觉</div>
+                    <div style="font-size: 13px; color: #8e8e93;">早睡早起身体好</div>
+                </div>
+                <div class="check-button">
+                    <i class="far fa-circle" style="color: #d1d1d6;"></i>
+                </div>
+            </div>
+            
+            <div class="habit-card">
+                <div class="habit-icon" style="background: linear-gradient(135deg, #fccb90, #d57eeb);">
+                    📝
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 4px;">记录今天</div>
+                    <div style="font-size: 13px; color: #8e8e93;">写下开心的事情</div>
+                </div>
+                <div class="check-button">
+                    <i class="far fa-circle" style="color: #d1d1d6;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Summary Card -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 20px; margin-top: 25px; color: white;">
+            <div style="text-align: center;">
+                <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">今日完成</div>
+                <div style="font-size: 36px; font-weight: bold; margin-bottom: 8px;">7/10</div>
+                <div style="font-size: 14px; opacity: 0.9; margin-bottom: 15px;">继续加油！还差3个就完美啦 🌟</div>
+                <div style="display: flex; justify-content: center; gap: 20px; font-size: 13px;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-star"></i>
+                        <span>今日获得 14 星星</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-bolt"></i>
+                        <span>能量 +70</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="nav-bar">
+        <a href="#" class="nav-item">
+            <i class="fas fa-planet-ringed"></i>
+            <span>星际</span>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-check-circle"></i>
+            <span>打卡</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>成就</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </div>
+</body>
+</html>
