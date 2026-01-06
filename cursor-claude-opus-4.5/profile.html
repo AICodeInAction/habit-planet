@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #0f0a27 0%, #1a153e 30%, #0f0a1f 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .profile-hero {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b9d, #c44dff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            border: 4px solid rgba(196, 77, 255, 0.5);
+            box-shadow: 0 0 30px rgba(196, 77, 255, 0.3);
+        }
+        
+        .level-badge {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #000;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .edit-btn {
+            position: absolute;
+            top: 0;
+            right: -5px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 20px;
+            margin: 0 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4da8ff, #c44dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .calendar-day.empty {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .calendar-day.level-0 {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .calendar-day.level-1 {
+            background: rgba(76, 217, 100, 0.2);
+        }
+        
+        .calendar-day.level-2 {
+            background: rgba(76, 217, 100, 0.4);
+        }
+        
+        .calendar-day.level-3 {
+            background: rgba(76, 217, 100, 0.6);
+        }
+        
+        .calendar-day.level-4 {
+            background: rgba(76, 217, 100, 0.9);
+        }
+        
+        .calendar-day.today {
+            border: 2px solid #4da8ff;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .menu-item:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.98);
+        }
+        
+        .menu-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 10, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0 28px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .tab-item.active {
+            color: #c44dff;
+        }
+        
+        .tab-item i {
+            font-size: 22px;
+        }
+        
+        .content-area {
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 20px;
+            margin: 16px 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .xp-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #c44dff, #ff6b9d);
+            border-radius: 5px;
+        }
+        
+        .achievement-mini {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <div class="content-area">
+        <!-- 个人信息头部 -->
+        <div class="profile-hero">
+            <div class="flex justify-end px-2 mb-4">
+                <button class="text-gray-400">
+                    <i class="fas fa-cog text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="avatar-container">
+                <div class="avatar">👦</div>
+                <div class="level-badge">Lv.12</div>
+                <div class="edit-btn">
+                    <i class="fas fa-pencil text-xs"></i>
+                </div>
+            </div>
+            
+            <h1 class="text-2xl font-bold mt-4">小星星</h1>
+            <p class="text-gray-400 text-sm">宇宙探险家 · 习惯达人</p>
+            
+            <!-- 经验值进度 -->
+            <div class="mt-4 px-8">
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-400">等级进度</span>
+                    <span class="text-purple-400">2,450 / 3,000 XP</span>
+                </div>
+                <div class="xp-bar">
+                    <div class="xp-fill" style="width: 82%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 统计卡片 -->
+        <div class="stats-card">
+            <div class="grid grid-cols-4 gap-4">
+                <div class="stat-item">
+                    <div class="stat-value">12</div>
+                    <div class="text-gray-400 text-xs">连续天数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">156</div>
+                    <div class="text-gray-400 text-xs">完成习惯</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">18</div>
+                    <div class="text-gray-400 text-xs">奖牌</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3</div>
+                    <div class="text-gray-400 text-xs">星球</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 打卡日历 -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fas fa-calendar-alt text-blue-400"></i>
+                11月打卡记录
+            </div>
+            <div class="calendar-grid">
+                <!-- 星期标题 -->
+                <div class="text-center text-xs text-gray-500 pb-2">一</div>
+                <div class="text-center text-xs text-gray-500 pb-2">二</div>
+                <div class="text-center text-xs text-gray-500 pb-2">三</div>
+                <div class="text-center text-xs text-gray-500 pb-2">四</div>
+                <div class="text-center text-xs text-gray-500 pb-2">五</div>
+                <div class="text-center text-xs text-gray-500 pb-2">六</div>
+                <div class="text-center text-xs text-gray-500 pb-2">日</div>
+                
+                <!-- 日历格子 -->
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day level-3">1</div>
+                <div class="calendar-day level-4">2</div>
+                <div class="calendar-day level-2">3</div>
+                
+                <div class="calendar-day level-4">4</div>
+                <div class="calendar-day level-3">5</div>
+                <div class="calendar-day level-4">6</div>
+                <div class="calendar-day level-2">7</div>
+                <div class="calendar-day level-4">8</div>
+                <div class="calendar-day level-3">9</div>
+                <div class="calendar-day level-1">10</div>
+                
+                <div class="calendar-day level-4">11</div>
+                <div class="calendar-day level-4">12</div>
+                <div class="calendar-day level-3">13</div>
+                <div class="calendar-day level-4">14</div>
+                <div class="calendar-day level-4">15</div>
+                <div class="calendar-day level-4">16</div>
+                <div class="calendar-day level-3">17</div>
+                
+                <div class="calendar-day level-4">18</div>
+                <div class="calendar-day level-4">19</div>
+                <div class="calendar-day level-4">20</div>
+                <div class="calendar-day level-4">21</div>
+                <div class="calendar-day level-4">22</div>
+                <div class="calendar-day level-4">23</div>
+                <div class="calendar-day level-4">24</div>
+                
+                <div class="calendar-day level-4">25</div>
+                <div class="calendar-day level-3 today">26</div>
+                <div class="calendar-day level-0">27</div>
+                <div class="calendar-day level-0">28</div>
+                <div class="calendar-day level-0">29</div>
+                <div class="calendar-day level-0">30</div>
+                <div class="calendar-day empty"></div>
+            </div>
+            <div class="flex items-center justify-end gap-2 mt-4 text-xs text-gray-500">
+                <span>少</span>
+                <div class="w-3 h-3 rounded bg-white/5"></div>
+                <div class="w-3 h-3 rounded bg-green-400/20"></div>
+                <div class="w-3 h-3 rounded bg-green-400/40"></div>
+                <div class="w-3 h-3 rounded bg-green-400/60"></div>
+                <div class="w-3 h-3 rounded bg-green-400/90"></div>
+                <span>多</span>
+            </div>
+        </div>
+        
+        <!-- 最近成就 -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fas fa-trophy text-yellow-400"></i>
+                最近成就
+            </div>
+            <div class="flex gap-4 overflow-x-auto pb-2">
+                <div class="flex flex-col items-center gap-2 flex-shrink-0">
+                    <div class="achievement-mini">🔥</div>
+                    <span class="text-xs">连续7天</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 flex-shrink-0">
+                    <div class="achievement-mini">⚡</div>
+                    <span class="text-xs">习惯达人</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 flex-shrink-0">
+                    <div class="achievement-mini">🚀</div>
+                    <span class="text-xs">启航者</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 flex-shrink-0">
+                    <div class="achievement-mini">💪</div>
+                    <span class="text-xs">运动健将</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 flex-shrink-0">
+                    <div class="achievement-mini">🎯</div>
+                    <span class="text-xs">完美主义</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 菜单列表 -->
+        <div class="px-5 mt-4">
+            <div class="menu-item">
+                <div class="menu-icon bg-gradient-to-br from-blue-500 to-cyan-500">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold">数据统计</h3>
+                    <p class="text-gray-400 text-sm">查看详细统计报告</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon bg-gradient-to-br from-purple-500 to-pink-500">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold">星尘商店</h3>
+                    <p class="text-gray-400 text-sm">兑换精美装饰</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon bg-gradient-to-br from-green-500 to-teal-500">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold">分享成就</h3>
+                    <p class="text-gray-400 text-sm">和朋友分享你的进步</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon bg-gradient-to-br from-orange-500 to-red-500">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold">帮助与反馈</h3>
+                    <p class="text-gray-400 text-sm">联系我们</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-medal"></i>
+            <span>奖牌</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-user-astronaut"></i>
+            <span>我的</span>
+        </div>
+    </div>
+</body>
+</html>
+

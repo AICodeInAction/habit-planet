@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Planet · Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"SF Pro Display"', "Inter", "system-ui"],
+              body: ['"SF Pro Text"', "Inter", "system-ui"],
+            },
+            colors: {
+              night: "#040714",
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-yH6Qdh1dQFZITkkpFmS6r30YIOCwVDDDeWGPA7eGRIDvN+xr3aMcMBXNIN1qNbfXDnpa9eKJeMgnbPiwJLzA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        background: #030712;
+        font-family: "SF Pro Text", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      .device {
+        width: 430px;
+        height: 932px;
+        border-radius: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(2, 6, 23, 0.55);
+        background: radial-gradient(circle at top, #152347, #050912 60%);
+      }
+      .status-bar {
+        height: 54px;
+        padding: 0 24px;
+      }
+      .content {
+        height: calc(100% - 54px - 90px);
+      }
+      .tab-bar {
+        height: 90px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(18px);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center py-10">
+    <div class="device flex flex-col text-white">
+      <div class="status-bar flex items-center justify-between text-sm text-white/80">
+        <span class="font-semibold">9:41</span>
+        <div class="flex items-center gap-3 text-lg">
+          <i class="fa-solid fa-signal"></i>
+          <i class="fa-solid fa-wifi"></i>
+          <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+      </div>
+
+      <div class="content px-6 pb-4 pt-1 overflow-y-auto">
+        <header class="flex items-center justify-between py-3">
+          <div>
+            <p class="text-sm text-white/60">星际习惯航线</p>
+            <h1 class="text-3xl font-bold font-display">星航家庭</h1>
+          </div>
+          <div class="w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-white/20">
+            <img
+              src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80"
+              alt="Kid avatar"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </header>
+
+        <section
+          class="relative rounded-3xl overflow-hidden mb-6"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?auto=format&fit=crop&w=900&q=80');
+            background-size: cover;
+          "
+        >
+          <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/70 via-night/70 to-night/80"></div>
+          <div class="relative p-6">
+            <p class="text-sm uppercase tracking-[0.3em] text-white/70 mb-2">今日航程</p>
+            <h2 class="text-2xl font-semibold mb-3">点亮「晨读星」</h2>
+            <p class="text-white/80 mb-5">完成 3 个晨间习惯即可推进飞船 40 光点。</p>
+            <div class="flex items-center gap-4">
+              <button class="px-4 py-2 rounded-full bg-white text-slate-900 text-sm font-semibold">
+                开始任务
+              </button>
+              <div class="flex items-center text-white/70 text-sm">
+                <i class="fa-solid fa-fire text-orange-400 mr-2"></i>
+                连续 12 天
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="space-y-4 mb-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">家庭同步进度</h3>
+            <button class="text-sm text-indigo-300">全部</button>
+          </div>
+          <div class="bg-white/5 rounded-3xl p-4 flex items-center gap-4">
+            <div class="relative">
+              <svg width="80" height="80">
+                <circle cx="40" cy="40" r="32" stroke="rgba(59,130,246,0.1)" stroke-width="8" fill="none" />
+                <circle
+                  cx="40"
+                  cy="40"
+                  r="32"
+                  stroke="url(#grad)"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                  fill="none"
+                  stroke-dasharray="201"
+                  stroke-dashoffset="50"
+                ></circle>
+                <defs>
+                  <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#38bdf8"></stop>
+                    <stop offset="100%" stop-color="#c084fc"></stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center text-lg font-semibold">74%</div>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-white/60">本周合力完成</p>
+              <p class="text-2xl font-bold">19 / 24 习惯</p>
+              <div class="flex items-center gap-2 text-sm text-emerald-300 mt-1">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                较上周 +3
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="space-y-3 mb-20">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">今日任务清单</h3>
+            <button class="text-sm text-indigo-300">编辑</button>
+          </div>
+          <article class="bg-gradient-to-r from-indigo-900/80 to-fuchsia-900/70 rounded-3xl p-4 flex gap-4">
+            <div class="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0">
+              <img
+                src="https://images.unsplash.com/photo-1468717755208-4adaa8843cff?auto=format&fit=crop&w=300&q=80"
+                alt="Habit cover"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-white/70">家庭晨间</p>
+              <h4 class="text-xl font-semibold mb-2">晨读 15 分钟</h4>
+              <div class="flex items-center justify-between">
+                <div class="flex -space-x-2">
+                  <img
+                    src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=80&q=80"
+                    class="w-8 h-8 rounded-full border-2 border-white/30"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=80&q=80"
+                    class="w-8 h-8 rounded-full border-2 border-white/30"
+                  />
+                </div>
+                <button class="px-3 py-1.5 rounded-full bg-white/20 text-xs uppercase tracking-wider">
+                  待开始
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="bg-white/5 rounded-3xl p-4 flex items-center justify-between">
+            <div>
+              <p class="text-sm text-white/60">运动升空</p>
+              <h4 class="text-xl font-semibold">户外骑行</h4>
+              <p class="text-xs text-white/60 mt-1">已累计 2.3 km</p>
+            </div>
+            <div class="text-right">
+              <p class="text-2xl font-bold text-emerald-300">+12 光点</p>
+              <button class="mt-2 text-sm text-indigo-300">记录</button>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <nav class="tab-bar flex items-center justify-around bg-black/40 text-xs">
+        <a class="flex flex-col items-center text-indigo-300">
+          <i class="fa-solid fa-house text-lg mb-1"></i>
+          首页
+        </a>
+        <a class="flex flex-col items-center text-white/60">
+          <i class="fa-solid fa-globe text-lg mb-1"></i>
+          星际
+        </a>
+        <a class="flex flex-col items-center text-white/60">
+          <i class="fa-solid fa-people-group text-lg mb-1"></i>
+          家庭
+        </a>
+        <a class="flex flex-col items-center text-white/60">
+          <i class="fa-solid fa-award text-lg mb-1"></i>
+          奖章
+        </a>
+        <a class="flex flex-col items-center text-white/60">
+          <i class="fa-solid fa-user text-lg mb-1"></i>
+          我
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>
+

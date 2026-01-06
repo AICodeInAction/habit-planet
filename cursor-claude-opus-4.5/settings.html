@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1a3e 50%, #0f1629 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .settings-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .settings-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-item:active {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .settings-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .toggle-switch {
+            width: 52px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: #4cd964;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .toggle-switch.active::after {
+            left: 23px;
+        }
+        
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 4px;
+            margin-bottom: 10px;
+        }
+        
+        .value-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0 28px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .tab-item.active {
+            color: #4da8ff;
+        }
+        
+        .tab-item i {
+            font-size: 22px;
+        }
+        
+        .content-area {
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .danger-btn {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.2);
+            border-radius: 16px;
+            color: #ff3b30;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .danger-btn:active {
+            background: rgba(255, 59, 48, 0.2);
+        }
+        
+        .version-info {
+            text-align: center;
+            padding: 30px 20px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+        }
+        
+        .premium-banner {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ff6347 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .premium-banner::before {
+            content: '⭐';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 80px;
+            opacity: 0.2;
+        }
+        
+        .premium-btn {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <div class="content-area px-5">
+        <!-- 导航头部 -->
+        <div class="pt-2 pb-6 flex items-center justify-between">
+            <div class="back-btn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1 class="text-lg font-bold">设置</h1>
+            <div class="w-10"></div>
+        </div>
+        
+        <!-- 会员横幅 -->
+        <div class="premium-banner">
+            <h2 class="text-xl font-bold text-black">升级到星际会员 🚀</h2>
+            <p class="text-black/70 text-sm mt-1">解锁全部星球、无限装饰和专属奖牌</p>
+            <div class="premium-btn">立即升级</div>
+        </div>
+        
+        <!-- 账号设置 -->
+        <div class="section-title">账号设置</div>
+        <div class="settings-section">
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-blue-500 to-cyan-500">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">个人资料</div>
+                    <div class="text-gray-400 text-sm">编辑头像、昵称等</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-purple-500 to-pink-500">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">家庭管理</div>
+                    <div class="text-gray-400 text-sm">管理家庭成员</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-green-500 to-teal-500">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">隐私设置</div>
+                    <div class="text-gray-400 text-sm">数据与隐私保护</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+        </div>
+        
+        <!-- 通知设置 -->
+        <div class="section-title">通知与提醒</div>
+        <div class="settings-section">
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-red-500 to-orange-500">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">习惯提醒</div>
+                    <div class="text-gray-400 text-sm">按时完成习惯打卡</div>
+                </div>
+                <div class="toggle-switch active"></div>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-yellow-500 to-amber-500">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">成就通知</div>
+                    <div class="text-gray-400 text-sm">获得新奖牌时提醒</div>
+                </div>
+                <div class="toggle-switch active"></div>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-pink-500 to-rose-500">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">家人动态</div>
+                    <div class="text-gray-400 text-sm">家人完成习惯时提醒</div>
+                </div>
+                <div class="toggle-switch active"></div>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-indigo-500 to-purple-500">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">免打扰模式</div>
+                    <div class="text-gray-400 text-sm">22:00 - 08:00</div>
+                </div>
+                <div class="toggle-switch"></div>
+            </div>
+        </div>
+        
+        <!-- 显示设置 -->
+        <div class="section-title">显示与声音</div>
+        <div class="settings-section">
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-gray-600 to-gray-800">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">深色模式</div>
+                </div>
+                <div class="toggle-switch active"></div>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-cyan-500 to-blue-500">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">音效</div>
+                </div>
+                <div class="toggle-switch active"></div>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-violet-500 to-fuchsia-500">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">动画效果</div>
+                </div>
+                <div class="toggle-switch active"></div>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-emerald-500 to-green-500">
+                    <i class="fas fa-language"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">语言</div>
+                </div>
+                <span class="value-text">简体中文</span>
+                <i class="fas fa-chevron-right text-gray-500 ml-2"></i>
+            </div>
+        </div>
+        
+        <!-- 其他设置 -->
+        <div class="section-title">关于</div>
+        <div class="settings-section">
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-blue-500 to-indigo-500">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">给我们评分</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-teal-500 to-cyan-500">
+                    <i class="fas fa-share"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">分享给朋友</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-amber-500 to-yellow-500">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">帮助中心</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-gray-500 to-slate-500">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">用户协议</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+            <div class="settings-item">
+                <div class="settings-icon bg-gradient-to-br from-slate-500 to-gray-600">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-semibold">隐私政策</div>
+                </div>
+                <i class="fas fa-chevron-right text-gray-500"></i>
+            </div>
+        </div>
+        
+        <!-- 退出登录 -->
+        <button class="danger-btn">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+            退出登录
+        </button>
+        
+        <!-- 版本信息 -->
+        <div class="version-info">
+            <p>习惯星球 v1.0.0</p>
+            <p class="mt-1">Made with ❤️ for better habits</p>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-medal"></i>
+            <span>奖牌</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-user-astronaut"></i>
+            <span>我的</span>
+        </div>
+    </div>
+    
+    <script>
+        // 开关切换功能
+        document.querySelectorAll('.toggle-switch').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

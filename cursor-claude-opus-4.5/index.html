@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>习惯星球 - 高保真原型展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'nunito': ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        'space-dark': '#0a0e27',
+                        'space-purple': '#1a1a3e',
+                        'nebula-pink': '#ff6b9d',
+                        'nebula-purple': '#c44dff',
+                        'star-gold': '#ffd700',
+                        'cosmic-blue': '#4da8ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            min-height: 100vh;
+        }
+        
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 55px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 0 12px #1a1a1a,
+                0 0 0 14px #333,
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(77, 168, 255, 0.2);
+            position: relative;
+            background: #000;
+        }
+        
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 0 0 24px 24px;
+            z-index: 10;
+        }
+        
+        .phone-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 43px;
+        }
+        
+        .prototype-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            justify-content: center;
+            padding: 60px 40px;
+        }
+        
+        .prototype-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .prototype-label {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, rgba(77, 168, 255, 0.2), rgba(196, 77, 255, 0.2));
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-section {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: #fff;
+        }
+        
+        .header-section h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4da8ff, #c44dff, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+        
+        .header-section p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- 页面头部 -->
+    <div class="header-section">
+        <h1><i class="fas fa-planet-ringed"></i> 习惯星球</h1>
+        <p>基于《掌控习惯》原理设计的亲子习惯养成App<br>让全家人在星际探索中一起养成好习惯</p>
+    </div>
+    
+    <!-- 原型展示区 -->
+    <div class="prototype-container">
+        <!-- 首页 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-home"></i> 首页 - 今日习惯
+            </div>
+            <div class="phone-frame">
+                <iframe src="home.html"></iframe>
+            </div>
+        </div>
+        
+        <!-- 星际探索 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-rocket"></i> 星际探索
+            </div>
+            <div class="phone-frame">
+                <iframe src="galaxy.html"></iframe>
+            </div>
+        </div>
+        
+        <!-- 星球详情 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-globe"></i> 星球详情
+            </div>
+            <div class="phone-frame">
+                <iframe src="planet.html"></iframe>
+            </div>
+        </div>
+        
+        <!-- 创建习惯 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-plus-circle"></i> 创建习惯
+            </div>
+            <div class="phone-frame">
+                <iframe src="habit-create.html"></iframe>
+            </div>
+        </div>
+        
+        <!-- 奖牌中心 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-medal"></i> 奖牌中心
+            </div>
+            <div class="phone-frame">
+                <iframe src="medals.html"></iframe>
+            </div>
+        </div>
+        
+        <!-- 家庭空间 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-users"></i> 家庭空间
+            </div>
+            <div class="phone-frame">
+                <iframe src="family.html"></iframe>
+            </div>
+        </div>
+        
+        <!-- 个人中心 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-user-astronaut"></i> 个人中心
+            </div>
+            <div class="phone-frame">
+                <iframe src="profile.html"></iframe>
+            </div>
+        </div>
+        
+        <!-- 设置 -->
+        <div class="prototype-item">
+            <div class="prototype-label">
+                <i class="fas fa-cog"></i> 设置
+            </div>
+            <div class="phone-frame">
+                <iframe src="settings.html"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 生成星空背景
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建习惯 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1a3e 50%, #0f1629 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .form-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: rgba(77, 168, 255, 0.5);
+            background: rgba(77, 168, 255, 0.1);
+        }
+        
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .icon-picker {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+        
+        .icon-item {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .icon-item:active {
+            transform: scale(0.9);
+        }
+        
+        .icon-item.selected {
+            border-color: #4da8ff;
+            background: rgba(77, 168, 255, 0.2);
+        }
+        
+        .frequency-btn {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 14px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .frequency-btn.selected {
+            border-color: #4da8ff;
+            background: rgba(77, 168, 255, 0.2);
+        }
+        
+        .time-slot {
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .time-slot.selected {
+            border-color: #c44dff;
+            background: rgba(196, 77, 255, 0.2);
+        }
+        
+        .reward-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .reward-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #4da8ff 0%, #c44dff 100%);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(77, 168, 255, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .day-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 50%;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .day-btn.selected {
+            border-color: #4da8ff;
+            background: rgba(77, 168, 255, 0.3);
+        }
+        
+        .content-area {
+            padding-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <div class="content-area px-5">
+        <!-- 导航头部 -->
+        <div class="pt-2 pb-4 flex items-center justify-between">
+            <div class="back-btn">
+                <i class="fas fa-times"></i>
+            </div>
+            <h1 class="text-lg font-bold">创建新习惯</h1>
+            <div class="w-10"></div>
+        </div>
+        
+        <!-- 习惯名称 -->
+        <div class="form-card">
+            <div class="section-title">习惯名称</div>
+            <input type="text" class="input-field" placeholder="输入习惯名称，如：阅读30分钟" value="每天练习书法">
+        </div>
+        
+        <!-- 选择图标 -->
+        <div class="form-card">
+            <div class="section-title">选择图标</div>
+            <div class="icon-picker">
+                <div class="icon-item">📚</div>
+                <div class="icon-item">🏃</div>
+                <div class="icon-item">💧</div>
+                <div class="icon-item selected">✍️</div>
+                <div class="icon-item">🎹</div>
+                <div class="icon-item">🧘</div>
+                <div class="icon-item">🦷</div>
+                <div class="icon-item">😴</div>
+                <div class="icon-item">🍎</div>
+                <div class="icon-item">🎨</div>
+                <div class="icon-item">🌱</div>
+                <div class="icon-item">⭐</div>
+            </div>
+        </div>
+        
+        <!-- 重复频率 -->
+        <div class="form-card">
+            <div class="section-title">重复频率</div>
+            <div class="flex gap-3 mb-4">
+                <div class="frequency-btn selected">每天</div>
+                <div class="frequency-btn">工作日</div>
+                <div class="frequency-btn">自定义</div>
+            </div>
+            <div class="flex justify-between">
+                <div class="day-btn selected">一</div>
+                <div class="day-btn selected">二</div>
+                <div class="day-btn selected">三</div>
+                <div class="day-btn selected">四</div>
+                <div class="day-btn selected">五</div>
+                <div class="day-btn selected">六</div>
+                <div class="day-btn selected">日</div>
+            </div>
+        </div>
+        
+        <!-- 最佳时间 -->
+        <div class="form-card">
+            <div class="section-title">最佳完成时间</div>
+            <div class="flex flex-wrap gap-2">
+                <div class="time-slot">🌅 早晨</div>
+                <div class="time-slot selected">☀️ 上午</div>
+                <div class="time-slot">🌤️ 下午</div>
+                <div class="time-slot">🌙 晚上</div>
+                <div class="time-slot">⭐ 随时</div>
+            </div>
+        </div>
+        
+        <!-- 提醒设置 -->
+        <div class="form-card">
+            <div class="flex items-center justify-between mb-4">
+                <div class="section-title mb-0">开启提醒</div>
+                <div class="w-14 h-8 bg-blue-500 rounded-full p-1 cursor-pointer">
+                    <div class="w-6 h-6 bg-white rounded-full ml-auto"></div>
+                </div>
+            </div>
+            <input type="text" class="input-field" placeholder="选择提醒时间" value="09:00">
+        </div>
+        
+        <!-- 星尘奖励 -->
+        <div class="form-card">
+            <div class="section-title">完成奖励</div>
+            <div class="flex items-center gap-4 mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-sparkles text-yellow-400 text-xl"></i>
+                    <span class="text-2xl font-bold text-yellow-400">45</span>
+                    <span class="text-gray-400">星尘</span>
+                </div>
+            </div>
+            <input type="range" class="reward-slider" min="10" max="100" value="45">
+            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                <span>简单 (10)</span>
+                <span>中等 (50)</span>
+                <span>困难 (100)</span>
+            </div>
+        </div>
+        
+        <!-- 关联家庭成员 -->
+        <div class="form-card">
+            <div class="section-title">邀请家人一起</div>
+            <div class="flex gap-3">
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-xl border-2 border-green-400">
+                        👩
+                    </div>
+                    <span class="text-xs">妈妈</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-xl opacity-50">
+                        👨
+                    </div>
+                    <span class="text-xs text-gray-500">爸爸</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center text-xl opacity-50">
+                        👧
+                    </div>
+                    <span class="text-xs text-gray-500">妹妹</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-14 h-14 rounded-full bg-gray-700 flex items-center justify-center text-xl">
+                        <i class="fas fa-plus text-gray-500"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">添加</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 提交按钮 -->
+        <button class="submit-btn mt-4">
+            <i class="fas fa-rocket mr-2"></i>
+            创建习惯
+        </button>
+    </div>
+    
+    <script>
+        // 图标选择
+        document.querySelectorAll('.icon-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.icon-item').forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // 频率选择
+        document.querySelectorAll('.frequency-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.frequency-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // 时间段选择
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // 日期选择
+        document.querySelectorAll('.day-btn').forEach(day => {
+            day.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奖牌中心 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #1a1a0a 0%, #2d2a15 30%, #1a180a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .medal-hero {
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+        
+        .medal-count {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+        
+        .medal-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .medal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+        }
+        
+        .medal-card.locked {
+            opacity: 0.5;
+            filter: grayscale(0.5);
+        }
+        
+        .medal-card.new {
+            border-color: rgba(255, 215, 0, 0.5);
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.4); }
+        }
+        
+        .medal-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 12px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+        
+        .medal-icon.silver {
+            background: linear-gradient(135deg, #c0c0c0 0%, #808080 100%);
+            box-shadow: 0 8px 30px rgba(192, 192, 192, 0.3);
+        }
+        
+        .medal-icon.bronze {
+            background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+            box-shadow: 0 8px 30px rgba(205, 127, 50, 0.3);
+        }
+        
+        .medal-icon.special {
+            background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+            box-shadow: 0 8px 30px rgba(156, 39, 176, 0.3);
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        .tab-selector {
+            display: flex;
+            gap: 8px;
+            padding: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.2));
+            color: #ffd700;
+        }
+        
+        .progress-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0 28px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .tab-item.active {
+            color: #ffd700;
+        }
+        
+        .tab-item i {
+            font-size: 22px;
+        }
+        
+        .content-area {
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .shine-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .category-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <div class="content-area px-5">
+        <!-- 头部统计 -->
+        <div class="medal-hero">
+            <div class="medal-count">18</div>
+            <p class="text-gray-400 text-lg">已获得奖牌</p>
+            <div class="flex justify-center gap-6 mt-4">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-yellow-400">6</div>
+                    <div class="text-xs text-gray-500">金牌</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-gray-300">7</div>
+                    <div class="text-xs text-gray-500">银牌</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-orange-400">5</div>
+                    <div class="text-xs text-gray-500">铜牌</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab 选择器 -->
+        <div class="tab-selector">
+            <div class="tab-btn active">全部</div>
+            <div class="tab-btn">连续打卡</div>
+            <div class="tab-btn">里程碑</div>
+            <div class="tab-btn">特殊</div>
+        </div>
+        
+        <!-- 连续打卡奖牌 -->
+        <div class="category-title">
+            <i class="fas fa-fire text-orange-400"></i>
+            连续打卡成就
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="medal-card new">
+                <div class="medal-icon">
+                    <div class="shine-effect"></div>
+                    🔥
+                    <span class="new-badge">NEW</span>
+                </div>
+                <h3 class="font-bold text-lg">坚持之星</h3>
+                <p class="text-gray-400 text-sm">连续打卡7天</p>
+                <div class="progress-badge">
+                    <i class="fas fa-check text-green-400"></i>
+                    已完成
+                </div>
+            </div>
+            <div class="medal-card">
+                <div class="medal-icon">
+                    ⚡
+                </div>
+                <h3 class="font-bold text-lg">习惯达人</h3>
+                <p class="text-gray-400 text-sm">连续打卡14天</p>
+                <div class="progress-badge">
+                    <i class="fas fa-check text-green-400"></i>
+                    已完成
+                </div>
+            </div>
+            <div class="medal-card">
+                <div class="medal-icon silver">
+                    🌟
+                </div>
+                <h3 class="font-bold text-lg">月度冠军</h3>
+                <p class="text-gray-400 text-sm">连续打卡30天</p>
+                <div class="progress-badge">
+                    <span class="text-yellow-400">12/30</span>
+                </div>
+            </div>
+            <div class="medal-card locked">
+                <div class="medal-icon bronze">
+                    👑
+                </div>
+                <h3 class="font-bold text-lg">习惯大师</h3>
+                <p class="text-gray-400 text-sm">连续打卡100天</p>
+                <div class="progress-badge">
+                    <span class="text-gray-500">12/100</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 里程碑奖牌 -->
+        <div class="category-title">
+            <i class="fas fa-flag-checkered text-blue-400"></i>
+            里程碑成就
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="medal-card">
+                <div class="medal-icon">
+                    🚀
+                </div>
+                <h3 class="font-bold text-lg">启航者</h3>
+                <p class="text-gray-400 text-sm">完成第一个习惯</p>
+                <div class="progress-badge">
+                    <i class="fas fa-check text-green-400"></i>
+                    已完成
+                </div>
+            </div>
+            <div class="medal-card">
+                <div class="medal-icon silver">
+                    📚
+                </div>
+                <h3 class="font-bold text-lg">小书虫</h3>
+                <p class="text-gray-400 text-sm">阅读累计50小时</p>
+                <div class="progress-badge">
+                    <span class="text-yellow-400">38/50h</span>
+                </div>
+            </div>
+            <div class="medal-card">
+                <div class="medal-icon">
+                    💪
+                </div>
+                <h3 class="font-bold text-lg">运动健将</h3>
+                <p class="text-gray-400 text-sm">运动累计100次</p>
+                <div class="progress-badge">
+                    <i class="fas fa-check text-green-400"></i>
+                    已完成
+                </div>
+            </div>
+            <div class="medal-card">
+                <div class="medal-icon bronze">
+                    🌍
+                </div>
+                <h3 class="font-bold text-lg">星际探险家</h3>
+                <p class="text-gray-400 text-sm">解锁5个星球</p>
+                <div class="progress-badge">
+                    <span class="text-yellow-400">3/5</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 特殊奖牌 -->
+        <div class="category-title">
+            <i class="fas fa-gem text-purple-400"></i>
+            特殊成就
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="medal-card">
+                <div class="medal-icon special">
+                    👨‍👩‍👧‍👦
+                </div>
+                <h3 class="font-bold text-lg">全家总动员</h3>
+                <p class="text-gray-400 text-sm">全家同时完成任务</p>
+                <div class="progress-badge">
+                    <i class="fas fa-check text-green-400"></i>
+                    已完成
+                </div>
+            </div>
+            <div class="medal-card">
+                <div class="medal-icon special">
+                    🎯
+                </div>
+                <h3 class="font-bold text-lg">完美主义者</h3>
+                <p class="text-gray-400 text-sm">单日100%完成率</p>
+                <div class="progress-badge">
+                    <i class="fas fa-check text-green-400"></i>
+                    已完成
+                </div>
+            </div>
+            <div class="medal-card locked">
+                <div class="medal-icon special">
+                    🌈
+                </div>
+                <h3 class="font-bold text-lg">彩虹收集者</h3>
+                <p class="text-gray-400 text-sm">收集所有星球装饰</p>
+                <div class="progress-badge">
+                    <span class="text-gray-500">28/100</span>
+                </div>
+            </div>
+            <div class="medal-card locked">
+                <div class="medal-icon special">
+                    🏆
+                </div>
+                <h3 class="font-bold text-lg">传奇</h3>
+                <p class="text-gray-400 text-sm">获得所有其他奖牌</p>
+                <div class="progress-badge">
+                    <span class="text-gray-500">18/50</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-medal"></i>
+            <span>奖牌</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user-astronaut"></i>
+            <span>我的</span>
+        </div>
+    </div>
+    
+    <script>
+        // Tab 切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

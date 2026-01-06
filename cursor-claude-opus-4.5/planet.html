@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星球详情 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #1a0a0a 0%, #2d1515 30%, #1a0a0a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .planet-hero {
+            position: relative;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .planet-main {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #c62828 40%, #bf360c 70%, #ff8a65 100%);
+            box-shadow: 
+                0 0 80px rgba(255, 107, 107, 0.5),
+                inset -20px -20px 40px rgba(0,0,0,0.4),
+                inset 10px 10px 30px rgba(255, 200, 200, 0.2);
+            position: relative;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .planet-main::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(139, 69, 19, 0.6);
+            border-radius: 50%;
+            top: 30%;
+            left: 40%;
+        }
+        
+        .planet-main::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(139, 69, 19, 0.4);
+            border-radius: 50%;
+            top: 55%;
+            left: 25%;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .decoration-item {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+        
+        .collection-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .collection-card:active {
+            transform: scale(0.95);
+        }
+        
+        .collection-card.locked {
+            opacity: 0.5;
+        }
+        
+        .collection-card.owned {
+            border-color: rgba(76, 217, 100, 0.3);
+            background: linear-gradient(135deg, rgba(76, 217, 100, 0.1) 0%, rgba(76, 217, 100, 0.05) 100%);
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0 28px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .tab-item.active {
+            color: #ff6b6b;
+        }
+        
+        .tab-item i {
+            font-size: 22px;
+        }
+        
+        .stat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .content-area {
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:active {
+            transform: scale(0.9);
+        }
+        
+        .decor-preview {
+            position: absolute;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- 星空背景 -->
+    <div class="stars-bg" id="stars"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <div class="content-area">
+        <!-- 导航头部 -->
+        <div class="px-5 pt-2 flex items-center justify-between">
+            <div class="back-btn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <h1 class="text-lg font-bold">火星</h1>
+            <div class="w-10"></div>
+        </div>
+        
+        <!-- 星球展示区 -->
+        <div class="planet-hero">
+            <!-- 装饰物 -->
+            <div class="decor-preview" style="top: 60px; left: 50px; animation-delay: 0s;">🚀</div>
+            <div class="decor-preview" style="top: 80px; right: 60px; animation-delay: 0.5s;">🛸</div>
+            <div class="decor-preview" style="bottom: 60px; left: 80px; animation-delay: 1s;">🌟</div>
+            <div class="decor-preview" style="bottom: 80px; right: 50px; animation-delay: 1.5s;">⭐</div>
+            <div class="decor-preview" style="top: 140px; left: 30px; animation-delay: 0.8s;">🪐</div>
+            
+            <div class="planet-main"></div>
+        </div>
+        
+        <!-- 星球信息 -->
+        <div class="px-5 -mt-4">
+            <div class="bg-gradient-to-br from-red-900/30 to-orange-900/20 rounded-3xl p-5 border border-red-500/20">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold">🔴 火星</h2>
+                        <p class="text-gray-400 text-sm mt-1">红色星球 · 勇气与探索</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold text-red-400">Lv.3</div>
+                        <p class="text-xs text-gray-400">星球等级</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-3 mb-4">
+                    <div class="stat-badge">
+                        <i class="fas fa-calendar-check text-green-400"></i>
+                        <span>解锁于 30天前</span>
+                    </div>
+                    <div class="stat-badge">
+                        <i class="fas fa-gem text-purple-400"></i>
+                        <span>5/12 收集</span>
+                    </div>
+                </div>
+                
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    火星是太阳系第四颗行星，因其红色外观而被称为"红色星球"。在这里，你将获得勇气和探索精神的加成！
+                </p>
+            </div>
+        </div>
+        
+        <!-- 收藏品 -->
+        <div class="px-5 mt-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-bold">星球装饰</h2>
+                <span class="text-sm text-gray-400">5/12 已解锁</span>
+            </div>
+            
+            <div class="grid grid-cols-4 gap-3">
+                <!-- 已拥有 -->
+                <div class="collection-card owned">
+                    <div class="text-3xl mb-2">🚀</div>
+                    <p class="text-xs">小火箭</p>
+                    <p class="text-xs text-green-400">已拥有</p>
+                </div>
+                <div class="collection-card owned">
+                    <div class="text-3xl mb-2">🛸</div>
+                    <p class="text-xs">飞碟</p>
+                    <p class="text-xs text-green-400">已拥有</p>
+                </div>
+                <div class="collection-card owned">
+                    <div class="text-3xl mb-2">🌟</div>
+                    <p class="text-xs">金星</p>
+                    <p class="text-xs text-green-400">已拥有</p>
+                </div>
+                <div class="collection-card owned">
+                    <div class="text-3xl mb-2">⭐</div>
+                    <p class="text-xs">星星</p>
+                    <p class="text-xs text-green-400">已拥有</p>
+                </div>
+                <div class="collection-card owned">
+                    <div class="text-3xl mb-2">🪐</div>
+                    <p class="text-xs">小土星</p>
+                    <p class="text-xs text-green-400">已拥有</p>
+                </div>
+                
+                <!-- 未解锁 -->
+                <div class="collection-card locked">
+                    <div class="text-3xl mb-2">🌙</div>
+                    <p class="text-xs">月亮</p>
+                    <p class="text-xs text-yellow-400">200星尘</p>
+                </div>
+                <div class="collection-card locked">
+                    <div class="text-3xl mb-2">☄️</div>
+                    <p class="text-xs">彗星</p>
+                    <p class="text-xs text-yellow-400">300星尘</p>
+                </div>
+                <div class="collection-card locked">
+                    <div class="text-3xl mb-2">🌌</div>
+                    <p class="text-xs">星云</p>
+                    <p class="text-xs text-yellow-400">500星尘</p>
+                </div>
+                <div class="collection-card locked">
+                    <div class="text-3xl mb-2">🔭</div>
+                    <p class="text-xs">望远镜</p>
+                    <p class="text-xs text-yellow-400">400星尘</p>
+                </div>
+                <div class="collection-card locked">
+                    <div class="text-3xl mb-2">🧑‍🚀</div>
+                    <p class="text-xs">宇航员</p>
+                    <p class="text-xs text-yellow-400">600星尘</p>
+                </div>
+                <div class="collection-card locked">
+                    <div class="text-3xl mb-2">🛰️</div>
+                    <p class="text-xs">卫星</p>
+                    <p class="text-xs text-yellow-400">350星尘</p>
+                </div>
+                <div class="collection-card locked">
+                    <div class="text-3xl mb-2">🏠</div>
+                    <p class="text-xs">太空站</p>
+                    <p class="text-xs text-yellow-400">800星尘</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 星球加成 -->
+        <div class="px-5 mt-6">
+            <h2 class="text-lg font-bold mb-4">星球加成</h2>
+            <div class="bg-gradient-to-br from-purple-900/30 to-pink-900/20 rounded-2xl p-4 border border-purple-500/20">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl">
+                        ⚡
+                    </div>
+                    <div>
+                        <h3 class="font-bold">勇气加成</h3>
+                        <p class="text-gray-400 text-sm">完成运动类习惯获得 +20% 星尘</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-medal"></i>
+            <span>奖牌</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user-astronaut"></i>
+            <span>我的</span>
+        </div>
+    </div>
+    
+    <script>
+        // 生成星空背景
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 2 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
+

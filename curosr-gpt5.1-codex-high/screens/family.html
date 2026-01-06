@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Planet · Family</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"SF Pro Display"', "Inter", "system-ui"],
+              body: ['"SF Pro Text"', "Inter", "system-ui"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-yH6Qdh1dQFZITkkpFmS6r30YIOCwVDDDeWGPA7eGRIDvN+xr3aMcMBXNIN1qNbfXDnpa9eKJeMgnbPiwJLzA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        background: #030712;
+        font-family: "SF Pro Text", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      .device {
+        width: 430px;
+        height: 932px;
+        border-radius: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(2, 6, 23, 0.55);
+        background: linear-gradient(160deg, #0a152d 0%, #041024 60%, #030a16 100%);
+      }
+      .status-bar {
+        height: 54px;
+        padding: 0 24px;
+      }
+      .content {
+        height: calc(100% - 54px - 90px);
+      }
+      .tab-bar {
+        height: 90px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(18px);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center py-10">
+    <div class="device flex flex-col text-white">
+      <div class="status-bar flex items-center justify-between text-sm text-white/80">
+        <span class="font-semibold">9:41</span>
+        <div class="flex items-center gap-3 text-lg">
+          <i class="fa-solid fa-signal"></i>
+          <i class="fa-solid fa-wifi"></i>
+          <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+      </div>
+
+      <div class="content px-6 pb-4 pt-2 overflow-y-auto">
+        <header class="py-3">
+          <p class="text-sm text-white/60">亲子互动 · 全家目标</p>
+          <h1 class="text-3xl font-bold font-display">家庭共创中心</h1>
+        </header>
+
+        <section class="bg-white/5 rounded-3xl p-4 mb-4 border border-white/10">
+          <div class="flex justify-between items-center mb-3">
+            <div>
+              <p class="text-sm text-white/60">本周主题</p>
+              <h2 class="text-xl font-semibold">「温暖厨房日记」</h2>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 text-sm">第 2 天</span>
+          </div>
+          <p class="text-white/70 text-sm">
+            每晚记录一次家庭晚餐时刻，分享一天最开心的瞬间，完成后解锁「味蕾星」限定装饰。
+          </p>
+          <div class="flex items-center gap-3 mt-4">
+            <button class="flex-1 py-2 rounded-2xl bg-white/10">上传照片</button>
+            <button class="flex-1 py-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-fuchsia-500">录音留言</button>
+          </div>
+        </section>
+
+        <section class="space-y-4 mb-5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold">亲子星际电台</h3>
+            <button class="text-sm text-indigo-300">查看全部</button>
+          </div>
+          <div class="bg-gradient-to-r from-indigo-900/70 to-sky-900/30 rounded-3xl p-4 flex gap-4 border border-white/10">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=200&q=80"
+                class="w-full h-full object-cover"
+                alt="family moment"
+              />
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-white/60">Dad · 35秒前</p>
+              <p class="text-lg font-semibold">今天你们是谁的英雄？</p>
+              <p class="text-white/70 text-sm mt-1">
+                如果你能把今天最想感谢的人写下来，今晚我们就把他写进「勇气星」的石碑上。
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white/5 rounded-3xl p-4 border border-white/10">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-semibold">家庭航行排行榜</h4>
+              <span class="text-xs text-white/60">每晚重置</span>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="text-lg font-semibold text-amber-300">1</span>
+                  <div>
+                    <p class="font-semibold">Yoyo</p>
+                    <p class="text-xs text-white/60">连胜 5 天</p>
+                  </div>
+                </div>
+                <p class="text-lg text-emerald-300">+38 光点</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="text-lg font-semibold text-slate-300">2</span>
+                  <div>
+                    <p class="font-semibold">Mom</p>
+                    <p class="text-xs text-white/60">今日连线 3 次</p>
+                  </div>
+                </div>
+                <p class="text-lg text-emerald-300">+31 光点</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="text-lg font-semibold text-orange-200">3</span>
+                  <div>
+                    <p class="font-semibold">Dad</p>
+                    <p class="text-xs text-white/60">已建 2 个星球</p>
+                  </div>
+                </div>
+                <p class="text-lg text-emerald-300">+24 光点</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white/5 rounded-3xl p-4 border border-white/10 mb-20">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold">亲子任务板</h3>
+            <button class="text-sm text-indigo-300">+ 新任务</button>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-white/60">今晚 20:30</p>
+                <p class="font-semibold">全家星球会议</p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-white/10 text-sm">提醒我</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-white/60">周末特别行动</p>
+                <p class="font-semibold">户外寻宝 + 露营</p>
+              </div>
+              <span class="text-emerald-300 text-sm">已确认</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <nav class="tab-bar flex items-center justify-around bg-black/40 text-xs text-white/70">
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-house text-lg mb-1"></i>
+          首页
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-globe text-lg mb-1"></i>
+          星际
+        </a>
+        <a class="flex flex-col items-center text-emerald-300">
+          <i class="fa-solid fa-people-group text-lg mb-1"></i>
+          家庭
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-award text-lg mb-1"></i>
+          奖章
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-user text-lg mb-1"></i>
+          我
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>
+

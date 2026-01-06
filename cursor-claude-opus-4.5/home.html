@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'nunito': ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1a3e 50%, #0f1629 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #4da8ff, #c44dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .habit-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .habit-card:active {
+            transform: scale(0.98);
+        }
+        
+        .habit-card.completed {
+            background: linear-gradient(135deg, rgba(76, 217, 100, 0.2) 0%, rgba(76, 217, 100, 0.1) 100%);
+            border-color: rgba(76, 217, 100, 0.3);
+        }
+        
+        .check-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .check-circle.checked {
+            background: linear-gradient(135deg, #4cd964, #34c759);
+            border-color: #4cd964;
+        }
+        
+        .progress-ring {
+            width: 140px;
+            height: 140px;
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.5s ease;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .star-dust {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.1));
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0 28px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-item.active {
+            color: #4da8ff;
+        }
+        
+        .tab-item i {
+            font-size: 22px;
+        }
+        
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+        }
+        
+        .streak-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .content-area {
+            padding-bottom: 100px;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- 浮动粒子 -->
+    <div class="floating-particles" id="particles"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <!-- 主内容区 -->
+    <div class="content-area px-5 relative z-10">
+        <!-- 头部区域 -->
+        <div class="pt-4 pb-6">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <p class="text-gray-400 text-sm">星期三，11月26日</p>
+                    <h1 class="text-2xl font-bold mt-1">你好，小星星 ✨</h1>
+                </div>
+                <div class="star-dust">
+                    <i class="fas fa-sparkles text-yellow-400"></i>
+                    <span class="text-yellow-400 font-bold">2,450</span>
+                </div>
+            </div>
+            
+            <!-- 今日进度 -->
+            <div class="bg-gradient-to-br from-purple-900/40 to-blue-900/40 rounded-3xl p-5 border border-white/10">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold mb-1">今日任务</h2>
+                        <p class="text-gray-400 text-sm">完成 4/6 个习惯</p>
+                        <div class="streak-badge mt-3">
+                            <i class="fas fa-fire"></i>
+                            连续 12 天
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <svg class="progress-ring" viewBox="0 0 140 140">
+                            <circle
+                                cx="70"
+                                cy="70"
+                                r="60"
+                                fill="none"
+                                stroke="rgba(255,255,255,0.1)"
+                                stroke-width="12"
+                            />
+                            <circle
+                                class="progress-ring-circle"
+                                cx="70"
+                                cy="70"
+                                r="60"
+                                fill="none"
+                                stroke="url(#gradient)"
+                                stroke-width="12"
+                                stroke-linecap="round"
+                                stroke-dasharray="377"
+                                stroke-dashoffset="126"
+                            />
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#4da8ff"/>
+                                    <stop offset="100%" stop-color="#c44dff"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <span class="text-3xl font-bold gradient-text">67%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 习惯列表 -->
+        <div class="mb-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold">今日习惯</h2>
+                <button class="text-blue-400 text-sm flex items-center gap-1">
+                    <i class="fas fa-plus"></i>
+                    添加
+                </button>
+            </div>
+            
+            <!-- 习惯卡片 - 已完成 -->
+            <div class="habit-card completed">
+                <div class="flex items-center gap-4">
+                    <div class="check-circle checked">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">📚</span>
+                            <div>
+                                <h3 class="font-bold">阅读30分钟</h3>
+                                <p class="text-gray-400 text-xs">每天睡前阅读</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-yellow-400 text-sm font-bold">+50</div>
+                        <div class="text-gray-500 text-xs">星尘</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片 - 已完成 -->
+            <div class="habit-card completed">
+                <div class="flex items-center gap-4">
+                    <div class="check-circle checked">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🦷</span>
+                            <div>
+                                <h3 class="font-bold">早晚刷牙</h3>
+                                <p class="text-gray-400 text-xs">保护牙齿健康</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-yellow-400 text-sm font-bold">+30</div>
+                        <div class="text-gray-500 text-xs">星尘</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片 - 已完成 -->
+            <div class="habit-card completed">
+                <div class="flex items-center gap-4">
+                    <div class="check-circle checked">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🏃</span>
+                            <div>
+                                <h3 class="font-bold">运动20分钟</h3>
+                                <p class="text-gray-400 text-xs">跑步或跳绳</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-yellow-400 text-sm font-bold">+40</div>
+                        <div class="text-gray-500 text-xs">星尘</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片 - 已完成 -->
+            <div class="habit-card completed">
+                <div class="flex items-center gap-4">
+                    <div class="check-circle checked">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">💧</span>
+                            <div>
+                                <h3 class="font-bold">喝8杯水</h3>
+                                <p class="text-gray-400 text-xs">保持身体水分</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-yellow-400 text-sm font-bold">+25</div>
+                        <div class="text-gray-500 text-xs">星尘</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片 - 未完成 -->
+            <div class="habit-card">
+                <div class="flex items-center gap-4">
+                    <div class="check-circle">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🎹</span>
+                            <div>
+                                <h3 class="font-bold">练习钢琴</h3>
+                                <p class="text-gray-400 text-xs">每天练习30分钟</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-gray-400 text-sm font-bold">+60</div>
+                        <div class="text-gray-500 text-xs">星尘</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 习惯卡片 - 未完成 -->
+            <div class="habit-card">
+                <div class="flex items-center gap-4">
+                    <div class="check-circle">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🛏️</span>
+                            <div>
+                                <h3 class="font-bold">整理房间</h3>
+                                <p class="text-gray-400 text-xs">保持整洁</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-gray-400 text-sm font-bold">+35</div>
+                        <div class="text-gray-500 text-xs">星尘</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item active">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-medal"></i>
+            <span>奖牌</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user-astronaut"></i>
+            <span>我的</span>
+        </div>
+    </div>
+    
+    <script>
+        // 生成浮动粒子
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.bottom = '-20px';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particlesContainer.appendChild(particle);
+        }
+        
+        // 点击打卡功能
+        document.querySelectorAll('.check-circle:not(.checked)').forEach(circle => {
+            circle.addEventListener('click', function() {
+                this.classList.add('checked');
+                this.innerHTML = '<i class="fas fa-check text-white text-sm"></i>';
+                this.closest('.habit-card').classList.add('completed');
+            });
+        });
+    </script>
+</body>
+</html>
+

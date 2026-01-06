@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Planet · Galaxy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"SF Pro Display"', "Inter", "system-ui"],
+              body: ['"SF Pro Text"', "Inter", "system-ui"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-yH6Qdh1dQFZITkkpFmS6r30YIOCwVDDDeWGPA7eGRIDvN+xr3aMcMBXNIN1qNbfXDnpa9eKJeMgnbPiwJLzA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        background: #030712;
+        font-family: "SF Pro Text", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      .device {
+        width: 430px;
+        height: 932px;
+        border-radius: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(2, 6, 23, 0.55);
+        background: #010316;
+      }
+      .status-bar {
+        height: 54px;
+        padding: 0 24px;
+      }
+      .content {
+        height: calc(100% - 54px - 90px);
+      }
+      .tab-bar {
+        height: 90px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(18px);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center py-10">
+    <div class="device flex flex-col text-white">
+      <div class="status-bar flex items-center justify-between text-sm text-white/80">
+        <span class="font-semibold">9:41</span>
+        <div class="flex items-center gap-3 text-lg">
+          <i class="fa-solid fa-signal"></i>
+          <i class="fa-solid fa-wifi"></i>
+          <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+      </div>
+
+      <div
+        class="content relative overflow-hidden"
+        style="
+          background-image: url('https://images.unsplash.com/photo-1454789548928-9efd52dc4031?auto=format&fit=crop&w=1200&q=80');
+          background-size: cover;
+          background-position: center;
+        "
+      >
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-indigo-900/50 to-black/80 backdrop-blur-[1px]"></div>
+        <div class="relative z-10 h-full flex flex-col justify-between px-6 pb-6 pt-2">
+          <header class="py-4">
+            <p class="text-sm text-white/70">第 3 章 · 银河探险</p>
+            <h1 class="text-3xl font-bold font-display">晨曦星系</h1>
+            <p class="text-white/70 text-sm mt-1">累计光点：248</p>
+          </header>
+
+          <div class="space-y-4">
+            <div class="bg-white/10 rounded-3xl p-4 flex items-center justify-between backdrop-blur-xl">
+              <div>
+                <p class="text-sm text-white/70">下一站</p>
+                <h2 class="text-2xl font-semibold">「勇气星」</h2>
+                <p class="text-sm text-amber-200 mt-1">再需 32 光点开启</p>
+              </div>
+              <div class="w-20 h-20 rounded-full border border-white/30 flex items-center justify-center">
+                <span class="text-xl font-bold">68%</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <article class="rounded-3xl p-4 bg-gradient-to-br from-sky-500/30 to-purple-500/20 border border-white/10">
+                <p class="text-xs uppercase tracking-[0.3em] text-white/70">已解锁</p>
+                <h3 class="text-xl font-semibold mt-1">晨读星</h3>
+                <p class="text-sm text-white/70 mt-2">可装饰 4 / 8 件</p>
+                <div class="mt-4 flex items-center gap-2 text-emerald-200 text-xs">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  +18 光尘
+                </div>
+              </article>
+
+              <article class="rounded-3xl p-4 bg-white/5 border border-white/10">
+                <p class="text-xs uppercase tracking-[0.3em] text-white/50">建造中</p>
+                <h3 class="text-xl font-semibold mt-1">活力星</h3>
+                <p class="text-sm text-white/60 mt-2">家务 + 运动加成</p>
+                <div class="mt-4 text-sm text-white/70">剩余 12h 45m</div>
+              </article>
+
+              <article class="col-span-2 rounded-3xl overflow-hidden border border-white/10">
+                <div
+                  class="h-32"
+                  style="
+                    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80');
+                    background-size: cover;
+                  "
+                ></div>
+                <div class="p-4 bg-black/60 backdrop-blur-lg">
+                  <p class="text-sm text-indigo-200">星球装饰</p>
+                  <h3 class="text-xl font-semibold mt-1">亲子共创纪念碑</h3>
+                  <div class="flex items-center justify-between mt-3 text-sm">
+                    <span class="text-white/80">所需光尘 120</span>
+                    <button class="px-4 py-1.5 rounded-full bg-white/10 border border-white/20">预览</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tab-bar flex items-center justify-around bg-black/60 text-xs text-white/70">
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-house text-lg mb-1"></i>
+          首页
+        </a>
+        <a class="flex flex-col items-center text-sky-300">
+          <i class="fa-solid fa-globe text-lg mb-1"></i>
+          星际
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-people-group text-lg mb-1"></i>
+          家庭
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-award text-lg mb-1"></i>
+          奖章
+        </a>
+        <a class="flex flex-col items-center">
+          <i class="fa-solid fa-user text-lg mb-1"></i>
+          我
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Planet · Prototype Board</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-yH6Qdh1dQFZITkkpFmS6r30YIOCwVDDDeWGPA7eGRIDvN+xr3aMcMBXNIN1qNbfXDnpa9eKJeMgnbPiwJLzA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        background: radial-gradient(circle at top, #040d2b, #01030a);
+        font-family: "SF Pro Text", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      .phone-frame {
+        width: 430px;
+        height: 932px;
+        border-radius: 44px;
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(5, 8, 29, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: #000;
+        position: relative;
+      }
+      .phone-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 44px;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen text-white">
+    <header class="max-w-6xl mx-auto px-6 py-16">
+      <p class="text-blue-200 uppercase tracking-[0.3em] text-xs mb-4">Habit Planet · Prototype</p>
+      <h1 class="text-4xl md:text-5xl font-bold font-[SF Pro Display] mb-4">高保真界面原型</h1>
+      <p class="text-white/70 max-w-3xl">
+        以下为 Habit Planet 的关键界面，覆盖家庭协作、星际旅程、奖牌机制与个人成长。所有界面均基于
+        Tailwind CSS + FontAwesome，尺寸模拟 iPhone 15 Pro，并可直接用于前端开发对齐。
+      </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 pb-20 space-y-12">
+      <section>
+        <h2 class="text-2xl font-semibold mb-6">核心旅程</h2>
+        <div class="grid gap-10 lg:grid-cols-2">
+          <div>
+            <p class="mb-3 text-sm text-white/70 uppercase tracking-[0.2em]">Home</p>
+            <div class="phone-frame">
+              <iframe src="screens/home.html" title="Home Screen" loading="lazy"></iframe>
+            </div>
+          </div>
+          <div>
+            <p class="mb-3 text-sm text-white/70 uppercase tracking-[0.2em]">Galaxy</p>
+            <div class="phone-frame">
+              <iframe src="screens/galaxy.html" title="Galaxy Screen" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mb-6">家庭互动 & 激励</h2>
+        <div class="grid gap-10 lg:grid-cols-2">
+          <div>
+            <p class="mb-3 text-sm text-white/70 uppercase tracking-[0.2em]">Family Hub</p>
+            <div class="phone-frame">
+              <iframe src="screens/family.html" title="Family Screen" loading="lazy"></iframe>
+            </div>
+          </div>
+          <div>
+            <p class="mb-3 text-sm text-white/70 uppercase tracking-[0.2em]">Rewards</p>
+            <div class="phone-frame">
+              <iframe src="screens/rewards.html" title="Rewards Screen" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold mb-6">个人成长面板</h2>
+        <div class="grid gap-10 lg:grid-cols-2">
+          <div>
+            <p class="mb-3 text-sm text-white/70 uppercase tracking-[0.2em]">Profile</p>
+            <div class="phone-frame">
+              <iframe src="screens/profile.html" title="Profile Screen" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+

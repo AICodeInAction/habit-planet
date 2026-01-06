@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星际探索 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: radial-gradient(ellipse at center, #1a1a3e 0%, #0a0e27 50%, #050510 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .star-dust-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.08));
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+        }
+        
+        .galaxy-container {
+            position: relative;
+            height: 500px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+        
+        .planet:hover {
+            transform: scale(1.15);
+        }
+        
+        .planet.locked {
+            filter: grayscale(0.7) brightness(0.5);
+            opacity: 0.6;
+        }
+        
+        .planet.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+        }
+        
+        .planet-earth {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4da8ff 0%, #2e7d32 50%, #1565c0 100%);
+            top: 350px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 50px rgba(77, 168, 255, 0.5), inset -10px -10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .planet-mars {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #c62828 50%, #bf360c 100%);
+            top: 270px;
+            left: 25%;
+            box-shadow: 0 0 40px rgba(255, 107, 107, 0.4), inset -8px -8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .planet-jupiter {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ffb74d 0%, #ff8f00 30%, #e65100 60%, #ffb74d 100%);
+            top: 160px;
+            right: 20%;
+            box-shadow: 0 0 60px rgba(255, 183, 77, 0.4), inset -12px -12px 30px rgba(0,0,0,0.3);
+        }
+        
+        .planet-saturn {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffe082 0%, #ffc107 50%, #ff8f00 100%);
+            top: 80px;
+            left: 30%;
+            box-shadow: 0 0 45px rgba(255, 224, 130, 0.4), inset -10px -10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .planet-saturn::before {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 20px;
+            background: linear-gradient(90deg, transparent, rgba(255, 224, 130, 0.4), transparent);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+        }
+        
+        .planet-neptune {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #64b5f6 0%, #1976d2 50%, #0d47a1 100%);
+            top: 50px;
+            right: 25%;
+            box-shadow: 0 0 35px rgba(100, 181, 246, 0.4), inset -8px -8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .planet-mystery {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #9c27b0 0%, #6a1b9a 50%, #4a148c 100%);
+            top: 130px;
+            left: 10%;
+            box-shadow: 0 0 35px rgba(156, 39, 176, 0.4), inset -8px -8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .spaceship {
+            position: absolute;
+            font-size: 32px;
+            top: 400px;
+            left: 60%;
+            animation: float 3s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-10deg); }
+            50% { transform: translateY(-15px) rotate(-10deg); }
+        }
+        
+        .orbit-path {
+            position: absolute;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .orbit-1 {
+            width: 200px;
+            height: 200px;
+            top: 280px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .orbit-2 {
+            width: 340px;
+            height: 340px;
+            top: 210px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .orbit-3 {
+            width: 480px;
+            height: 480px;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .progress-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 16px;
+            margin: 0 20px;
+        }
+        
+        .unlock-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .unlock-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4da8ff, #c44dff);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0 28px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .tab-item.active {
+            color: #4da8ff;
+        }
+        
+        .tab-item i {
+            font-size: 22px;
+        }
+        
+        .planet-label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            white-space: nowrap;
+            transform: translateX(-50%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .content-area {
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <div class="content-area">
+        <!-- 头部 -->
+        <div class="px-5 pt-4 pb-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">星际探索</h1>
+                    <p class="text-gray-400 text-sm mt-1">收集星尘，解锁新星球</p>
+                </div>
+                <div class="star-dust-bar">
+                    <i class="fas fa-sparkles text-yellow-400"></i>
+                    <span class="text-yellow-400 font-bold">2,450</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 星系地图 -->
+        <div class="galaxy-container">
+            <!-- 轨道路径 -->
+            <div class="orbit-path orbit-1"></div>
+            <div class="orbit-path orbit-2"></div>
+            <div class="orbit-path orbit-3"></div>
+            
+            <!-- 地球 - 起点 -->
+            <div class="planet planet-earth" data-planet="earth">
+                <div class="planet-label" style="bottom: -30px; left: 50%;">
+                    🌍 地球（起点）
+                </div>
+            </div>
+            
+            <!-- 火星 - 已解锁 -->
+            <div class="planet planet-mars" data-planet="mars">
+                <div class="planet-label" style="bottom: -28px; left: 50%;">
+                    🔴 火星
+                </div>
+            </div>
+            
+            <!-- 木星 - 已解锁 -->
+            <div class="planet planet-jupiter" data-planet="jupiter">
+                <div class="planet-label" style="bottom: -30px; left: 50%;">
+                    🟠 木星
+                </div>
+            </div>
+            
+            <!-- 土星 - 解锁中 -->
+            <div class="planet planet-saturn" data-planet="saturn">
+                <div class="planet-label" style="bottom: -28px; left: 50%;">
+                    🪐 土星
+                </div>
+            </div>
+            
+            <!-- 海王星 - 未解锁 -->
+            <div class="planet planet-neptune locked" data-planet="neptune">
+                <div class="planet-label" style="bottom: -28px; left: 50%;">
+                    🔵 海王星
+                </div>
+            </div>
+            
+            <!-- 神秘星球 - 未解锁 -->
+            <div class="planet planet-mystery locked" data-planet="mystery">
+                <div class="planet-label" style="bottom: -28px; left: 50%;">
+                    🟣 神秘星球
+                </div>
+            </div>
+            
+            <!-- 宇航员/飞船 -->
+            <div class="spaceship">🚀</div>
+        </div>
+        
+        <!-- 解锁进度卡片 -->
+        <div class="progress-card">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-2xl">
+                        🪐
+                    </div>
+                    <div>
+                        <h3 class="font-bold">下一站：土星</h3>
+                        <p class="text-gray-400 text-sm">还需 550 星尘即可解锁</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-bold text-yellow-400">82%</span>
+                </div>
+            </div>
+            <div class="unlock-progress">
+                <div class="unlock-progress-bar" style="width: 82%;"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                <span>2,450 / 3,000 星尘</span>
+                <span>预计 3 天后解锁</span>
+            </div>
+        </div>
+        
+        <!-- 已解锁星球列表 -->
+        <div class="px-5 mt-6">
+            <h2 class="text-lg font-bold mb-4">已解锁星球</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/10">
+                    <div class="text-4xl mb-2">🌍</div>
+                    <p class="text-sm font-bold">地球</p>
+                    <p class="text-xs text-green-400">起点</p>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/10">
+                    <div class="text-4xl mb-2">🔴</div>
+                    <p class="text-sm font-bold">火星</p>
+                    <p class="text-xs text-gray-400">5个装饰</p>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/10">
+                    <div class="text-4xl mb-2">🟠</div>
+                    <p class="text-sm font-bold">木星</p>
+                    <p class="text-xs text-gray-400">3个装饰</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-medal"></i>
+            <span>奖牌</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user-astronaut"></i>
+            <span>我的</span>
+        </div>
+    </div>
+    
+    <script>
+        // 生成星空背景
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
+

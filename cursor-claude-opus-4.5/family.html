@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭空间 - 习惯星球</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #0a1a27 0%, #153a3e 30%, #0a1a1f 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .status-bar {
+            background: transparent;
+            padding: 14px 28px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 126px;
+            height: 37px;
+            background: #000;
+            border-radius: 24px;
+            z-index: 100;
+        }
+        
+        .family-banner {
+            background: linear-gradient(135deg, rgba(76, 217, 100, 0.2) 0%, rgba(52, 199, 89, 0.1) 100%);
+            border: 1px solid rgba(76, 217, 100, 0.2);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .family-banner::before {
+            content: '🏠';
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 100px;
+            opacity: 0.1;
+        }
+        
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            position: relative;
+        }
+        
+        .member-avatar.online::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: #4cd964;
+            border: 2px solid #0a1a27;
+            border-radius: 50%;
+        }
+        
+        .task-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .task-card.family-task {
+            border-color: rgba(76, 217, 100, 0.3);
+            background: linear-gradient(135deg, rgba(76, 217, 100, 0.1) 0%, rgba(76, 217, 100, 0.05) 100%);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4cd964, #34c759);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .leaderboard-item:first-child {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 140, 0, 0.1) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .rank-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .rank-1 { background: linear-gradient(135deg, #ffd700, #ff8c00); }
+        .rank-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); }
+        .rank-3 { background: linear-gradient(135deg, #cd7f32, #8b4513); }
+        .rank-other { background: rgba(255, 255, 255, 0.1); }
+        
+        .encourage-btn {
+            background: linear-gradient(135deg, #ff6b9d, #c44dff);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 26, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 0 28px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .tab-item.active {
+            color: #4cd964;
+        }
+        
+        .tab-item i {
+            font-size: 22px;
+        }
+        
+        .content-area {
+            padding-bottom: 100px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mini-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 2px solid rgba(10, 26, 39, 0.8);
+            margin-left: -8px;
+        }
+        
+        .mini-avatar:first-child {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- 动态岛 -->
+    <div class="dynamic-island"></div>
+    
+    <!-- iOS 状态栏 -->
+    <div class="status-bar relative z-10">
+        <span>9:41</span>
+        <div class="flex items-center gap-1">
+            <i class="fas fa-signal text-xs"></i>
+            <i class="fas fa-wifi text-xs"></i>
+            <i class="fas fa-battery-full text-xs"></i>
+        </div>
+    </div>
+    
+    <div class="content-area px-5">
+        <!-- 页面标题 -->
+        <div class="pt-4 pb-2">
+            <h1 class="text-2xl font-bold">家庭空间</h1>
+            <p class="text-gray-400 text-sm mt-1">全家一起养成好习惯</p>
+        </div>
+        
+        <!-- 家庭横幅 -->
+        <div class="family-banner">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-xl font-bold">星星之家 ⭐</h2>
+                    <p class="text-gray-400 text-sm">4位成员 · 创建于30天前</p>
+                </div>
+                <button class="bg-white/10 px-4 py-2 rounded-full text-sm">
+                    <i class="fas fa-cog mr-1"></i> 管理
+                </button>
+            </div>
+            <div class="flex gap-4">
+                <div class="member-avatar online bg-gradient-to-br from-pink-400 to-purple-500">👩</div>
+                <div class="member-avatar online bg-gradient-to-br from-blue-400 to-cyan-500">👨</div>
+                <div class="member-avatar online bg-gradient-to-br from-yellow-400 to-orange-500">👦</div>
+                <div class="member-avatar bg-gradient-to-br from-green-400 to-teal-500">👧</div>
+            </div>
+        </div>
+        
+        <!-- 家庭任务 -->
+        <div class="section-title">
+            <i class="fas fa-flag text-green-400"></i>
+            家庭共同任务
+        </div>
+        
+        <div class="task-card family-task">
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="text-3xl">🌳</div>
+                    <div>
+                        <h3 class="font-bold">一起种一棵树</h3>
+                        <p class="text-gray-400 text-sm">累计完成100次习惯</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-bold text-green-400">78%</span>
+                </div>
+            </div>
+            <div class="progress-bar mb-3">
+                <div class="progress-fill" style="width: 78%;"></div>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex">
+                    <div class="mini-avatar bg-gradient-to-br from-pink-400 to-purple-500">👩</div>
+                    <div class="mini-avatar bg-gradient-to-br from-blue-400 to-cyan-500">👨</div>
+                    <div class="mini-avatar bg-gradient-to-br from-yellow-400 to-orange-500">👦</div>
+                    <div class="mini-avatar bg-gradient-to-br from-green-400 to-teal-500">👧</div>
+                </div>
+                <span class="text-sm text-gray-400">78/100 次</span>
+            </div>
+        </div>
+        
+        <div class="task-card family-task">
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="text-3xl">📖</div>
+                    <div>
+                        <h3 class="font-bold">家庭阅读周</h3>
+                        <p class="text-gray-400 text-sm">每人本周阅读5小时</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-bold text-green-400">45%</span>
+                </div>
+            </div>
+            <div class="progress-bar mb-3">
+                <div class="progress-fill" style="width: 45%;"></div>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex">
+                    <div class="mini-avatar bg-gradient-to-br from-pink-400 to-purple-500">👩</div>
+                    <div class="mini-avatar bg-gradient-to-br from-yellow-400 to-orange-500">👦</div>
+                </div>
+                <span class="text-sm text-gray-400">剩余 3 天</span>
+            </div>
+        </div>
+        
+        <!-- 家庭排行榜 -->
+        <div class="section-title mt-6">
+            <i class="fas fa-trophy text-yellow-400"></i>
+            本周排行榜
+        </div>
+        
+        <div class="leaderboard-item">
+            <div class="rank-badge rank-1">1</div>
+            <div class="member-avatar online bg-gradient-to-br from-yellow-400 to-orange-500" style="width: 48px; height: 48px; font-size: 24px;">👦</div>
+            <div class="flex-1">
+                <h3 class="font-bold">小星星</h3>
+                <p class="text-gray-400 text-sm">完成 28 个习惯</p>
+            </div>
+            <div class="text-right">
+                <div class="text-yellow-400 font-bold">1,240</div>
+                <div class="text-xs text-gray-500">星尘</div>
+            </div>
+        </div>
+        
+        <div class="leaderboard-item">
+            <div class="rank-badge rank-2">2</div>
+            <div class="member-avatar online bg-gradient-to-br from-pink-400 to-purple-500" style="width: 48px; height: 48px; font-size: 24px;">👩</div>
+            <div class="flex-1">
+                <h3 class="font-bold">妈妈</h3>
+                <p class="text-gray-400 text-sm">完成 25 个习惯</p>
+            </div>
+            <div class="text-right">
+                <div class="text-gray-300 font-bold">1,120</div>
+                <div class="text-xs text-gray-500">星尘</div>
+            </div>
+        </div>
+        
+        <div class="leaderboard-item">
+            <div class="rank-badge rank-3">3</div>
+            <div class="member-avatar online bg-gradient-to-br from-blue-400 to-cyan-500" style="width: 48px; height: 48px; font-size: 24px;">👨</div>
+            <div class="flex-1">
+                <h3 class="font-bold">爸爸</h3>
+                <p class="text-gray-400 text-sm">完成 22 个习惯</p>
+            </div>
+            <div class="text-right">
+                <div class="text-orange-400 font-bold">980</div>
+                <div class="text-xs text-gray-500">星尘</div>
+            </div>
+            <button class="encourage-btn">
+                <i class="fas fa-heart"></i>
+                加油
+            </button>
+        </div>
+        
+        <div class="leaderboard-item">
+            <div class="rank-badge rank-other">4</div>
+            <div class="member-avatar bg-gradient-to-br from-green-400 to-teal-500" style="width: 48px; height: 48px; font-size: 24px;">👧</div>
+            <div class="flex-1">
+                <h3 class="font-bold">妹妹</h3>
+                <p class="text-gray-400 text-sm">完成 18 个习惯</p>
+            </div>
+            <div class="text-right">
+                <div class="text-white font-bold">780</div>
+                <div class="text-xs text-gray-500">星尘</div>
+            </div>
+            <button class="encourage-btn">
+                <i class="fas fa-heart"></i>
+                加油
+            </button>
+        </div>
+        
+        <!-- 家庭动态 -->
+        <div class="section-title mt-6">
+            <i class="fas fa-bolt text-blue-400"></i>
+            最新动态
+        </div>
+        
+        <div class="bg-white/5 rounded-2xl p-4">
+            <div class="activity-item">
+                <div class="activity-icon bg-gradient-to-br from-yellow-400 to-orange-500">👦</div>
+                <div class="flex-1">
+                    <p><span class="font-bold">小星星</span> 完成了 <span class="text-green-400">阅读30分钟</span></p>
+                    <p class="text-gray-500 text-xs mt-1">5 分钟前</p>
+                </div>
+                <button class="text-pink-400">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon bg-gradient-to-br from-pink-400 to-purple-500">👩</div>
+                <div class="flex-1">
+                    <p><span class="font-bold">妈妈</span> 获得了 <span class="text-yellow-400">坚持之星</span> 奖牌</p>
+                    <p class="text-gray-500 text-xs mt-1">30 分钟前</p>
+                </div>
+                <button class="text-pink-400">
+                    <i class="fas fa-heart text-pink-400"></i> 3
+                </button>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon bg-gradient-to-br from-blue-400 to-cyan-500">👨</div>
+                <div class="flex-1">
+                    <p><span class="font-bold">爸爸</span> 给 <span class="text-blue-400">小星星</span> 点了赞</p>
+                    <p class="text-gray-500 text-xs mt-1">1 小时前</p>
+                </div>
+            </div>
+            
+            <div class="activity-item" style="border: none;">
+                <div class="activity-icon bg-gradient-to-br from-green-400 to-teal-500">👧</div>
+                <div class="flex-1">
+                    <p><span class="font-bold">妹妹</span> 解锁了 <span class="text-purple-400">火星</span></p>
+                    <p class="text-gray-500 text-xs mt-1">2 小时前</p>
+                </div>
+                <button class="text-pink-400">
+                    <i class="fas fa-heart text-pink-400"></i> 5
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-rocket"></i>
+            <span>探索</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-medal"></i>
+            <span>奖牌</span>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-users"></i>
+            <span>家庭</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user-astronaut"></i>
+            <span>我的</span>
+        </div>
+    </div>
+</body>
+</html>
+
